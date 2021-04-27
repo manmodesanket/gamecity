@@ -1,0 +1,12 @@
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 1rem;
+}
