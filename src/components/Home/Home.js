@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-
 import { useWishlist } from "../../context/Wishlist/WishlistContext";
+import { useProductList } from "../../context/ProductContext/ProductContext";
+
+import axios from "axios";
 
 const API = "https://buygames-backend.manmodesanket.repl.co/products";
 
 const Home = () => {
-  const [productList, setProductList] = useState([]);
+  const { productList } = useProductList();
   const { wishListDispatch } = useWishlist();
 
   const handleWishList = (item) => {
@@ -15,17 +16,6 @@ const Home = () => {
       payload: item,
     });
   };
-
-  const fetchProducts = async () => {
-    const products = await axios.get(API);
-    if (products.data.success) return products.data.products;
-    return null;
-  };
-
-  useEffect(async () => {
-    const products = await fetchProducts();
-    setProductList(products);
-  }, []);
 
   return (
     <div>
@@ -36,7 +26,7 @@ const Home = () => {
               <div key={i} className="card">
                 <div className="card-name">{item.name}</div>
                 <div>
-                  <button onClick={() => handleWishList(item)}>
+                  <button onClick={() => handleWishList(item._id)}>
                     Add to Wishlist
                   </button>
                 </div>

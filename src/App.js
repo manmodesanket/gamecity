@@ -8,10 +8,11 @@ import { Cart } from "./components/Cart/Cart";
 import { WishListProvider } from "./context/Wishlist/WishlistProvider";
 
 import "../main.css";
+import { ProductProvider } from "./context/ProductContext/ProductProvider";
 
 const App = () => {
   return (
-    <div>
+    <ProductProvider>
       <WishListProvider>
         <Navbar />
         <Router>
@@ -20,7 +21,7 @@ const App = () => {
           <Cart path="/cart" />
         </Router>
       </WishListProvider>
-    </div>
+    </ProductProvider>
   );
 };
 
