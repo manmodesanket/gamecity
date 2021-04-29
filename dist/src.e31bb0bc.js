@@ -33121,24 +33121,7 @@ var Navbar = function Navbar() {
 };
 
 exports.Navbar = Navbar;
-},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"context/Wishlist/WishlistContext.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.useWishlist = useWishlist;
-exports.WishListContext = void 0;
-
-var _react = require("react");
-
-var WishListContext = (0, _react.createContext)();
-exports.WishListContext = WishListContext;
-
-function useWishlist() {
-  return (0, _react.useContext)(WishListContext);
-}
-},{"react":"../node_modules/react/index.js"}],"context/ProductContext/ProductContext.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"context/ProductContext/ProductContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33155,7 +33138,119 @@ exports.ProductContext = ProductContext;
 function useProductList() {
   return (0, _react.useContext)(ProductContext);
 }
-},{"react":"../node_modules/react/index.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"context/Wishlist/WishlistContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useWishlist = useWishlist;
+exports.WishListContext = void 0;
+
+var _react = require("react");
+
+var WishListContext = (0, _react.createContext)();
+exports.WishListContext = WishListContext;
+
+function useWishlist() {
+  return (0, _react.useContext)(WishListContext);
+}
+},{"react":"../node_modules/react/index.js"}],"components/WishListButton/WishListButton.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.WishListButton = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _WishlistContext = require("../../context/Wishlist/WishlistContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var WishListButton = function WishListButton(props) {
+  var _useWishlist = (0, _WishlistContext.useWishlist)(),
+      wishList = _useWishlist.wishList,
+      wishListDispatch = _useWishlist.wishListDispatch;
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      added = _useState2[0],
+      setAdded = _useState2[1];
+
+  var handleWishList = function handleWishList(item) {
+    wishListDispatch({
+      type: "ADD_TO_WISHLIST",
+      payload: item
+    });
+  };
+
+  (0, _react.useEffect)(function () {
+    if (wishList.includes(props.id)) {
+      setAdded(true);
+    }
+  }, [wishList]);
+  return /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return handleWishList(props.id);
+    }
+  }, added ? "Added to Wishlist" : "Add to Wishlist");
+};
+
+exports.WishListButton = WishListButton;
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/Home/Home.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Home = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _WishListButton = require("../WishListButton/WishListButton");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var Home = function Home() {
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productList = _useProductList.productList;
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "products"
+  }, productList ? productList.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: i,
+      className: "card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "card-name"
+    }, item.name), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_WishListButton.WishListButton, {
+      id: item._id
+    })));
+  }) : null));
+};
+
+exports.Home = Home;
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -34955,67 +35050,7 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../node_modules/axios/lib/helpers/isAxiosError.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"components/Home/Home.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Home = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _WishlistContext = require("../../context/Wishlist/WishlistContext");
-
-var _ProductContext = require("../../context/ProductContext/ProductContext");
-
-var _axios = _interopRequireDefault(require("axios"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-var API = "https://buygames-backend.manmodesanket.repl.co/products";
-
-var Home = function Home() {
-  var _useProductList = (0, _ProductContext.useProductList)(),
-      productList = _useProductList.productList;
-
-  var _useWishlist = (0, _WishlistContext.useWishlist)(),
-      wishListDispatch = _useWishlist.wishListDispatch;
-
-  var handleWishList = function handleWishList(item) {
-    wishListDispatch({
-      type: "ADD_TO_WISHLIST",
-      payload: item
-    });
-  };
-
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"), /*#__PURE__*/_react.default.createElement("div", {
-    className: "products"
-  }, productList ? productList.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: i,
-      className: "card"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "card-name"
-    }, item.name), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleWishList(item._id);
-      }
-    }, "Add to Wishlist")));
-  }) : null));
-};
-/*
-{productList.map((item) => (
-                <div>{item.name}</div>
-            ))}*/
-
-
-exports.Home = Home;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","axios":"../node_modules/axios/index.js"}],"components/Wishlist/Wishlist.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"components/Wishlist/Wishlist.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35065,7 +35100,6 @@ var Wishlist = function Wishlist() {
       setItemList = _useState2[1];
 
   (0, _react.useEffect)(function () {
-    console.log("hello");
     var list = [];
 
     for (var i = 0; i < wishList.length; i++) {
@@ -35078,7 +35112,6 @@ var Wishlist = function Wishlist() {
 
     setItemList(list);
   }, [wishList]);
-  console.log(itemList);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Wishlist"), /*#__PURE__*/_react.default.createElement("div", {
     className: "products"
   }, itemList ? itemList.map(function (item, i) {
@@ -35491,7 +35524,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1837" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2906" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

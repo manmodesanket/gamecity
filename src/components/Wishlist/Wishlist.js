@@ -11,7 +11,6 @@ const Wishlist = () => {
   let [itemList, setItemList] = useState([]);
 
   useEffect(() => {
-    console.log("hello");
     let list = [];
     for (let i = 0; i < wishList.length; i++) {
       for (let j = 0; j < productList.length; j++) {
@@ -22,7 +21,6 @@ const Wishlist = () => {
     }
     setItemList(list);
   }, [wishList]);
-  console.log(itemList);
 
   return (
     <div>

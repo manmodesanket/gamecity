@@ -1,21 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useWishlist } from "../../context/Wishlist/WishlistContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
-
-import axios from "axios";
-
-const API = "https://buygames-backend.manmodesanket.repl.co/products";
+import { WishListButton } from "../WishListButton/WishListButton";
 
 const Home = () => {
   const { productList } = useProductList();
-  const { wishListDispatch } = useWishlist();
-
-  const handleWishList = (item) => {
-    wishListDispatch({
-      type: "ADD_TO_WISHLIST",
-      payload: item,
-    });
-  };
 
   return (
     <div>
@@ -26,9 +14,7 @@ const Home = () => {
               <div key={i} className="card">
                 <div className="card-name">{item.name}</div>
                 <div>
-                  <button onClick={() => handleWishList(item._id)}>
-                    Add to Wishlist
-                  </button>
+                  <WishListButton id={item._id} />
                 </div>
               </div>
             ))
@@ -39,8 +25,3 @@ const Home = () => {
 };
 
 export { Home };
-
-/*
-{productList.map((item) => (
-                <div>{item.name}</div>
-            ))}*/
