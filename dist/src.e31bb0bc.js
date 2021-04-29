@@ -33245,7 +33245,7 @@ var Home = function Home() {
       className: "card-name"
     }, item.name), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_WishListButton.WishListButton, {
       id: item._id
-    })));
+    })), /*#__PURE__*/_react.default.createElement("div", null, "Rs.", item.price));
   }) : null));
 };
 
@@ -35050,7 +35050,41 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../node_modules/axios/lib/helpers/isAxiosError.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"components/Wishlist/Wishlist.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"components/Wishlist/RemoveFromWishList.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RemoveFromWishList = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _WishlistContext = require("../../context/Wishlist/WishlistContext");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var RemoveFromWishList = function RemoveFromWishList(props) {
+  var _useWishlist = (0, _WishlistContext.useWishlist)(),
+      wishList = _useWishlist.wishList,
+      wishListDispatch = _useWishlist.wishListDispatch;
+
+  var removeFromWishList = function removeFromWishList(id) {
+    wishListDispatch({
+      type: "REMOVE_FROM_WISHLIST",
+      payload: id
+    });
+  };
+
+  return /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return removeFromWishList(props.id);
+    }
+  }, "Remove");
+};
+
+exports.RemoveFromWishList = RemoveFromWishList;
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/Wishlist/Wishlist.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35065,6 +35099,8 @@ var _react = _interopRequireWildcard(require("react"));
 var _WishlistContext = require("../../context/Wishlist/WishlistContext");
 
 var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _RemoveFromWishList = require("./RemoveFromWishList");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -35120,12 +35156,14 @@ var Wishlist = function Wishlist() {
       className: "card"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "card-name"
-    }, item.name));
+    }, item.name), /*#__PURE__*/_react.default.createElement(_RemoveFromWishList.RemoveFromWishList, {
+      id: item._id
+    }));
   }) : null));
 };
 
 exports.Wishlist = Wishlist;
-},{"axios":"../node_modules/axios/index.js","react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","./RemoveFromWishList":"components/Wishlist/RemoveFromWishList.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35173,6 +35211,12 @@ var reducerFunction = function reducerFunction(state, action) {
       }
 
       return [].concat(_toConsumableArray(state), [action.payload]);
+
+    case "REMOVE_FROM_WISHLIST":
+      var newState = state.filter(function (item) {
+        return item !== action.payload;
+      });
+      return newState;
 
     default:
       return state;

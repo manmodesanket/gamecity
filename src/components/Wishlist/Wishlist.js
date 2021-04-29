@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useWishlist } from "../../context/Wishlist/WishlistContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
+import { RemoveFromWishList } from "./RemoveFromWishList";
 
 const API = "https://buygames-backend.manmodesanket.repl.co/products/";
 
@@ -30,6 +31,7 @@ const Wishlist = () => {
           ? itemList.map((item, i) => (
               <div key={i} className="card">
                 <div className="card-name">{item.name}</div>
+                <RemoveFromWishList id={item._id} />
               </div>
             ))
           : null}

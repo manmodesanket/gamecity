@@ -6,8 +6,10 @@ export const reducerFunction = (state, action) => {
       for (let i = 0; i < state.length; i++) {
         if (state[i] === action.payload) return state;
       }
-
       return [...state, action.payload];
+    case "REMOVE_FROM_WISHLIST":
+      const newState = state.filter((item) => item !== action.payload);
+      return newState;
     default:
       return state;
   }

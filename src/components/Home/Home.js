@@ -16,6 +16,7 @@ const Home = () => {
                 <div>
                   <WishListButton id={item._id} />
                 </div>
+                <div>Rs.{item.price}</div>
               </div>
             ))
           : null}
