@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { reducerFunction } from "../../Reducers/Wishlist/Reducer";
+import { reducerFunction } from "../../Reducers/Reducer";
 import { WishListContext } from "./WishlistContext";
 
 export const WishListProvider = ({ children }) => {

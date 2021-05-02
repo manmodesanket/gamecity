@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { reducerFunction } from "../../Reducers/Wishlist/Reducer";
+import { reducerFunction } from "../../Reducers/Reducer";
 import { CartContext } from "./CartContext";
 
 export const CartProvider = ({ children }) => {

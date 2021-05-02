@@ -1,5 +1,5 @@
 import React, { useReducer, useState, useEffect } from "react";
-import { reducerFunction } from "../../Reducers/Wishlist/Reducer";
+import { reducerFunction } from "../../Reducers/Reducer";
 import { ProductContext } from "./ProductContext";
 
 import axios from "axios";

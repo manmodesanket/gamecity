@@ -33602,7 +33602,7 @@ var Cart = function Cart() {
 };
 
 exports.Cart = Cart;
-},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"Reducers/Wishlist/Reducer.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"Reducers/Reducer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33683,7 +33683,7 @@ exports.WishListProvider = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Reducer = require("../../Reducers/Wishlist/Reducer");
+var _Reducer = require("../../Reducers/Reducer");
 
 var _WishlistContext = require("./WishlistContext");
 
@@ -33720,7 +33720,7 @@ var WishListProvider = function WishListProvider(_ref) {
 };
 
 exports.WishListProvider = WishListProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Wishlist/Reducer":"Reducers/Wishlist/Reducer.js","./WishlistContext":"context/Wishlist/WishlistContext.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./WishlistContext":"context/Wishlist/WishlistContext.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -35602,7 +35602,7 @@ exports.ProductProvider = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Reducer = require("../../Reducers/Wishlist/Reducer");
+var _Reducer = require("../../Reducers/Reducer");
 
 var _ProductContext = require("./ProductContext");
 
@@ -35729,7 +35729,7 @@ var ProductProvider = function ProductProvider(_ref) {
 };
 
 exports.ProductProvider = ProductProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Wishlist/Reducer":"Reducers/Wishlist/Reducer.js","./ProductContext":"context/ProductContext/ProductContext.js","axios":"../node_modules/axios/index.js"}],"context/CartContext/CartProvider.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./ProductContext":"context/ProductContext/ProductContext.js","axios":"../node_modules/axios/index.js"}],"context/CartContext/CartProvider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35739,7 +35739,7 @@ exports.CartProvider = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Reducer = require("../../Reducers/Wishlist/Reducer");
+var _Reducer = require("../../Reducers/Reducer");
 
 var _CartContext = require("./CartContext");
 
@@ -35776,7 +35776,7 @@ var CartProvider = function CartProvider(_ref) {
 };
 
 exports.CartProvider = CartProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Wishlist/Reducer":"Reducers/Wishlist/Reducer.js","./CartContext":"context/CartContext/CartContext.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./CartContext":"context/CartContext/CartContext.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35860,7 +35860,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3131" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1137" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
