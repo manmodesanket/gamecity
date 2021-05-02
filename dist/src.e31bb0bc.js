@@ -33209,11 +33209,106 @@ var WishListButton = function WishListButton(props) {
     onClick: function onClick() {
       return handleWishList(props.id);
     }
-  }, added ? "Added to Wishlist" : "Add to Wishlist");
+  }, added ? "Wishlisted" : "Wishlist");
 };
 
 exports.WishListButton = WishListButton;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/Home/Home.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/Filters/Filters.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Filters = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var Filters = function Filters() {
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      ascending = _useState2[0],
+      setAscending = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      descending = _useState4[0],
+      setDescending = _useState4[1];
+
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productListDispatch = _useProductList.productListDispatch,
+      setClearFilter = _useProductList.setClearFilter;
+
+  var handlePriceChange = function handlePriceChange(event) {
+    if (event.target.value === "Ascending") {
+      setAscending(true);
+      setDescending(false);
+      productListDispatch({
+        type: "PRODUCT_LIST_ASCENDING"
+      });
+    } else if (event.target.value === "Descending") {
+      setDescending(true);
+      setAscending(false);
+      productListDispatch({
+        type: "PRODUCT_LIST_DESCENDING"
+      });
+    }
+  };
+
+  var clearFilter = function clearFilter() {
+    setClearFilter(true);
+    setAscending(false);
+    setDescending(false);
+  };
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Filters"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Price"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "radio",
+    id: "asc",
+    value: "Ascending",
+    name: "price",
+    checked: ascending,
+    onChange: function onChange(e) {
+      return handlePriceChange(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "asc"
+  }, "Low To High"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "radio",
+    id: "desc",
+    value: "Descending",
+    name: "price",
+    checked: descending,
+    onChange: function onChange(e) {
+      return handlePriceChange(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "desc"
+  }, "High To Low")), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return clearFilter();
+    }
+  }, "Clear Filters")));
+};
+
+exports.Filters = Filters;
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"components/Home/Home.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33227,6 +33322,8 @@ var _ProductContext = require("../../context/ProductContext/ProductContext");
 
 var _WishListButton = require("../WishListButton/WishListButton");
 
+var _Filters = require("../Filters/Filters");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -33235,7 +33332,7 @@ var Home = function Home() {
   var _useProductList = (0, _ProductContext.useProductList)(),
       productList = _useProductList.productList;
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"), /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"), /*#__PURE__*/_react.default.createElement(_Filters.Filters, null), /*#__PURE__*/_react.default.createElement("div", {
     className: "products"
   }, productList ? productList.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("div", {
@@ -33250,7 +33347,7 @@ var Home = function Home() {
 };
 
 exports.Home = Home;
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js","../Filters/Filters":"components/Filters/Filters.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -35203,7 +35300,27 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var reducerFunction = function reducerFunction(state, action) {
   switch (action.type) {
     case "PRODUCT_LIST":
-      return action.payload;
+      var initialState = _toConsumableArray(action.payload);
+
+      return initialState;
+
+    case "PRODUCT_LIST_ASCENDING":
+      state.sort(function (a, b) {
+        return a.price > b.price ? 1 : -1;
+      });
+
+      var ascPriceState = _toConsumableArray(state);
+
+      return ascPriceState;
+
+    case "PRODUCT_LIST_DESCENDING":
+      state.sort(function (a, b) {
+        return a.price < b.price ? 1 : -1;
+      });
+
+      var descPriceState = _toConsumableArray(state);
+
+      return descPriceState;
 
     case "ADD_TO_WISHLIST":
       for (var i = 0; i < state.length; i++) {
@@ -35418,6 +35535,16 @@ var ProductProvider = function ProductProvider(_ref) {
       productList = _useReducer2[0],
       dispatch = _useReducer2[1];
 
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      initialList = _useState2[0],
+      setInitialList = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      clearFilter = _useState4[0],
+      setClearFilter = _useState4[1];
+
   var fetchProducts = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       var products;
@@ -35432,16 +35559,17 @@ var ProductProvider = function ProductProvider(_ref) {
               products = _context.sent;
 
               if (!products.data.success) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
+              setInitialList(products.data.products);
               return _context.abrupt("return", products.data.products);
 
-            case 5:
+            case 6:
               return _context.abrupt("return", null);
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -35477,10 +35605,20 @@ var ProductProvider = function ProductProvider(_ref) {
       }
     }, _callee2);
   })), []);
+  (0, _react.useEffect)(function () {
+    if (clearFilter) {
+      dispatch({
+        type: "PRODUCT_LIST",
+        payload: initialList
+      });
+      setClearFilter(false);
+    }
+  }, [clearFilter]);
   return /*#__PURE__*/_react.default.createElement(_ProductContext.ProductContext.Provider, {
     value: {
       productList: productList,
-      productListDispatch: dispatch
+      productListDispatch: dispatch,
+      setClearFilter: setClearFilter
     }
   }, children);
 };
@@ -35568,7 +35706,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2906" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3131" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

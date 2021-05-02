@@ -20,7 +20,7 @@ const WishListButton = (props) => {
 
   return (
     <button onClick={() => handleWishList(props.id)}>
-      {added ? "Added to Wishlist" : "Add to Wishlist"}
+      {added ? "Wishlisted" : "Wishlist"}
     </button>
   );
 };
