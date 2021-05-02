@@ -19,6 +19,11 @@ export const reducerFunction = (state, action) => {
     case "REMOVE_FROM_WISHLIST":
       const newState = state.filter((item) => item !== action.payload);
       return newState;
+    case "ADD_TO_CART":
+      for (let i = 0; i < state.length; i++) {
+        if (state[i] === action.payload) return state;
+      }
+      return [...state, action.payload];
     default:
       return state;
   }

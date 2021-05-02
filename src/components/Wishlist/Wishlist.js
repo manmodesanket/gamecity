@@ -1,13 +1,10 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useWishlist } from "../../context/Wishlist/WishlistContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
 import { RemoveFromWishList } from "./RemoveFromWishList";
 
-const API = "https://buygames-backend.manmodesanket.repl.co/products/";
-
 const Wishlist = () => {
-  let { wishList, wishListDispatch } = useWishlist();
+  let { wishList } = useWishlist();
   const { productList } = useProductList();
   let [itemList, setItemList] = useState([]);
 
