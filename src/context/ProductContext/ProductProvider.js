@@ -10,6 +10,7 @@ export const ProductProvider = ({ children }) => {
   let [productList, dispatch] = useReducer(reducerFunction, []);
   let [initialList, setInitialList] = useState([]);
   let [clearFilter, setClearFilter] = useState(false);
+  let [loading, setLoading] = useState(true);
 
   const fetchProducts = async () => {
     const products = await axios.get(API);
@@ -26,6 +27,7 @@ export const ProductProvider = ({ children }) => {
       type: "PRODUCT_LIST",
       payload: products,
     });
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -40,7 +42,12 @@ export const ProductProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider
-      value={{ productList, productListDispatch: dispatch, setClearFilter }}
+      value={{
+        productList,
+        productListDispatch: dispatch,
+        setClearFilter,
+        loading,
+      }}
     >
       {children}
     </ProductContext.Provider>

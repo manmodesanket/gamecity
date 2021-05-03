@@ -33409,11 +33409,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Home = function Home() {
   var _useProductList = (0, _ProductContext.useProductList)(),
-      productList = _useProductList.productList;
+      productList = _useProductList.productList,
+      loading = _useProductList.loading;
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"), /*#__PURE__*/_react.default.createElement(_Filters.Filters, null), /*#__PURE__*/_react.default.createElement("div", {
     className: "products"
-  }, productList ? productList.map(function (item, i) {
+  }, productList.length > 0 ? productList.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i,
       className: "card"
@@ -33424,7 +33425,7 @@ var Home = function Home() {
     })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
       id: item._id
     })), /*#__PURE__*/_react.default.createElement("div", null, "Rs.", item.price));
-  }) : null));
+  }) : loading ? "Loading..." : "No Products available"));
 };
 
 exports.Home = Home;
@@ -33521,7 +33522,7 @@ var Wishlist = function Wishlist() {
   }, [wishList]);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Wishlist"), /*#__PURE__*/_react.default.createElement("div", {
     className: "products"
-  }, itemList ? itemList.map(function (item, i) {
+  }, itemList.length > 0 ? itemList.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i,
       className: "card"
@@ -33530,7 +33531,7 @@ var Wishlist = function Wishlist() {
     }, item.name), /*#__PURE__*/_react.default.createElement(_RemoveFromWishList.RemoveFromWishList, {
       id: item._id
     }));
-  }) : null));
+  }) : "Empty"));
 };
 
 exports.Wishlist = Wishlist;
@@ -35650,6 +35651,11 @@ var ProductProvider = function ProductProvider(_ref) {
       clearFilter = _useState4[0],
       setClearFilter = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      loading = _useState6[0],
+      setLoading = _useState6[1];
+
   var fetchProducts = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       var products;
@@ -35702,8 +35708,9 @@ var ProductProvider = function ProductProvider(_ref) {
               type: "PRODUCT_LIST",
               payload: products
             });
+            setLoading(false);
 
-          case 4:
+          case 5:
           case "end":
             return _context2.stop();
         }
@@ -35723,7 +35730,8 @@ var ProductProvider = function ProductProvider(_ref) {
     value: {
       productList: productList,
       productListDispatch: dispatch,
-      setClearFilter: setClearFilter
+      setClearFilter: setClearFilter,
+      loading: loading
     }
   }, children);
 };
@@ -35860,7 +35868,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1137" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3338" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

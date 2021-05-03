@@ -5,14 +5,14 @@ import { AddToCartButton } from "./AddToCartButton";
 import { Filters } from "../Filters/Filters";
 
 const Home = () => {
-  const { productList } = useProductList();
+  const { productList, loading } = useProductList();
 
   return (
     <div>
       <h1>Home</h1>
       <Filters />
       <div className="products">
-        {productList
+        {productList.length > 0
           ? productList.map((item, i) => (
               <div key={i} className="card">
                 <div className="card-name">{item.name}</div>
@@ -25,7 +25,9 @@ const Home = () => {
                 <div>Rs.{item.price}</div>
               </div>
             ))
-          : null}
+          : loading
+          ? "Loading..."
+          : "No Products available"}
       </div>
     </div>
   );

@@ -24,14 +24,14 @@ const Wishlist = () => {
     <div>
       <h1>Wishlist</h1>
       <div className="products">
-        {itemList
+        {itemList.length > 0
           ? itemList.map((item, i) => (
               <div key={i} className="card">
                 <div className="card-name">{item.name}</div>
                 <RemoveFromWishList id={item._id} />
               </div>
             ))
-          : null}
+          : "Empty"}
       </div>
     </div>
   );
