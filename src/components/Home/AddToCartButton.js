@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useCartList } from "../../context/CartContext/CartContext";
+import { createToastMessageList } from "../../Utilities/UtilityFunctions";
 
-const AddToCartButton = (props) => {
+const AddToCartButton = ({ id, toastMessageList, setToastMessageList }) => {
   let { cartList, cartDispatch } = useCartList();
   const [added, setAdded] = useState(false);
 
@@ -10,16 +11,18 @@ const AddToCartButton = (props) => {
       type: "ADD_TO_CART",
       payload: item,
     });
+    const obj = createToastMessageList("Item added to cart");
+    setToastMessageList([...toastMessageList, obj]);
   };
 
   useEffect(() => {
-    if (cartList.includes(props.id)) {
+    if (cartList.includes(id)) {
       setAdded(true);
     }
   }, [cartList]);
 
   return (
-    <button onClick={() => handleAddToCart(props.id)}>
+    <button onClick={() => handleAddToCart(id)}>
       {added ? "Added To Cart" : "Add To Cart"}
     </button>
   );

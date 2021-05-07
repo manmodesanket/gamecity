@@ -33157,7 +33157,25 @@ exports.WishListContext = WishListContext;
 function useWishlist() {
   return (0, _react.useContext)(WishListContext);
 }
-},{"react":"../node_modules/react/index.js"}],"components/WishListButton/WishListButton.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"Utilities/UtilityFunctions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createToastMessageList = void 0;
+
+var createToastMessageList = function createToastMessageList(msg) {
+  var toastId = Math.floor(Math.random() * 100);
+  var obj = {
+    id: toastId,
+    message: msg
+  };
+  return obj;
+};
+
+exports.createToastMessageList = createToastMessageList;
+},{}],"components/WishListButton/WishListButton.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33169,9 +33187,19 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _WishlistContext = require("../../context/Wishlist/WishlistContext");
 
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -33185,7 +33213,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var WishListButton = function WishListButton(props) {
+var WishListButton = function WishListButton(_ref) {
+  var id = _ref.id,
+      toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList;
+
   var _useWishlist = (0, _WishlistContext.useWishlist)(),
       wishList = _useWishlist.wishList,
       wishListDispatch = _useWishlist.wishListDispatch;
@@ -33200,22 +33232,24 @@ var WishListButton = function WishListButton(props) {
       type: "ADD_TO_WISHLIST",
       payload: item
     });
+    var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to wishlist");
+    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
   };
 
   (0, _react.useEffect)(function () {
-    if (wishList.includes(props.id)) {
+    if (wishList.includes(id)) {
       setAdded(true);
     }
   }, [wishList]);
   return /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
-      return handleWishList(props.id);
+      return handleWishList(id);
     }
   }, added ? "Wishlisted" : "Wishlist");
 };
 
 exports.WishListButton = WishListButton;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js"}],"context/CartContext/CartContext.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"context/CartContext/CartContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33244,9 +33278,19 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _CartContext = require("../../context/CartContext/CartContext");
 
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -33260,7 +33304,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var AddToCartButton = function AddToCartButton(props) {
+var AddToCartButton = function AddToCartButton(_ref) {
+  var id = _ref.id,
+      toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList;
+
   var _useCartList = (0, _CartContext.useCartList)(),
       cartList = _useCartList.cartList,
       cartDispatch = _useCartList.cartDispatch;
@@ -33275,22 +33323,24 @@ var AddToCartButton = function AddToCartButton(props) {
       type: "ADD_TO_CART",
       payload: item
     });
+    var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
+    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
   };
 
   (0, _react.useEffect)(function () {
-    if (cartList.includes(props.id)) {
+    if (cartList.includes(id)) {
       setAdded(true);
     }
   }, [cartList]);
   return /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
-      return handleAddToCart(props.id);
+      return handleAddToCart(id);
     }
   }, added ? "Added To Cart" : "Add To Cart");
 };
 
 exports.AddToCartButton = AddToCartButton;
-},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js"}],"components/Filters/Filters.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/Filters/Filters.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33473,14 +33523,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -33498,40 +33540,10 @@ var Home = function Home() {
       productList = _useProductList.productList,
       loading = _useProductList.loading;
 
-  var _useWishlist = (0, _WishlistContext.useWishlist)(),
-      wishList = _useWishlist.wishList;
-
-  var _useCartList = (0, _CartContext.useCartList)(),
-      cartList = _useCartList.cartList;
-
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       toastMessageList = _useState2[0],
       setToastMessageList = _useState2[1];
-
-  (0, _react.useEffect)(function () {
-    if (wishList.length > 0) {
-      var list = createToastMessageList("Item added to Wishlist"); //setToastMessageList([...toastMessageList, "Item added to Wishlist"]);
-
-      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [list]));
-    }
-  }, [wishList]);
-  (0, _react.useEffect)(function () {
-    if (cartList.length > 0) {
-      var list = createToastMessageList("Item added to Cart"); //setToastMessageList([...toastMessageList, "Item added to Cart"]);
-
-      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [list]));
-    }
-  }, [cartList]);
-
-  var createToastMessageList = function createToastMessageList(msg) {
-    var toastId = Math.floor(Math.random() * 100);
-    var obj = {
-      id: toastId,
-      message: msg
-    };
-    return obj;
-  };
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"), /*#__PURE__*/_react.default.createElement(_Filters.Filters, null), /*#__PURE__*/_react.default.createElement("div", {
     className: "products"
@@ -33542,9 +33554,13 @@ var Home = function Home() {
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "card-name"
     }, item.name), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_WishListButton.WishListButton, {
-      id: item._id
+      id: item._id,
+      toastMessageList: toastMessageList,
+      setToastMessageList: setToastMessageList
     })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
-      id: item._id
+      id: item._id,
+      toastMessageList: toastMessageList,
+      setToastMessageList: setToastMessageList
     })), /*#__PURE__*/_react.default.createElement("div", null, "Rs.", item.price));
   }) : loading ? "Loading..." : "No Products available"), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
     toastMessageList: toastMessageList ? toastMessageList : null,

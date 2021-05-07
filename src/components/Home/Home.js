@@ -9,34 +9,7 @@ import { useCartList } from "../../context/CartContext/CartContext";
 
 const Home = () => {
   const { productList, loading } = useProductList();
-  const { wishList } = useWishlist();
-  const { cartList } = useCartList();
   let [toastMessageList, setToastMessageList] = useState([]);
-
-  useEffect(() => {
-    if (wishList.length > 0) {
-      const list = createToastMessageList("Item added to Wishlist");
-      //setToastMessageList([...toastMessageList, "Item added to Wishlist"]);
-      setToastMessageList([...toastMessageList, list]);
-    }
-  }, [wishList]);
-
-  useEffect(() => {
-    if (cartList.length > 0) {
-      const list = createToastMessageList("Item added to Cart");
-      //setToastMessageList([...toastMessageList, "Item added to Cart"]);
-      setToastMessageList([...toastMessageList, list]);
-    }
-  }, [cartList]);
-
-  const createToastMessageList = (msg) => {
-    const toastId = Math.floor(Math.random() * 100);
-    const obj = {
-      id: toastId,
-      message: msg,
-    };
-    return obj;
-  };
 
   return (
     <div>
@@ -48,10 +21,18 @@ const Home = () => {
               <div key={i} className="card">
                 <div className="card-name">{item.name}</div>
                 <div>
-                  <WishListButton id={item._id} />
+                  <WishListButton
+                    id={item._id}
+                    toastMessageList={toastMessageList}
+                    setToastMessageList={setToastMessageList}
+                  />
                 </div>
                 <div>
-                  <AddToCartButton id={item._id} />
+                  <AddToCartButton
+                    id={item._id}
+                    toastMessageList={toastMessageList}
+                    setToastMessageList={setToastMessageList}
+                  />
                 </div>
                 <div>Rs.{item.price}</div>
               </div>

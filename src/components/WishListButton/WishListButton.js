@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useWishlist } from "../../context/Wishlist/WishlistContext";
+import { createToastMessageList } from "../../Utilities/UtilityFunctions";
 
-const WishListButton = (props) => {
+const WishListButton = ({ id, toastMessageList, setToastMessageList }) => {
   const { wishList, wishListDispatch } = useWishlist();
   const [added, setAdded] = useState(false);
 
@@ -10,16 +11,18 @@ const WishListButton = (props) => {
       type: "ADD_TO_WISHLIST",
       payload: item,
     });
+    const obj = createToastMessageList("Item added to wishlist");
+    setToastMessageList([...toastMessageList, obj]);
   };
 
   useEffect(() => {
-    if (wishList.includes(props.id)) {
+    if (wishList.includes(id)) {
       setAdded(true);
     }
   }, [wishList]);
 
   return (
-    <button onClick={() => handleWishList(props.id)}>
+    <button onClick={() => handleWishList(id)}>
       {added ? "Wishlisted" : "Wishlist"}
     </button>
   );
