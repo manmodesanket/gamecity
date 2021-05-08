@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import { Router } from "@reach/router";
 
 import { Navbar } from "./components/Navbar/Navbar";
@@ -16,15 +16,25 @@ const App = () => {
     <ProductProvider>
       <WishListProvider>
         <CartProvider>
-          <Navbar />
           <Router>
-            <Home path="/" />
-            <Wishlist path="/wishlist" />
-            <Cart path="/cart" />
+            <NavbarRouter path="/">
+              <Home path="/" />
+              <Wishlist path="/wishlist" />
+              <Cart path="/cart" />
+            </NavbarRouter>
           </Router>
         </CartProvider>
       </WishListProvider>
     </ProductProvider>
+  );
+};
+
+const NavbarRouter = (props) => {
+  return (
+    <div>
+      <Navbar location={props.location} />
+      {props.children}
+    </div>
   );
 };
 

@@ -4,8 +4,6 @@ import { WishListButton } from "../WishListButton/WishListButton";
 import { AddToCartButton } from "./AddToCartButton";
 import { Filters } from "../Filters/Filters";
 import { Toast } from "../Toast/Toast";
-import { useWishlist } from "../../context/Wishlist/WishlistContext";
-import { useCartList } from "../../context/CartContext/CartContext";
 
 const Home = () => {
   const { productList, loading } = useProductList();

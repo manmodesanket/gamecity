@@ -1,21 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "@reach/router";
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/wishlist">Wishist</Link>
-        </li>
-        <li>
-          <Link to="/cart">Cart</Link>
-        </li>
-      </ul>
+    <div className="navbar">
+      <div>
+        <Link to="/" className="navabar__heading">
+          GameCity
+        </Link>
+      </div>
+      <div className="navbar__nav">
+        <NavbarNav linkName={"Home"} path="/" location={props.location} />
+        <NavbarNav
+          linkName={"Wishlist"}
+          path="/wishlist"
+          location={props.location}
+        />
+        <NavbarNav linkName={"Cart"} path="/cart" location={props.location} />
+      </div>
     </div>
+  );
+};
+
+const NavLink = (props) => {
+  return <Link {...props} className="link navbar__nav__links" />;
+};
+
+const NavbarNav = ({ linkName, path, location }) => {
+  let [styleObj, setStyleObj] = useState();
+  useEffect(() => {
+    if (location.pathname === path) {
+      setStyleObj(true);
+    } else {
+      setStyleObj(false);
+    }
+  }, [location]);
+  return (
+    <NavLink
+      to={`${path}`}
+      className=""
+      style={{ borderBottom: styleObj ? "5px solid whitesmoke" : null }}
+    >
+      {linkName}
+    </NavLink>
   );
 };
 

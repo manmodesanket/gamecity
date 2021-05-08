@@ -33106,23 +33106,84 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Navbar = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _router = require("@reach/router");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
-var Navbar = function Navbar() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_router.Link, {
-    to: "/"
-  }, "Home")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_router.Link, {
-    to: "/wishlist"
-  }, "Wishist")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_router.Link, {
-    to: "/cart"
-  }, "Cart"))));
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var Navbar = function Navbar(props) {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "navbar"
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_router.Link, {
+    to: "/",
+    className: "navabar__heading"
+  }, "GameCity")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "navbar__nav"
+  }, /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Home",
+    path: "/",
+    location: props.location
+  }), /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Wishlist",
+    path: "/wishlist",
+    location: props.location
+  }), /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Cart",
+    path: "/cart",
+    location: props.location
+  })));
 };
 
 exports.Navbar = Navbar;
+
+var NavLink = function NavLink(props) {
+  return /*#__PURE__*/_react.default.createElement(_router.Link, _extends({}, props, {
+    className: "link navbar__nav__links"
+  }));
+};
+
+var NavbarNav = function NavbarNav(_ref) {
+  var linkName = _ref.linkName,
+      path = _ref.path,
+      location = _ref.location;
+
+  var _useState = (0, _react.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      styleObj = _useState2[0],
+      setStyleObj = _useState2[1];
+
+  (0, _react.useEffect)(function () {
+    if (location.pathname === path) {
+      setStyleObj(true);
+    } else {
+      setStyleObj(false);
+    }
+  }, [location]);
+  return /*#__PURE__*/_react.default.createElement(NavLink, {
+    to: "".concat(path),
+    className: "",
+    style: {
+      borderBottom: styleObj ? "5px solid whitesmoke" : null
+    }
+  }, linkName);
+};
 },{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"context/ProductContext/ProductContext.js":[function(require,module,exports) {
 "use strict";
 
@@ -33515,10 +33576,6 @@ var _Filters = require("../Filters/Filters");
 
 var _Toast = require("../Toast/Toast");
 
-var _WishlistContext = require("../../context/Wishlist/WishlistContext");
-
-var _CartContext = require("../../context/CartContext/CartContext");
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -33569,7 +33626,7 @@ var Home = function Home() {
 };
 
 exports.Home = Home;
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js","./AddToCartButton":"components/Home/AddToCartButton.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js"}],"components/Wishlist/RemoveFromWishList.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js","./AddToCartButton":"components/Home/AddToCartButton.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js"}],"components/Wishlist/RemoveFromWishList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35932,7 +35989,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _router = require("@reach/router");
 
@@ -35952,16 +36009,26 @@ var _ProductProvider = require("./context/ProductContext/ProductProvider");
 
 var _CartProvider = require("./context/CartContext/CartProvider");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var App = function App() {
-  return /*#__PURE__*/_react.default.createElement(_ProductProvider.ProductProvider, null, /*#__PURE__*/_react.default.createElement(_WishlistProvider.WishListProvider, null, /*#__PURE__*/_react.default.createElement(_CartProvider.CartProvider, null, /*#__PURE__*/_react.default.createElement(_Navbar.Navbar, null), /*#__PURE__*/_react.default.createElement(_router.Router, null, /*#__PURE__*/_react.default.createElement(_Home.Home, {
+  return /*#__PURE__*/_react.default.createElement(_ProductProvider.ProductProvider, null, /*#__PURE__*/_react.default.createElement(_WishlistProvider.WishListProvider, null, /*#__PURE__*/_react.default.createElement(_CartProvider.CartProvider, null, /*#__PURE__*/_react.default.createElement(_router.Router, null, /*#__PURE__*/_react.default.createElement(NavbarRouter, {
+    path: "/"
+  }, /*#__PURE__*/_react.default.createElement(_Home.Home, {
     path: "/"
   }), /*#__PURE__*/_react.default.createElement(_Wishlist.Wishlist, {
     path: "/wishlist"
   }), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     path: "/cart"
-  })))));
+  }))))));
+};
+
+var NavbarRouter = function NavbarRouter(props) {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Navbar.Navbar, {
+    location: props.location
+  }), props.children);
 };
 
 var _default = App;
@@ -36008,7 +36075,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3121" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2874" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
