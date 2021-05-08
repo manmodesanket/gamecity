@@ -33182,7 +33182,6 @@ var NavbarNav = function NavbarNav(_ref) {
   }, [location]);
   return /*#__PURE__*/_react.default.createElement(NavLink, {
     to: "".concat(path),
-    className: "",
     style: {
       borderBottom: styleObj ? "5px solid whitesmoke" : null
     }

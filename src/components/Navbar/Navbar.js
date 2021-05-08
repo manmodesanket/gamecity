@@ -43,7 +43,6 @@ const NavbarNav = ({ linkName, path, location }) => {
   return (
     <NavLink
       to={`${path}`}
-      className=""
       style={{ borderBottom: styleObj ? "5px solid whitesmoke" : null }}
     >
       {linkName}
