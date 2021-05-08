@@ -12,6 +12,11 @@ const Navbar = (props) => {
       <div className="navbar__nav">
         <NavbarNav linkName={"Home"} path="/" location={props.location} />
         <NavbarNav
+          linkName={"Products"}
+          path="/products"
+          location={props.location}
+        />
+        <NavbarNav
           linkName={"Wishlist"}
           path="/wishlist"
           location={props.location}

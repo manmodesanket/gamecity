@@ -3,6 +3,7 @@ import { Router } from "@reach/router";
 
 import { Navbar } from "./components/Navbar/Navbar";
 import { Home } from "./components/Home/Home";
+import { ProductsPage } from "./components/Products/Products";
 import { Wishlist } from "./components/Wishlist/Wishlist";
 import { Cart } from "./components/Cart/Cart";
 import { WishListProvider } from "./context/Wishlist/WishlistProvider";
@@ -19,6 +20,7 @@ const App = () => {
           <Router>
             <NavbarRouter path="/">
               <Home path="/" />
+              <ProductsPage path="/products" />
               <Wishlist path="/wishlist" />
               <Cart path="/cart" />
             </NavbarRouter>

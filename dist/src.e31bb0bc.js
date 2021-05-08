@@ -33141,6 +33141,10 @@ var Navbar = function Navbar(props) {
     path: "/",
     location: props.location
   }), /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Products",
+    path: "/products",
+    location: props.location
+  }), /*#__PURE__*/_react.default.createElement(NavbarNav, {
     linkName: "Wishlist",
     path: "/wishlist",
     location: props.location
@@ -33602,6 +33606,56 @@ var Home = function Home() {
       toastMessageList = _useState2[0],
       setToastMessageList = _useState2[1];
 
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"));
+};
+
+exports.Home = Home;
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js","./AddToCartButton":"components/Home/AddToCartButton.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js"}],"components/Products/Products.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProductsPage = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _WishListButton = require("../WishListButton/WishListButton");
+
+var _AddToCartButton = require("../Home/AddToCartButton");
+
+var _Filters = require("../Filters/Filters");
+
+var _Toast = require("../Toast/Toast");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var ProductsPage = function ProductsPage() {
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productList = _useProductList.productList,
+      loading = _useProductList.loading;
+
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      toastMessageList = _useState2[0],
+      setToastMessageList = _useState2[1];
+
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"), /*#__PURE__*/_react.default.createElement(_Filters.Filters, null), /*#__PURE__*/_react.default.createElement("div", {
     className: "products"
   }, productList.length > 0 ? productList.map(function (item, i) {
@@ -33625,8 +33679,8 @@ var Home = function Home() {
   }));
 };
 
-exports.Home = Home;
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js","./AddToCartButton":"components/Home/AddToCartButton.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js"}],"components/Wishlist/RemoveFromWishList.js":[function(require,module,exports) {
+exports.ProductsPage = ProductsPage;
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js"}],"components/Wishlist/RemoveFromWishList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35997,6 +36051,8 @@ var _Navbar = require("./components/Navbar/Navbar");
 
 var _Home = require("./components/Home/Home");
 
+var _Products = require("./components/Products/Products");
+
 var _Wishlist = require("./components/Wishlist/Wishlist");
 
 var _Cart = require("./components/Cart/Cart");
@@ -36018,6 +36074,8 @@ var App = function App() {
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_Home.Home, {
     path: "/"
+  }), /*#__PURE__*/_react.default.createElement(_Products.ProductsPage, {
+    path: "/products"
   }), /*#__PURE__*/_react.default.createElement(_Wishlist.Wishlist, {
     path: "/wishlist"
   }), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
@@ -36033,7 +36091,7 @@ var NavbarRouter = function NavbarRouter(props) {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/Navbar/Navbar":"components/Navbar/Navbar.js","./components/Home/Home":"components/Home/Home.js","./components/Wishlist/Wishlist":"components/Wishlist/Wishlist.js","./components/Cart/Cart":"components/Cart/Cart.js","./context/Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js","../main.css":"../main.css","./context/ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./context/CartContext/CartProvider":"context/CartContext/CartProvider.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/Navbar/Navbar":"components/Navbar/Navbar.js","./components/Home/Home":"components/Home/Home.js","./components/Products/Products":"components/Products/Products.js","./components/Wishlist/Wishlist":"components/Wishlist/Wishlist.js","./components/Cart/Cart":"components/Cart/Cart.js","./context/Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js","../main.css":"../main.css","./context/ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./context/CartContext/CartProvider":"context/CartContext/CartProvider.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -36075,7 +36133,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2874" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3190" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
