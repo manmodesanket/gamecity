@@ -22,7 +22,7 @@ const AddToCartButton = ({ id, toastMessageList, setToastMessageList }) => {
   }, [cartList]);
 
   return (
-    <button onClick={() => handleAddToCart(id)}>
+    <button className="btn btn-card" onClick={() => handleAddToCart(id)}>
       {added ? "Added To Cart" : "Add To Cart"}
     </button>
   );

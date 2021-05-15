@@ -4,35 +4,45 @@ import { WishListButton } from "../WishListButton/WishListButton";
 import { AddToCartButton } from "../Home/AddToCartButton";
 import { Filters } from "../Filters/Filters";
 import { Toast } from "../Toast/Toast";
+import { Link } from "@reach/router";
 
 const ProductsPage = () => {
   const { productList, loading } = useProductList();
   let [toastMessageList, setToastMessageList] = useState([]);
 
   return (
-    <div>
-      <h1>Home</h1>
-      <Filters />
+    <div className="main-page">
+      {productList.length > 0 ? <Filters /> : null}
       <div className="products">
         {productList.length > 0
           ? productList.map((item, i) => (
-              <div key={i} className="card">
-                <div className="card-name">{item.name}</div>
-                <div>
-                  <WishListButton
-                    id={item._id}
-                    toastMessageList={toastMessageList}
-                    setToastMessageList={setToastMessageList}
-                  />
-                </div>
-                <div>
-                  <AddToCartButton
-                    id={item._id}
-                    toastMessageList={toastMessageList}
-                    setToastMessageList={setToastMessageList}
-                  />
-                </div>
-                <div>Rs.{item.price}</div>
+              <div key={i} className="product__wrapper">
+                <Link
+                  className="product-link"
+                  to={`/product-details/${item._id}`}
+                >
+                  <div className="product__card">
+                    <div className="product__card__img">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="image-container"
+                      />
+                    </div>
+                    <div className="product__card__details">
+                      <div className="product__card__name">{item.name}</div>
+                      <div className="product-card__publisher">
+                        {item.publisher}
+                      </div>
+                      <div className="product__card__price">
+                        Rs.{item.price}
+                      </div>
+                      <div className="product__card__rating">
+                        {item.rating}★
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               </div>
             ))
           : loading
@@ -48,3 +58,10 @@ const ProductsPage = () => {
 };
 
 export { ProductsPage };
+
+/*
+<img
+                    src={item.image}
+                    alt={item.name}
+                    className="product-card__image"
+                  />*/

@@ -22,7 +22,7 @@ const WishListButton = ({ id, toastMessageList, setToastMessageList }) => {
   }, [wishList]);
 
   return (
-    <button onClick={() => handleWishList(id)}>
+    <button className="btn btn-card" onClick={() => handleWishList(id)}>
       {added ? "Wishlisted" : "Wishlist"}
     </button>
   );

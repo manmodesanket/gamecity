@@ -33306,6 +33306,7 @@ var WishListButton = function WishListButton(_ref) {
     }
   }, [wishList]);
   return /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn btn-card",
     onClick: function onClick() {
       return handleWishList(id);
     }
@@ -33397,6 +33398,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
     }
   }, [cartList]);
   return /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn btn-card",
     onClick: function onClick() {
       return handleAddToCart(id);
     }
@@ -33629,6 +33631,8 @@ var _Filters = require("../Filters/Filters");
 
 var _Toast = require("../Toast/Toast");
 
+var _router = require("@reach/router");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -33655,31 +33659,51 @@ var ProductsPage = function ProductsPage() {
       toastMessageList = _useState2[0],
       setToastMessageList = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"), /*#__PURE__*/_react.default.createElement(_Filters.Filters, null), /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, productList.length > 0 ? /*#__PURE__*/_react.default.createElement(_Filters.Filters, null) : null, /*#__PURE__*/_react.default.createElement("div", {
     className: "products"
   }, productList.length > 0 ? productList.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i,
-      className: "card"
+      className: "product__wrapper"
+    }, /*#__PURE__*/_react.default.createElement(_router.Link, {
+      className: "product-link",
+      to: "/product-details/".concat(item._id)
     }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "card-name"
-    }, item.name), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_WishListButton.WishListButton, {
-      id: item._id,
-      toastMessageList: toastMessageList,
-      setToastMessageList: setToastMessageList
-    })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
-      id: item._id,
-      toastMessageList: toastMessageList,
-      setToastMessageList: setToastMessageList
-    })), /*#__PURE__*/_react.default.createElement("div", null, "Rs.", item.price));
+      className: "product__card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__img"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: item.image,
+      alt: item.name,
+      className: "image-container"
+    })), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__details"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__name"
+    }, item.name), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product-card__publisher"
+    }, item.publisher), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__price"
+    }, "Rs.", item.price), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__rating"
+    }, item.rating, "\u2605")))));
   }) : loading ? "Loading..." : "No Products available"), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
     toastMessageList: toastMessageList ? toastMessageList : null,
     setToastMessageList: setToastMessageList
   }));
 };
+/*
+<img
+                    src={item.image}
+                    alt={item.name}
+                    className="product-card__image"
+                  />*/
+
 
 exports.ProductsPage = ProductsPage;
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js"}],"components/Wishlist/RemoveFromWishList.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"components/Wishlist/RemoveFromWishList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36132,7 +36156,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3190" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3401" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -73,19 +73,83 @@ body {
   align-items: center;
 }
 
-.products {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  font-size: var(--fz-md);
+.main-page {
+  padding: 0 1em;
 }
 
-.card {
+.btn {
+  padding: 0.5em 1em;
+
+  border-radius: 2px;
+  border: 1px solid black;
+}
+
+.btn-card {
+  width: 100%;
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.product-link {
+  text-decoration: none;
+  color: black;
+}
+
+.product__wrapper {
+  width: 100%;
+  padding: 0.5em 0.5em;
+}
+
+.product__card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #e1e7ef;
+
+  padding-bottom: 1em;
+  margin: 1rem 1rem 0 1rem;
+
+  cursor: pointer;
+}
+
+.product__card:hover {
+  box-shadow: -5px 5px 10px 0 rgb(0, 0, 0, 0.1);
+}
+
+.product__card__img {
+  display: none;
+  width: auto;
+  flex-basis: 28.7%;
+  max-width: 28.7%;
+  padding: 1em 1em;
+}
+
+.image-container {
+  width: 20vw;
+  margin: 0 auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product__card__details {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
-  padding: 1rem;
+  align-items: flex-start;
+  justify-content: center;
+
+  margin: 0 1em;
+}
+
+.product__card__name {
+  font-weight: bold;
+}
+
+.product__card__price {
+  font-weight: bold;
 }
 
 .toast-card {
@@ -124,6 +188,49 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+  }
+
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    transition: box-shadow 2s ease-in-out;
+  }
+
+  .product-link {
+    text-decoration: none;
+    color: black;
+
+    display: flex;
+    width: 100%;
+  }
+
+  .product__wrapper {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex: 1 0 20%;
+    max-width: 25%;
+  }
+
+  .product__card {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 1em;
+  }
+
+  .product__card__img {
+    display: none;
+    padding: 1em 1em;
+  }
+
+  .image-container {
+    margin: 0 auto;
+  }
+
+  .product__card__details {
+    margin: 0 auto;
   }
 }
 
