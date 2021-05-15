@@ -11,8 +11,8 @@ const AddToCartButton = ({ id, toastMessageList, setToastMessageList }) => {
       type: "ADD_TO_CART",
       payload: item,
     });
-    const obj = createToastMessageList("Item added to cart");
-    setToastMessageList([...toastMessageList, obj]);
+    //const obj = createToastMessageList("Item added to cart");
+    //setToastMessageList([...toastMessageList, obj]);
   };
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const AddToCartButton = ({ id, toastMessageList, setToastMessageList }) => {
   }, [cartList]);
 
   return (
-    <button className="btn btn-card" onClick={() => handleAddToCart(id)}>
+    <button className="btn" onClick={() => handleAddToCart(id)}>
       {added ? "Added To Cart" : "Add To Cart"}
     </button>
   );

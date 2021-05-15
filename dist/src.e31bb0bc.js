@@ -33366,14 +33366,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -33404,9 +33396,8 @@ var AddToCartButton = function AddToCartButton(_ref) {
     cartDispatch({
       type: "ADD_TO_CART",
       payload: item
-    });
-    var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
-    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+    }); //const obj = createToastMessageList("Item added to cart");
+    //setToastMessageList([...toastMessageList, obj]);
   };
 
   (0, _react.useEffect)(function () {
@@ -33415,7 +33406,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
     }
   }, [cartList]);
   return /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn btn-card",
+    className: "btn",
     onClick: function onClick() {
       return handleAddToCart(id);
     }
@@ -33641,11 +33632,13 @@ var ProductsPage = function ProductsPage() {
       className: "product__card"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "product__card__img"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "image-container"
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: item.image,
       alt: item.name,
-      className: "image-container"
-    })), /*#__PURE__*/_react.default.createElement("div", {
+      className: "card__image"
+    }))), /*#__PURE__*/_react.default.createElement("div", {
       className: "product__card__details"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "product__card__name"
@@ -33974,6 +33967,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ProductContext = require("../../context/ProductContext/ProductContext");
 
+var _AddToCartButton = require("../Home/AddToCartButton");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -34011,11 +34006,38 @@ var ProductDetails = function ProductDetails(props) {
   }, [productList]);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page"
-  }, game ? game.name : "Product Details not available");
+  }, game ? /*#__PURE__*/_react.default.createElement(GameDetails, {
+    game: game
+  }) : "Product Details not available");
 };
 
 exports.ProductDetails = ProductDetails;
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+
+var GameDetails = function GameDetails(_ref) {
+  var game = _ref.game;
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "game-details_card"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "image-wrapper__outer"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "image-wrapper_inner"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: game.image,
+    alt: game.name,
+    className: "image-holder"
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "game_details"
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    className: "product-name"
+  }, game.name), /*#__PURE__*/_react.default.createElement("div", {
+    className: "product-card__publisher"
+  }, game.publisher), /*#__PURE__*/_react.default.createElement("h1", {
+    className: "product-price"
+  }, "Rs.", game.price), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
+    id: game._id
+  })));
+};
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {

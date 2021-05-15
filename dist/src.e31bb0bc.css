@@ -92,23 +92,32 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-.product-link {
-  text-decoration: none;
-  color: black;
+  transition: all 2s ease-in-out;
 }
 
 .product__wrapper {
   width: 100%;
   padding: 0.5em 0.5em;
+
+  border-bottom: 1px solid #e1e7ef;
+}
+
+.product-link {
+  text-decoration: none;
+  color: black;
+
+  width: 100%;
+  display: flex;
+}
+
+.product-link:hover {
+  box-shadow: -5px 5px 10px 0 rgb(0, 0, 0, 0.1);
 }
 
 .product__card {
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: 1px solid #e1e7ef;
 
   padding-bottom: 1em;
   margin: 1rem 1rem 0 1rem;
@@ -116,23 +125,22 @@ body {
   cursor: pointer;
 }
 
-.product__card:hover {
-  box-shadow: -5px 5px 10px 0 rgb(0, 0, 0, 0.1);
-}
-
 .product__card__img {
-  display: none;
   width: auto;
   flex-basis: 28.7%;
   max-width: 28.7%;
-  padding: 1em 1em;
+  padding: 0;
+  margin: 0 20px 0 0;
 }
 
 .image-container {
-  width: 20vw;
+  width: 100%;
   margin: 0 auto;
-  height: 100%;
-  object-fit: cover;
+}
+
+.card__image {
+  width: 100%;
+  min-width: 25vw;
 }
 
 .product__card__details {
@@ -140,8 +148,6 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-
-  margin: 0 1em;
 }
 
 .product__card__name {
@@ -155,6 +161,32 @@ body {
 .toast-card {
   border: 1px solid black;
   width: 10%;
+}
+
+.product-name {
+  font-size: var(--fz-lg);
+}
+
+.product-price {
+  font-size: var(--fz-xxl);
+}
+
+.game-details_card {
+  margin-top: 1em;
+}
+
+.image-wrapper__outer {
+  width: 100%;
+}
+
+.image-wrapper__outer .image-wrapper_inner {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.image-holder {
+  width: 100%;
+  margin: 0 auto;
 }
 
 @media (min-width: 650px) {
@@ -194,35 +226,50 @@ body {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    transition: box-shadow 2s ease-in-out;
+  }
+
+  .product__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 0 20%;
+
+    border: 0;
   }
 
   .product-link {
     text-decoration: none;
     color: black;
 
-    display: flex;
-    width: 100%;
-  }
+    display: block;
 
-  .product__wrapper {
-    display: flex;
     width: 100%;
-    flex-wrap: wrap;
-    flex: 1 0 20%;
-    max-width: 25%;
+    height: 100%;
+    padding: 0.5em;
   }
 
   .product__card {
     display: flex;
-    width: 100%;
+    flex-direction: column;
     align-items: center;
-    padding: 1em;
+
+    padding: 0;
+    width: 100%;
   }
 
   .product__card__img {
-    display: none;
-    padding: 1em 1em;
+    min-width: 100%;
+    padding: 16px 5px 8px;
+    height: 212px !important;
+  }
+
+  .image-container {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .card__image {
+    width: 100%;
+    min-width: 10vw;
   }
 
   .image-container {
@@ -231,6 +278,36 @@ body {
 
   .product__card__details {
     margin: 0 auto;
+  }
+
+  .game-details_card {
+    margin-top: 1em;
+
+    display: flex;
+  }
+
+  .image-wrapper__outer {
+    width: 100%;
+    flex-basis: 70%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .image-wrapper__outer .image-wrapper_inner {
+    width: 30%;
+    margin: 0 auto;
+  }
+
+  .image-holder {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .game_details {
+    flex-basis: 30%;
+
+    padding: 1em;
+    margin: 10em 0 0 0;
   }
 }
 

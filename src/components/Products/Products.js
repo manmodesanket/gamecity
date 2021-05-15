@@ -23,11 +23,13 @@ const ProductsPage = () => {
                 >
                   <div className="product__card">
                     <div className="product__card__img">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="image-container"
-                      />
+                      <div className="image-container">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="card__image"
+                        />
+                      </div>
                     </div>
                     <div className="product__card__details">
                       <div className="product__card__name">{item.name}</div>
