@@ -21,7 +21,7 @@ export const reducerFunction = (state, action) => {
       return newState;
     case "ADD_TO_CART":
       for (let i = 0; i < state.length; i++) {
-        if (state[i] === action.payload) return state;
+        if (state[i].id === action.payload.id) return state;
       }
       return [...state, action.payload];
     default:

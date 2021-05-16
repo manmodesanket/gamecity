@@ -9,7 +9,7 @@ const ProductDetails = (props) => {
 
   useEffect(() => {
     if (productList.length > 0) {
-      const newGame = productList.find((item) => item._id === id);
+      let newGame = productList.find((item) => item._id === id);
       setGame(newGame);
     }
   }, [productList]);
