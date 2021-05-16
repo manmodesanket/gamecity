@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useCartList } from "../../context/CartContext/CartContext";
 import { createToastMessageList } from "../../Utilities/UtilityFunctions";
 
-const AddToCartButton = ({ id, toastMessageList, setToastMessageList }) => {
+const AddToCartButton = ({
+  id,
+  toastMessageList,
+  setToastMessageList,
+  classes,
+}) => {
   let { cartList, cartDispatch } = useCartList();
   const [added, setAdded] = useState(false);
-
   const handleAddToCart = (item) => {
     cartDispatch({
       type: "ADD_TO_CART",
@@ -22,7 +26,10 @@ const AddToCartButton = ({ id, toastMessageList, setToastMessageList }) => {
   }, [cartList]);
 
   return (
-    <button className="btn" onClick={() => handleAddToCart(id)}>
+    <button
+      className={`btn ${[...classes]}`}
+      onClick={() => handleAddToCart(id)}
+    >
       {added ? "Added To Cart" : "Add To Cart"}
     </button>
   );

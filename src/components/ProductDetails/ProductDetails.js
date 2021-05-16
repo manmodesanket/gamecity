@@ -23,17 +23,20 @@ const ProductDetails = (props) => {
 
 const GameDetails = ({ game }) => {
   return (
-    <div className="game-details_card">
-      <div className="image-wrapper__outer">
-        <div className="image-wrapper_inner">
-          <img src={game.image} alt={game.name} className="image-holder" />
+    <div className="main-page">
+      <div className="game-details_card">
+        <div className="image-wrapper__outer">
+          <div className="image-wrapper_inner">
+            <img src={game.image} alt={game.name} className="image-holder" />
+          </div>
         </div>
-      </div>
-      <div className="game_details">
-        <h1 className="product-name">{game.name}</h1>
-        <div className="product-card__publisher">{game.publisher}</div>
-        <h1 className="product-price">Rs.{game.price}</h1>
-        <AddToCartButton id={game._id} />
+        <div className="game_details">
+          <h1 className="product-name">{game.name}</h1>
+          <div className="product__publisher">{game.publisher}</div>
+          <div className="product__rating">{game.rating}★</div>
+          <h1 className="product-price">Rs.{game.price}</h1>
+          <AddToCartButton id={game._id} classes={["btn-cart"]} />
+        </div>
       </div>
     </div>
   );

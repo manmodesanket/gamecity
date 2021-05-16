@@ -33366,6 +33366,14 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -33381,7 +33389,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddToCartButton = function AddToCartButton(_ref) {
   var id = _ref.id,
       toastMessageList = _ref.toastMessageList,
-      setToastMessageList = _ref.setToastMessageList;
+      setToastMessageList = _ref.setToastMessageList,
+      classes = _ref.classes;
 
   var _useCartList = (0, _CartContext.useCartList)(),
       cartList = _useCartList.cartList,
@@ -33406,7 +33415,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
     }
   }, [cartList]);
   return /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn",
+    className: "btn ".concat(_toConsumableArray(classes)),
     onClick: function onClick() {
       return handleAddToCart(id);
     }
@@ -33647,6 +33656,8 @@ var ProductsPage = function ProductsPage() {
     }, item.publisher), /*#__PURE__*/_react.default.createElement("div", {
       className: "product__card__price"
     }, "Rs.", item.price), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card_platform"
+    }, item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
       className: "product__card__rating"
     }, item.rating, "\u2605")))));
   }) : loading ? "Loading..." : "No Products available"), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
@@ -34016,6 +34027,8 @@ exports.ProductDetails = ProductDetails;
 var GameDetails = function GameDetails(_ref) {
   var game = _ref.game;
   return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "game-details_card"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "image-wrapper__outer"
@@ -34030,12 +34043,15 @@ var GameDetails = function GameDetails(_ref) {
   }, /*#__PURE__*/_react.default.createElement("h1", {
     className: "product-name"
   }, game.name), /*#__PURE__*/_react.default.createElement("div", {
-    className: "product-card__publisher"
-  }, game.publisher), /*#__PURE__*/_react.default.createElement("h1", {
+    className: "product__publisher"
+  }, game.publisher), /*#__PURE__*/_react.default.createElement("div", {
+    className: "product__rating"
+  }, game.rating, "\u2605"), /*#__PURE__*/_react.default.createElement("h1", {
     className: "product-price"
   }, "Rs.", game.price), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
-    id: game._id
-  })));
+    id: game._id,
+    classes: ["btn-cart"]
+  }))));
 };
 },{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
@@ -36202,7 +36218,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3401" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3915" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

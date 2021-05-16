@@ -39,6 +39,13 @@ const ProductsPage = () => {
                       <div className="product__card__price">
                         Rs.{item.price}
                       </div>
+                      <div className="product__card_platform">
+                        {item.platform === 1
+                          ? "PlayStation 5"
+                          : item.platform === 2
+                          ? "Xbox Series X"
+                          : null}
+                      </div>
                       <div className="product__card__rating">
                         {item.rating}★
                       </div>

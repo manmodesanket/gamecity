@@ -88,6 +88,14 @@ body {
   width: 100%;
 }
 
+.btn-cart {
+  width: 100%;
+  color: whitesmoke;
+  font-weight: bold;
+  background-color: #543de0;
+  cursor: pointer;
+}
+
 .products {
   display: flex;
   flex-direction: row;
@@ -111,7 +119,7 @@ body {
 }
 
 .product-link:hover {
-  box-shadow: -5px 5px 10px 0 rgb(0, 0, 0, 0.1);
+  box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
 }
 
 .product__card {
@@ -148,6 +156,8 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+
+  padding: 0;
 }
 
 .product__card__name {
@@ -225,13 +235,14 @@ body {
   .products {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
   }
 
   .product__wrapper {
     display: flex;
     flex-wrap: wrap;
-    flex: 1 0 20%;
+    flex: 0 0 23%;
 
     border: 0;
   }
@@ -263,13 +274,13 @@ body {
   }
 
   .image-container {
-    width: 50%;
+    width: 30%;
     margin: 0 auto;
   }
 
   .card__image {
     width: 100%;
-    min-width: 10vw;
+    min-width: 5vw;
   }
 
   .image-container {
@@ -278,6 +289,7 @@ body {
 
   .product__card__details {
     margin: 0 auto;
+    padding: 0.5em;
   }
 
   .game-details_card {
@@ -307,7 +319,7 @@ body {
     flex-basis: 30%;
 
     padding: 1em;
-    margin: 10em 0 0 0;
+    margin: auto 0;
   }
 }
 
