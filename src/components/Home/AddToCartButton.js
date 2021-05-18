@@ -19,8 +19,8 @@ const AddToCartButton = ({
       type: "ADD_TO_CART",
       payload: newItem,
     });
-    //const obj = createToastMessageList("Item added to cart");
-    //setToastMessageList([...toastMessageList, obj]);
+    const obj = createToastMessageList("Item added to cart");
+    setToastMessageList([...toastMessageList, obj]);
   };
 
   useEffect(() => {

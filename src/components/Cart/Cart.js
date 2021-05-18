@@ -78,31 +78,36 @@ const Cart = () => {
                     </div>
                   </div>
                   <div className="cart__card__details">
-                    <div className="cart__card__name">{item.name}</div>
-                    <div className="cart__card_platform">
-                      Platform:{" "}
-                      {item.platform === 1
-                        ? "PlayStation 5"
-                        : item.platform === 2
-                        ? "Xbox Series X"
-                        : null}
-                    </div>
-                    <div className="cart__card_publisher">
-                      Publisher: {item.publisher}
-                    </div>
-                    <div className="cart_card__price">
-                      Rs.{item.price * item.items}
+                    <div className="cart_card_details_wrapper">
+                      <div className="cart__card__name">{item.name}</div>
+                      <div className="cart__card_platform">
+                        Platform:{" "}
+                        {item.platform === 1
+                          ? "PlayStation 5"
+                          : item.platform === 2
+                          ? "Xbox Series X"
+                          : null}
+                      </div>
+                      <div className="cart__card_publisher">
+                        Publisher: {item.publisher}
+                      </div>
+                      <div className="cart_card__price">
+                        Rs.{item.price * item.items}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="product_quantity">
-                  <button onClick={() => handleQuantity(item._id, "DESC")}>
-                    -
-                  </button>
-                  {item.items}
-                  <button onClick={() => handleQuantity(item._id, "INC")}>
-                    +
-                  </button>
+                <div className="cart__product__actions">
+                  <div className="product_quantity">
+                    <button onClick={() => handleQuantity(item._id, "DESC")}>
+                      -
+                    </button>
+                    {item.items}
+                    <button onClick={() => handleQuantity(item._id, "INC")}>
+                      +
+                    </button>
+                  </div>
+                  <button>Remove</button>
                 </div>
               </div>
             ))

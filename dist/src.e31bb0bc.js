@@ -33409,8 +33409,9 @@ var AddToCartButton = function AddToCartButton(_ref) {
     cartDispatch({
       type: "ADD_TO_CART",
       payload: newItem
-    }); //const obj = createToastMessageList("Item added to cart");
-    //setToastMessageList([...toastMessageList, obj]);
+    });
+    var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
+    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
   };
 
   (0, _react.useEffect)(function () {
@@ -33534,9 +33535,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Toast = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -33550,16 +33553,18 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Toast = function Toast(_ref) {
   var toastMessageList = _ref.toastMessageList,
       setToastMessageList = _ref.setToastMessageList;
-  return /*#__PURE__*/_react.default.createElement("div", null, toastMessageList.length > 0 ? toastMessageList.map(function (toast) {
-    return /*#__PURE__*/_react.default.createElement(ToastCard, {
-      toastObj: toast,
-      key: toast.id,
-      setToastMessageList: setToastMessageList,
-      toastMessageList: toastMessageList
-    });
+  return /*#__PURE__*/_react.default.createElement("div", null, toastMessageList.length > 0 ? toastMessageList.map(function (toast, i) {
+    var _React$createElement;
+
+    return /*#__PURE__*/_react.default.createElement(ToastCard, (_React$createElement = {
+      key: i,
+      toastObj: toast
+    }, _defineProperty(_React$createElement, "key", toast.id), _defineProperty(_React$createElement, "setToastMessageList", setToastMessageList), _defineProperty(_React$createElement, "toastMessageList", toastMessageList), _React$createElement));
   }) : null);
 };
 
@@ -33578,6 +33583,14 @@ var ToastCard = function ToastCard(_ref2) {
     setToastMessageList(_toConsumableArray(toastMessageList));
   };
 
+  (0, _react.useEffect)(function () {
+    var interval = setInterval(function () {
+      deleteToast(toastMessageList[0].id);
+    }, 3000);
+    return function () {
+      clearInterval(interval);
+    };
+  }, []);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "toast-card"
   }, /*#__PURE__*/_react.default.createElement("div", null, toastObj.message), /*#__PURE__*/_react.default.createElement("button", {
@@ -33931,6 +33944,8 @@ var Cart = function Cart() {
     }))), /*#__PURE__*/_react.default.createElement("div", {
       className: "cart__card__details"
     }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart_card_details_wrapper"
+    }, /*#__PURE__*/_react.default.createElement("div", {
       className: "cart__card__name"
     }, item.name), /*#__PURE__*/_react.default.createElement("div", {
       className: "cart__card_platform"
@@ -33938,7 +33953,9 @@ var Cart = function Cart() {
       className: "cart__card_publisher"
     }, "Publisher: ", item.publisher), /*#__PURE__*/_react.default.createElement("div", {
       className: "cart_card__price"
-    }, "Rs.", item.price * item.items))), /*#__PURE__*/_react.default.createElement("div", {
+    }, "Rs.", item.price * item.items)))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__product__actions"
+    }, /*#__PURE__*/_react.default.createElement("div", {
       className: "product_quantity"
     }, /*#__PURE__*/_react.default.createElement("button", {
       onClick: function onClick() {
@@ -33948,7 +33965,7 @@ var Cart = function Cart() {
       onClick: function onClick() {
         return handleQuantity(item._id, "INC");
       }
-    }, "+")));
+    }, "+")), /*#__PURE__*/_react.default.createElement("button", null, "Remove")));
   }) : null));
 };
 
@@ -34085,6 +34102,8 @@ var _ProductContext = require("../../context/ProductContext/ProductContext");
 
 var _AddToCartButton = require("../Home/AddToCartButton");
 
+var _Toast = require("../Toast/Toast");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -34112,6 +34131,12 @@ var ProductDetails = function ProductDetails(props) {
   var _useProductList = (0, _ProductContext.useProductList)(),
       productList = _useProductList.productList;
 
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      toastMessageList = _useState4[0],
+      setToastMessageList = _useState4[1]; //console.log(toastMessageList);
+
+
   (0, _react.useEffect)(function () {
     if (productList.length > 0) {
       var newGame = productList.find(function (item) {
@@ -34123,14 +34148,21 @@ var ProductDetails = function ProductDetails(props) {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page"
   }, game ? /*#__PURE__*/_react.default.createElement(GameDetails, {
-    game: game
-  }) : "Product Details not available");
+    game: game,
+    setToastMessageList: setToastMessageList,
+    toastMessageList: toastMessageList
+  }) : "Product Details not available", /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
+    toastMessageList: toastMessageList,
+    setToastMessageList: setToastMessageList
+  }));
 };
 
 exports.ProductDetails = ProductDetails;
 
 var GameDetails = function GameDetails(_ref) {
-  var game = _ref.game;
+  var game = _ref.game,
+      setToastMessageList = _ref.setToastMessageList,
+      toastMessageList = _ref.toastMessageList;
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -34155,10 +34187,12 @@ var GameDetails = function GameDetails(_ref) {
     className: "product-price"
   }, "Rs.", game.price), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
     id: game._id,
-    classes: ["btn-cart"]
+    classes: ["btn-cart"],
+    setToastMessageList: setToastMessageList,
+    toastMessageList: toastMessageList
   }))));
 };
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js","../Toast/Toast":"components/Toast/Toast.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -36323,7 +36357,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3915" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3062" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
