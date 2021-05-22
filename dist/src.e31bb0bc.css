@@ -97,6 +97,8 @@ body {
   font-weight: bold;
   background-color: #543de0;
   cursor: pointer;
+
+  margin-bottom: 0.5em;
 }
 
 .products {

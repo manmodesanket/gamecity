@@ -33297,7 +33297,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var WishListButton = function WishListButton(_ref) {
   var id = _ref.id,
       toastMessageList = _ref.toastMessageList,
-      setToastMessageList = _ref.setToastMessageList;
+      setToastMessageList = _ref.setToastMessageList,
+      classes = _ref.classes;
 
   var _useWishlist = (0, _WishlistContext.useWishlist)(),
       wishList = _useWishlist.wishList,
@@ -33309,12 +33310,22 @@ var WishListButton = function WishListButton(_ref) {
       setAdded = _useState2[1];
 
   var handleWishList = function handleWishList(item) {
-    wishListDispatch({
-      type: "ADD_TO_WISHLIST",
-      payload: item
+    var isPresentInCart = wishList.find(function (itemInCart) {
+      return itemInCart === item;
     });
-    var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to wishlist");
-    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+
+    if (isPresentInCart === undefined || isPresentInCart === null) {
+      wishListDispatch({
+        type: "ADD_TO_WISHLIST",
+        payload: item
+      });
+      var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to wishlist");
+      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+    } else {
+      var _obj = (0, _UtilityFunctions.createToastMessageList)("Item already in Wishlist");
+
+      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -33323,11 +33334,11 @@ var WishListButton = function WishListButton(_ref) {
     }
   }, [wishList]);
   return /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn btn-card",
+    className: "btn ".concat(_toConsumableArray(classes)),
     onClick: function onClick() {
       return handleWishList(id);
     }
-  }, added ? "Wishlisted" : "Wishlist");
+  }, added ? "Added To Wishlist" : "Add To Wishlist");
 };
 
 exports.WishListButton = WishListButton;
@@ -34143,6 +34154,8 @@ var _AddToCartButton = require("../Home/AddToCartButton");
 
 var _Toast = require("../Toast/Toast");
 
+var _WishListButton = require("../WishListButton/WishListButton");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -34224,14 +34237,19 @@ var GameDetails = function GameDetails(_ref) {
     className: "product__rating"
   }, game.rating, "\u2605"), /*#__PURE__*/_react.default.createElement("h1", {
     className: "product-price"
-  }, "Rs.", game.price), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
+  }, "Rs.", game.price), /*#__PURE__*/_react.default.createElement(_WishListButton.WishListButton, {
+    id: game._id,
+    classes: ["btn-cart"],
+    setToastMessageList: setToastMessageList,
+    toastMessageList: toastMessageList
+  }), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
     id: game._id,
     classes: ["btn-cart"],
     setToastMessageList: setToastMessageList,
     toastMessageList: toastMessageList
   }))));
 };
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js","../Toast/Toast":"components/Toast/Toast.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js","../Toast/Toast":"components/Toast/Toast.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
