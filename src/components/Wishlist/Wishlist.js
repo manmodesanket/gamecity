@@ -3,11 +3,13 @@ import { useWishlist } from "../../context/Wishlist/WishlistContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
 import { RemoveFromWishList } from "./RemoveFromWishList";
 import { Link } from "@reach/router";
+import { Toast } from "../Toast/Toast";
 
 const Wishlist = () => {
   let { wishList } = useWishlist();
   const { productList } = useProductList();
   let [itemList, setItemList] = useState([]);
+  let [toastMessageList, setToastMessageList] = useState([]);
 
   useEffect(() => {
     let list = [];
@@ -48,11 +50,17 @@ const Wishlist = () => {
                 <RemoveFromWishList
                   id={item._id}
                   classes={["cart__product__actions__remove__btn"]}
+                  toastMessageList={toastMessageList}
+                  setToastMessageList={setToastMessageList}
                 />
               </div>
             ))
           : "Empty"}
       </div>
+      <Toast
+        toastMessageList={toastMessageList}
+        setToastMessageList={setToastMessageList}
+      />
     </div>
   );
 };

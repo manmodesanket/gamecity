@@ -33731,11 +33731,27 @@ var _react = _interopRequireDefault(require("react"));
 
 var _WishlistContext = require("../../context/Wishlist/WishlistContext");
 
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var RemoveFromWishList = function RemoveFromWishList(_ref) {
   var id = _ref.id,
-      classes = _ref.classes;
+      classes = _ref.classes,
+      toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList;
 
   var _useWishlist = (0, _WishlistContext.useWishlist)(),
       wishList = _useWishlist.wishList,
@@ -33746,6 +33762,8 @@ var RemoveFromWishList = function RemoveFromWishList(_ref) {
       type: "REMOVE_FROM_WISHLIST",
       payload: id
     });
+    var obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from wishlist");
+    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
   };
 
   return /*#__PURE__*/_react.default.createElement("button", {
@@ -33757,7 +33775,7 @@ var RemoveFromWishList = function RemoveFromWishList(_ref) {
 };
 
 exports.RemoveFromWishList = RemoveFromWishList;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/Wishlist/Wishlist.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/Wishlist/Wishlist.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33774,6 +33792,8 @@ var _ProductContext = require("../../context/ProductContext/ProductContext");
 var _RemoveFromWishList = require("./RemoveFromWishList");
 
 var _router = require("@reach/router");
+
+var _Toast = require("../Toast/Toast");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -33802,6 +33822,11 @@ var Wishlist = function Wishlist() {
       _useState2 = _slicedToArray(_useState, 2),
       itemList = _useState2[0],
       setItemList = _useState2[1];
+
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      toastMessageList = _useState4[0],
+      setToastMessageList = _useState4[1];
 
   (0, _react.useEffect)(function () {
     var list = [];
@@ -33842,13 +33867,18 @@ var Wishlist = function Wishlist() {
       className: "card-name"
     }, item.name))), /*#__PURE__*/_react.default.createElement(_RemoveFromWishList.RemoveFromWishList, {
       id: item._id,
-      classes: ["cart__product__actions__remove__btn"]
+      classes: ["cart__product__actions__remove__btn"],
+      toastMessageList: toastMessageList,
+      setToastMessageList: setToastMessageList
     }));
-  }) : "Empty"));
+  }) : "Empty"), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
+    toastMessageList: toastMessageList,
+    setToastMessageList: setToastMessageList
+  }));
 };
 
 exports.Wishlist = Wishlist;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","./RemoveFromWishList":"components/Wishlist/RemoveFromWishList.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","./RemoveFromWishList":"components/Wishlist/RemoveFromWishList.js","@reach/router":"../node_modules/@reach/router/es/index.js","../Toast/Toast":"components/Toast/Toast.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33861,6 +33891,10 @@ var _react = _interopRequireWildcard(require("react"));
 var _CartContext = require("../../context/CartContext/CartContext");
 
 var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+var _Toast = require("../Toast/Toast");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -33909,6 +33943,11 @@ var Cart = function Cart() {
       _useState4 = _slicedToArray(_useState3, 2),
       total = _useState4[0],
       setTotal = _useState4[1];
+
+  var _useState5 = (0, _react.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      toastMessageList = _useState6[0],
+      setToastMessageList = _useState6[1];
 
   var compare = function compare(a, b) {
     if (a.added > b.added) return 1;else return -1;
@@ -33977,6 +34016,8 @@ var Cart = function Cart() {
       type: "REMOVE_FROM_CART",
       payload: id
     });
+    var obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from cart");
+    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
   };
 
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -34032,11 +34073,14 @@ var Cart = function Cart() {
       },
       className: "btn cart__product__actions__remove__btn"
     }, "Remove")));
-  }) : null));
+  }) : null), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
+    toastMessageList: toastMessageList,
+    setToastMessageList: setToastMessageList
+  }));
 };
 
 exports.Cart = Cart;
-},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"Reducers/Reducer.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js"}],"Reducers/Reducer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

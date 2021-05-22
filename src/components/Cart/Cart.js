@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useCartList } from "../../context/CartContext/CartContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
+import { createToastMessageList } from "../../Utilities/UtilityFunctions";
+import { Toast } from "../Toast/Toast";
 
 const Cart = () => {
   let { cartList, cartDispatch } = useCartList();
   const { productList } = useProductList();
   let [itemList, setItemList] = useState([]);
   let [total, setTotal] = useState(0);
+  let [toastMessageList, setToastMessageList] = useState([]);
 
   const compare = (a, b) => {
     if (a.added > b.added) return 1;
@@ -66,6 +69,8 @@ const Cart = () => {
       type: "REMOVE_FROM_CART",
       payload: id,
     });
+    const obj = createToastMessageList("Item removed from cart");
+    setToastMessageList([...toastMessageList, obj]);
   };
 
   return (
@@ -136,6 +141,10 @@ const Cart = () => {
             ))
           : null}
       </div>
+      <Toast
+        toastMessageList={toastMessageList}
+        setToastMessageList={setToastMessageList}
+      />
     </div>
   );
 };
