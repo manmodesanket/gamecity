@@ -127,6 +127,11 @@ body {
   box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
 }
 
+.wishlist-link {
+  text-decoration: none;
+  color: black;
+}
+
 .product__card {
   display: flex;
   flex-direction: row;
@@ -272,6 +277,7 @@ body {
 
   align-items: center;
 
+  margin-bottom: 0.5em;
   flex-basis: 100%;
 }
 

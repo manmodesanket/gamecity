@@ -33733,7 +33733,10 @@ var _WishlistContext = require("../../context/Wishlist/WishlistContext");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var RemoveFromWishList = function RemoveFromWishList(props) {
+var RemoveFromWishList = function RemoveFromWishList(_ref) {
+  var id = _ref.id,
+      classes = _ref.classes;
+
   var _useWishlist = (0, _WishlistContext.useWishlist)(),
       wishList = _useWishlist.wishList,
       wishListDispatch = _useWishlist.wishListDispatch;
@@ -33746,8 +33749,9 @@ var RemoveFromWishList = function RemoveFromWishList(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn ".concat(classes),
     onClick: function onClick() {
-      return removeFromWishList(props.id);
+      return removeFromWishList(id);
     }
   }, "Remove");
 };
@@ -33768,6 +33772,8 @@ var _WishlistContext = require("../../context/Wishlist/WishlistContext");
 var _ProductContext = require("../../context/ProductContext/ProductContext");
 
 var _RemoveFromWishList = require("./RemoveFromWishList");
+
+var _router = require("@reach/router");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -33810,22 +33816,39 @@ var Wishlist = function Wishlist() {
 
     setItemList(list);
   }, [wishList]);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Wishlist"), /*#__PURE__*/_react.default.createElement("div", {
-    className: "products"
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Wishlist"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__products"
   }, itemList.length > 0 ? itemList.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("div", {
-      key: i,
-      className: "card"
+      key: item._id,
+      className: "cart_card__wrapper"
+    }, /*#__PURE__*/_react.default.createElement(_router.Link, {
+      className: "wishlist-link",
+      to: "/product-details/".concat(item._id)
     }, /*#__PURE__*/_react.default.createElement("div", {
+      key: i,
+      className: "cart__card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card__img"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__image-container"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: item.image,
+      alt: item.name,
+      className: "cart__card__image"
+    }))), /*#__PURE__*/_react.default.createElement("div", {
       className: "card-name"
-    }, item.name), /*#__PURE__*/_react.default.createElement(_RemoveFromWishList.RemoveFromWishList, {
-      id: item._id
+    }, item.name))), /*#__PURE__*/_react.default.createElement(_RemoveFromWishList.RemoveFromWishList, {
+      id: item._id,
+      classes: ["cart__product__actions__remove__btn"]
     }));
   }) : "Empty"));
 };
 
 exports.Wishlist = Wishlist;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","./RemoveFromWishList":"components/Wishlist/RemoveFromWishList.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","./RemoveFromWishList":"components/Wishlist/RemoveFromWishList.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33950,7 +33973,6 @@ var Cart = function Cart() {
   };
 
   var handleCartRemove = function handleCartRemove(id) {
-    console.log(id);
     cartDispatch({
       type: "REMOVE_FROM_CART",
       payload: id

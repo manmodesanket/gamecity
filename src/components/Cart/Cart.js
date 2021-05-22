@@ -62,7 +62,6 @@ const Cart = () => {
   };
 
   const handleCartRemove = (id) => {
-    console.log(id);
     cartDispatch({
       type: "REMOVE_FROM_CART",
       payload: id,

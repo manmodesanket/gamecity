@@ -1,7 +1,7 @@
 import React from "react";
 import { useWishlist } from "../../context/Wishlist/WishlistContext";
 
-const RemoveFromWishList = (props) => {
+const RemoveFromWishList = ({ id, classes }) => {
   const { wishList, wishListDispatch } = useWishlist();
 
   const removeFromWishList = (id) => {
@@ -11,7 +11,11 @@ const RemoveFromWishList = (props) => {
     });
   };
 
-  return <button onClick={() => removeFromWishList(props.id)}>Remove</button>;
+  return (
+    <button className={`btn ${classes}`} onClick={() => removeFromWishList(id)}>
+      Remove
+    </button>
+  );
 };
 
 export { RemoveFromWishList };
