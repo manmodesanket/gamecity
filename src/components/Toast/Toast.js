@@ -28,16 +28,23 @@ const ToastCard = ({ toastObj, setToastMessageList, toastMessageList }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       deleteToast(toastMessageList[0].id);
-    }, 3000);
+    }, 2000);
     return () => {
       clearInterval(interval);
     };
   }, []);
 
   return (
-    <div className="toast-card">
-      <div>{toastObj.message}</div>
-      <button onClick={() => deleteToast(toastObj.id)}>X</button>
+    <div className="toast-wrapper">
+      <div className="toast-card">
+        <div>{toastObj.message}</div>
+        <button
+          onClick={() => deleteToast(toastObj.id)}
+          className="btn toast__card__btn"
+        >
+          X
+        </button>
+      </div>
     </div>
   );
 };

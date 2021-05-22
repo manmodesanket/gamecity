@@ -17,13 +17,16 @@ export const reducerFunction = (state, action) => {
       }
       return [...state, action.payload];
     case "REMOVE_FROM_WISHLIST":
-      const newState = state.filter((item) => item !== action.payload);
-      return newState;
+      const newWishListState = state.filter((item) => item !== action.payload);
+      return newWishListState;
     case "ADD_TO_CART":
       for (let i = 0; i < state.length; i++) {
         if (state[i].id === action.payload.id) return state;
       }
       return [...state, action.payload];
+    case "REMOVE_FROM_CART":
+      let newCartState = state.filter((item) => item.id !== action.payload);
+      return [...newCartState];
     default:
       return state;
   }

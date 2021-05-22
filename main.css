@@ -15,6 +15,7 @@
   --blue: #543de0;
   --green: #40be88;
   --orange: #ff9d44;
+  --secondary: #f1f4f9;
 }
 
 body {
@@ -26,6 +27,8 @@ body {
   background-color: var(--blue);
 
   color: whitesmoke;
+
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -168,18 +171,46 @@ body {
   font-weight: bold;
 }
 
-.toast-card {
-  border: 1px solid black;
+.toast-wrapper {
+  position: absolute;
+  bottom: 12px;
+
   width: 90%;
 
-  position: absolute;
-  bottom: 10px;
+  display: flex;
+  justify-content: center;
+
+  transition: all 2s ease-in-out;
+}
+
+.toast-card {
+  border: 1px solid black;
+  width: 100%;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 
-  transition: transform 0.6s ease-in-out;
-  animation: toast-in-right 0.7s;
+  padding: 0.5em 1em;
+
+  margin: 0 auto;
+
+  border-radius: 5px;
+
+  color: whitesmoke;
+  background-color: var(--blue);
+
+  box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
+}
+
+.toast__card__btn {
+  outline: none;
+  border: none;
+
+  cursor: pointer;
+
+  color: whitesmoke;
+  background-color: inherit;
 }
 
 .product-name {
@@ -227,6 +258,10 @@ body {
   align-items: center;
 
   border-bottom: 1px solid #e1e7ef;
+}
+
+.cart_card__wrapper:hover {
+  background-color: var(--secondary);
 }
 
 .cart__card {
@@ -280,6 +315,26 @@ body {
   margin-top: 0.5em;
 
   flex-basis: 33.333%;
+}
+
+.cart__card__quantity__btn {
+  color: whitesmoke;
+  background-color: var(--blue);
+}
+
+.cart__card__quantity__btn:hover {
+  cursor: pointer;
+}
+
+.cart__product__actions__remove__btn {
+  cursor: pointer;
+  font-weight: bold;
+  color: whitesmoke;
+  background-color: var(--orange);
+}
+
+.product_quantity__element {
+  margin: 0 2px;
 }
 
 @media (min-width: 650px) {
@@ -485,5 +540,38 @@ body {
 
     flex-basis: 10%;
     max-width: 10%;
+  }
+
+  .toast-wrapper {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+
+    width: 30%;
+
+    display: flex;
+    justify-content: center;
+
+    transition: all 2s ease-in-out;
+  }
+
+  .toast-card {
+    border: 1px solid black;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0.5em 1em;
+
+    margin: 0 auto;
+
+    border-radius: 5px;
+
+    color: whitesmoke;
+    background-color: var(--blue);
+
+    box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
   }
 }

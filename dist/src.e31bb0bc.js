@@ -33402,16 +33402,26 @@ var AddToCartButton = function AddToCartButton(_ref) {
       setAdded = _useState2[1];
 
   var handleAddToCart = function handleAddToCart(item) {
-    var newItem = {
-      id: item,
-      added: Date.now()
-    };
-    cartDispatch({
-      type: "ADD_TO_CART",
-      payload: newItem
+    var isPresentInCart = cartList.find(function (itemInCart) {
+      return itemInCart.id === item;
     });
-    var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
-    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+
+    if (isPresentInCart === undefined || isPresentInCart === null) {
+      var newItem = {
+        id: item,
+        added: Date.now()
+      };
+      cartDispatch({
+        type: "ADD_TO_CART",
+        payload: newItem
+      });
+      var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
+      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+    } else {
+      var _obj = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
+
+      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -33586,18 +33596,21 @@ var ToastCard = function ToastCard(_ref2) {
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
       deleteToast(toastMessageList[0].id);
-    }, 3000);
+    }, 2000);
     return function () {
       clearInterval(interval);
     };
   }, []);
   return /*#__PURE__*/_react.default.createElement("div", {
+    className: "toast-wrapper"
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "toast-card"
   }, /*#__PURE__*/_react.default.createElement("div", null, toastObj.message), /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       return deleteToast(toastObj.id);
-    }
-  }, "X"));
+    },
+    className: "btn toast__card__btn"
+  }, "X")));
 };
 },{"react":"../node_modules/react/index.js"}],"components/Products/Products.js":[function(require,module,exports) {
 "use strict";
@@ -33847,7 +33860,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Cart = function Cart() {
   var _useCartList = (0, _CartContext.useCartList)(),
-      cartList = _useCartList.cartList;
+      cartList = _useCartList.cartList,
+      cartDispatch = _useCartList.cartDispatch;
 
   var _useProductList = (0, _ProductContext.useProductList)(),
       productList = _useProductList.productList;
@@ -33893,6 +33907,8 @@ var Cart = function Cart() {
       }
 
       setTotal(_total);
+    } else if (itemList.length === 0) {
+      setTotal(0);
     }
   }, [itemList]);
 
@@ -33920,6 +33936,14 @@ var Cart = function Cart() {
         setItemList(_list);
       }
     }
+  };
+
+  var handleCartRemove = function handleCartRemove(id) {
+    console.log(id);
+    cartDispatch({
+      type: "REMOVE_FROM_CART",
+      payload: id
+    });
   };
 
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -33960,12 +33984,21 @@ var Cart = function Cart() {
     }, /*#__PURE__*/_react.default.createElement("button", {
       onClick: function onClick() {
         return handleQuantity(item._id, "DESC");
-      }
-    }, "-"), item.items, /*#__PURE__*/_react.default.createElement("button", {
+      },
+      className: "btn cart__card__quantity__btn product_quantity__element"
+    }, "-"), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product_quantity__element"
+    }, item.items), /*#__PURE__*/_react.default.createElement("button", {
       onClick: function onClick() {
         return handleQuantity(item._id, "INC");
-      }
-    }, "+")), /*#__PURE__*/_react.default.createElement("button", null, "Remove")));
+      },
+      className: "btn cart__card__quantity__btn product_quantity__element"
+    }, "+")), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        return handleCartRemove(item._id);
+      },
+      className: "btn cart__product__actions__remove__btn"
+    }, "Remove")));
   }) : null));
 };
 
@@ -34023,10 +34056,10 @@ var reducerFunction = function reducerFunction(state, action) {
       return [].concat(_toConsumableArray(state), [action.payload]);
 
     case "REMOVE_FROM_WISHLIST":
-      var newState = state.filter(function (item) {
+      var newWishListState = state.filter(function (item) {
         return item !== action.payload;
       });
-      return newState;
+      return newWishListState;
 
     case "ADD_TO_CART":
       for (var _i = 0; _i < state.length; _i++) {
@@ -34034,6 +34067,12 @@ var reducerFunction = function reducerFunction(state, action) {
       }
 
       return [].concat(_toConsumableArray(state), [action.payload]);
+
+    case "REMOVE_FROM_CART":
+      var newCartState = state.filter(function (item) {
+        return item.id !== action.payload;
+      });
+      return _toConsumableArray(newCartState);
 
     default:
       return state;
@@ -36357,7 +36396,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3062" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1648" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

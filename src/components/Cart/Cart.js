@@ -3,7 +3,7 @@ import { useCartList } from "../../context/CartContext/CartContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
 
 const Cart = () => {
-  let { cartList } = useCartList();
+  let { cartList, cartDispatch } = useCartList();
   const { productList } = useProductList();
   let [itemList, setItemList] = useState([]);
   let [total, setTotal] = useState(0);
@@ -38,6 +38,8 @@ const Cart = () => {
         total += itemList[i].items * itemList[i].price;
       }
       setTotal(total);
+    } else if (itemList.length === 0) {
+      setTotal(0);
     }
   }, [itemList]);
 
@@ -57,6 +59,14 @@ const Cart = () => {
         setItemList(list);
       }
     }
+  };
+
+  const handleCartRemove = (id) => {
+    console.log(id);
+    cartDispatch({
+      type: "REMOVE_FROM_CART",
+      payload: id,
+    });
   };
 
   return (
@@ -99,15 +109,29 @@ const Cart = () => {
                 </div>
                 <div className="cart__product__actions">
                   <div className="product_quantity">
-                    <button onClick={() => handleQuantity(item._id, "DESC")}>
+                    <button
+                      onClick={() => handleQuantity(item._id, "DESC")}
+                      className="btn cart__card__quantity__btn product_quantity__element"
+                    >
                       -
                     </button>
-                    {item.items}
-                    <button onClick={() => handleQuantity(item._id, "INC")}>
+                    <div className="product_quantity__element">
+                      {item.items}
+                    </div>
+
+                    <button
+                      onClick={() => handleQuantity(item._id, "INC")}
+                      className="btn cart__card__quantity__btn product_quantity__element"
+                    >
                       +
                     </button>
                   </div>
-                  <button>Remove</button>
+                  <button
+                    onClick={() => handleCartRemove(item._id)}
+                    className="btn cart__product__actions__remove__btn"
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             ))
