@@ -95,7 +95,7 @@ body {
   width: 100%;
   color: whitesmoke;
   font-weight: bold;
-  background-color: #543de0;
+  background-color: var(--blue);
   cursor: pointer;
 
   margin-bottom: 0.5em;
@@ -343,6 +343,13 @@ body {
 
 .product_quantity__element {
   margin: 0 2px;
+}
+
+.loader {
+  color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
 
 @media (min-width: 650px) {
