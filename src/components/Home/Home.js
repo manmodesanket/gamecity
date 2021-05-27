@@ -1,9 +1,10 @@
 import React from "react";
+import { NewRelease } from "./NewRelease";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="main-page">
+      <NewRelease />
     </div>
   );
 };

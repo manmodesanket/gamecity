@@ -33187,24 +33187,7 @@ var NavbarNav = function NavbarNav(_ref) {
     }
   }, linkName);
 };
-},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"components/Home/Home.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Home = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Home = function Home() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Home"));
-};
-
-exports.Home = Home;
-},{"react":"../node_modules/react/index.js"}],"context/ProductContext/ProductContext.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"context/ProductContext/ProductContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33221,176 +33204,6 @@ exports.ProductContext = ProductContext;
 function useProductList() {
   return (0, _react.useContext)(ProductContext);
 }
-},{"react":"../node_modules/react/index.js"}],"components/Filters/Filters.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Filters = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _ProductContext = require("../../context/ProductContext/ProductContext");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var Filters = function Filters() {
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      ascending = _useState2[0],
-      setAscending = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      descending = _useState4[0],
-      setDescending = _useState4[1];
-
-  var _useProductList = (0, _ProductContext.useProductList)(),
-      productListDispatch = _useProductList.productListDispatch,
-      setClearFilter = _useProductList.setClearFilter;
-
-  var handlePriceChange = function handlePriceChange(event) {
-    if (event.target.value === "Ascending") {
-      setAscending(true);
-      setDescending(false);
-      productListDispatch({
-        type: "PRODUCT_LIST_ASCENDING"
-      });
-    } else if (event.target.value === "Descending") {
-      setDescending(true);
-      setAscending(false);
-      productListDispatch({
-        type: "PRODUCT_LIST_DESCENDING"
-      });
-    }
-  };
-
-  var clearFilter = function clearFilter() {
-    setClearFilter(true);
-    setAscending(false);
-    setDescending(false);
-  };
-
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Filters"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Price"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "radio",
-    id: "asc",
-    value: "Ascending",
-    name: "price",
-    checked: ascending,
-    onChange: function onChange(e) {
-      return handlePriceChange(e);
-    }
-  }), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "asc"
-  }, "Low To High"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "radio",
-    id: "desc",
-    value: "Descending",
-    name: "price",
-    checked: descending,
-    onChange: function onChange(e) {
-      return handlePriceChange(e);
-    }
-  }), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "desc"
-  }, "High To Low")), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: function onClick() {
-      return clearFilter();
-    }
-  }, "Clear Filters")));
-};
-
-exports.Filters = Filters;
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"components/Toast/Toast.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Toast = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var Toast = function Toast(_ref) {
-  var toastMessageList = _ref.toastMessageList,
-      setToastMessageList = _ref.setToastMessageList;
-  return /*#__PURE__*/_react.default.createElement("div", null, toastMessageList.length > 0 ? toastMessageList.map(function (toast, i) {
-    var _React$createElement;
-
-    return /*#__PURE__*/_react.default.createElement(ToastCard, (_React$createElement = {
-      key: i,
-      toastObj: toast
-    }, _defineProperty(_React$createElement, "key", toast.id), _defineProperty(_React$createElement, "setToastMessageList", setToastMessageList), _defineProperty(_React$createElement, "toastMessageList", toastMessageList), _React$createElement));
-  }) : null);
-};
-
-exports.Toast = Toast;
-
-var ToastCard = function ToastCard(_ref2) {
-  var toastObj = _ref2.toastObj,
-      setToastMessageList = _ref2.setToastMessageList,
-      toastMessageList = _ref2.toastMessageList;
-
-  var deleteToast = function deleteToast(id) {
-    var index = toastMessageList.findIndex(function (e) {
-      return e.id === id;
-    });
-    toastMessageList.splice(index, 1);
-    setToastMessageList(_toConsumableArray(toastMessageList));
-  };
-
-  (0, _react.useEffect)(function () {
-    var interval = setInterval(function () {
-      deleteToast(toastMessageList[0].id);
-    }, 2000);
-    return function () {
-      clearInterval(interval);
-    };
-  }, []);
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "toast-wrapper"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "toast-card"
-  }, /*#__PURE__*/_react.default.createElement("div", null, toastObj.message), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: function onClick() {
-      return deleteToast(toastObj.id);
-    },
-    className: "btn toast__card__btn"
-  }, "X")));
-};
 },{"react":"../node_modules/react/index.js"}],"../node_modules/react-loader-spinner/dist/loader/Circles.js":[function(require,module,exports) {
 "use strict";
 
@@ -34977,7 +34790,266 @@ Loader.defaultProps = {
   visible: true,
   timeout: 0
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./loader":"../node_modules/react-loader-spinner/dist/loader/index.js"}],"components/Products/Products.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./loader":"../node_modules/react-loader-spinner/dist/loader/index.js"}],"components/Home/NewRelease.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.NewRelease = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _router = require("@reach/router");
+
+var _reactLoaderSpinner = _interopRequireDefault(require("react-loader-spinner"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NewRelease = function NewRelease() {
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productList = _useProductList.productList,
+      loading = _useProductList.loading;
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "New Release"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "products"
+  }, productList.length > 0 ? productList.map(function (item, i) {
+    if (item.newRelease === true) {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        key: i,
+        className: "product__wrapper"
+      }, /*#__PURE__*/_react.default.createElement(_router.Link, {
+        className: "product-link",
+        to: "/product-details/".concat(item._id)
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "product__card"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "product__card__img"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "image-container"
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        src: item.image,
+        alt: item.name,
+        className: "card__image"
+      }))), /*#__PURE__*/_react.default.createElement("div", {
+        className: "product__card__details"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "product__card__name"
+      }, item.name), /*#__PURE__*/_react.default.createElement("div", {
+        className: "product-card__publisher"
+      }, item.publisher), /*#__PURE__*/_react.default.createElement("div", {
+        className: "product__card__price"
+      }, "Rs.", item.price), /*#__PURE__*/_react.default.createElement("div", {
+        className: "product__card_platform"
+      }, item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
+        className: "product__card__rating"
+      }, item.rating, "\u2605")))));
+    }
+  }) : loading ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "loader"
+  }, /*#__PURE__*/_react.default.createElement(_reactLoaderSpinner.default, {
+    type: "TailSpin",
+    color: "#543de0",
+    height: 50,
+    width: 50
+  })) : "No Products available"));
+};
+
+exports.NewRelease = NewRelease;
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","react-loader-spinner":"../node_modules/react-loader-spinner/dist/index.js"}],"components/Home/Home.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Home = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _NewRelease = require("./NewRelease");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Home = function Home() {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement(_NewRelease.NewRelease, null));
+};
+
+exports.Home = Home;
+},{"react":"../node_modules/react/index.js","./NewRelease":"components/Home/NewRelease.js"}],"components/Filters/Filters.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Filters = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var Filters = function Filters() {
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      ascending = _useState2[0],
+      setAscending = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      descending = _useState4[0],
+      setDescending = _useState4[1];
+
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productListDispatch = _useProductList.productListDispatch,
+      setClearFilter = _useProductList.setClearFilter;
+
+  var handlePriceChange = function handlePriceChange(event) {
+    if (event.target.value === "Ascending") {
+      setAscending(true);
+      setDescending(false);
+      productListDispatch({
+        type: "PRODUCT_LIST_ASCENDING"
+      });
+    } else if (event.target.value === "Descending") {
+      setDescending(true);
+      setAscending(false);
+      productListDispatch({
+        type: "PRODUCT_LIST_DESCENDING"
+      });
+    }
+  };
+
+  var clearFilter = function clearFilter() {
+    setClearFilter(true);
+    setAscending(false);
+    setDescending(false);
+  };
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Filters"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Price"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "radio",
+    id: "asc",
+    value: "Ascending",
+    name: "price",
+    checked: ascending,
+    onChange: function onChange(e) {
+      return handlePriceChange(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "asc"
+  }, "Low To High"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "radio",
+    id: "desc",
+    value: "Descending",
+    name: "price",
+    checked: descending,
+    onChange: function onChange(e) {
+      return handlePriceChange(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "desc"
+  }, "High To Low")), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return clearFilter();
+    }
+  }, "Clear Filters")));
+};
+
+exports.Filters = Filters;
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"components/Toast/Toast.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Toast = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Toast = function Toast(_ref) {
+  var toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList;
+  return /*#__PURE__*/_react.default.createElement("div", null, toastMessageList.length > 0 ? toastMessageList.map(function (toast, i) {
+    var _React$createElement;
+
+    return /*#__PURE__*/_react.default.createElement(ToastCard, (_React$createElement = {
+      key: i,
+      toastObj: toast
+    }, _defineProperty(_React$createElement, "key", toast.id), _defineProperty(_React$createElement, "setToastMessageList", setToastMessageList), _defineProperty(_React$createElement, "toastMessageList", toastMessageList), _React$createElement));
+  }) : null);
+};
+
+exports.Toast = Toast;
+
+var ToastCard = function ToastCard(_ref2) {
+  var toastObj = _ref2.toastObj,
+      setToastMessageList = _ref2.setToastMessageList,
+      toastMessageList = _ref2.toastMessageList;
+
+  var deleteToast = function deleteToast(id) {
+    var index = toastMessageList.findIndex(function (e) {
+      return e.id === id;
+    });
+    toastMessageList.splice(index, 1);
+    setToastMessageList(_toConsumableArray(toastMessageList));
+  };
+
+  (0, _react.useEffect)(function () {
+    var interval = setInterval(function () {
+      deleteToast(toastMessageList[0].id);
+    }, 2000);
+    return function () {
+      clearInterval(interval);
+    };
+  }, []);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "toast-wrapper"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "toast-card"
+  }, /*#__PURE__*/_react.default.createElement("div", null, toastObj.message), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return deleteToast(toastObj.id);
+    },
+    className: "btn toast__card__btn"
+  }, "X")));
+};
+},{"react":"../node_modules/react/index.js"}],"components/Products/Products.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38073,7 +38145,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4339" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2464" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

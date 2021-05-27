@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
 :root {
   /*fonts*/
   --fz-xxs: 12px;
@@ -20,7 +22,7 @@
 
 body {
   margin: 0;
-  font-family: "Rubik", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .navbar {
@@ -66,6 +68,13 @@ body {
   outline: none;
 
   padding: 0.5em 0;
+}
+
+.loader {
+  color: black;
+  position: fixed;
+  top: 50%;
+  left: 45%;
 }
 
 .link {
@@ -328,6 +337,7 @@ body {
 .cart__card__quantity__btn {
   color: whitesmoke;
   background-color: var(--blue);
+  cursor: pointer;
 }
 
 .cart__card__quantity__btn:hover {
@@ -343,13 +353,6 @@ body {
 
 .product_quantity__element {
   margin: 0 2px;
-}
-
-.loader {
-  color: black;
-  position: fixed;
-  top: 50%;
-  left: 50%;
 }
 
 @media (min-width: 650px) {
@@ -385,10 +388,17 @@ body {
     justify-content: space-around;
   }
 
+  .loader {
+    color: black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+  }
+
   .products {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
   }
 
