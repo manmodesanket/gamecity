@@ -35464,7 +35464,7 @@ var Cart = function Cart() {
     }
 
     setItemList(list);
-  }, [cartList]);
+  }, []);
   (0, _react.useEffect)(function () {
     if (itemList.length > 0) {
       var _total = 0;
@@ -35510,6 +35510,10 @@ var Cart = function Cart() {
       type: "REMOVE_FROM_CART",
       payload: id
     });
+    var newItemList = itemList.filter(function (item) {
+      return item._id != id;
+    });
+    setItemList(newItemList);
     var obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from cart");
     setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
   };
@@ -38144,7 +38148,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3940" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4384" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

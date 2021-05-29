@@ -33,7 +33,7 @@ const Cart = () => {
       }
     }
     setItemList(list);
-  }, [cartList]);
+  }, []);
 
   useEffect(() => {
     if (itemList.length > 0) {
@@ -71,6 +71,8 @@ const Cart = () => {
       type: "REMOVE_FROM_CART",
       payload: id,
     });
+    const newItemList = itemList.filter((item) => item._id != id);
+    setItemList(newItemList);
     const obj = createToastMessageList("Item removed from cart");
     setToastMessageList([...toastMessageList, obj]);
   };
