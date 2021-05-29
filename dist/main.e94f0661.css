@@ -11,7 +11,7 @@
   --fz-xxl: 22px;
   --fz-heading: 32px;
   --border-radius: 4px;
-  --nav-height: 50px;
+  --nav-height: 60px;
 
   /*colors*/
   --blue: #543de0;
@@ -29,7 +29,9 @@ body {
   background-color: var(--blue);
 
   color: whitesmoke;
+}
 
+.navbar__wrapper {
   width: 100%;
 
   display: flex;
@@ -52,7 +54,6 @@ body {
   font-size: var(--fz-lg);
 
   width: 100%;
-  height: 100%;
 
   display: flex;
   flex-direction: row;
@@ -356,36 +357,14 @@ body {
 }
 
 @media (min-width: 650px) {
-  .navbar {
-    background-color: var(--blue);
-
-    color: whitesmoke;
-
-    display: flex;
+  .navbar__wrapper {
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    height: var(--nav-height);
+    width: 70%;
+    margin-left: 15%;
   }
 
-  .navabar__heading {
-    font-size: var(--fz-heading);
-    font-weight: bold;
-
-    color: whitesmoke;
-    text-decoration: none;
-  }
-
-  .navbar__nav {
-    font-size: var(--fz-lg);
-
-    width: 50%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  .main-page {
+    margin: 0 15%;
   }
 
   .loader {

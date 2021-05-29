@@ -4,24 +4,26 @@ import { Link } from "@reach/router";
 const Navbar = (props) => {
   return (
     <div className="navbar">
-      <div>
-        <Link to="/" className="navabar__heading">
-          GameCity
-        </Link>
-      </div>
-      <div className="navbar__nav">
-        <NavbarNav linkName={"Home"} path="/" location={props.location} />
-        <NavbarNav
-          linkName={"Products"}
-          path="/products"
-          location={props.location}
-        />
-        <NavbarNav
-          linkName={"Wishlist"}
-          path="/wishlist"
-          location={props.location}
-        />
-        <NavbarNav linkName={"Cart"} path="/cart" location={props.location} />
+      <div className="navbar__wrapper">
+        <div className="navbar__title">
+          <Link to="/" className="navabar__heading">
+            GameCity
+          </Link>
+        </div>
+        <div className="navbar__nav">
+          <NavbarNav linkName={"Home"} path="/" location={props.location} />
+          <NavbarNav
+            linkName={"Products"}
+            path="/products"
+            location={props.location}
+          />
+          <NavbarNav
+            linkName={"Wishlist"}
+            path="/wishlist"
+            location={props.location}
+          />
+          <NavbarNav linkName={"Cart"} path="/cart" location={props.location} />
+        </div>
       </div>
     </div>
   );

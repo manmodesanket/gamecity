@@ -33131,7 +33131,11 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 var Navbar = function Navbar(props) {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "navbar"
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_router.Link, {
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "navbar__wrapper"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "navbar__title"
+  }, /*#__PURE__*/_react.default.createElement(_router.Link, {
     to: "/",
     className: "navabar__heading"
   }, "GameCity")), /*#__PURE__*/_react.default.createElement("div", {
@@ -33152,7 +33156,7 @@ var Navbar = function Navbar(props) {
     linkName: "Cart",
     path: "/cart",
     location: props.location
-  })));
+  }))));
 };
 
 exports.Navbar = Navbar;
@@ -38145,7 +38149,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2464" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3940" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
