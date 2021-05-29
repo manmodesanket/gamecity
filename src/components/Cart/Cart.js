@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useCartList } from "../../context/CartContext/CartContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
-import { createToastMessageList } from "../../Utilities/UtilityFunctions";
+import {
+  createToastMessageList,
+  findProductById,
+} from "../../Utilities/UtilityFunctions";
 import { Toast } from "../Toast/Toast";
 
 const Cart = () => {
@@ -19,15 +22,14 @@ const Cart = () => {
   useEffect(() => {
     let list = [];
     for (let i = 0; i < cartList.length; i++) {
-      for (let j = 0; j < productList.length; j++) {
-        if (productList[j]._id === cartList[i].id) {
-          const obj = {
-            items: 1,
-            added: cartList[i].added,
-            ...productList[j],
-          };
-          list.push(obj);
-        }
+      const obj = findProductById(productList, cartList[i].id);
+      if (obj !== null) {
+        obj = {
+          items: 1,
+          added: cartList[i].added,
+          ...obj,
+        };
+        list.push(obj);
       }
     }
     setItemList(list);

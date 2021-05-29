@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useWishlist } from "../../context/Wishlist/WishlistContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
-import { RemoveFromWishList } from "./RemoveFromWishList";
+import { RemoveFromWishList } from "../WishListComponents/RemoveFromWishList";
 import { Link } from "@reach/router";
 import { Toast } from "../Toast/Toast";
 

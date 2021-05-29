@@ -66,10 +66,3 @@ const ProductsPage = () => {
 };
 
 export { ProductsPage };
-
-/*
-<img
-                    src={item.image}
-                    alt={item.name}
-                    className="product-card__image"
-                  />*/

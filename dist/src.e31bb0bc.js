@@ -34971,6 +34971,7 @@ var Filters = function Filters() {
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "desc"
   }, "High To Low")), /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn",
     onClick: function onClick() {
       return clearFilter();
     }
@@ -35147,13 +35148,6 @@ var ProductsPage = function ProductsPage() {
     setToastMessageList: setToastMessageList
   }));
 };
-/*
-<img
-                    src={item.image}
-                    alt={item.name}
-                    className="product-card__image"
-                  />*/
-
 
 exports.ProductsPage = ProductsPage;
 },{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js","@reach/router":"../node_modules/@reach/router/es/index.js","react-loader-spinner":"../node_modules/react-loader-spinner/dist/index.js"}],"context/Wishlist/WishlistContext.js":[function(require,module,exports) {
@@ -35179,7 +35173,7 @@ function useWishlist() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createToastMessageList = void 0;
+exports.findProductById = exports.createToastMessageList = void 0;
 
 var createToastMessageList = function createToastMessageList(msg) {
   var toastId = Math.floor(Math.random() * 100);
@@ -35191,7 +35185,19 @@ var createToastMessageList = function createToastMessageList(msg) {
 };
 
 exports.createToastMessageList = createToastMessageList;
-},{}],"components/Wishlist/RemoveFromWishList.js":[function(require,module,exports) {
+
+var findProductById = function findProductById(productList, id) {
+  var newGame = productList.find(function (item) {
+    return item._id === id;
+  });
+
+  if (newGame != null) {
+    return newGame;
+  }
+};
+
+exports.findProductById = findProductById;
+},{}],"components/WishListComponents/RemoveFromWishList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35261,7 +35267,7 @@ var _WishlistContext = require("../../context/Wishlist/WishlistContext");
 
 var _ProductContext = require("../../context/ProductContext/ProductContext");
 
-var _RemoveFromWishList = require("./RemoveFromWishList");
+var _RemoveFromWishList = require("../WishListComponents/RemoveFromWishList");
 
 var _router = require("@reach/router");
 
@@ -35350,7 +35356,7 @@ var Wishlist = function Wishlist() {
 };
 
 exports.Wishlist = Wishlist;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","./RemoveFromWishList":"components/Wishlist/RemoveFromWishList.js","@reach/router":"../node_modules/@reach/router/es/index.js","../Toast/Toast":"components/Toast/Toast.js"}],"context/CartContext/CartContext.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListComponents/RemoveFromWishList":"components/WishListComponents/RemoveFromWishList.js","@reach/router":"../node_modules/@reach/router/es/index.js","../Toast/Toast":"components/Toast/Toast.js"}],"context/CartContext/CartContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35446,15 +35452,14 @@ var Cart = function Cart() {
     var list = [];
 
     for (var i = 0; i < cartList.length; i++) {
-      for (var j = 0; j < productList.length; j++) {
-        if (productList[j]._id === cartList[i].id) {
-          var obj = _objectSpread({
-            items: 1,
-            added: cartList[i].added
-          }, productList[j]);
+      var obj = (0, _UtilityFunctions.findProductById)(productList, cartList[i].id);
 
-          list.push(obj);
-        }
+      if (obj !== null) {
+        obj = _objectSpread({
+          items: 1,
+          added: cartList[i].added
+        }, obj);
+        list.push(obj);
       }
     }
 
@@ -35693,7 +35698,7 @@ var WishListProvider = function WishListProvider(_ref) {
 };
 
 exports.WishListProvider = WishListProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/Home/AddToCartButton.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/CartComponents/AddToCartButton.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35746,7 +35751,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
       added = _useState2[0],
       setAdded = _useState2[1];
 
-  var handleAddToCart = function handleAddToCart(item) {
+  var handleAddToCart = function handleAddToCart(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
     var isPresentInCart = cartList.find(function (itemInCart) {
       return itemInCart.id === item;
     });
@@ -35762,6 +35767,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
       });
       var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
       setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+      setAdded(true);
     } else {
       var _obj = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
 
@@ -35769,25 +35775,16 @@ var AddToCartButton = function AddToCartButton(_ref) {
     }
   };
 
-  (0, _react.useEffect)(function () {
-    var item = cartList.find(function (item) {
-      return item.id === id;
-    });
-
-    if (item) {
-      setAdded(true);
-    }
-  }, [cartList]);
   return /*#__PURE__*/_react.default.createElement("button", {
     className: "btn ".concat(_toConsumableArray(classes)),
     onClick: function onClick() {
-      return handleAddToCart(id);
+      return handleAddToCart(id, cartList, cartDispatch, toastMessageList, setToastMessageList);
     }
   }, added ? "Added To Cart" : "Add To Cart");
 };
 
 exports.AddToCartButton = AddToCartButton;
-},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/WishListButton/WishListButton.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/WishListComponents/WishListButton.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35840,7 +35837,13 @@ var WishListButton = function WishListButton(_ref) {
       added = _useState2[0],
       setAdded = _useState2[1];
 
-  var handleWishList = function handleWishList(item) {
+  (0, _react.useEffect)(function () {
+    if (wishList.includes(id)) {
+      setAdded(true);
+    }
+  }, [wishList]);
+
+  var addToWishList = function addToWishList(item, wishList, wishListDispatch, toastMessageList, setToastMessageList) {
     var isPresentInCart = wishList.find(function (itemInCart) {
       return itemInCart === item;
     });
@@ -35859,15 +35862,10 @@ var WishListButton = function WishListButton(_ref) {
     }
   };
 
-  (0, _react.useEffect)(function () {
-    if (wishList.includes(id)) {
-      setAdded(true);
-    }
-  }, [wishList]);
   return /*#__PURE__*/_react.default.createElement("button", {
     className: "btn ".concat(_toConsumableArray(classes)),
     onClick: function onClick() {
-      return handleWishList(id);
+      return addToWishList(id, wishList, wishListDispatch, toastMessageList, setToastMessageList);
     }
   }, added ? "Added To Wishlist" : "Add To Wishlist");
 };
@@ -35885,11 +35883,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ProductContext = require("../../context/ProductContext/ProductContext");
 
-var _AddToCartButton = require("../Home/AddToCartButton");
+var _AddToCartButton = require("../CartComponents/AddToCartButton");
 
 var _Toast = require("../Toast/Toast");
 
-var _WishListButton = require("../WishListButton/WishListButton");
+var _WishListButton = require("../WishListComponents/WishListButton");
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -35921,16 +35921,11 @@ var ProductDetails = function ProductDetails(props) {
   var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
       toastMessageList = _useState4[0],
-      setToastMessageList = _useState4[1]; //console.log(toastMessageList);
-
+      setToastMessageList = _useState4[1];
 
   (0, _react.useEffect)(function () {
-    if (productList.length > 0) {
-      var newGame = productList.find(function (item) {
-        return item._id === id;
-      });
-      setGame(newGame);
-    }
+    var newGame = (0, _UtilityFunctions.findProductById)(productList, id);
+    setGame(newGame);
   }, [productList]);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page"
@@ -35984,7 +35979,7 @@ var GameDetails = function GameDetails(_ref) {
     toastMessageList: toastMessageList
   }))));
 };
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Home/AddToCartButton":"components/Home/AddToCartButton.js","../Toast/Toast":"components/Toast/Toast.js","../WishListButton/WishListButton":"components/WishListButton/WishListButton.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../CartComponents/AddToCartButton":"components/CartComponents/AddToCartButton.js","../Toast/Toast":"components/Toast/Toast.js","../WishListComponents/WishListButton":"components/WishListComponents/WishListButton.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {

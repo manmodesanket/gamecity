@@ -7,4 +7,11 @@ const createToastMessageList = (msg) => {
   return obj;
 };
 
-export { createToastMessageList };
+const findProductById = (productList, id) => {
+  let newGame = productList.find((item) => item._id === id);
+  if (newGame != null) {
+    return newGame;
+  }
+};
+
+export { createToastMessageList, findProductById };

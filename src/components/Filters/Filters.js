@@ -53,7 +53,9 @@ const Filters = () => {
           />
           <label htmlFor="desc">High To Low</label>
         </form>
-        <button onClick={() => clearFilter()}>Clear Filters</button>
+        <button className="btn" onClick={() => clearFilter()}>
+          Clear Filters
+        </button>
       </div>
     </div>
   );

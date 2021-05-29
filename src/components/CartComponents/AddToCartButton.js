@@ -10,7 +10,14 @@ const AddToCartButton = ({
 }) => {
   let { cartList, cartDispatch } = useCartList();
   const [added, setAdded] = useState(false);
-  const handleAddToCart = (item) => {
+
+  const handleAddToCart = (
+    item,
+    cartList,
+    cartDispatch,
+    toastMessageList,
+    setToastMessageList
+  ) => {
     let isPresentInCart = cartList.find((itemInCart) => itemInCart.id === item);
     if (isPresentInCart === undefined || isPresentInCart === null) {
       const newItem = {
@@ -23,23 +30,25 @@ const AddToCartButton = ({
       });
       const obj = createToastMessageList("Item added to cart");
       setToastMessageList([...toastMessageList, obj]);
+      setAdded(true);
     } else {
       const obj = createToastMessageList("Item already in cart");
       setToastMessageList([...toastMessageList, obj]);
     }
   };
 
-  useEffect(() => {
-    const item = cartList.find((item) => item.id === id);
-    if (item) {
-      setAdded(true);
-    }
-  }, [cartList]);
-
   return (
     <button
       className={`btn ${[...classes]}`}
-      onClick={() => handleAddToCart(id)}
+      onClick={() =>
+        handleAddToCart(
+          id,
+          cartList,
+          cartDispatch,
+          toastMessageList,
+          setToastMessageList
+        )
+      }
     >
       {added ? "Added To Cart" : "Add To Cart"}
     </button>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useProductList } from "../../context/ProductContext/ProductContext";
-import { AddToCartButton } from "../Home/AddToCartButton";
+import { AddToCartButton } from "../CartComponents/AddToCartButton";
 import { Toast } from "../Toast/Toast";
-import { WishListButton } from "../WishListButton/WishListButton";
+import { WishListButton } from "../WishListComponents/WishListButton";
+import { findProductById } from "../../Utilities/UtilityFunctions";
 
 const ProductDetails = (props) => {
   const { id } = props;
@@ -10,12 +11,9 @@ const ProductDetails = (props) => {
   const { productList } = useProductList();
   let [toastMessageList, setToastMessageList] = useState([]);
 
-  //console.log(toastMessageList);
   useEffect(() => {
-    if (productList.length > 0) {
-      let newGame = productList.find((item) => item._id === id);
-      setGame(newGame);
-    }
+    let newGame = findProductById(productList, id);
+    setGame(newGame);
   }, [productList]);
 
   return (

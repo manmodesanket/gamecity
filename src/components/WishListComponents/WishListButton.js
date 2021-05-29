@@ -11,7 +11,19 @@ const WishListButton = ({
   const { wishList, wishListDispatch } = useWishlist();
   const [added, setAdded] = useState(false);
 
-  const handleWishList = (item) => {
+  useEffect(() => {
+    if (wishList.includes(id)) {
+      setAdded(true);
+    }
+  }, [wishList]);
+
+  const addToWishList = (
+    item,
+    wishList,
+    wishListDispatch,
+    toastMessageList,
+    setToastMessageList
+  ) => {
     let isPresentInCart = wishList.find((itemInCart) => itemInCart === item);
     if (isPresentInCart === undefined || isPresentInCart === null) {
       wishListDispatch({
@@ -26,16 +38,18 @@ const WishListButton = ({
     }
   };
 
-  useEffect(() => {
-    if (wishList.includes(id)) {
-      setAdded(true);
-    }
-  }, [wishList]);
-
   return (
     <button
       className={`btn ${[...classes]}`}
-      onClick={() => handleWishList(id)}
+      onClick={() =>
+        addToWishList(
+          id,
+          wishList,
+          wishListDispatch,
+          toastMessageList,
+          setToastMessageList
+        )
+      }
     >
       {added ? "Added To Wishlist" : "Add To Wishlist"}
     </button>
