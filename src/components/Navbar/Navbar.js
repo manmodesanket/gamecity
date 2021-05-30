@@ -45,7 +45,7 @@ const NavbarNav = ({ linkName, path, location }) => {
   return (
     <NavLink
       to={`${path}`}
-      style={{ borderBottom: styleObj ? "5px solid whitesmoke" : null }}
+      style={{ borderBottom: styleObj ? "3px solid whitesmoke" : null }}
     >
       {linkName}
     </NavLink>

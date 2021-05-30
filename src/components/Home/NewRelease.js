@@ -6,8 +6,8 @@ import Loader from "react-loader-spinner";
 const NewRelease = () => {
   const { productList, loading } = useProductList();
   return (
-    <div>
-      <h1>New Release</h1>
+    <div className="newrelease">
+      <h1 className="newrelease__heading">New Release</h1>
       <div className="products">
         {productList.length > 0 ? (
           productList.map((item, i) => {

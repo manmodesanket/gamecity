@@ -44,8 +44,6 @@ body {
   font-size: var(--fz-heading);
   font-weight: bold;
 
-  padding: 0 1em;
-
   color: whitesmoke;
   text-decoration: none;
 }
@@ -57,7 +55,6 @@ body {
 
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
 }
 
 .navbar__nav__links {
@@ -67,7 +64,6 @@ body {
   flex-grow: 1;
 
   outline: none;
-
   padding: 0.5em 0;
 }
 
@@ -367,8 +363,13 @@ body {
     margin-left: 15%;
   }
 
+  .navbar__nav {
+    flex-basis: 50%;
+  }
+
   .main-page {
     margin: 0 15%;
+    padding: 0;
   }
 
   .loader {
