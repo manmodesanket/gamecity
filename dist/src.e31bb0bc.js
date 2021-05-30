@@ -35759,6 +35759,16 @@ var AddToCartButton = function AddToCartButton(_ref) {
       added = _useState2[0],
       setAdded = _useState2[1];
 
+  (0, _react.useEffect)(function () {
+    var addedInCart = cartList.find(function (item) {
+      return item.id === id;
+    });
+
+    if (addedInCart) {
+      setAdded(true);
+    }
+  }, [cartList]);
+
   var handleAddToCart = function handleAddToCart(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
     var isPresentInCart = cartList.find(function (itemInCart) {
       return itemInCart.id === item;

@@ -11,6 +11,14 @@ const AddToCartButton = ({
   let { cartList, cartDispatch } = useCartList();
   const [added, setAdded] = useState(false);
 
+  useEffect(() => {
+    const addedInCart = cartList.find((item) => item.id === id);
+
+    if (addedInCart) {
+      setAdded(true);
+    }
+  }, [cartList]);
+
   const handleAddToCart = (
     item,
     cartList,

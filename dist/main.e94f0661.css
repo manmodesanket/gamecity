@@ -15,6 +15,7 @@
 
   /*colors*/
   --blue: #543de0;
+  --dark-blue: #4b1aec;
   --green: #40be88;
   --orange: #ff9d44;
   --secondary: #f1f4f9;
@@ -109,6 +110,10 @@ body {
   cursor: pointer;
 
   margin-bottom: 0.5em;
+}
+
+.btn-cart:hover {
+  background-color: var(--dark-blue);
 }
 
 .products {
