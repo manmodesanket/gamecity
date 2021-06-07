@@ -12,24 +12,29 @@ import { ProductDetails } from "./components/ProductDetails/ProductDetails";
 import "../main.css";
 import { ProductProvider } from "./context/ProductContext/ProductProvider";
 import { CartProvider } from "./context/CartContext/CartProvider";
+import { Login } from "./components/Login/Login";
+import { AuthProvider } from "./context/AuthContext/AuthProvider";
 
 const App = () => {
   return (
-    <ProductProvider>
-      <WishListProvider>
-        <CartProvider>
-          <Router>
-            <NavbarRouter path="/">
-              <Home path="/" />
-              <ProductsPage path="/products" />
-              <ProductDetails path="/product-details/:id" />
-              <Wishlist path="/wishlist" />
-              <Cart path="/cart" />
-            </NavbarRouter>
-          </Router>
-        </CartProvider>
-      </WishListProvider>
-    </ProductProvider>
+    <AuthProvider>
+      <ProductProvider>
+        <WishListProvider>
+          <CartProvider>
+            <Router>
+              <NavbarRouter path="/">
+                <Home path="/" />
+                <ProductsPage path="/products" />
+                <ProductDetails path="/product-details/:id" />
+                <Wishlist path="/wishlist" />
+                <Cart path="/cart" />
+                <Login path="/login" />
+              </NavbarRouter>
+            </Router>
+          </CartProvider>
+        </WishListProvider>
+      </ProductProvider>
+    </AuthProvider>
   );
 };
 

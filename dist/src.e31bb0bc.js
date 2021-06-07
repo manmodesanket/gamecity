@@ -38060,7 +38060,188 @@ var CartProvider = function CartProvider(_ref) {
 };
 
 exports.CartProvider = CartProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./CartContext":"context/CartContext/CartContext.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./CartContext":"context/CartContext/CartContext.js"}],"context/AuthContext/AuthContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useAuth = useAuth;
+exports.AuthContext = void 0;
+
+var _react = require("react");
+
+var AuthContext = (0, _react.createContext)();
+exports.AuthContext = AuthContext;
+
+function useAuth() {
+  return (0, _react.useContext)(AuthContext);
+}
+},{"react":"../node_modules/react/index.js"}],"components/Login/Login.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Login = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Login = function Login() {
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      isUserLoggedIn = _useAuth.isUserLoggedIn,
+      loginWithCredentials = _useAuth.loginWithCredentials,
+      logout = _useAuth.logout;
+
+  function loginHandler() {
+    isUserLoggedIn ? logout() : loginWithCredentials("sanket", "batata");
+  }
+
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return loginHandler();
+    }
+  }, isUserLoggedIn ? "I am logged In" : "I am logged out"));
+};
+
+exports.Login = Login;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AuthProvider = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _AuthContext = require("./AuthContext");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function loginService(uname, pswd) {
+  console.log("loginService");
+  return _axios.default.post("https://buygames-backend.manmodesanket.repl.co/auth/login", {
+    user: {
+      username: uname,
+      password: pswd
+    }
+  });
+}
+
+var AuthProvider = function AuthProvider(_ref) {
+  var children = _ref.children;
+
+  var _ref2 = JSON.parse(localStorage.getItem("auth")) || {
+    loggedIn: false,
+    token: null
+  },
+      loggedIn = _ref2.loggedIn,
+      savedToken = _ref2.token;
+
+  var _useState = (0, _react.useState)(loggedIn),
+      _useState2 = _slicedToArray(_useState, 2),
+      isUserLoggedIn = _useState2[0],
+      setLogin = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(savedToken),
+      _useState4 = _slicedToArray(_useState3, 2),
+      token = _useState4[0],
+      setToken = _useState4[1];
+
+  var loginWithCredentials = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(username, password) {
+      var response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return loginService(username, password);
+
+            case 3:
+              response = _context.sent;
+              console.log(response);
+
+              if (response.status === 200) {
+                setToken(response.data.token);
+                setLogin(true);
+                localStorage.setItem("auth", JSON.stringify({
+                  loggedIn: true,
+                  token: response.data.token
+                }));
+              }
+
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              console.log("galat hai", _context.t0);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 8]]);
+    }));
+
+    return function loginWithCredentials(_x, _x2) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  function logout() {
+    var _localStorage;
+
+    setLogin(false);
+    setToken(null);
+    (_localStorage = localStorage) === null || _localStorage === void 0 ? void 0 : _localStorage.removeItem("auth");
+  }
+
+  return /*#__PURE__*/_react.default.createElement(_AuthContext.AuthContext.Provider, {
+    value: {
+      isUserLoggedIn: isUserLoggedIn,
+      token: token,
+      loginWithCredentials: loginWithCredentials,
+      logout: logout
+    }
+  }, children);
+};
+
+exports.AuthProvider = AuthProvider;
+},{"react":"../node_modules/react/index.js","./AuthContext":"context/AuthContext/AuthContext.js","axios":"../node_modules/axios/index.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38092,10 +38273,14 @@ var _ProductProvider = require("./context/ProductContext/ProductProvider");
 
 var _CartProvider = require("./context/CartContext/CartProvider");
 
+var _Login = require("./components/Login/Login");
+
+var _AuthProvider = require("./context/AuthContext/AuthProvider");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-  return /*#__PURE__*/_react.default.createElement(_ProductProvider.ProductProvider, null, /*#__PURE__*/_react.default.createElement(_WishlistProvider.WishListProvider, null, /*#__PURE__*/_react.default.createElement(_CartProvider.CartProvider, null, /*#__PURE__*/_react.default.createElement(_router.Router, null, /*#__PURE__*/_react.default.createElement(NavbarRouter, {
+  return /*#__PURE__*/_react.default.createElement(_AuthProvider.AuthProvider, null, /*#__PURE__*/_react.default.createElement(_ProductProvider.ProductProvider, null, /*#__PURE__*/_react.default.createElement(_WishlistProvider.WishListProvider, null, /*#__PURE__*/_react.default.createElement(_CartProvider.CartProvider, null, /*#__PURE__*/_react.default.createElement(_router.Router, null, /*#__PURE__*/_react.default.createElement(NavbarRouter, {
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_Home.Home, {
     path: "/"
@@ -38107,7 +38292,9 @@ var App = function App() {
     path: "/wishlist"
   }), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     path: "/cart"
-  }))))));
+  }), /*#__PURE__*/_react.default.createElement(_Login.Login, {
+    path: "/login"
+  })))))));
 };
 
 var NavbarRouter = function NavbarRouter(props) {
@@ -38118,7 +38305,7 @@ var NavbarRouter = function NavbarRouter(props) {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/Navbar/Navbar":"components/Navbar/Navbar.js","./components/Home/Home":"components/Home/Home.js","./components/Products/Products":"components/Products/Products.js","./components/Wishlist/Wishlist":"components/Wishlist/Wishlist.js","./components/Cart/Cart":"components/Cart/Cart.js","./context/Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js","./components/ProductDetails/ProductDetails":"components/ProductDetails/ProductDetails.js","../main.css":"../main.css","./context/ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./context/CartContext/CartProvider":"context/CartContext/CartProvider.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/Navbar/Navbar":"components/Navbar/Navbar.js","./components/Home/Home":"components/Home/Home.js","./components/Products/Products":"components/Products/Products.js","./components/Wishlist/Wishlist":"components/Wishlist/Wishlist.js","./components/Cart/Cart":"components/Cart/Cart.js","./context/Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js","./components/ProductDetails/ProductDetails":"components/ProductDetails/ProductDetails.js","../main.css":"../main.css","./context/ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./context/CartContext/CartProvider":"context/CartContext/CartProvider.js","./components/Login/Login":"components/Login/Login.js","./context/AuthContext/AuthProvider":"context/AuthContext/AuthProvider.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -38160,7 +38347,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1642" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2384" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
