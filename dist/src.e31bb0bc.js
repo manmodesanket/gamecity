@@ -35360,7 +35360,24 @@ var Wishlist = function Wishlist() {
 };
 
 exports.Wishlist = Wishlist;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListComponents/RemoveFromWishList":"components/WishListComponents/RemoveFromWishList.js","@reach/router":"../node_modules/@reach/router/es/index.js","../Toast/Toast":"components/Toast/Toast.js"}],"context/CartContext/CartContext.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListComponents/RemoveFromWishList":"components/WishListComponents/RemoveFromWishList.js","@reach/router":"../node_modules/@reach/router/es/index.js","../Toast/Toast":"components/Toast/Toast.js"}],"context/AuthContext/AuthContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useAuth = useAuth;
+exports.AuthContext = void 0;
+
+var _react = require("react");
+
+var AuthContext = (0, _react.createContext)();
+exports.AuthContext = AuthContext;
+
+function useAuth() {
+  return (0, _react.useContext)(AuthContext);
+}
+},{"react":"../node_modules/react/index.js"}],"context/CartContext/CartContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35377,699 +35394,7 @@ exports.CartContext = CartContext;
 function useCartList() {
   return (0, _react.useContext)(CartContext);
 }
-},{"react":"../node_modules/react/index.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Cart = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _CartContext = require("../../context/CartContext/CartContext");
-
-var _ProductContext = require("../../context/ProductContext/ProductContext");
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-var _Toast = require("../Toast/Toast");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var Cart = function Cart() {
-  var _useCartList = (0, _CartContext.useCartList)(),
-      cartList = _useCartList.cartList,
-      cartDispatch = _useCartList.cartDispatch;
-
-  var _useProductList = (0, _ProductContext.useProductList)(),
-      productList = _useProductList.productList;
-
-  var _useState = (0, _react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      itemList = _useState2[0],
-      setItemList = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      total = _useState4[0],
-      setTotal = _useState4[1];
-
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      toastMessageList = _useState6[0],
-      setToastMessageList = _useState6[1];
-
-  var compare = function compare(a, b) {
-    if (a.added > b.added) return 1;else return -1;
-  };
-
-  (0, _react.useEffect)(function () {
-    var list = [];
-
-    for (var i = 0; i < cartList.length; i++) {
-      var obj = (0, _UtilityFunctions.findProductById)(productList, cartList[i].id);
-
-      if (obj !== null) {
-        obj = _objectSpread({
-          items: 1,
-          added: cartList[i].added
-        }, obj);
-        list.push(obj);
-      }
-    }
-
-    setItemList(list);
-  }, []);
-  (0, _react.useEffect)(function () {
-    if (itemList.length > 0) {
-      var _total = 0;
-
-      for (var i = 0; i < itemList.length; i++) {
-        _total += itemList[i].items * itemList[i].price;
-      }
-
-      setTotal(_total);
-    } else if (itemList.length === 0) {
-      setTotal(0);
-    }
-  }, [itemList]);
-
-  var handleQuantity = function handleQuantity(id, str) {
-    var product = itemList.find(function (item) {
-      return item._id === id;
-    });
-    var newItemList = itemList.filter(function (item) {
-      return item._id !== id;
-    });
-
-    if (str === "INC") {
-      product.items += 1;
-      var list = [product].concat(_toConsumableArray(newItemList));
-      list.sort(compare);
-      setItemList(list);
-    } else if (str === "DESC") {
-      if (product.items > 1) {
-        product.items -= 1;
-
-        var _list = [product].concat(_toConsumableArray(newItemList));
-
-        _list.sort(compare);
-
-        setItemList(_list);
-      }
-    }
-  };
-
-  var handleCartRemove = function handleCartRemove(id) {
-    cartDispatch({
-      type: "REMOVE_FROM_CART",
-      payload: id
-    });
-    var newItemList = itemList.filter(function (item) {
-      return item._id != id;
-    });
-    setItemList(newItemList);
-    var obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from cart");
-    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
-  };
-
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page main-page__cart"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "Cart"), /*#__PURE__*/_react.default.createElement("h2", null, "Total: Rs.", total ? total : 0), /*#__PURE__*/_react.default.createElement("div", {
-    className: "cart__products"
-  }, itemList ? itemList.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: item._id,
-      className: "cart_card__wrapper"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      key: i,
-      className: "cart__card"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__img"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__image-container"
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: item.image,
-      alt: item.name,
-      className: "cart__card__image"
-    }))), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__details"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart_card_details_wrapper"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__name"
-    }, item.name), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card_platform"
-    }, "Platform:", " ", item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card_publisher"
-    }, "Publisher: ", item.publisher), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart_card__price"
-    }, "Rs.", item.price * item.items)))), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__product__actions"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "product_quantity"
-    }, /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleQuantity(item._id, "DESC");
-      },
-      className: "btn cart__card__quantity__btn product_quantity__element"
-    }, "-"), /*#__PURE__*/_react.default.createElement("div", {
-      className: "product_quantity__element"
-    }, item.items), /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleQuantity(item._id, "INC");
-      },
-      className: "btn cart__card__quantity__btn product_quantity__element"
-    }, "+")), /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleCartRemove(item._id);
-      },
-      className: "btn cart__product__actions__remove__btn"
-    }, "Remove")));
-  }) : null), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
-    toastMessageList: toastMessageList,
-    setToastMessageList: setToastMessageList
-  }));
-};
-
-exports.Cart = Cart;
-},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js"}],"Reducers/Reducer.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.reducerFunction = void 0;
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var reducerFunction = function reducerFunction(state, action) {
-  switch (action.type) {
-    case "PRODUCT_LIST":
-      var initialState = _toConsumableArray(action.payload);
-
-      return initialState;
-
-    case "PRODUCT_LIST_ASCENDING":
-      state.sort(function (a, b) {
-        return a.price > b.price ? 1 : -1;
-      });
-
-      var ascPriceState = _toConsumableArray(state);
-
-      return ascPriceState;
-
-    case "PRODUCT_LIST_DESCENDING":
-      state.sort(function (a, b) {
-        return a.price < b.price ? 1 : -1;
-      });
-
-      var descPriceState = _toConsumableArray(state);
-
-      return descPriceState;
-
-    case "ADD_TO_WISHLIST":
-      for (var i = 0; i < state.length; i++) {
-        if (state[i] === action.payload) return state;
-      }
-
-      return [].concat(_toConsumableArray(state), [action.payload]);
-
-    case "REMOVE_FROM_WISHLIST":
-      var newWishListState = state.filter(function (item) {
-        return item !== action.payload;
-      });
-      return newWishListState;
-
-    case "ADD_TO_CART":
-      for (var _i = 0; _i < state.length; _i++) {
-        if (state[_i].id === action.payload.id) return state;
-      }
-
-      return [].concat(_toConsumableArray(state), [action.payload]);
-
-    case "REMOVE_FROM_CART":
-      var newCartState = state.filter(function (item) {
-        return item.id !== action.payload;
-      });
-      return _toConsumableArray(newCartState);
-
-    default:
-      return state;
-  }
-};
-
-exports.reducerFunction = reducerFunction;
-},{}],"context/Wishlist/WishlistProvider.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.WishListProvider = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _Reducer = require("../../Reducers/Reducer");
-
-var _WishlistContext = require("./WishlistContext");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var WishListProvider = function WishListProvider(_ref) {
-  var children = _ref.children;
-
-  var _useReducer = (0, _react.useReducer)(_Reducer.reducerFunction, []),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      wishList = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  return /*#__PURE__*/_react.default.createElement(_WishlistContext.WishListContext.Provider, {
-    value: {
-      wishList: wishList,
-      wishListDispatch: dispatch
-    }
-  }, children);
-};
-
-exports.WishListProvider = WishListProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/CartComponents/AddToCartButton.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.AddToCartButton = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _CartContext = require("../../context/CartContext/CartContext");
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var AddToCartButton = function AddToCartButton(_ref) {
-  var id = _ref.id,
-      toastMessageList = _ref.toastMessageList,
-      setToastMessageList = _ref.setToastMessageList,
-      classes = _ref.classes;
-
-  var _useCartList = (0, _CartContext.useCartList)(),
-      cartList = _useCartList.cartList,
-      cartDispatch = _useCartList.cartDispatch;
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      added = _useState2[0],
-      setAdded = _useState2[1];
-
-  (0, _react.useEffect)(function () {
-    var addedInCart = cartList.find(function (item) {
-      return item.id === id;
-    });
-
-    if (addedInCart) {
-      setAdded(true);
-    }
-  }, [cartList]);
-
-  var handleAddToCart = function handleAddToCart(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
-    var isPresentInCart = cartList.find(function (itemInCart) {
-      return itemInCart.id === item;
-    });
-
-    if (isPresentInCart === undefined || isPresentInCart === null) {
-      var newItem = {
-        id: item,
-        added: Date.now()
-      };
-      cartDispatch({
-        type: "ADD_TO_CART",
-        payload: newItem
-      });
-      var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
-      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
-      setAdded(true);
-    } else {
-      var _obj = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
-
-      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
-    }
-  };
-
-  return /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn ".concat(_toConsumableArray(classes)),
-    onClick: function onClick() {
-      return handleAddToCart(id, cartList, cartDispatch, toastMessageList, setToastMessageList);
-    }
-  }, added ? "Added To Cart" : "Add To Cart");
-};
-
-exports.AddToCartButton = AddToCartButton;
-},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/WishListComponents/WishListButton.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.WishListButton = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _WishlistContext = require("../../context/Wishlist/WishlistContext");
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var WishListButton = function WishListButton(_ref) {
-  var id = _ref.id,
-      toastMessageList = _ref.toastMessageList,
-      setToastMessageList = _ref.setToastMessageList,
-      classes = _ref.classes;
-
-  var _useWishlist = (0, _WishlistContext.useWishlist)(),
-      wishList = _useWishlist.wishList,
-      wishListDispatch = _useWishlist.wishListDispatch;
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      added = _useState2[0],
-      setAdded = _useState2[1];
-
-  (0, _react.useEffect)(function () {
-    if (wishList.includes(id)) {
-      setAdded(true);
-    }
-  }, [wishList]);
-
-  var addToWishList = function addToWishList(item, wishList, wishListDispatch, toastMessageList, setToastMessageList) {
-    var isPresentInCart = wishList.find(function (itemInCart) {
-      return itemInCart === item;
-    });
-
-    if (isPresentInCart === undefined || isPresentInCart === null) {
-      wishListDispatch({
-        type: "ADD_TO_WISHLIST",
-        payload: item
-      });
-      var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to wishlist");
-      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
-    } else {
-      var _obj = (0, _UtilityFunctions.createToastMessageList)("Item already in Wishlist");
-
-      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
-    }
-  };
-
-  return /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn ".concat(_toConsumableArray(classes)),
-    onClick: function onClick() {
-      return addToWishList(id, wishList, wishListDispatch, toastMessageList, setToastMessageList);
-    }
-  }, added ? "Added To Wishlist" : "Add To Wishlist");
-};
-
-exports.WishListButton = WishListButton;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/ProductDetails/ProductDetails.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ProductDetails = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _ProductContext = require("../../context/ProductContext/ProductContext");
-
-var _AddToCartButton = require("../CartComponents/AddToCartButton");
-
-var _Toast = require("../Toast/Toast");
-
-var _WishListButton = require("../WishListComponents/WishListButton");
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var ProductDetails = function ProductDetails(props) {
-  var id = props.id;
-
-  var _useState = (0, _react.useState)(),
-      _useState2 = _slicedToArray(_useState, 2),
-      game = _useState2[0],
-      setGame = _useState2[1];
-
-  var _useProductList = (0, _ProductContext.useProductList)(),
-      productList = _useProductList.productList;
-
-  var _useState3 = (0, _react.useState)([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      toastMessageList = _useState4[0],
-      setToastMessageList = _useState4[1];
-
-  (0, _react.useEffect)(function () {
-    var newGame = (0, _UtilityFunctions.findProductById)(productList, id);
-    setGame(newGame);
-  }, [productList]);
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page"
-  }, game ? /*#__PURE__*/_react.default.createElement(GameDetails, {
-    game: game,
-    setToastMessageList: setToastMessageList,
-    toastMessageList: toastMessageList
-  }) : "Product Details not available", /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
-    toastMessageList: toastMessageList,
-    setToastMessageList: setToastMessageList
-  }));
-};
-
-exports.ProductDetails = ProductDetails;
-
-var GameDetails = function GameDetails(_ref) {
-  var game = _ref.game,
-      setToastMessageList = _ref.setToastMessageList,
-      toastMessageList = _ref.toastMessageList;
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "game-details_card"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "image-wrapper__outer"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "image-wrapper_inner"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: game.image,
-    alt: game.name,
-    className: "image-holder"
-  }))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "game_details"
-  }, /*#__PURE__*/_react.default.createElement("h1", {
-    className: "product-name"
-  }, game.name), /*#__PURE__*/_react.default.createElement("div", {
-    className: "product__publisher"
-  }, game.publisher), /*#__PURE__*/_react.default.createElement("div", {
-    className: "product__rating"
-  }, game.rating, "\u2605"), /*#__PURE__*/_react.default.createElement("h1", {
-    className: "product-price"
-  }, "Rs.", game.price), /*#__PURE__*/_react.default.createElement(_WishListButton.WishListButton, {
-    id: game._id,
-    classes: ["btn-cart"],
-    setToastMessageList: setToastMessageList,
-    toastMessageList: toastMessageList
-  }), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
-    id: game._id,
-    classes: ["btn-cart"],
-    setToastMessageList: setToastMessageList,
-    toastMessageList: toastMessageList
-  }))));
-};
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../CartComponents/AddToCartButton":"components/CartComponents/AddToCartButton.js","../Toast/Toast":"components/Toast/Toast.js","../WishListComponents/WishListButton":"components/WishListComponents/WishListButton.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../main.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -37869,7 +37194,771 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../node_modules/axios/lib/helpers/isAxiosError.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"context/ProductContext/ProductProvider.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Cart = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+var _CartContext = require("../../context/CartContext/CartContext");
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+var _Toast = require("../Toast/Toast");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _router = require("@reach/router");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var Cart = function Cart() {
+  var _useCartList = (0, _CartContext.useCartList)(),
+      cartList = _useCartList.cartList,
+      cartDispatch = _useCartList.cartDispatch;
+
+  var _useState = (0, _react.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      user = _useState2[0],
+      setUser = _useState2[1];
+
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      token = _useAuth.token,
+      isUserLoggrdIn = _useAuth.isUserLoggrdIn;
+
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productList = _useProductList.productList;
+
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      itemList = _useState4[0],
+      setItemList = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      total = _useState6[0],
+      setTotal = _useState6[1];
+
+  var _useState7 = (0, _react.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      toastMessageList = _useState8[0],
+      setToastMessageList = _useState8[1];
+
+  var compare = function compare(a, b) {
+    if (a.added > b.added) return 1;else return -1;
+  };
+
+  (0, _react.useEffect)(function () {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+
+              if (!(token != null)) {
+                _context.next = 8;
+                break;
+              }
+
+              _context.next = 4;
+              return _axios.default.get("https://buygames-backend.manmodesanket.repl.co/auth/user", {
+                headers: {
+                  authorization: token
+                }
+              });
+
+            case 4:
+              response = _context.sent;
+
+              if (response.data.token != null) {
+                setUser(response.data.userID);
+              }
+
+              _context.next = 9;
+              break;
+
+            case 8:
+              (0, _router.navigate)("../login");
+
+            case 9:
+              _context.next = 14;
+              break;
+
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](0);
+              console.log(_context.t0);
+
+            case 14:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 11]]);
+    }))();
+  }, [token]);
+  (0, _react.useEffect)(function () {
+    var list = [];
+
+    for (var i = 0; i < cartList.length; i++) {
+      var obj = (0, _UtilityFunctions.findProductById)(productList, cartList[i].id);
+
+      if (obj !== null) {
+        obj = _objectSpread({
+          items: 1,
+          added: cartList[i].added
+        }, obj);
+        list.push(obj);
+      }
+    }
+
+    setItemList(list);
+  }, []);
+  (0, _react.useEffect)(function () {
+    if (itemList.length > 0) {
+      var _total = 0;
+
+      for (var i = 0; i < itemList.length; i++) {
+        _total += itemList[i].items * itemList[i].price;
+      }
+
+      setTotal(_total);
+    } else if (itemList.length === 0) {
+      setTotal(0);
+    }
+  }, [itemList]);
+
+  var handleQuantity = function handleQuantity(id, str) {
+    var product = itemList.find(function (item) {
+      return item._id === id;
+    });
+    var newItemList = itemList.filter(function (item) {
+      return item._id !== id;
+    });
+
+    if (str === "INC") {
+      product.items += 1;
+      var list = [product].concat(_toConsumableArray(newItemList));
+      list.sort(compare);
+      setItemList(list);
+    } else if (str === "DESC") {
+      if (product.items > 1) {
+        product.items -= 1;
+
+        var _list = [product].concat(_toConsumableArray(newItemList));
+
+        _list.sort(compare);
+
+        setItemList(_list);
+      }
+    }
+  };
+
+  var handleCartRemove = function handleCartRemove(id) {
+    cartDispatch({
+      type: "REMOVE_FROM_CART",
+      payload: id
+    });
+    var newItemList = itemList.filter(function (item) {
+      return item._id != id;
+    });
+    setItemList(newItemList);
+    var obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from cart");
+    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+  };
+
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page main-page__cart"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Cart"), /*#__PURE__*/_react.default.createElement("h2", null, "Total: Rs.", total ? total : 0), /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__products"
+  }, itemList ? itemList.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: item._id,
+      className: "cart_card__wrapper"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      key: i,
+      className: "cart__card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card__img"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__image-container"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: item.image,
+      alt: item.name,
+      className: "cart__card__image"
+    }))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card__details"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart_card_details_wrapper"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card__name"
+    }, item.name), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card_platform"
+    }, "Platform:", " ", item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card_publisher"
+    }, "Publisher: ", item.publisher), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart_card__price"
+    }, "Rs.", item.price * item.items)))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__product__actions"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "product_quantity"
+    }, /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        return handleQuantity(item._id, "DESC");
+      },
+      className: "btn cart__card__quantity__btn product_quantity__element"
+    }, "-"), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product_quantity__element"
+    }, item.items), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        return handleQuantity(item._id, "INC");
+      },
+      className: "btn cart__card__quantity__btn product_quantity__element"
+    }, "+")), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        return handleCartRemove(item._id);
+      },
+      className: "btn cart__product__actions__remove__btn"
+    }, "Remove")));
+  }) : null), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
+    toastMessageList: toastMessageList,
+    setToastMessageList: setToastMessageList
+  }));
+};
+
+exports.Cart = Cart;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js","axios":"../node_modules/axios/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"Reducers/Reducer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.reducerFunction = void 0;
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var reducerFunction = function reducerFunction(state, action) {
+  switch (action.type) {
+    case "PRODUCT_LIST":
+      var initialState = _toConsumableArray(action.payload);
+
+      return initialState;
+
+    case "PRODUCT_LIST_ASCENDING":
+      state.sort(function (a, b) {
+        return a.price > b.price ? 1 : -1;
+      });
+
+      var ascPriceState = _toConsumableArray(state);
+
+      return ascPriceState;
+
+    case "PRODUCT_LIST_DESCENDING":
+      state.sort(function (a, b) {
+        return a.price < b.price ? 1 : -1;
+      });
+
+      var descPriceState = _toConsumableArray(state);
+
+      return descPriceState;
+
+    case "ADD_TO_WISHLIST":
+      for (var i = 0; i < state.length; i++) {
+        if (state[i] === action.payload) return state;
+      }
+
+      return [].concat(_toConsumableArray(state), [action.payload]);
+
+    case "REMOVE_FROM_WISHLIST":
+      var newWishListState = state.filter(function (item) {
+        return item !== action.payload;
+      });
+      return newWishListState;
+
+    case "ADD_TO_CART":
+      for (var _i = 0; _i < state.length; _i++) {
+        if (state[_i].id === action.payload.id) return state;
+      }
+
+      return [].concat(_toConsumableArray(state), [action.payload]);
+
+    case "REMOVE_FROM_CART":
+      var newCartState = state.filter(function (item) {
+        return item.id !== action.payload;
+      });
+      return _toConsumableArray(newCartState);
+
+    default:
+      return state;
+  }
+};
+
+exports.reducerFunction = reducerFunction;
+},{}],"context/Wishlist/WishlistProvider.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.WishListProvider = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Reducer = require("../../Reducers/Reducer");
+
+var _WishlistContext = require("./WishlistContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var WishListProvider = function WishListProvider(_ref) {
+  var children = _ref.children;
+
+  var _useReducer = (0, _react.useReducer)(_Reducer.reducerFunction, []),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      wishList = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  return /*#__PURE__*/_react.default.createElement(_WishlistContext.WishListContext.Provider, {
+    value: {
+      wishList: wishList,
+      wishListDispatch: dispatch
+    }
+  }, children);
+};
+
+exports.WishListProvider = WishListProvider;
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/CartComponents/AddToCartButton.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AddToCartButton = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _CartContext = require("../../context/CartContext/CartContext");
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var AddToCartButton = function AddToCartButton(_ref) {
+  var id = _ref.id,
+      toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList,
+      classes = _ref.classes;
+
+  var _useCartList = (0, _CartContext.useCartList)(),
+      cartList = _useCartList.cartList,
+      cartDispatch = _useCartList.cartDispatch;
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      added = _useState2[0],
+      setAdded = _useState2[1];
+
+  (0, _react.useEffect)(function () {
+    var addedInCart = cartList.find(function (item) {
+      return item.id === id;
+    });
+
+    if (addedInCart) {
+      setAdded(true);
+    }
+  }, [cartList]);
+
+  var handleAddToCart = function handleAddToCart(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
+    var isPresentInCart = cartList.find(function (itemInCart) {
+      return itemInCart.id === item;
+    });
+
+    if (isPresentInCart === undefined || isPresentInCart === null) {
+      var newItem = {
+        id: item,
+        added: Date.now()
+      };
+      cartDispatch({
+        type: "ADD_TO_CART",
+        payload: newItem
+      });
+      var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
+      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+      setAdded(true);
+    } else {
+      var _obj = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
+
+      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+    }
+  };
+
+  return /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn ".concat(_toConsumableArray(classes)),
+    onClick: function onClick() {
+      return handleAddToCart(id, cartList, cartDispatch, toastMessageList, setToastMessageList);
+    }
+  }, added ? "Added To Cart" : "Add To Cart");
+};
+
+exports.AddToCartButton = AddToCartButton;
+},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/WishListComponents/WishListButton.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.WishListButton = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _WishlistContext = require("../../context/Wishlist/WishlistContext");
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var WishListButton = function WishListButton(_ref) {
+  var id = _ref.id,
+      toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList,
+      classes = _ref.classes;
+
+  var _useWishlist = (0, _WishlistContext.useWishlist)(),
+      wishList = _useWishlist.wishList,
+      wishListDispatch = _useWishlist.wishListDispatch;
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      added = _useState2[0],
+      setAdded = _useState2[1];
+
+  (0, _react.useEffect)(function () {
+    if (wishList.includes(id)) {
+      setAdded(true);
+    }
+  }, [wishList]);
+
+  var addToWishList = function addToWishList(item, wishList, wishListDispatch, toastMessageList, setToastMessageList) {
+    var isPresentInCart = wishList.find(function (itemInCart) {
+      return itemInCart === item;
+    });
+
+    if (isPresentInCart === undefined || isPresentInCart === null) {
+      wishListDispatch({
+        type: "ADD_TO_WISHLIST",
+        payload: item
+      });
+      var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to wishlist");
+      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+    } else {
+      var _obj = (0, _UtilityFunctions.createToastMessageList)("Item already in Wishlist");
+
+      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+    }
+  };
+
+  return /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn ".concat(_toConsumableArray(classes)),
+    onClick: function onClick() {
+      return addToWishList(id, wishList, wishListDispatch, toastMessageList, setToastMessageList);
+    }
+  }, added ? "Added To Wishlist" : "Add To Wishlist");
+};
+
+exports.WishListButton = WishListButton;
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/ProductDetails/ProductDetails.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProductDetails = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _AddToCartButton = require("../CartComponents/AddToCartButton");
+
+var _Toast = require("../Toast/Toast");
+
+var _WishListButton = require("../WishListComponents/WishListButton");
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var ProductDetails = function ProductDetails(props) {
+  var id = props.id;
+
+  var _useState = (0, _react.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      game = _useState2[0],
+      setGame = _useState2[1];
+
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productList = _useProductList.productList;
+
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      toastMessageList = _useState4[0],
+      setToastMessageList = _useState4[1];
+
+  (0, _react.useEffect)(function () {
+    var newGame = (0, _UtilityFunctions.findProductById)(productList, id);
+    setGame(newGame);
+  }, [productList]);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, game ? /*#__PURE__*/_react.default.createElement(GameDetails, {
+    game: game,
+    setToastMessageList: setToastMessageList,
+    toastMessageList: toastMessageList
+  }) : "Product Details not available", /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
+    toastMessageList: toastMessageList,
+    setToastMessageList: setToastMessageList
+  }));
+};
+
+exports.ProductDetails = ProductDetails;
+
+var GameDetails = function GameDetails(_ref) {
+  var game = _ref.game,
+      setToastMessageList = _ref.setToastMessageList,
+      toastMessageList = _ref.toastMessageList;
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "game-details_card"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "image-wrapper__outer"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "image-wrapper_inner"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: game.image,
+    alt: game.name,
+    className: "image-holder"
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "game_details"
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    className: "product-name"
+  }, game.name), /*#__PURE__*/_react.default.createElement("div", {
+    className: "product__publisher"
+  }, game.publisher), /*#__PURE__*/_react.default.createElement("div", {
+    className: "product__rating"
+  }, game.rating, "\u2605"), /*#__PURE__*/_react.default.createElement("h1", {
+    className: "product-price"
+  }, "Rs.", game.price), /*#__PURE__*/_react.default.createElement(_WishListButton.WishListButton, {
+    id: game._id,
+    classes: ["btn-cart"],
+    setToastMessageList: setToastMessageList,
+    toastMessageList: toastMessageList
+  }), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
+    id: game._id,
+    classes: ["btn-cart"],
+    setToastMessageList: setToastMessageList,
+    toastMessageList: toastMessageList
+  }))));
+};
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../CartComponents/AddToCartButton":"components/CartComponents/AddToCartButton.js","../Toast/Toast":"components/Toast/Toast.js","../WishListComponents/WishListButton":"components/WishListComponents/WishListButton.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../main.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"context/ProductContext/ProductProvider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38060,24 +38149,7 @@ var CartProvider = function CartProvider(_ref) {
 };
 
 exports.CartProvider = CartProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./CartContext":"context/CartContext/CartContext.js"}],"context/AuthContext/AuthContext.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.useAuth = useAuth;
-exports.AuthContext = void 0;
-
-var _react = require("react");
-
-var AuthContext = (0, _react.createContext)();
-exports.AuthContext = AuthContext;
-
-function useAuth() {
-  return (0, _react.useContext)(AuthContext);
-}
-},{"react":"../node_modules/react/index.js"}],"components/Login/Login.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./CartContext":"context/CartContext/CartContext.js"}],"components/Login/Login.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38085,11 +38157,35 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Login = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _AuthContext = require("../../context/AuthContext/AuthContext");
 
+var _router = require("@reach/router");
+
+var _axios = _interopRequireDefault(require("axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Login = function Login() {
   var _useAuth = (0, _AuthContext.useAuth)(),
@@ -38097,21 +38193,104 @@ var Login = function Login() {
       loginWithCredentials = _useAuth.loginWithCredentials,
       logout = _useAuth.logout;
 
+  var _useAuth2 = (0, _AuthContext.useAuth)(),
+      token = _useAuth2.token,
+      isUserLoggrdIn = _useAuth2.isUserLoggrdIn,
+      setLogin = _useAuth2.setLogin;
+
+  var _useState = (0, _react.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      username = _useState2[0],
+      setUsername = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      setPassword = _useState4[1];
+
   function loginHandler() {
-    isUserLoggedIn ? logout() : loginWithCredentials("sanket", "batata");
+    isUserLoggedIn ? logout() : loginWithCredentials(username, password);
   }
 
+  var handleSubmit = function handleSubmit(evt) {
+    evt.preventDefault();
+    loginHandler();
+  };
+
+  (0, _react.useEffect)(function () {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+
+              if (!(token != null)) {
+                _context.next = 7;
+                break;
+              }
+
+              _context.next = 4;
+              return _axios.default.get("https://buygames-backend.manmodesanket.repl.co/auth/user", {
+                headers: {
+                  authorization: token
+                }
+              });
+
+            case 4:
+              response = _context.sent;
+              console.log(response);
+
+              if (response.data.token != null) {
+                setLogin(true);
+              } else {
+                (0, _router.navigate)("../");
+              }
+
+            case 7:
+              _context.next = 12;
+              break;
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](0);
+              console.log(_context.t0);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 9]]);
+    }))();
+  }, [token]);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: function onClick() {
-      return loginHandler();
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "login-form"
+  }, /*#__PURE__*/_react.default.createElement("h2", null, "Login Form"), /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/_react.default.createElement("label", null, "Username:", /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    value: username,
+    onChange: function onChange(e) {
+      return setUsername(e.target.value);
     }
-  }, isUserLoggedIn ? "I am logged In" : "I am logged out"));
+  })), /*#__PURE__*/_react.default.createElement("label", null, "Password:", /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    }
+  })), /*#__PURE__*/_react.default.createElement("input", {
+    type: "submit",
+    value: "Submit"
+  }))));
 };
 
 exports.Login = Login;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38151,8 +38330,8 @@ function loginService(uname, pswd) {
   console.log("loginService");
   return _axios.default.post("https://buygames-backend.manmodesanket.repl.co/auth/login", {
     user: {
-      username: uname,
-      password: pswd
+      uname: uname,
+      pswd: pswd
     }
   });
 }
@@ -38190,9 +38369,10 @@ var AuthProvider = function AuthProvider(_ref) {
 
             case 3:
               response = _context.sent;
+              console.log("loginWithCredentials response:");
               console.log(response);
 
-              if (response.status === 200) {
+              if (response.status === 201) {
                 setToken(response.data.token);
                 setLogin(true);
                 localStorage.setItem("auth", JSON.stringify({
@@ -38201,20 +38381,20 @@ var AuthProvider = function AuthProvider(_ref) {
                 }));
               }
 
-              _context.next = 11;
+              _context.next = 12;
               break;
 
-            case 8:
-              _context.prev = 8;
+            case 9:
+              _context.prev = 9;
               _context.t0 = _context["catch"](0);
               console.log("galat hai", _context.t0);
 
-            case 11:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 8]]);
+      }, _callee, null, [[0, 9]]);
     }));
 
     return function loginWithCredentials(_x, _x2) {
@@ -38235,7 +38415,8 @@ var AuthProvider = function AuthProvider(_ref) {
       isUserLoggedIn: isUserLoggedIn,
       token: token,
       loginWithCredentials: loginWithCredentials,
-      logout: logout
+      logout: logout,
+      setLogin: setLogin
     }
   }, children);
 };
@@ -38347,7 +38528,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2384" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3738" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

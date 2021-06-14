@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext/AuthContext";
 import { useCartList } from "../../context/CartContext/CartContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
 import {
@@ -6,9 +7,13 @@ import {
   findProductById,
 } from "../../Utilities/UtilityFunctions";
 import { Toast } from "../Toast/Toast";
+import axios from "axios";
+import { navigate } from "@reach/router";
 
 const Cart = () => {
   let { cartList, cartDispatch } = useCartList();
+  const [user, setUser] = useState(null);
+  let { token, isUserLoggrdIn } = useAuth();
   const { productList } = useProductList();
   let [itemList, setItemList] = useState([]);
   let [total, setTotal] = useState(0);
@@ -18,6 +23,26 @@ const Cart = () => {
     if (a.added > b.added) return 1;
     else return -1;
   };
+
+  useEffect(() => {
+    (async function () {
+      try {
+        if (token != null) {
+          const response = await axios.get(
+            "https://buygames-backend.manmodesanket.repl.co/auth/user",
+            { headers: { authorization: token } }
+          );
+          if (response.data.token != null) {
+            setUser(response.data.userID);
+          }
+        } else {
+          navigate("../login");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [token]);
 
   useEffect(() => {
     let list = [];

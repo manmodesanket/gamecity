@@ -361,6 +361,9 @@ body {
   margin: 0 2px;
 }
 
+.login-form {
+}
+
 @media (min-width: 650px) {
   .navbar__wrapper {
     flex-direction: row;

@@ -8,7 +8,7 @@ function loginService(uname, pswd) {
   return axios.post(
     "https://buygames-backend.manmodesanket.repl.co/auth/login",
     {
-      user: { username: uname, password: pswd },
+      user: { uname, pswd },
     }
   );
 }
@@ -27,8 +27,9 @@ export const AuthProvider = ({ children }) => {
   const loginWithCredentials = async (username, password) => {
     try {
       const response = await loginService(username, password);
+      console.log("loginWithCredentials response:");
       console.log(response);
-      if (response.status === 200) {
+      if (response.status === 201) {
         setToken(response.data.token);
         setLogin(true);
         localStorage.setItem(
@@ -49,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isUserLoggedIn, token, loginWithCredentials, logout }}
+      value={{ isUserLoggedIn, token, loginWithCredentials, logout, setLogin }}
     >
       {children}
     </AuthContext.Provider>
