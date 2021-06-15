@@ -1,6 +1,7 @@
 import React, { useReducer, useState, useEffect } from "react";
 import { reducerFunction } from "../../Reducers/Reducer";
 import { ProductContext } from "./ProductContext";
+import makeApiCall from "../../server/server.request";
 
 import axios from "axios";
 
@@ -13,10 +14,14 @@ export const ProductProvider = ({ children }) => {
   let [loading, setLoading] = useState(true);
 
   const fetchProducts = async () => {
-    const products = await axios.get(API);
-    if (products.data.success) {
-      setInitialList(products.data.products);
-      return products.data.products;
+    const { response } = await await makeApiCall({
+      type: "get",
+      url: API,
+      data: null,
+    });
+    if (response.success) {
+      setInitialList(response.products);
+      return response.products;
     }
     return null;
   };

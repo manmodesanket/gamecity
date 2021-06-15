@@ -37958,7 +37958,91 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"context/ProductContext/ProductProvider.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"server/server.request.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function makeApiCall(_x) {
+  return _makeApiCall.apply(this, arguments);
+}
+
+function _makeApiCall() {
+  _makeApiCall = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
+    var type, url, data, response, _data;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            type = _ref.type, url = _ref.url, data = _ref.data;
+            _context.t0 = type;
+            _context.next = _context.t0 === "get" ? 4 : 16;
+            break;
+
+          case 4:
+            _context.prev = 4;
+            _context.next = 7;
+            return _axios.default.get(url);
+
+          case 7:
+            response = _context.sent;
+
+            if (!(response.status === 200)) {
+              _context.next = 11;
+              break;
+            }
+
+            _data = response.data;
+            return _context.abrupt("return", {
+              success: true,
+              response: _data
+            });
+
+          case 11:
+            _context.next = 16;
+            break;
+
+          case 13:
+            _context.prev = 13;
+            _context.t1 = _context["catch"](4);
+            return _context.abrupt("return", {
+              success: false,
+              error: _context.t1,
+              response: null
+            });
+
+          case 16:
+            return _context.abrupt("return", {
+              success: false,
+              error: false,
+              response: null
+            });
+
+          case 17:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[4, 13]]);
+  }));
+  return _makeApiCall.apply(this, arguments);
+}
+
+var _default = makeApiCall;
+exports.default = _default;
+},{"axios":"../node_modules/axios/index.js"}],"context/ProductContext/ProductProvider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37971,6 +38055,8 @@ var _react = _interopRequireWildcard(require("react"));
 var _Reducer = require("../../Reducers/Reducer");
 
 var _ProductContext = require("./ProductContext");
+
+var _server = _interopRequireDefault(require("../../server/server.request"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -38023,29 +38109,35 @@ var ProductProvider = function ProductProvider(_ref) {
 
   var fetchProducts = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var products;
+      var _yield$makeApiCall, response;
+
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _axios.default.get(API);
+              return (0, _server.default)({
+                type: "get",
+                url: API,
+                data: null
+              });
 
             case 2:
-              products = _context.sent;
+              _yield$makeApiCall = _context.sent;
+              response = _yield$makeApiCall.response;
 
-              if (!products.data.success) {
-                _context.next = 6;
+              if (!response.success) {
+                _context.next = 7;
                 break;
               }
 
-              setInitialList(products.data.products);
-              return _context.abrupt("return", products.data.products);
-
-            case 6:
-              return _context.abrupt("return", null);
+              setInitialList(response.products);
+              return _context.abrupt("return", response.products);
 
             case 7:
+              return _context.abrupt("return", null);
+
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -38102,7 +38194,7 @@ var ProductProvider = function ProductProvider(_ref) {
 };
 
 exports.ProductProvider = ProductProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./ProductContext":"context/ProductContext/ProductContext.js","axios":"../node_modules/axios/index.js"}],"context/CartContext/CartProvider.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./ProductContext":"context/ProductContext/ProductContext.js","../../server/server.request":"server/server.request.js","axios":"../node_modules/axios/index.js"}],"context/CartContext/CartProvider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38528,7 +38620,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3738" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4841" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
