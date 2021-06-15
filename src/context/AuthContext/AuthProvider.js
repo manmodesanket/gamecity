@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { AuthContext } from "./AuthContext";
 
 import axios from "axios";
+import makeApiCall from "../../server/server.request";
 
 function loginService(uname, pswd) {
   console.log("loginService");
-  return axios.post(
-    "https://buygames-backend.manmodesanket.repl.co/auth/login",
-    {
-      user: { uname, pswd },
-    }
-  );
+  let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/login";
+  let data = {
+    uname,
+    pswd,
+  };
+  return makeApiCall({ type: "post", url: urlStr, data });
 }
 
 export const AuthProvider = ({ children }) => {
@@ -26,15 +27,14 @@ export const AuthProvider = ({ children }) => {
 
   const loginWithCredentials = async (username, password) => {
     try {
-      const response = await loginService(username, password);
-      console.log("loginWithCredentials response:");
+      const { success, response } = await loginService(username, password);
       console.log(response);
-      if (response.status === 201) {
-        setToken(response.data.token);
+      if (success) {
+        setToken(response.token);
         setLogin(true);
         localStorage.setItem(
           "auth",
-          JSON.stringify({ loggedIn: true, token: response.data.token })
+          JSON.stringify({ loggedIn: true, token: response.token })
         );
       }
     } catch (error) {

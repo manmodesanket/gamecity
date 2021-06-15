@@ -3,10 +3,6 @@ import { reducerFunction } from "../../Reducers/Reducer";
 import { ProductContext } from "./ProductContext";
 import makeApiCall from "../../server/server.request";
 
-import axios from "axios";
-
-const API = "https://buygames-backend.manmodesanket.repl.co/products";
-
 export const ProductProvider = ({ children }) => {
   let [productList, dispatch] = useReducer(reducerFunction, []);
   let [initialList, setInitialList] = useState([]);
@@ -14,9 +10,10 @@ export const ProductProvider = ({ children }) => {
   let [loading, setLoading] = useState(true);
 
   const fetchProducts = async () => {
-    const { response } = await await makeApiCall({
+    let urlStr = process.env.REACT_APP_API_ROOT_URL + "products";
+    const { response } = await makeApiCall({
       type: "get",
-      url: API,
+      url: urlStr,
       data: null,
     });
     if (response.success) {

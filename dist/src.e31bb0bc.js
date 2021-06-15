@@ -37980,7 +37980,7 @@ function makeApiCall(_x) {
 
 function _makeApiCall() {
   _makeApiCall = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
-    var type, url, data, response, _data;
+    var type, url, data, response, _data, _response, _data2;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -37988,7 +37988,7 @@ function _makeApiCall() {
           case 0:
             type = _ref.type, url = _ref.url, data = _ref.data;
             _context.t0 = type;
-            _context.next = _context.t0 === "get" ? 4 : 16;
+            _context.next = _context.t0 === "get" ? 4 : _context.t0 === "post" ? 16 : 29;
             break;
 
           case 4:
@@ -38024,18 +38024,51 @@ function _makeApiCall() {
             });
 
           case 16:
+            _context.prev = 16;
+            console.log(url, data);
+            _context.next = 20;
+            return _axios.default.post(url, data);
+
+          case 20:
+            _response = _context.sent;
+
+            if (!(_response.status === 201)) {
+              _context.next = 24;
+              break;
+            }
+
+            _data2 = _response.data;
+            return _context.abrupt("return", {
+              success: true,
+              response: _data2
+            });
+
+          case 24:
+            _context.next = 29;
+            break;
+
+          case 26:
+            _context.prev = 26;
+            _context.t2 = _context["catch"](16);
+            return _context.abrupt("return", {
+              success: false,
+              error: _context.t2,
+              response: null
+            });
+
+          case 29:
             return _context.abrupt("return", {
               success: false,
               error: false,
               response: null
             });
 
-          case 17:
+          case 30:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[4, 13]]);
+    }, _callee, null, [[4, 13], [16, 26]]);
   }));
   return _makeApiCall.apply(this, arguments);
 }
@@ -38058,8 +38091,6 @@ var _ProductContext = require("./ProductContext");
 
 var _server = _interopRequireDefault(require("../../server/server.request"));
 
-var _axios = _interopRequireDefault(require("axios"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -38081,8 +38112,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var API = "https://buygames-backend.manmodesanket.repl.co/products";
 
 var ProductProvider = function ProductProvider(_ref) {
   var children = _ref.children;
@@ -38109,35 +38138,36 @@ var ProductProvider = function ProductProvider(_ref) {
 
   var fetchProducts = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var _yield$makeApiCall, response;
+      var urlStr, _yield$makeApiCall, response;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "products";
+              _context.next = 3;
               return (0, _server.default)({
                 type: "get",
-                url: API,
+                url: urlStr,
                 data: null
               });
 
-            case 2:
+            case 3:
               _yield$makeApiCall = _context.sent;
               response = _yield$makeApiCall.response;
 
               if (!response.success) {
-                _context.next = 7;
+                _context.next = 8;
                 break;
               }
 
               setInitialList(response.products);
               return _context.abrupt("return", response.products);
 
-            case 7:
+            case 8:
               return _context.abrupt("return", null);
 
-            case 8:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -38194,7 +38224,7 @@ var ProductProvider = function ProductProvider(_ref) {
 };
 
 exports.ProductProvider = ProductProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./ProductContext":"context/ProductContext/ProductContext.js","../../server/server.request":"server/server.request.js","axios":"../node_modules/axios/index.js"}],"context/CartContext/CartProvider.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./ProductContext":"context/ProductContext/ProductContext.js","../../server/server.request":"server/server.request.js"}],"context/CartContext/CartProvider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38396,6 +38426,8 @@ var _AuthContext = require("./AuthContext");
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -38420,11 +38452,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function loginService(uname, pswd) {
   console.log("loginService");
-  return _axios.default.post("https://buygames-backend.manmodesanket.repl.co/auth/login", {
-    user: {
-      uname: uname,
-      pswd: pswd
-    }
+  var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/login";
+  var data = {
+    uname: uname,
+    pswd: pswd
+  };
+  return (0, _server.default)({
+    type: "post",
+    url: urlStr,
+    data: data
   });
 }
 
@@ -38450,7 +38486,8 @@ var AuthProvider = function AuthProvider(_ref) {
 
   var loginWithCredentials = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(username, password) {
-      var response;
+      var _yield$loginService, success, response;
+
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -38460,33 +38497,34 @@ var AuthProvider = function AuthProvider(_ref) {
               return loginService(username, password);
 
             case 3:
-              response = _context.sent;
-              console.log("loginWithCredentials response:");
+              _yield$loginService = _context.sent;
+              success = _yield$loginService.success;
+              response = _yield$loginService.response;
               console.log(response);
 
-              if (response.status === 201) {
-                setToken(response.data.token);
+              if (success) {
+                setToken(response.token);
                 setLogin(true);
                 localStorage.setItem("auth", JSON.stringify({
                   loggedIn: true,
-                  token: response.data.token
+                  token: response.token
                 }));
               }
 
-              _context.next = 12;
+              _context.next = 13;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 10:
+              _context.prev = 10;
               _context.t0 = _context["catch"](0);
               console.log("galat hai", _context.t0);
 
-            case 12:
+            case 13:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 10]]);
     }));
 
     return function loginWithCredentials(_x, _x2) {
@@ -38514,7 +38552,7 @@ var AuthProvider = function AuthProvider(_ref) {
 };
 
 exports.AuthProvider = AuthProvider;
-},{"react":"../node_modules/react/index.js","./AuthContext":"context/AuthContext/AuthContext.js","axios":"../node_modules/axios/index.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./AuthContext":"context/AuthContext/AuthContext.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38620,7 +38658,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4841" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3549" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
