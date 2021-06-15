@@ -5,7 +5,6 @@ import axios from "axios";
 import makeApiCall from "../../server/server.request";
 
 function loginService(uname, pswd) {
-  console.log("loginService");
   let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/login";
   let data = {
     uname,
@@ -22,16 +21,15 @@ export const AuthProvider = ({ children }) => {
     token: null,
   };
 
-  const [isUserLoggedIn, setLogin] = useState(loggedIn);
   const [token, setToken] = useState(savedToken);
+  const [user, setUser] = useState(null);
 
   const loginWithCredentials = async (username, password) => {
     try {
       const { success, response } = await loginService(username, password);
-      console.log(response);
       if (success) {
         setToken(response.token);
-        setLogin(true);
+        setUser(response.username);
         localStorage.setItem(
           "auth",
           JSON.stringify({ loggedIn: true, token: response.token })
@@ -50,7 +48,13 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isUserLoggedIn, token, loginWithCredentials, logout, setLogin }}
+      value={{
+        token,
+        loginWithCredentials,
+        logout,
+        user,
+        setUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

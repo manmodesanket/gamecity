@@ -4,7 +4,7 @@ async function makeApiCall({ type, url, data }) {
   switch (type) {
     case "get":
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, data);
         if (response.status === 200) {
           const { data } = response;
           return { success: true, response: data };
@@ -14,7 +14,6 @@ async function makeApiCall({ type, url, data }) {
       }
     case "post":
       try {
-        console.log(url, data);
         const response = await axios.post(url, data);
         if (response.status === 201) {
           const { data } = response;

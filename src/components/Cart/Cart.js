@@ -9,11 +9,12 @@ import {
 import { Toast } from "../Toast/Toast";
 import axios from "axios";
 import { navigate } from "@reach/router";
+import makeApiCall from "../../server/server.request";
 
 const Cart = () => {
   let { cartList, cartDispatch } = useCartList();
-  const [user, setUser] = useState(null);
-  let { token, isUserLoggrdIn } = useAuth();
+
+  let { token, user, setUser } = useAuth();
   const { productList } = useProductList();
   let [itemList, setItemList] = useState([]);
   let [total, setTotal] = useState(0);
@@ -28,14 +29,17 @@ const Cart = () => {
     (async function () {
       try {
         if (token != null) {
-          const response = await axios.get(
-            "https://buygames-backend.manmodesanket.repl.co/auth/user",
-            { headers: { authorization: token } }
-          );
-          if (response.data.token != null) {
-            setUser(response.data.userID);
+          let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/user";
+          let data = { headers: { authorization: token } };
+          const { success, response } = await makeApiCall({
+            type: "get",
+            url: urlStr,
+            data,
+          });
+          if (success) {
+            setUser(response.userID);
           }
-        } else {
+        } else if (user == null) {
           navigate("../login");
         }
       } catch (err) {

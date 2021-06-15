@@ -37194,7 +37194,123 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../node_modules/axios/lib/helpers/isAxiosError.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"server/server.request.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function makeApiCall(_x) {
+  return _makeApiCall.apply(this, arguments);
+}
+
+function _makeApiCall() {
+  _makeApiCall = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
+    var type, url, data, response, _data, _response, _data2;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            type = _ref.type, url = _ref.url, data = _ref.data;
+            _context.t0 = type;
+            _context.next = _context.t0 === "get" ? 4 : _context.t0 === "post" ? 16 : 28;
+            break;
+
+          case 4:
+            _context.prev = 4;
+            _context.next = 7;
+            return _axios.default.get(url, data);
+
+          case 7:
+            response = _context.sent;
+
+            if (!(response.status === 200)) {
+              _context.next = 11;
+              break;
+            }
+
+            _data = response.data;
+            return _context.abrupt("return", {
+              success: true,
+              response: _data
+            });
+
+          case 11:
+            _context.next = 16;
+            break;
+
+          case 13:
+            _context.prev = 13;
+            _context.t1 = _context["catch"](4);
+            return _context.abrupt("return", {
+              success: false,
+              error: _context.t1,
+              response: null
+            });
+
+          case 16:
+            _context.prev = 16;
+            _context.next = 19;
+            return _axios.default.post(url, data);
+
+          case 19:
+            _response = _context.sent;
+
+            if (!(_response.status === 201)) {
+              _context.next = 23;
+              break;
+            }
+
+            _data2 = _response.data;
+            return _context.abrupt("return", {
+              success: true,
+              response: _data2
+            });
+
+          case 23:
+            _context.next = 28;
+            break;
+
+          case 25:
+            _context.prev = 25;
+            _context.t2 = _context["catch"](16);
+            return _context.abrupt("return", {
+              success: false,
+              error: _context.t2,
+              response: null
+            });
+
+          case 28:
+            return _context.abrupt("return", {
+              success: false,
+              error: false,
+              response: null
+            });
+
+          case 29:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[4, 13], [16, 25]]);
+  }));
+  return _makeApiCall.apply(this, arguments);
+}
+
+var _default = makeApiCall;
+exports.default = _default;
+},{"axios":"../node_modules/axios/index.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37217,6 +37333,8 @@ var _Toast = require("../Toast/Toast");
 var _axios = _interopRequireDefault(require("axios"));
 
 var _router = require("@reach/router");
+
+var _server = _interopRequireDefault(require("../../server/server.request"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37259,32 +37377,28 @@ var Cart = function Cart() {
       cartList = _useCartList.cartList,
       cartDispatch = _useCartList.cartDispatch;
 
-  var _useState = (0, _react.useState)(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      user = _useState2[0],
-      setUser = _useState2[1];
-
   var _useAuth = (0, _AuthContext.useAuth)(),
       token = _useAuth.token,
-      isUserLoggrdIn = _useAuth.isUserLoggrdIn;
+      user = _useAuth.user,
+      setUser = _useAuth.setUser;
 
   var _useProductList = (0, _ProductContext.useProductList)(),
       productList = _useProductList.productList;
 
-  var _useState3 = (0, _react.useState)([]),
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      itemList = _useState2[0],
+      setItemList = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(0),
       _useState4 = _slicedToArray(_useState3, 2),
-      itemList = _useState4[0],
-      setItemList = _useState4[1];
+      total = _useState4[0],
+      setTotal = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(0),
+  var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      total = _useState6[0],
-      setTotal = _useState6[1];
-
-  var _useState7 = (0, _react.useState)([]),
-      _useState8 = _slicedToArray(_useState7, 2),
-      toastMessageList = _useState8[0],
-      setToastMessageList = _useState8[1];
+      toastMessageList = _useState6[0],
+      setToastMessageList = _useState6[1];
 
   var compare = function compare(a, b) {
     if (a.added > b.added) return 1;else return -1;
@@ -37292,7 +37406,8 @@ var Cart = function Cart() {
 
   (0, _react.useEffect)(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var response;
+      var urlStr, data, _yield$makeApiCall, success, response;
+
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -37300,45 +37415,55 @@ var Cart = function Cart() {
               _context.prev = 0;
 
               if (!(token != null)) {
-                _context.next = 8;
+                _context.next = 12;
                 break;
               }
 
-              _context.next = 4;
-              return _axios.default.get("https://buygames-backend.manmodesanket.repl.co/auth/user", {
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              data = {
                 headers: {
                   authorization: token
                 }
+              };
+              _context.next = 6;
+              return (0, _server.default)({
+                type: "get",
+                url: urlStr,
+                data: data
               });
 
-            case 4:
-              response = _context.sent;
+            case 6:
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+              response = _yield$makeApiCall.response;
 
-              if (response.data.token != null) {
-                setUser(response.data.userID);
+              if (success) {
+                setUser(response.userID);
               }
 
-              _context.next = 9;
+              _context.next = 13;
               break;
 
-            case 8:
-              (0, _router.navigate)("../login");
+            case 12:
+              if (user == null) {
+                (0, _router.navigate)("../login");
+              }
 
-            case 9:
-              _context.next = 14;
+            case 13:
+              _context.next = 18;
               break;
 
-            case 11:
-              _context.prev = 11;
+            case 15:
+              _context.prev = 15;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0);
 
-            case 14:
+            case 18:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 11]]);
+      }, _callee, null, [[0, 15]]);
     }))();
   }, [token]);
   (0, _react.useEffect)(function () {
@@ -37471,7 +37596,7 @@ var Cart = function Cart() {
 };
 
 exports.Cart = Cart;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js","axios":"../node_modules/axios/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"Reducers/Reducer.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js","axios":"../node_modules/axios/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../server/server.request":"server/server.request.js"}],"Reducers/Reducer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37958,124 +38083,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"server/server.request.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _axios = _interopRequireDefault(require("axios"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function makeApiCall(_x) {
-  return _makeApiCall.apply(this, arguments);
-}
-
-function _makeApiCall() {
-  _makeApiCall = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
-    var type, url, data, response, _data, _response, _data2;
-
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            type = _ref.type, url = _ref.url, data = _ref.data;
-            _context.t0 = type;
-            _context.next = _context.t0 === "get" ? 4 : _context.t0 === "post" ? 16 : 29;
-            break;
-
-          case 4:
-            _context.prev = 4;
-            _context.next = 7;
-            return _axios.default.get(url);
-
-          case 7:
-            response = _context.sent;
-
-            if (!(response.status === 200)) {
-              _context.next = 11;
-              break;
-            }
-
-            _data = response.data;
-            return _context.abrupt("return", {
-              success: true,
-              response: _data
-            });
-
-          case 11:
-            _context.next = 16;
-            break;
-
-          case 13:
-            _context.prev = 13;
-            _context.t1 = _context["catch"](4);
-            return _context.abrupt("return", {
-              success: false,
-              error: _context.t1,
-              response: null
-            });
-
-          case 16:
-            _context.prev = 16;
-            console.log(url, data);
-            _context.next = 20;
-            return _axios.default.post(url, data);
-
-          case 20:
-            _response = _context.sent;
-
-            if (!(_response.status === 201)) {
-              _context.next = 24;
-              break;
-            }
-
-            _data2 = _response.data;
-            return _context.abrupt("return", {
-              success: true,
-              response: _data2
-            });
-
-          case 24:
-            _context.next = 29;
-            break;
-
-          case 26:
-            _context.prev = 26;
-            _context.t2 = _context["catch"](16);
-            return _context.abrupt("return", {
-              success: false,
-              error: _context.t2,
-              response: null
-            });
-
-          case 29:
-            return _context.abrupt("return", {
-              success: false,
-              error: false,
-              response: null
-            });
-
-          case 30:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, null, [[4, 13], [16, 26]]);
-  }));
-  return _makeApiCall.apply(this, arguments);
-}
-
-var _default = makeApiCall;
-exports.default = _default;
-},{"axios":"../node_modules/axios/index.js"}],"context/ProductContext/ProductProvider.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"context/ProductContext/ProductProvider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38287,6 +38295,8 @@ var _router = require("@reach/router");
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -38311,14 +38321,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Login = function Login() {
   var _useAuth = (0, _AuthContext.useAuth)(),
-      isUserLoggedIn = _useAuth.isUserLoggedIn,
+      user = _useAuth.user,
       loginWithCredentials = _useAuth.loginWithCredentials,
-      logout = _useAuth.logout;
-
-  var _useAuth2 = (0, _AuthContext.useAuth)(),
-      token = _useAuth2.token,
-      isUserLoggrdIn = _useAuth2.isUserLoggrdIn,
-      setLogin = _useAuth2.setLogin;
+      logout = _useAuth.logout,
+      token = _useAuth.token,
+      setUser = _useAuth.setUser;
 
   var _useState = (0, _react.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -38331,7 +38338,7 @@ var Login = function Login() {
       setPassword = _useState4[1];
 
   function loginHandler() {
-    isUserLoggedIn ? logout() : loginWithCredentials(username, password);
+    user ? logout() : loginWithCredentials(username, password);
   }
 
   var handleSubmit = function handleSubmit(evt) {
@@ -38341,7 +38348,8 @@ var Login = function Login() {
 
   (0, _react.useEffect)(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var response;
+      var urlStr, data, _yield$makeApiCall, success, response;
+
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -38349,42 +38357,48 @@ var Login = function Login() {
               _context.prev = 0;
 
               if (!(token != null)) {
-                _context.next = 7;
+                _context.next = 10;
                 break;
               }
 
-              _context.next = 4;
-              return _axios.default.get("https://buygames-backend.manmodesanket.repl.co/auth/user", {
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              data = {
                 headers: {
                   authorization: token
                 }
+              };
+              _context.next = 6;
+              return (0, _server.default)({
+                type: "get",
+                url: urlStr,
+                data: data
               });
 
-            case 4:
-              response = _context.sent;
-              console.log(response);
+            case 6:
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+              response = _yield$makeApiCall.response;
 
-              if (response.data.token != null) {
-                setLogin(true);
-              } else {
+              if (success) {
+                setUser(response.userID);
                 (0, _router.navigate)("../");
               }
 
-            case 7:
-              _context.next = 12;
+            case 10:
+              _context.next = 15;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 12:
+              _context.prev = 12;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0);
 
-            case 12:
+            case 15:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 12]]);
     }))();
   }, [token]);
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -38412,7 +38426,7 @@ var Login = function Login() {
 };
 
 exports.Login = Login;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38451,7 +38465,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function loginService(uname, pswd) {
-  console.log("loginService");
   var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/login";
   var data = {
     uname: uname,
@@ -38474,15 +38487,15 @@ var AuthProvider = function AuthProvider(_ref) {
       loggedIn = _ref2.loggedIn,
       savedToken = _ref2.token;
 
-  var _useState = (0, _react.useState)(loggedIn),
+  var _useState = (0, _react.useState)(savedToken),
       _useState2 = _slicedToArray(_useState, 2),
-      isUserLoggedIn = _useState2[0],
-      setLogin = _useState2[1];
+      token = _useState2[0],
+      setToken = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(savedToken),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      token = _useState4[0],
-      setToken = _useState4[1];
+      user = _useState4[0],
+      setUser = _useState4[1];
 
   var loginWithCredentials = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(username, password) {
@@ -38500,31 +38513,30 @@ var AuthProvider = function AuthProvider(_ref) {
               _yield$loginService = _context.sent;
               success = _yield$loginService.success;
               response = _yield$loginService.response;
-              console.log(response);
 
               if (success) {
                 setToken(response.token);
-                setLogin(true);
+                setUser(response.username);
                 localStorage.setItem("auth", JSON.stringify({
                   loggedIn: true,
                   token: response.token
                 }));
               }
 
-              _context.next = 13;
+              _context.next = 12;
               break;
 
-            case 10:
-              _context.prev = 10;
+            case 9:
+              _context.prev = 9;
               _context.t0 = _context["catch"](0);
               console.log("galat hai", _context.t0);
 
-            case 13:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 10]]);
+      }, _callee, null, [[0, 9]]);
     }));
 
     return function loginWithCredentials(_x, _x2) {
@@ -38542,11 +38554,11 @@ var AuthProvider = function AuthProvider(_ref) {
 
   return /*#__PURE__*/_react.default.createElement(_AuthContext.AuthContext.Provider, {
     value: {
-      isUserLoggedIn: isUserLoggedIn,
       token: token,
       loginWithCredentials: loginWithCredentials,
       logout: logout,
-      setLogin: setLogin
+      user: user,
+      setUser: setUser
     }
   }, children);
 };
@@ -38658,7 +38670,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3549" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2907" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
