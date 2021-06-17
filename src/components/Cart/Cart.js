@@ -29,7 +29,7 @@ const Cart = () => {
     if (user === null) {
       navigate("../login");
     }
-  });
+  }, [user]);
 
   useEffect(() => {
     let list = [];
@@ -78,15 +78,27 @@ const Cart = () => {
     }
   };
 
-  const handleCartRemove = (id) => {
-    cartDispatch({
-      type: "REMOVE_FROM_CART",
-      payload: id,
+  const handleCartRemove = async (id) => {
+    let data = { username: user, cartItem: id, action: "remove" };
+    let urlStr = process.env.REACT_APP_API_ROOT_URL + "cart";
+    const { success } = await makeApiCall({
+      url: urlStr,
+      type: "post",
+      data,
     });
-    const newItemList = itemList.filter((item) => item._id != id);
-    setItemList(newItemList);
-    const obj = createToastMessageList("Item removed from cart");
-    setToastMessageList([...toastMessageList, obj]);
+    if (success) {
+      cartDispatch({
+        type: "REMOVE_FROM_CART",
+        payload: id,
+      });
+      const newItemList = itemList.filter((item) => item._id != id);
+      setItemList(newItemList);
+      const obj = createToastMessageList("Item removed from cart");
+      setToastMessageList([...toastMessageList, obj]);
+    } else {
+      const obj = createToastMessageList("Failed to remove from Cart");
+      setToastMessageList([...toastMessageList, obj]);
+    }
   };
 
   return (

@@ -37,8 +37,12 @@ const AddToCartButton = ({
       //make api call if success add to cart
       let data = { username: user, cartItem: id, action: "add" };
       let urlStr = process.env.REACT_APP_API_ROOT_URL + "cart";
-      const response = await makeApiCall({ url: urlStr, type: "post", data });
-      if (response.success) {
+      const { success } = await makeApiCall({
+        url: urlStr,
+        type: "post",
+        data,
+      });
+      if (success) {
         const newItem = {
           id: item,
           added: Date.now(),

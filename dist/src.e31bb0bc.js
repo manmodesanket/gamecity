@@ -37267,7 +37267,7 @@ function _makeApiCall() {
           case 19:
             _response = _context.sent;
 
-            if (!(_response.status === 201)) {
+            if (!(_response.status === 201 || _response.status === 204)) {
               _context.next = 23;
               break;
             }
@@ -37342,6 +37342,10 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -37404,7 +37408,7 @@ var Cart = function Cart() {
     if (user === null) {
       (0, _router.navigate)("../login");
     }
-  });
+  }, [user]);
   (0, _react.useEffect)(function () {
     var list = [];
 
@@ -37462,18 +37466,59 @@ var Cart = function Cart() {
     }
   };
 
-  var handleCartRemove = function handleCartRemove(id) {
-    cartDispatch({
-      type: "REMOVE_FROM_CART",
-      payload: id
-    });
-    var newItemList = itemList.filter(function (item) {
-      return item._id != id;
-    });
-    setItemList(newItemList);
-    var obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from cart");
-    setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
-  };
+  var handleCartRemove = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id) {
+      var data, urlStr, _yield$makeApiCall, success, newItemList, obj, _obj;
+
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              data = {
+                username: user,
+                cartItem: id,
+                action: "remove"
+              };
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              _context.next = 4;
+              return (0, _server.default)({
+                url: urlStr,
+                type: "post",
+                data: data
+              });
+
+            case 4:
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+
+              if (success) {
+                cartDispatch({
+                  type: "REMOVE_FROM_CART",
+                  payload: id
+                });
+                newItemList = itemList.filter(function (item) {
+                  return item._id != id;
+                });
+                setItemList(newItemList);
+                obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from cart");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+              } else {
+                _obj = (0, _UtilityFunctions.createToastMessageList)("Failed to remove from Cart");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+              }
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleCartRemove(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page main-page__cart"
@@ -37737,7 +37782,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
 
   var handleAddToCart = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
-      var isPresentInCart, obj, data, urlStr, response, newItem, _obj, _obj2, _obj3;
+      var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, newItem, _obj, _obj2, _obj3;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -37748,7 +37793,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
               });
 
               if (!(isPresentInCart === undefined || isPresentInCart === null)) {
-                _context.next = 12;
+                _context.next = 13;
                 break;
               }
 
@@ -37769,9 +37814,10 @@ var AddToCartButton = function AddToCartButton(_ref) {
               });
 
             case 8:
-              response = _context.sent;
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
 
-              if (response.success) {
+              if (success) {
                 newItem = {
                   id: item,
                   added: Date.now()
@@ -37788,14 +37834,14 @@ var AddToCartButton = function AddToCartButton(_ref) {
                 setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
               }
 
-              _context.next = 14;
+              _context.next = 15;
               break;
 
-            case 12:
+            case 13:
               _obj3 = (0, _UtilityFunctions.createToastMessageList)("Failed to Add to Cart");
               setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj3]));
 
-            case 14:
+            case 15:
             case "end":
               return _context.stop();
           }
