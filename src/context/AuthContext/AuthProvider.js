@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
 
 import axios from "axios";
@@ -23,6 +23,27 @@ export const AuthProvider = ({ children }) => {
 
   const [token, setToken] = useState(savedToken);
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    (async function () {
+      try {
+        if (token != null) {
+          let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/user";
+          let data = { headers: { authorization: token } };
+          const { success, response } = await makeApiCall({
+            type: "get",
+            url: urlStr,
+            data,
+          });
+          if (success) {
+            setUser(response.userID);
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [token, user]);
 
   const loginWithCredentials = async (username, password) => {
     try {

@@ -37356,10 +37356,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -37405,67 +37401,10 @@ var Cart = function Cart() {
   };
 
   (0, _react.useEffect)(function () {
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var urlStr, data, _yield$makeApiCall, success, response;
-
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-
-              if (!(token != null)) {
-                _context.next = 12;
-                break;
-              }
-
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
-              data = {
-                headers: {
-                  authorization: token
-                }
-              };
-              _context.next = 6;
-              return (0, _server.default)({
-                type: "get",
-                url: urlStr,
-                data: data
-              });
-
-            case 6:
-              _yield$makeApiCall = _context.sent;
-              success = _yield$makeApiCall.success;
-              response = _yield$makeApiCall.response;
-
-              if (success) {
-                setUser(response.userID);
-              }
-
-              _context.next = 13;
-              break;
-
-            case 12:
-              if (user == null) {
-                (0, _router.navigate)("../login");
-              }
-
-            case 13:
-              _context.next = 18;
-              break;
-
-            case 15:
-              _context.prev = 15;
-              _context.t0 = _context["catch"](0);
-              console.log(_context.t0);
-
-            case 18:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[0, 15]]);
-    }))();
-  }, [token]);
+    if (user === null) {
+      (0, _router.navigate)("../login");
+    }
+  });
   (0, _react.useEffect)(function () {
     var list = [];
 
@@ -37730,9 +37669,15 @@ exports.AddToCartButton = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
 var _CartContext = require("../../context/CartContext/CartContext");
 
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
 var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -37745,6 +37690,10 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -37773,6 +37722,9 @@ var AddToCartButton = function AddToCartButton(_ref) {
       added = _useState2[0],
       setAdded = _useState2[1];
 
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user;
+
   (0, _react.useEffect)(function () {
     var addedInCart = cartList.find(function (item) {
       return item.id === id;
@@ -37783,29 +37735,78 @@ var AddToCartButton = function AddToCartButton(_ref) {
     }
   }, [cartList]);
 
-  var handleAddToCart = function handleAddToCart(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
-    var isPresentInCart = cartList.find(function (itemInCart) {
-      return itemInCart.id === item;
-    });
+  var handleAddToCart = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
+      var isPresentInCart, obj, data, urlStr, response, newItem, _obj, _obj2, _obj3;
 
-    if (isPresentInCart === undefined || isPresentInCart === null) {
-      var newItem = {
-        id: item,
-        added: Date.now()
-      };
-      cartDispatch({
-        type: "ADD_TO_CART",
-        payload: newItem
-      });
-      var obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
-      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
-      setAdded(true);
-    } else {
-      var _obj = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              isPresentInCart = cartList.find(function (itemInCart) {
+                return itemInCart.id === item;
+              });
 
-      setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
-    }
-  };
+              if (!(isPresentInCart === undefined || isPresentInCart === null)) {
+                _context.next = 12;
+                break;
+              }
+
+              obj = (0, _UtilityFunctions.createToastMessageList)("Loading...");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj])); //make api call if success add to cart
+
+              data = {
+                username: user,
+                cartItem: id,
+                action: "add"
+              };
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              _context.next = 8;
+              return (0, _server.default)({
+                url: urlStr,
+                type: "post",
+                data: data
+              });
+
+            case 8:
+              response = _context.sent;
+
+              if (response.success) {
+                newItem = {
+                  id: item,
+                  added: Date.now()
+                };
+                cartDispatch({
+                  type: "ADD_TO_CART",
+                  payload: newItem
+                });
+                _obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+                setAdded(true);
+              } else {
+                _obj2 = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
+              }
+
+              _context.next = 14;
+              break;
+
+            case 12:
+              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Failed to Add to Cart");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj3]));
+
+            case 14:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleAddToCart(_x, _x2, _x3, _x4, _x5) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
 
   return /*#__PURE__*/_react.default.createElement("button", {
     className: "btn ".concat(_toConsumableArray(classes)),
@@ -37816,7 +37817,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
 };
 
 exports.AddToCartButton = AddToCartButton;
-},{"react":"../node_modules/react/index.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/WishListComponents/WishListButton.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../server/server.request":"server/server.request.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/WishListComponents/WishListButton.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38497,20 +38498,75 @@ var AuthProvider = function AuthProvider(_ref) {
       user = _useState4[0],
       setUser = _useState4[1];
 
-  var loginWithCredentials = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(username, password) {
-      var _yield$loginService, success, response;
+  (0, _react.useEffect)(function () {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var urlStr, data, _yield$makeApiCall, success, response;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
-              _context.next = 3;
+
+              if (!(token != null)) {
+                _context.next = 10;
+                break;
+              }
+
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              data = {
+                headers: {
+                  authorization: token
+                }
+              };
+              _context.next = 6;
+              return (0, _server.default)({
+                type: "get",
+                url: urlStr,
+                data: data
+              });
+
+            case 6:
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+              response = _yield$makeApiCall.response;
+
+              if (success) {
+                setUser(response.userID);
+              }
+
+            case 10:
+              _context.next = 15;
+              break;
+
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context["catch"](0);
+              console.log(_context.t0);
+
+            case 15:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 12]]);
+    }))();
+  }, [token, user]);
+
+  var loginWithCredentials = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(username, password) {
+      var _yield$loginService, success, response;
+
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
               return loginService(username, password);
 
             case 3:
-              _yield$loginService = _context.sent;
+              _yield$loginService = _context2.sent;
               success = _yield$loginService.success;
               response = _yield$loginService.response;
 
@@ -38523,24 +38579,24 @@ var AuthProvider = function AuthProvider(_ref) {
                 }));
               }
 
-              _context.next = 12;
+              _context2.next = 12;
               break;
 
             case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](0);
-              console.log("galat hai", _context.t0);
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](0);
+              console.log("galat hai", _context2.t0);
 
             case 12:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee2, null, [[0, 9]]);
     }));
 
     return function loginWithCredentials(_x, _x2) {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
 
@@ -38670,7 +38726,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2907" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1754" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

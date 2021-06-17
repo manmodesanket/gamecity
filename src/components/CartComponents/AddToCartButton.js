@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext/AuthContext";
 import { useCartList } from "../../context/CartContext/CartContext";
+import makeApiCall from "../../server/server.request";
 import { createToastMessageList } from "../../Utilities/UtilityFunctions";
 
 const AddToCartButton = ({
@@ -10,6 +12,7 @@ const AddToCartButton = ({
 }) => {
   let { cartList, cartDispatch } = useCartList();
   const [added, setAdded] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const addedInCart = cartList.find((item) => item.id === id);
@@ -19,7 +22,7 @@ const AddToCartButton = ({
     }
   }, [cartList]);
 
-  const handleAddToCart = (
+  const handleAddToCart = async (
     item,
     cartList,
     cartDispatch,
@@ -28,19 +31,31 @@ const AddToCartButton = ({
   ) => {
     let isPresentInCart = cartList.find((itemInCart) => itemInCart.id === item);
     if (isPresentInCart === undefined || isPresentInCart === null) {
-      const newItem = {
-        id: item,
-        added: Date.now(),
-      };
-      cartDispatch({
-        type: "ADD_TO_CART",
-        payload: newItem,
-      });
-      const obj = createToastMessageList("Item added to cart");
+      const obj = createToastMessageList("Loading...");
       setToastMessageList([...toastMessageList, obj]);
-      setAdded(true);
+
+      //make api call if success add to cart
+      let data = { username: user, cartItem: id, action: "add" };
+      let urlStr = process.env.REACT_APP_API_ROOT_URL + "cart";
+      const response = await makeApiCall({ url: urlStr, type: "post", data });
+      if (response.success) {
+        const newItem = {
+          id: item,
+          added: Date.now(),
+        };
+        cartDispatch({
+          type: "ADD_TO_CART",
+          payload: newItem,
+        });
+        const obj = createToastMessageList("Item added to cart");
+        setToastMessageList([...toastMessageList, obj]);
+        setAdded(true);
+      } else {
+        const obj = createToastMessageList("Item already in cart");
+        setToastMessageList([...toastMessageList, obj]);
+      }
     } else {
-      const obj = createToastMessageList("Item already in cart");
+      const obj = createToastMessageList("Failed to Add to Cart");
       setToastMessageList([...toastMessageList, obj]);
     }
   };
