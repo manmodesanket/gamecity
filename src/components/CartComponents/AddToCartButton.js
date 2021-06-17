@@ -35,7 +35,7 @@ const AddToCartButton = ({
       setToastMessageList([...toastMessageList, obj]);
 
       //make api call if success add to cart
-      let data = { username: user, cartItem: id, action: "add" };
+      let data = { query: { username: user, cartItem: id, action: "add" } };
       let urlStr = process.env.REACT_APP_API_ROOT_URL + "cart";
       const { success } = await makeApiCall({
         url: urlStr,
@@ -45,6 +45,7 @@ const AddToCartButton = ({
       if (success) {
         const newItem = {
           id: item,
+          quantity: 1,
           added: Date.now(),
         };
         cartDispatch({

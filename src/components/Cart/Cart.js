@@ -17,6 +17,7 @@ const Cart = () => {
   let { token, user, setUser } = useAuth();
   const { productList } = useProductList();
   let [itemList, setItemList] = useState([]);
+  let [itemList1, setItemList1] = useState([]);
   let [total, setTotal] = useState(0);
   let [toastMessageList, setToastMessageList] = useState([]);
 
@@ -26,10 +27,42 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    if (user === null) {
-      navigate("../login");
+    (async function () {
+      try {
+        if (token != null) {
+          let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/user";
+          let data = { headers: { authorization: token } };
+          const { success, response } = await makeApiCall({
+            type: "get",
+            url: urlStr,
+            data,
+          });
+          if (success) {
+            setUser(response.userID);
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [user, token]);
+
+  useEffect(async () => {
+    let list = [];
+    if (cartList != null) {
+      cartList.forEach(async (item) => {
+        let urlStr = process.env.REACT_APP_API_ROOT_URL + "products/" + item.id;
+        const { success, response } = await makeApiCall({
+          type: "get",
+          url: urlStr,
+        });
+        if (success === true && response != null) {
+          list.push(response.product);
+        }
+      });
     }
-  }, [user]);
+    setItemList1(list);
+  }, [cartList]);
 
   useEffect(() => {
     let list = [];
@@ -37,22 +70,21 @@ const Cart = () => {
       const obj = findProductById(productList, cartList[i].id);
       if (obj !== null) {
         obj = {
-          items: 1,
-          added: cartList[i].added,
+          quantity: cartList[i].quantity,
           ...obj,
         };
         list.push(obj);
       }
     }
     setItemList(list);
-  }, []);
+  }, [cartList]);
 
   useEffect(() => {
     if (itemList.length > 0) {
       let total = 0;
 
       for (let i = 0; i < itemList.length; i++) {
-        total += itemList[i].items * itemList[i].price;
+        total += itemList[i].quantity * itemList[i].price;
       }
       setTotal(total);
     } else if (itemList.length === 0) {
@@ -60,26 +92,37 @@ const Cart = () => {
     }
   }, [itemList]);
 
-  const handleQuantity = (id, str) => {
-    const product = itemList.find((item) => item._id === id);
-    const newItemList = itemList.filter((item) => item._id !== id);
-    if (str === "INC") {
-      product.items += 1;
-      const list = [product, ...newItemList];
-      list.sort(compare);
-      setItemList(list);
-    } else if (str === "DESC") {
-      if (product.items > 1) {
-        product.items -= 1;
-        const list = [product, ...newItemList];
-        list.sort(compare);
-        setItemList(list);
+  const handleQuantity = async (id, str) => {
+    let urlStr = process.env.REACT_APP_API_ROOT_URL + "cart";
+    let data = {
+      query: {
+        username: user,
+        cartItem: id,
+        action: "update",
+        actiontype: str,
+      },
+    };
+    const item = itemList.find((item) => item._id === id);
+    if (item.quantity > 1 && item.quantity < 6) {
+      const { success, response } = await makeApiCall({
+        type: "post",
+        url: urlStr,
+        data,
+      });
+      if (success === true) {
+        cartDispatch({
+          type: "CART_LIST",
+          payload: response.savedCart.cartList,
+        });
       }
+    } else {
+      const obj = createToastMessageList("Cannot perform action.");
+      setToastMessageList([...toastMessageList, obj]);
     }
   };
 
   const handleCartRemove = async (id) => {
-    let data = { username: user, cartItem: id, action: "remove" };
+    let data = { query: { username: user, cartItem: id, action: "remove" } };
     let urlStr = process.env.REACT_APP_API_ROOT_URL + "cart";
     const { success } = await makeApiCall({
       url: urlStr,
@@ -148,7 +191,7 @@ const Cart = () => {
                       -
                     </button>
                     <div className="product_quantity__element">
-                      {item.items}
+                      {item.quantity}
                     </div>
 
                     <button

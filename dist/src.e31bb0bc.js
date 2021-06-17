@@ -37342,10 +37342,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -37359,6 +37355,10 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -37390,25 +37390,135 @@ var Cart = function Cart() {
       itemList = _useState2[0],
       setItemList = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(0),
+  var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      total = _useState4[0],
-      setTotal = _useState4[1];
+      itemList1 = _useState4[0],
+      setItemList1 = _useState4[1];
 
-  var _useState5 = (0, _react.useState)([]),
+  var _useState5 = (0, _react.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
-      toastMessageList = _useState6[0],
-      setToastMessageList = _useState6[1];
+      total = _useState6[0],
+      setTotal = _useState6[1];
+
+  var _useState7 = (0, _react.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      toastMessageList = _useState8[0],
+      setToastMessageList = _useState8[1];
 
   var compare = function compare(a, b) {
     if (a.added > b.added) return 1;else return -1;
   };
 
   (0, _react.useEffect)(function () {
-    if (user === null) {
-      (0, _router.navigate)("../login");
-    }
-  }, [user]);
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var urlStr, data, _yield$makeApiCall, success, response;
+
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+
+              if (!(token != null)) {
+                _context.next = 10;
+                break;
+              }
+
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              data = {
+                headers: {
+                  authorization: token
+                }
+              };
+              _context.next = 6;
+              return (0, _server.default)({
+                type: "get",
+                url: urlStr,
+                data: data
+              });
+
+            case 6:
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+              response = _yield$makeApiCall.response;
+
+              if (success) {
+                setUser(response.userID);
+              }
+
+            case 10:
+              _context.next = 15;
+              break;
+
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context["catch"](0);
+              console.log(_context.t0);
+
+            case 15:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 12]]);
+    }))();
+  }, [user, token]);
+  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+    var list;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            list = [];
+
+            if (cartList != null) {
+              cartList.forEach( /*#__PURE__*/function () {
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(item) {
+                  var urlStr, _yield$makeApiCall2, success, response;
+
+                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "products/" + item.id;
+                          _context2.next = 3;
+                          return (0, _server.default)({
+                            type: "get",
+                            url: urlStr
+                          });
+
+                        case 3:
+                          _yield$makeApiCall2 = _context2.sent;
+                          success = _yield$makeApiCall2.success;
+                          response = _yield$makeApiCall2.response;
+
+                          if (success === true && response != null) {
+                            list.push(response.product);
+                          }
+
+                        case 7:
+                        case "end":
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2);
+                }));
+
+                return function (_x) {
+                  return _ref3.apply(this, arguments);
+                };
+              }());
+            }
+
+            setItemList1(list);
+
+          case 3:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  })), [cartList]);
   (0, _react.useEffect)(function () {
     var list = [];
 
@@ -37417,21 +37527,20 @@ var Cart = function Cart() {
 
       if (obj !== null) {
         obj = _objectSpread({
-          items: 1,
-          added: cartList[i].added
+          quantity: cartList[i].quantity
         }, obj);
         list.push(obj);
       }
     }
 
     setItemList(list);
-  }, []);
+  }, [cartList]);
   (0, _react.useEffect)(function () {
     if (itemList.length > 0) {
       var _total = 0;
 
       for (var i = 0; i < itemList.length; i++) {
-        _total += itemList[i].items * itemList[i].price;
+        _total += itemList[i].quantity * itemList[i].price;
       }
 
       setTotal(_total);
@@ -37440,47 +37549,88 @@ var Cart = function Cart() {
     }
   }, [itemList]);
 
-  var handleQuantity = function handleQuantity(id, str) {
-    var product = itemList.find(function (item) {
-      return item._id === id;
-    });
-    var newItemList = itemList.filter(function (item) {
-      return item._id !== id;
-    });
+  var handleQuantity = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id, str) {
+      var urlStr, data, item, _yield$makeApiCall3, success, response, obj;
 
-    if (str === "INC") {
-      product.items += 1;
-      var list = [product].concat(_toConsumableArray(newItemList));
-      list.sort(compare);
-      setItemList(list);
-    } else if (str === "DESC") {
-      if (product.items > 1) {
-        product.items -= 1;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              data = {
+                query: {
+                  username: user,
+                  cartItem: id,
+                  action: "update",
+                  actiontype: str
+                }
+              };
+              item = itemList.find(function (item) {
+                return item._id === id;
+              });
 
-        var _list = [product].concat(_toConsumableArray(newItemList));
+              if (!(item.quantity > 1 && item.quantity < 6)) {
+                _context4.next = 12;
+                break;
+              }
 
-        _list.sort(compare);
+              _context4.next = 6;
+              return (0, _server.default)({
+                type: "post",
+                url: urlStr,
+                data: data
+              });
 
-        setItemList(_list);
-      }
-    }
-  };
+            case 6:
+              _yield$makeApiCall3 = _context4.sent;
+              success = _yield$makeApiCall3.success;
+              response = _yield$makeApiCall3.response;
+
+              if (success === true) {
+                cartDispatch({
+                  type: "CART_LIST",
+                  payload: response.savedCart.cartList
+                });
+              }
+
+              _context4.next = 14;
+              break;
+
+            case 12:
+              obj = (0, _UtilityFunctions.createToastMessageList)("Cannot perform action.");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+
+            case 14:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function handleQuantity(_x2, _x3) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
 
   var handleCartRemove = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id) {
-      var data, urlStr, _yield$makeApiCall, success, newItemList, obj, _obj;
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(id) {
+      var data, urlStr, _yield$makeApiCall4, success, newItemList, obj, _obj;
 
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               data = {
-                username: user,
-                cartItem: id,
-                action: "remove"
+                query: {
+                  username: user,
+                  cartItem: id,
+                  action: "remove"
+                }
               };
               urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
-              _context.next = 4;
+              _context5.next = 4;
               return (0, _server.default)({
                 url: urlStr,
                 type: "post",
@@ -37488,8 +37638,8 @@ var Cart = function Cart() {
               });
 
             case 4:
-              _yield$makeApiCall = _context.sent;
-              success = _yield$makeApiCall.success;
+              _yield$makeApiCall4 = _context5.sent;
+              success = _yield$makeApiCall4.success;
 
               if (success) {
                 cartDispatch({
@@ -37509,14 +37659,14 @@ var Cart = function Cart() {
 
             case 7:
             case "end":
-              return _context.stop();
+              return _context5.stop();
           }
         }
-      }, _callee);
+      }, _callee5);
     }));
 
-    return function handleCartRemove(_x) {
-      return _ref.apply(this, arguments);
+    return function handleCartRemove(_x4) {
+      return _ref5.apply(this, arguments);
     };
   }();
 
@@ -37562,7 +37712,7 @@ var Cart = function Cart() {
       className: "btn cart__card__quantity__btn product_quantity__element"
     }, "-"), /*#__PURE__*/_react.default.createElement("div", {
       className: "product_quantity__element"
-    }, item.items), /*#__PURE__*/_react.default.createElement("button", {
+    }, item.quantity), /*#__PURE__*/_react.default.createElement("button", {
       onClick: function onClick() {
         return handleQuantity(item._id, "INC");
       },
@@ -37606,6 +37756,11 @@ var reducerFunction = function reducerFunction(state, action) {
       var initialState = _toConsumableArray(action.payload);
 
       return initialState;
+
+    case "CART_LIST":
+      var initialCartList = _toConsumableArray(action.payload);
+
+      return initialCartList;
 
     case "PRODUCT_LIST_ASCENDING":
       state.sort(function (a, b) {
@@ -37801,9 +37956,11 @@ var AddToCartButton = function AddToCartButton(_ref) {
               setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj])); //make api call if success add to cart
 
               data = {
-                username: user,
-                cartItem: id,
-                action: "add"
+                query: {
+                  username: user,
+                  cartItem: id,
+                  action: "add"
+                }
               };
               urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
               _context.next = 8;
@@ -37820,6 +37977,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
               if (success) {
                 newItem = {
                   id: item,
+                  quantity: 1,
                   added: Date.now()
                 };
                 cartDispatch({
@@ -38291,11 +38449,21 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Reducer = require("../../Reducers/Reducer");
 
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _AuthContext = require("../AuthContext/AuthContext");
+
 var _CartContext = require("./CartContext");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -38317,6 +38485,49 @@ var CartProvider = function CartProvider(_ref) {
       cartList = _useReducer2[0],
       dispatch = _useReducer2[1];
 
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user,
+      token = _useAuth.token;
+
+  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var urlStr, data, _yield$makeApiCall, success, response;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+            data = {
+              params: {
+                username: user
+              }
+            };
+            _context.next = 4;
+            return (0, _server.default)({
+              type: "get",
+              url: urlStr,
+              data: data
+            });
+
+          case 4:
+            _yield$makeApiCall = _context.sent;
+            success = _yield$makeApiCall.success;
+            response = _yield$makeApiCall.response;
+
+            if (success === true && response.cartForUser != null) {
+              dispatch({
+                type: "CART_LIST",
+                payload: response.cartForUser.cartList
+              });
+            }
+
+          case 8:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  })), [user]);
   return /*#__PURE__*/_react.default.createElement(_CartContext.CartContext.Provider, {
     value: {
       cartList: cartList,
@@ -38326,7 +38537,7 @@ var CartProvider = function CartProvider(_ref) {
 };
 
 exports.CartProvider = CartProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./CartContext":"context/CartContext/CartContext.js"}],"components/Login/Login.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","../../server/server.request":"server/server.request.js","../AuthContext/AuthContext":"context/AuthContext/AuthContext.js","./CartContext":"context/CartContext/CartContext.js"}],"components/Login/Login.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

@@ -3,6 +3,9 @@ export const reducerFunction = (state, action) => {
     case "PRODUCT_LIST":
       const initialState = [...action.payload];
       return initialState;
+    case "CART_LIST":
+      const initialCartList = [...action.payload];
+      return initialCartList;
     case "PRODUCT_LIST_ASCENDING":
       state.sort((a, b) => (a.price > b.price ? 1 : -1));
       const ascPriceState = [...state];
