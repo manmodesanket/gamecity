@@ -33098,7 +33098,24 @@ var createRoute = function createRoute(basepath) {
 var shouldNavigate = function shouldNavigate(event) {
   return !event.defaultPrevented && event.button === 0 && !(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }; ////////////////////////////////////////////////////////////////////////
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","invariant":"../node_modules/invariant/browser.js","create-react-context":"../node_modules/create-react-context/lib/index.js","react-lifecycles-compat":"../node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js","./lib/utils":"../node_modules/@reach/router/es/lib/utils.js","./lib/history":"../node_modules/@reach/router/es/lib/history.js"}],"components/Navbar/Navbar.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","invariant":"../node_modules/invariant/browser.js","create-react-context":"../node_modules/create-react-context/lib/index.js","react-lifecycles-compat":"../node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js","./lib/utils":"../node_modules/@reach/router/es/lib/utils.js","./lib/history":"../node_modules/@reach/router/es/lib/history.js"}],"context/AuthContext/AuthContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useAuth = useAuth;
+exports.AuthContext = void 0;
+
+var _react = require("react");
+
+var AuthContext = (0, _react.createContext)();
+exports.AuthContext = AuthContext;
+
+function useAuth() {
+  return (0, _react.useContext)(AuthContext);
+}
+},{"react":"../node_modules/react/index.js"}],"components/Navbar/Navbar.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33109,6 +33126,8 @@ exports.Navbar = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _router = require("@reach/router");
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -33129,6 +33148,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 var Navbar = function Navbar(props) {
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user;
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "navbar"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -33148,13 +33170,17 @@ var Navbar = function Navbar(props) {
     linkName: "Products",
     path: "/products",
     location: props.location
-  }), /*#__PURE__*/_react.default.createElement(NavbarNav, {
+  }), user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
     linkName: "Wishlist",
     path: "/wishlist",
     location: props.location
-  }), /*#__PURE__*/_react.default.createElement(NavbarNav, {
+  }), user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
     linkName: "Cart",
     path: "/cart",
+    location: props.location
+  }), !user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Login",
+    path: "/login",
     location: props.location
   }))));
 };
@@ -33191,7 +33217,7 @@ var NavbarNav = function NavbarNav(_ref) {
     }
   }, linkName);
 };
-},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"context/ProductContext/ProductContext.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js"}],"context/ProductContext/ProductContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35170,23 +35196,6 @@ exports.WishListContext = WishListContext;
 
 function useWishlist() {
   return (0, _react.useContext)(WishListContext);
-}
-},{"react":"../node_modules/react/index.js"}],"context/AuthContext/AuthContext.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.useAuth = useAuth;
-exports.AuthContext = void 0;
-
-var _react = require("react");
-
-var AuthContext = (0, _react.createContext)();
-exports.AuthContext = AuthContext;
-
-function useAuth() {
-  return (0, _react.useContext)(AuthContext);
 }
 },{"react":"../node_modules/react/index.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';

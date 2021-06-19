@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@reach/router";
+import { useAuth } from "../../context/AuthContext/AuthContext";
 
 const Navbar = (props) => {
+  const { user } = useAuth();
   return (
     <div className="navbar">
       <div className="navbar__wrapper">
@@ -17,12 +19,27 @@ const Navbar = (props) => {
             path="/products"
             location={props.location}
           />
-          <NavbarNav
-            linkName={"Wishlist"}
-            path="/wishlist"
-            location={props.location}
-          />
-          <NavbarNav linkName={"Cart"} path="/cart" location={props.location} />
+          {user && (
+            <NavbarNav
+              linkName={"Wishlist"}
+              path="/wishlist"
+              location={props.location}
+            />
+          )}
+          {user && (
+            <NavbarNav
+              linkName={"Cart"}
+              path="/cart"
+              location={props.location}
+            />
+          )}
+          {!user && (
+            <NavbarNav
+              linkName={"Login"}
+              path="/login"
+              location={props.location}
+            />
+          )}
         </div>
       </div>
     </div>
