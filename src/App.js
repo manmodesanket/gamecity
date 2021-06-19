@@ -1,6 +1,7 @@
 import React from "react";
 import { Router } from "@reach/router";
 
+import Account from "./components/Account/Account";
 import { Navbar } from "./components/Navbar/Navbar";
 import { Home } from "./components/Home/Home";
 import { ProductsPage } from "./components/Products/Products";
@@ -29,6 +30,7 @@ const App = () => {
                 <Wishlist path="/wishlist" />
                 <Cart path="/cart" />
                 <Login path="/login" />
+                <Account path="/account" />
               </NavbarRouter>
             </Router>
           </CartProvider>

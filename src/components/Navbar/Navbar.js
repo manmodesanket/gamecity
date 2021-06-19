@@ -33,6 +33,13 @@ const Navbar = (props) => {
               location={props.location}
             />
           )}
+          {user && (
+            <NavbarNav
+              linkName={"Account"}
+              path="/account"
+              location={props.location}
+            />
+          )}
           {!user && (
             <NavbarNav
               linkName={"Login"}
