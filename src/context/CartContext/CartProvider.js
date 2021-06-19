@@ -15,16 +15,18 @@ export const CartProvider = ({ children }) => {
         username: user,
       },
     };
-    const { success, response } = await makeApiCall({
-      type: "get",
-      url: urlStr,
-      data,
-    });
-    if (success === true && response.cartForUser != null) {
-      dispatch({
-        type: "CART_LIST",
-        payload: response.cartForUser.cartList,
+    if (user != null) {
+      const { success, response } = await makeApiCall({
+        type: "get",
+        url: urlStr,
+        data,
       });
+      if (success === true) {
+        dispatch({
+          type: "CART_LIST",
+          payload: response.cartForUser.cartList,
+        });
+      }
     }
   }, [user]);
 
