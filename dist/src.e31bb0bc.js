@@ -35132,10 +35132,16 @@ var Account = function Account() {
       }, _callee, null, [[0, 15]]);
     }))();
   }, [token, user]);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "user_info"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "user_info__username"
+  }, /*#__PURE__*/_react.default.createElement("div", null, "Email: ", user)), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn form__submit__btn",
     onClick: logoutHandler
-  }, "Logout"));
+  }, "Logout"))));
 };
 
 var _default = Account;

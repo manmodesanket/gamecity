@@ -34,9 +34,16 @@ const Account = () => {
   }, [token, user]);
   return (
     <div>
-      <button className="btn form__submit__btn" onClick={logoutHandler}>
-        Logout
-      </button>
+      <div className="main-page">
+        <div className="user_info">
+          <div className="user_info__username">
+            <div>Email: {user}</div>
+          </div>
+          <button className="btn form__submit__btn" onClick={logoutHandler}>
+            Logout
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
