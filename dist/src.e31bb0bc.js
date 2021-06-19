@@ -37999,7 +37999,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
 
   var handleAddToCart = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
-      var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, newItem, _obj, _obj2, _obj3;
+      var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, newItem, _obj, _obj2, _obj3, _obj4;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -38010,7 +38010,12 @@ var AddToCartButton = function AddToCartButton(_ref) {
               });
 
               if (!(isPresentInCart === undefined || isPresentInCart === null)) {
-                _context.next = 13;
+                _context.next = 18;
+                break;
+              }
+
+              if (!(user != null)) {
+                _context.next = 14;
                 break;
               }
 
@@ -38025,14 +38030,14 @@ var AddToCartButton = function AddToCartButton(_ref) {
                 }
               };
               urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
-              _context.next = 8;
+              _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
                 type: "post",
                 data: data
               });
 
-            case 8:
+            case 9:
               _yield$makeApiCall = _context.sent;
               success = _yield$makeApiCall.success;
 
@@ -38054,14 +38059,22 @@ var AddToCartButton = function AddToCartButton(_ref) {
                 setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
               }
 
-              _context.next = 15;
+              _context.next = 16;
               break;
 
-            case 13:
-              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
+            case 14:
+              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Please login.");
               setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj3]));
 
-            case 15:
+            case 16:
+              _context.next = 20;
+              break;
+
+            case 18:
+              _obj4 = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj4]));
+
+            case 20:
             case "end":
               return _context.stop();
           }
@@ -38157,7 +38170,7 @@ var WishListButton = function WishListButton(_ref) {
 
   var addToWishList = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item, wishList, wishListDispatch, toastMessageList, setToastMessageList) {
-      var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, _obj, _obj2, _obj3;
+      var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, _obj, _obj2, _obj3, _obj4;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -38168,7 +38181,12 @@ var WishListButton = function WishListButton(_ref) {
               });
 
               if (!(isPresentInCart === undefined || isPresentInCart === null)) {
-                _context.next = 13;
+                _context.next = 18;
+                break;
+              }
+
+              if (!(user != null)) {
+                _context.next = 14;
                 break;
               }
 
@@ -38183,14 +38201,14 @@ var WishListButton = function WishListButton(_ref) {
                 }
               };
               urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
-              _context.next = 8;
+              _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
                 type: "post",
                 data: data
               });
 
-            case 8:
+            case 9:
               _yield$makeApiCall = _context.sent;
               success = _yield$makeApiCall.success;
 
@@ -38206,14 +38224,22 @@ var WishListButton = function WishListButton(_ref) {
                 setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
               }
 
-              _context.next = 15;
+              _context.next = 16;
               break;
 
-            case 13:
-              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Item already in Wishlist");
+            case 14:
+              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Please login.");
               setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj3]));
 
-            case 15:
+            case 16:
+              _context.next = 20;
+              break;
+
+            case 18:
+              _obj4 = (0, _UtilityFunctions.createToastMessageList)("Item already in Wishlist");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj4]));
+
+            case 20:
             case "end":
               return _context.stop();
           }

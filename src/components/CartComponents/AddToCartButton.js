@@ -31,32 +31,37 @@ const AddToCartButton = ({
   ) => {
     let isPresentInCart = cartList.find((itemInCart) => itemInCart.id === item);
     if (isPresentInCart === undefined || isPresentInCart === null) {
-      const obj = createToastMessageList("Loading...");
-      setToastMessageList([...toastMessageList, obj]);
-
-      //make api call if success add to cart
-      let data = { query: { username: user, cartItem: id, action: "add" } };
-      let urlStr = process.env.REACT_APP_API_ROOT_URL + "cart";
-      const { success } = await makeApiCall({
-        url: urlStr,
-        type: "post",
-        data,
-      });
-      if (success) {
-        const newItem = {
-          id: item,
-          quantity: 1,
-          added: Date.now(),
-        };
-        cartDispatch({
-          type: "ADD_TO_CART",
-          payload: newItem,
-        });
-        const obj = createToastMessageList("Item added to cart");
+      if (user != null) {
+        const obj = createToastMessageList("Loading...");
         setToastMessageList([...toastMessageList, obj]);
-        setAdded(true);
+
+        //make api call if success add to cart
+        let data = { query: { username: user, cartItem: id, action: "add" } };
+        let urlStr = process.env.REACT_APP_API_ROOT_URL + "cart";
+        const { success } = await makeApiCall({
+          url: urlStr,
+          type: "post",
+          data,
+        });
+        if (success) {
+          const newItem = {
+            id: item,
+            quantity: 1,
+            added: Date.now(),
+          };
+          cartDispatch({
+            type: "ADD_TO_CART",
+            payload: newItem,
+          });
+          const obj = createToastMessageList("Item added to cart");
+          setToastMessageList([...toastMessageList, obj]);
+          setAdded(true);
+        } else {
+          const obj = createToastMessageList("Failed to Add to Cart");
+          setToastMessageList([...toastMessageList, obj]);
+        }
       } else {
-        const obj = createToastMessageList("Failed to Add to Cart");
+        const obj = createToastMessageList("Please login.");
         setToastMessageList([...toastMessageList, obj]);
       }
     } else {

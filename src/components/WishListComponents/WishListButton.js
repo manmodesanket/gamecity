@@ -29,26 +29,31 @@ const WishListButton = ({
   ) => {
     let isPresentInCart = wishList.find((itemInCart) => itemInCart === item);
     if (isPresentInCart === undefined || isPresentInCart === null) {
-      const obj = createToastMessageList("Loading...");
-      setToastMessageList([...toastMessageList, obj]);
-
-      //make api call if success add to cart
-      let data = { query: { username: user, wishItem: id, action: "add" } };
-      let urlStr = process.env.REACT_APP_API_ROOT_URL + "wishlist";
-      const { success } = await makeApiCall({
-        url: urlStr,
-        type: "post",
-        data,
-      });
-      if (success) {
-        wishListDispatch({
-          type: "ADD_TO_WISHLIST",
-          payload: item,
-        });
-        const obj = createToastMessageList("Item added to wishlist");
+      if (user != null) {
+        const obj = createToastMessageList("Loading...");
         setToastMessageList([...toastMessageList, obj]);
+
+        //make api call if success add to cart
+        let data = { query: { username: user, wishItem: id, action: "add" } };
+        let urlStr = process.env.REACT_APP_API_ROOT_URL + "wishlist";
+        const { success } = await makeApiCall({
+          url: urlStr,
+          type: "post",
+          data,
+        });
+        if (success) {
+          wishListDispatch({
+            type: "ADD_TO_WISHLIST",
+            payload: item,
+          });
+          const obj = createToastMessageList("Item added to wishlist");
+          setToastMessageList([...toastMessageList, obj]);
+        } else {
+          const obj = createToastMessageList("Failed to add in Wishlist.");
+          setToastMessageList([...toastMessageList, obj]);
+        }
       } else {
-        const obj = createToastMessageList("Failed to add in Wishlist.");
+        const obj = createToastMessageList("Please login.");
         setToastMessageList([...toastMessageList, obj]);
       }
     } else {
