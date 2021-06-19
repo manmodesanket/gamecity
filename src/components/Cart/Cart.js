@@ -17,7 +17,6 @@ const Cart = () => {
   let { token, user, setUser } = useAuth();
   const { productList } = useProductList();
   let [itemList, setItemList] = useState([]);
-  let [itemList1, setItemList1] = useState([]);
   let [total, setTotal] = useState(0);
   let [toastMessageList, setToastMessageList] = useState([]);
 
@@ -40,29 +39,14 @@ const Cart = () => {
           if (success) {
             setUser(response.userID);
           }
+        } else {
+          navigate("../login");
         }
       } catch (err) {
         console.log(err);
       }
     })();
   }, [user, token]);
-
-  useEffect(async () => {
-    let list = [];
-    if (cartList != null) {
-      cartList.forEach(async (item) => {
-        let urlStr = process.env.REACT_APP_API_ROOT_URL + "products/" + item.id;
-        const { success, response } = await makeApiCall({
-          type: "get",
-          url: urlStr,
-        });
-        if (success === true && response != null) {
-          list.push(response.product);
-        }
-      });
-    }
-    setItemList1(list);
-  }, [cartList]);
 
   useEffect(() => {
     let list = [];
@@ -103,7 +87,10 @@ const Cart = () => {
       },
     };
     const item = itemList.find((item) => item._id === id);
-    if (item.quantity > 1 && item.quantity < 6) {
+    if (
+      (item.quantity > 1 && str === "DESC") ||
+      (item.quantity < 6 && str === "INC")
+    ) {
       const { success, response } = await makeApiCall({
         type: "post",
         url: urlStr,
@@ -144,6 +131,7 @@ const Cart = () => {
     }
   };
 
+  //console.log(itemList);
   return (
     <div className="main-page main-page__cart">
       <h1>Cart</h1>
@@ -177,7 +165,7 @@ const Cart = () => {
                         Publisher: {item.publisher}
                       </div>
                       <div className="cart_card__price">
-                        Rs.{item.price * item.items}
+                        Rs.{item.price * item.quantity}
                       </div>
                     </div>
                   </div>

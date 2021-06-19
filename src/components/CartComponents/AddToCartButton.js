@@ -56,11 +56,11 @@ const AddToCartButton = ({
         setToastMessageList([...toastMessageList, obj]);
         setAdded(true);
       } else {
-        const obj = createToastMessageList("Item already in cart");
+        const obj = createToastMessageList("Failed to Add to Cart");
         setToastMessageList([...toastMessageList, obj]);
       }
     } else {
-      const obj = createToastMessageList("Failed to Add to Cart");
+      const obj = createToastMessageList("Item already in cart");
       setToastMessageList([...toastMessageList, obj]);
     }
   };

@@ -37390,20 +37390,15 @@ var Cart = function Cart() {
       itemList = _useState2[0],
       setItemList = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
+  var _useState3 = (0, _react.useState)(0),
       _useState4 = _slicedToArray(_useState3, 2),
-      itemList1 = _useState4[0],
-      setItemList1 = _useState4[1];
+      total = _useState4[0],
+      setTotal = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(0),
+  var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      total = _useState6[0],
-      setTotal = _useState6[1];
-
-  var _useState7 = (0, _react.useState)([]),
-      _useState8 = _slicedToArray(_useState7, 2),
-      toastMessageList = _useState8[0],
-      setToastMessageList = _useState8[1];
+      toastMessageList = _useState6[0],
+      setToastMessageList = _useState6[1];
 
   var compare = function compare(a, b) {
     if (a.added > b.added) return 1;else return -1;
@@ -37420,7 +37415,7 @@ var Cart = function Cart() {
               _context.prev = 0;
 
               if (!(token != null)) {
-                _context.next = 10;
+                _context.next = 12;
                 break;
               }
 
@@ -37446,79 +37441,29 @@ var Cart = function Cart() {
                 setUser(response.userID);
               }
 
-            case 10:
-              _context.next = 15;
+              _context.next = 13;
               break;
 
             case 12:
-              _context.prev = 12;
+              (0, _router.navigate)("../login");
+
+            case 13:
+              _context.next = 18;
+              break;
+
+            case 15:
+              _context.prev = 15;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0);
 
-            case 15:
+            case 18:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 12]]);
+      }, _callee, null, [[0, 15]]);
     }))();
   }, [user, token]);
-  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var list;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            list = [];
-
-            if (cartList != null) {
-              cartList.forEach( /*#__PURE__*/function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(item) {
-                  var urlStr, _yield$makeApiCall2, success, response;
-
-                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                      switch (_context2.prev = _context2.next) {
-                        case 0:
-                          urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "products/" + item.id;
-                          _context2.next = 3;
-                          return (0, _server.default)({
-                            type: "get",
-                            url: urlStr
-                          });
-
-                        case 3:
-                          _yield$makeApiCall2 = _context2.sent;
-                          success = _yield$makeApiCall2.success;
-                          response = _yield$makeApiCall2.response;
-
-                          if (success === true && response != null) {
-                            list.push(response.product);
-                          }
-
-                        case 7:
-                        case "end":
-                          return _context2.stop();
-                      }
-                    }
-                  }, _callee2);
-                }));
-
-                return function (_x) {
-                  return _ref3.apply(this, arguments);
-                };
-              }());
-            }
-
-            setItemList1(list);
-
-          case 3:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  })), [cartList]);
   (0, _react.useEffect)(function () {
     var list = [];
 
@@ -37550,12 +37495,12 @@ var Cart = function Cart() {
   }, [itemList]);
 
   var handleQuantity = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id, str) {
-      var urlStr, data, item, _yield$makeApiCall3, success, response, obj;
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id, str) {
+      var urlStr, data, item, _yield$makeApiCall2, success, response, obj;
 
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
               data = {
@@ -37570,12 +37515,12 @@ var Cart = function Cart() {
                 return item._id === id;
               });
 
-              if (!(item.quantity > 1 && item.quantity < 6)) {
-                _context4.next = 12;
+              if (!(item.quantity > 1 && str === "DESC" || item.quantity < 6 && str === "INC")) {
+                _context2.next = 12;
                 break;
               }
 
-              _context4.next = 6;
+              _context2.next = 6;
               return (0, _server.default)({
                 type: "post",
                 url: urlStr,
@@ -37583,9 +37528,9 @@ var Cart = function Cart() {
               });
 
             case 6:
-              _yield$makeApiCall3 = _context4.sent;
-              success = _yield$makeApiCall3.success;
-              response = _yield$makeApiCall3.response;
+              _yield$makeApiCall2 = _context2.sent;
+              success = _yield$makeApiCall2.success;
+              response = _yield$makeApiCall2.response;
 
               if (success === true) {
                 cartDispatch({
@@ -37594,7 +37539,7 @@ var Cart = function Cart() {
                 });
               }
 
-              _context4.next = 14;
+              _context2.next = 14;
               break;
 
             case 12:
@@ -37603,24 +37548,24 @@ var Cart = function Cart() {
 
             case 14:
             case "end":
-              return _context4.stop();
+              return _context2.stop();
           }
         }
-      }, _callee4);
+      }, _callee2);
     }));
 
-    return function handleQuantity(_x2, _x3) {
-      return _ref4.apply(this, arguments);
+    return function handleQuantity(_x, _x2) {
+      return _ref2.apply(this, arguments);
     };
   }();
 
   var handleCartRemove = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(id) {
-      var data, urlStr, _yield$makeApiCall4, success, newItemList, obj, _obj;
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id) {
+      var data, urlStr, _yield$makeApiCall3, success, newItemList, obj, _obj;
 
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               data = {
                 query: {
@@ -37630,7 +37575,7 @@ var Cart = function Cart() {
                 }
               };
               urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
-              _context5.next = 4;
+              _context3.next = 4;
               return (0, _server.default)({
                 url: urlStr,
                 type: "post",
@@ -37638,8 +37583,8 @@ var Cart = function Cart() {
               });
 
             case 4:
-              _yield$makeApiCall4 = _context5.sent;
-              success = _yield$makeApiCall4.success;
+              _yield$makeApiCall3 = _context3.sent;
+              success = _yield$makeApiCall3.success;
 
               if (success) {
                 cartDispatch({
@@ -37659,16 +37604,17 @@ var Cart = function Cart() {
 
             case 7:
             case "end":
-              return _context5.stop();
+              return _context3.stop();
           }
         }
-      }, _callee5);
+      }, _callee3);
     }));
 
-    return function handleCartRemove(_x4) {
-      return _ref5.apply(this, arguments);
+    return function handleCartRemove(_x3) {
+      return _ref3.apply(this, arguments);
     };
-  }();
+  }(); //console.log(itemList);
+
 
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page main-page__cart"
@@ -37701,7 +37647,7 @@ var Cart = function Cart() {
       className: "cart__card_publisher"
     }, "Publisher: ", item.publisher), /*#__PURE__*/_react.default.createElement("div", {
       className: "cart_card__price"
-    }, "Rs.", item.price * item.items)))), /*#__PURE__*/_react.default.createElement("div", {
+    }, "Rs.", item.price * item.quantity)))), /*#__PURE__*/_react.default.createElement("div", {
       className: "cart__product__actions"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "product_quantity"
@@ -37988,7 +37934,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
                 setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
                 setAdded(true);
               } else {
-                _obj2 = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
+                _obj2 = (0, _UtilityFunctions.createToastMessageList)("Failed to Add to Cart");
                 setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
               }
 
@@ -37996,7 +37942,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
               break;
 
             case 13:
-              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Failed to Add to Cart");
+              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
               setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj3]));
 
             case 15:
@@ -38983,7 +38929,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1754" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1536" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
