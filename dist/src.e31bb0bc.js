@@ -37208,7 +37208,7 @@ var RemoveFromWishList = function RemoveFromWishList(_ref) {
                   action: "remove"
                 }
               };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
+              urlStr = "https://gamecity-backend.herokuapp.com/" + "wishlist";
               _context.next = 6;
               return (0, _server.default)({
                 url: urlStr,
@@ -37480,7 +37480,7 @@ var Cart = function Cart() {
                 break;
               }
 
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              urlStr = "https://gamecity-backend.herokuapp.com/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -37563,7 +37563,7 @@ var Cart = function Cart() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              urlStr = "https://gamecity-backend.herokuapp.com/" + "cart";
               data = {
                 query: {
                   username: user,
@@ -37635,7 +37635,7 @@ var Cart = function Cart() {
                   action: "remove"
                 }
               };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              urlStr = "https://gamecity-backend.herokuapp.com/" + "cart";
               _context3.next = 4;
               return (0, _server.default)({
                 url: urlStr,
@@ -37883,7 +37883,7 @@ var WishListProvider = function WishListProvider(_ref) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
+            urlStr = "https://gamecity-backend.herokuapp.com/" + "wishlist";
             data = {
               params: {
                 username: user
@@ -38038,7 +38038,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
                   action: "add"
                 }
               };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              urlStr = "https://gamecity-backend.herokuapp.com/" + "cart";
               _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
@@ -38209,7 +38209,7 @@ var WishListButton = function WishListButton(_ref) {
                   action: "add"
                 }
               };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
+              urlStr = "https://gamecity-backend.herokuapp.com/" + "wishlist";
               _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
@@ -38519,7 +38519,7 @@ var ProductProvider = function ProductProvider(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "products";
+              urlStr = "https://gamecity-backend.herokuapp.com/" + "products";
               _context.next = 3;
               return (0, _server.default)({
                 type: "get",
@@ -38658,7 +38658,7 @@ var CartProvider = function CartProvider(_ref) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+            urlStr = "https://gamecity-backend.herokuapp.com/" + "cart";
             data = {
               params: {
                 username: user
@@ -38787,7 +38787,7 @@ var Login = function Login() {
                 break;
               }
 
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              urlStr = "https://gamecity-backend.herokuapp.com/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -38901,7 +38901,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function loginService(uname, pswd) {
-  var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/login";
+  var urlStr = "https://gamecity-backend.herokuapp.com/" + "auth/login";
   var data = {
     uname: uname,
     pswd: pswd
@@ -38948,7 +38948,7 @@ var AuthProvider = function AuthProvider(_ref) {
                 break;
               }
 
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              urlStr = "https://gamecity-backend.herokuapp.com/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
