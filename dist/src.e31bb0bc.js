@@ -38830,24 +38830,34 @@ var Login = function Login() {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page"
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "login-form"
+    className: "login-form__container"
   }, /*#__PURE__*/_react.default.createElement("h2", null, "Login Form"), /*#__PURE__*/_react.default.createElement("form", {
-    onSubmit: handleSubmit
-  }, /*#__PURE__*/_react.default.createElement("label", null, "Username:", /*#__PURE__*/_react.default.createElement("input", {
+    onSubmit: handleSubmit,
+    className: "login__form"
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    className: "form__label form__element"
+  }, "Email:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     value: username,
+    className: "form__input form__element",
     onChange: function onChange(e) {
       return setUsername(e.target.value);
-    }
-  })), /*#__PURE__*/_react.default.createElement("label", null, "Password:", /*#__PURE__*/_react.default.createElement("input", {
+    },
+    placeholder: "Enter email here"
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    className: "form__label form__element"
+  }, "Password:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     value: password,
+    className: "form__input form__element",
     onChange: function onChange(e) {
       return setPassword(e.target.value);
-    }
-  })), /*#__PURE__*/_react.default.createElement("input", {
+    },
+    placeholder: "Enter password here"
+  }), /*#__PURE__*/_react.default.createElement("input", {
     type: "submit",
-    value: "Submit"
+    value: "Submit",
+    className: "form__submit__btn form__element"
   }))));
 };
 

@@ -361,7 +361,40 @@ body {
   margin: 0 2px;
 }
 
-.login-form {
+.login__form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 1em;
+}
+
+.form__label {
+  font-weight: bold;
+}
+
+.form__input {
+  outline: transparent solid 2px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0, 0.1);
+  padding: 0.5em 1em;
+}
+
+.form__element {
+  margin-bottom: 0.5em;
+}
+
+.form__submit__btn {
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0, 0.1);
+  outline: transparent solid 2px;
+  background-color: var(--blue);
+  color: whitesmoke;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  margin-top: 0.5em;
 }
 
 @media (min-width: 650px) {
@@ -590,6 +623,12 @@ body {
     background-color: var(--blue);
 
     box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
+  }
+
+  .login__form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 25%;
   }
 }
 

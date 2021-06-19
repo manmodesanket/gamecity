@@ -43,26 +43,30 @@ const Login = () => {
 
   return (
     <div className="main-page">
-      <div className="login-form">
+      <div className="login-form__container">
         <h2>Login Form</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Username:
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-          <label>
-            Password:
-            <input
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <input type="submit" value="Submit" />
+        <form onSubmit={handleSubmit} className="login__form">
+          <label className="form__label form__element">Email:</label>
+          <input
+            type="text"
+            value={username}
+            className="form__input form__element"
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter email here"
+          />
+          <label className="form__label form__element">Password:</label>
+          <input
+            type="text"
+            value={password}
+            className="form__input form__element"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password here"
+          />
+          <input
+            type="submit"
+            value="Submit"
+            className="form__submit__btn form__element"
+          />
         </form>
       </div>
     </div>
