@@ -35084,7 +35084,7 @@ var Account = function Account() {
                 break;
               }
 
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "auth/user";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -37327,7 +37327,7 @@ var RemoveFromWishList = function RemoveFromWishList(_ref) {
                   action: "remove"
                 }
               };
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "wishlist";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
               _context.next = 6;
               return (0, _server.default)({
                 url: urlStr,
@@ -37599,7 +37599,7 @@ var Cart = function Cart() {
                 break;
               }
 
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "auth/user";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -37682,7 +37682,7 @@ var Cart = function Cart() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "cart";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
               data = {
                 query: {
                   username: user,
@@ -37754,7 +37754,7 @@ var Cart = function Cart() {
                   action: "remove"
                 }
               };
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "cart";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
               _context3.next = 4;
               return (0, _server.default)({
                 url: urlStr,
@@ -37992,8 +37992,7 @@ var WishListProvider = function WishListProvider(_ref) {
       dispatch = _useReducer2[1];
 
   var _useAuth = (0, _AuthContext.useAuth)(),
-      user = _useAuth.user,
-      token = _useAuth.token;
+      user = _useAuth.user;
 
   (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
     var urlStr, data, _yield$makeApiCall, success, response;
@@ -38002,7 +38001,7 @@ var WishListProvider = function WishListProvider(_ref) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            urlStr = "https://gamecity-backend.herokuapp.com/" + "wishlist";
+            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
             data = {
               params: {
                 username: user
@@ -38157,7 +38156,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
                   action: "add"
                 }
               };
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "cart";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
               _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
@@ -38328,7 +38327,7 @@ var WishListButton = function WishListButton(_ref) {
                   action: "add"
                 }
               };
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "wishlist";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
               _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
@@ -38638,7 +38637,7 @@ var ProductProvider = function ProductProvider(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "products";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "products";
               _context.next = 3;
               return (0, _server.default)({
                 type: "get",
@@ -38777,7 +38776,7 @@ var CartProvider = function CartProvider(_ref) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            urlStr = "https://gamecity-backend.herokuapp.com/" + "cart";
+            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
             data = {
               params: {
                 username: user
@@ -38906,7 +38905,7 @@ var Login = function Login() {
                 break;
               }
 
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "auth/user";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -38981,17 +38980,19 @@ var Login = function Login() {
 };
 
 exports.Login = Login;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js"}],"components/Signup/Signup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AuthProvider = void 0;
+exports.Signup = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _AuthContext = require("./AuthContext");
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+var _router = require("@reach/router");
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -39019,11 +39020,179 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+var Signup = function Signup() {
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user,
+      signup = _useAuth.signup,
+      token = _useAuth.token,
+      setUser = _useAuth.setUser;
+
+  var _useState = (0, _react.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      username = _useState2[0],
+      setUsername = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      setPassword = _useState4[1];
+
+  var handleSubmit = function handleSubmit(evt) {
+    evt.preventDefault();
+    signup(username, password);
+  };
+
+  (0, _react.useEffect)(function () {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var urlStr, data, _yield$makeApiCall, success, response;
+
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+
+              if (!(token != null)) {
+                _context.next = 10;
+                break;
+              }
+
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              data = {
+                headers: {
+                  authorization: token
+                }
+              };
+              _context.next = 6;
+              return (0, _server.default)({
+                type: "get",
+                url: urlStr,
+                data: data
+              });
+
+            case 6:
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+              response = _yield$makeApiCall.response;
+
+              if (success) {
+                setUser(response.userID);
+                (0, _router.navigate)("../");
+              }
+
+            case 10:
+              _context.next = 15;
+              break;
+
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context["catch"](0);
+              console.log(_context.t0);
+
+            case 15:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 12]]);
+    }))();
+  }, [token]);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "login-form__container"
+  }, /*#__PURE__*/_react.default.createElement("h2", null, "Signup Form"), /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: handleSubmit,
+    className: "login__form"
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    className: "form__label form__element"
+  }, "Email:"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    value: username,
+    className: "form__input form__element",
+    onChange: function onChange(e) {
+      return setUsername(e.target.value);
+    },
+    placeholder: "Enter email here"
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    className: "form__label form__element"
+  }, "Password:"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    value: password,
+    className: "form__input form__element",
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    placeholder: "Enter password here"
+  }), /*#__PURE__*/_react.default.createElement("input", {
+    type: "submit",
+    value: "Submit",
+    className: "form__submit__btn form__element"
+  }))));
+};
+
+exports.Signup = Signup;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AuthProvider = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _AuthContext = require("./AuthContext");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _router = require("@reach/router");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function loginService(uname, pswd) {
-  var urlStr = "https://gamecity-backend.herokuapp.com/" + "auth/login";
+  var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/login";
   var data = {
     uname: uname,
     pswd: pswd
+  };
+  return (0, _server.default)({
+    type: "post",
+    url: urlStr,
+    data: data
+  });
+}
+
+function signupService(uname, pswd) {
+  var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/signup";
+  console.log(uname, pswd);
+  var data = {
+    user: {
+      uname: uname,
+      pswd: pswd
+    }
   };
   return (0, _server.default)({
     type: "post",
@@ -39067,7 +39236,7 @@ var AuthProvider = function AuthProvider(_ref) {
                 break;
               }
 
-              urlStr = "https://gamecity-backend.herokuapp.com/" + "auth/user";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -39154,6 +39323,50 @@ var AuthProvider = function AuthProvider(_ref) {
     };
   }();
 
+  var signup = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(username, password) {
+      var _yield$signupService, success, response, _token, _user;
+
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return signupService(username, password);
+
+            case 3:
+              _yield$signupService = _context3.sent;
+              success = _yield$signupService.success;
+              response = _yield$signupService.response;
+
+              if (success) {
+                console.log(response);
+                _token = response.token, _user = response.user;
+                (0, _router.navigate)("../login");
+              }
+
+              _context3.next = 12;
+              break;
+
+            case 9:
+              _context3.prev = 9;
+              _context3.t0 = _context3["catch"](0);
+              console.log("galat hai", _context3.t0);
+
+            case 12:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 9]]);
+    }));
+
+    return function signup(_x3, _x4) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
   function logout() {
     var _localStorage;
 
@@ -39166,6 +39379,7 @@ var AuthProvider = function AuthProvider(_ref) {
     value: {
       token: token,
       loginWithCredentials: loginWithCredentials,
+      signup: signup,
       logout: logout,
       user: user,
       setUser: setUser
@@ -39174,7 +39388,7 @@ var AuthProvider = function AuthProvider(_ref) {
 };
 
 exports.AuthProvider = AuthProvider;
-},{"react":"../node_modules/react/index.js","./AuthContext":"context/AuthContext/AuthContext.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./AuthContext":"context/AuthContext/AuthContext.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39210,6 +39424,8 @@ var _CartProvider = require("./context/CartContext/CartProvider");
 
 var _Login = require("./components/Login/Login");
 
+var _Signup = require("./components/Signup/Signup");
+
 var _AuthProvider = require("./context/AuthContext/AuthProvider");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39229,6 +39445,8 @@ var App = function App() {
     path: "/cart"
   }), /*#__PURE__*/_react.default.createElement(_Login.Login, {
     path: "/login"
+  }), /*#__PURE__*/_react.default.createElement(_Signup.Signup, {
+    path: "/signup"
   }), /*#__PURE__*/_react.default.createElement(_Account.default, {
     path: "/account"
   })))))));
@@ -39242,7 +39460,7 @@ var NavbarRouter = function NavbarRouter(props) {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/Account/Account":"components/Account/Account.js","./components/Navbar/Navbar":"components/Navbar/Navbar.js","./components/Home/Home":"components/Home/Home.js","./components/Products/Products":"components/Products/Products.js","./components/Wishlist/Wishlist":"components/Wishlist/Wishlist.js","./components/Cart/Cart":"components/Cart/Cart.js","./context/Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js","./components/ProductDetails/ProductDetails":"components/ProductDetails/ProductDetails.js","../main.css":"../main.css","./context/ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./context/CartContext/CartProvider":"context/CartContext/CartProvider.js","./components/Login/Login":"components/Login/Login.js","./context/AuthContext/AuthProvider":"context/AuthContext/AuthProvider.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/Account/Account":"components/Account/Account.js","./components/Navbar/Navbar":"components/Navbar/Navbar.js","./components/Home/Home":"components/Home/Home.js","./components/Products/Products":"components/Products/Products.js","./components/Wishlist/Wishlist":"components/Wishlist/Wishlist.js","./components/Cart/Cart":"components/Cart/Cart.js","./context/Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js","./components/ProductDetails/ProductDetails":"components/ProductDetails/ProductDetails.js","../main.css":"../main.css","./context/ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./context/CartContext/CartProvider":"context/CartContext/CartProvider.js","./components/Login/Login":"components/Login/Login.js","./components/Signup/Signup":"components/Signup/Signup.js","./context/AuthContext/AuthProvider":"context/AuthContext/AuthProvider.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -39284,7 +39502,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2375" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4185" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

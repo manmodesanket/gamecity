@@ -3,6 +3,7 @@ import { AuthContext } from "./AuthContext";
 
 import axios from "axios";
 import makeApiCall from "../../server/server.request";
+import { navigate } from "@reach/router";
 
 function loginService(uname, pswd) {
   let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/login";
@@ -10,6 +11,13 @@ function loginService(uname, pswd) {
     uname,
     pswd,
   };
+  return makeApiCall({ type: "post", url: urlStr, data });
+}
+
+function signupService(uname, pswd) {
+  let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/signup";
+  console.log(uname, pswd);
+  let data = { user: { uname, pswd } };
   return makeApiCall({ type: "post", url: urlStr, data });
 }
 
@@ -61,6 +69,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const signup = async (username, password) => {
+    try {
+      const { success, response } = await signupService(username, password);
+      if (success) {
+        console.log(response);
+        const { token, user } = response;
+        navigate("../login");
+      }
+    } catch (error) {
+      console.log("galat hai", error);
+    }
+  };
+
   function logout() {
     setToken(null);
     setUser(null);
@@ -72,6 +93,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         token,
         loginWithCredentials,
+        signup,
         logout,
         user,
         setUser,

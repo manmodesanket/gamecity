@@ -14,6 +14,7 @@ import "../main.css";
 import { ProductProvider } from "./context/ProductContext/ProductProvider";
 import { CartProvider } from "./context/CartContext/CartProvider";
 import { Login } from "./components/Login/Login";
+import { Signup } from "./components/Signup/Signup";
 import { AuthProvider } from "./context/AuthContext/AuthProvider";
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
                 <Wishlist path="/wishlist" />
                 <Cart path="/cart" />
                 <Login path="/login" />
+                <Signup path="/signup" />
                 <Account path="/account" />
               </NavbarRouter>
             </Router>

@@ -7,7 +7,7 @@ import { WishListContext } from "./WishlistContext";
 export const WishListProvider = ({ children }) => {
   let [wishList, dispatch] = useReducer(reducerFunction, []);
 
-  let { user, token } = useAuth();
+  let { user } = useAuth();
 
   useEffect(async () => {
     let urlStr = process.env.REACT_APP_API_ROOT_URL + "wishlist";
