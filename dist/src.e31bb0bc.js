@@ -39192,7 +39192,6 @@ function loginService(uname, pswd) {
 
 function signupService(uname, pswd) {
   var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/signup";
-  console.log(uname, pswd);
   var data = {
     user: {
       uname: uname,
@@ -39346,7 +39345,6 @@ var AuthProvider = function AuthProvider(_ref) {
               response = _yield$signupService.response;
 
               if (success) {
-                console.log(response);
                 _token = response.token, _user = response.user;
                 (0, _router.navigate)("../login");
               }
