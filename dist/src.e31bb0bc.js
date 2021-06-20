@@ -35084,7 +35084,7 @@ var Account = function Account() {
                 break;
               }
 
-              urlStr = undefined + "auth/user";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -37327,7 +37327,7 @@ var RemoveFromWishList = function RemoveFromWishList(_ref) {
                   action: "remove"
                 }
               };
-              urlStr = undefined + "wishlist";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
               _context.next = 6;
               return (0, _server.default)({
                 url: urlStr,
@@ -37599,7 +37599,7 @@ var Cart = function Cart() {
                 break;
               }
 
-              urlStr = undefined + "auth/user";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -37682,7 +37682,7 @@ var Cart = function Cart() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              urlStr = undefined + "cart";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
               data = {
                 query: {
                   username: user,
@@ -37754,7 +37754,7 @@ var Cart = function Cart() {
                   action: "remove"
                 }
               };
-              urlStr = undefined + "cart";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
               _context3.next = 4;
               return (0, _server.default)({
                 url: urlStr,
@@ -38001,7 +38001,7 @@ var WishListProvider = function WishListProvider(_ref) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            urlStr = undefined + "wishlist";
+            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
             data = {
               params: {
                 username: user
@@ -38156,7 +38156,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
                   action: "add"
                 }
               };
-              urlStr = undefined + "cart";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
               _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
@@ -38327,7 +38327,7 @@ var WishListButton = function WishListButton(_ref) {
                   action: "add"
                 }
               };
-              urlStr = undefined + "wishlist";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
               _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
@@ -38776,7 +38776,7 @@ var CartProvider = function CartProvider(_ref) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            urlStr = undefined + "cart";
+            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
             data = {
               params: {
                 username: user
@@ -38836,8 +38836,6 @@ var _react = _interopRequireWildcard(require("react"));
 var _AuthContext = require("../../context/AuthContext/AuthContext");
 
 var _router = require("@reach/router");
-
-var _axios = _interopRequireDefault(require("axios"));
 
 var _server = _interopRequireDefault(require("../../server/server.request"));
 
@@ -38905,7 +38903,7 @@ var Login = function Login() {
                 break;
               }
 
-              urlStr = undefined + "auth/user";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -38976,11 +38974,18 @@ var Login = function Login() {
     type: "submit",
     value: "Submit",
     className: "form__submit__btn form__element"
-  }))));
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: "form__message"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    classname: "form__message__text form__message__element"
+  }, "Don't have account?"), /*#__PURE__*/_react.default.createElement(_router.Link, {
+    to: "/signup",
+    className: "form__messsage__link form__message__element"
+  }, "Signup")))));
 };
 
 exports.Login = Login;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js"}],"components/Signup/Signup.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../server/server.request":"server/server.request.js"}],"components/Signup/Signup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39057,7 +39062,7 @@ var Signup = function Signup() {
                 break;
               }
 
-              urlStr = undefined + "auth/user";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -39173,7 +39178,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function loginService(uname, pswd) {
-  var urlStr = undefined + "auth/login";
+  var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/login";
   var data = {
     uname: uname,
     pswd: pswd
@@ -39186,7 +39191,7 @@ function loginService(uname, pswd) {
 }
 
 function signupService(uname, pswd) {
-  var urlStr = undefined + "auth/signup";
+  var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/signup";
   console.log(uname, pswd);
   var data = {
     user: {
@@ -39236,7 +39241,7 @@ var AuthProvider = function AuthProvider(_ref) {
                 break;
               }
 
-              urlStr = undefined + "auth/user";
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -39503,7 +39508,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1874" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3506" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

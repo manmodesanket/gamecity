@@ -380,6 +380,11 @@ body {
   padding: 0.5em 1em;
 }
 
+.form__input:focus {
+  border-color: var(--dark-blue);
+  border-width: 2px;
+}
+
 .form__element {
   margin-bottom: 0.5em;
 }
@@ -395,6 +400,15 @@ body {
   font-weight: bold;
   padding: 0.5em 1em;
   margin-top: 0.5em;
+}
+
+.form__message {
+  display: flex;
+  justify-content: center;
+}
+
+.form__message__element {
+  margin-left: 0.5em;
 }
 
 @media (min-width: 650px) {

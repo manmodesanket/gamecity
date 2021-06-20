@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext/AuthContext";
 import { navigate } from "@reach/router";
-import axios from "axios";
+import { Link } from "@reach/router";
 import makeApiCall from "../../server/server.request";
 
 const Login = () => {
@@ -67,6 +67,17 @@ const Login = () => {
             value="Submit"
             className="form__submit__btn form__element"
           />
+          <div className="form__message">
+            <div classname="form__message__text form__message__element">
+              Don't have account?
+            </div>
+            <Link
+              to="/signup"
+              className="form__messsage__link form__message__element"
+            >
+              Signup
+            </Link>
+          </div>
         </form>
       </div>
     </div>
