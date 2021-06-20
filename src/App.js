@@ -25,7 +25,7 @@ const App = () => {
           <CartProvider>
             <Router>
               <NavbarRouter path="/">
-                <Home path="/" />
+                <Home default path="/" />
                 <ProductsPage path="/products" />
                 <ProductDetails path="/product-details/:id" />
                 <Wishlist path="/wishlist" />

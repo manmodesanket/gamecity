@@ -35084,7 +35084,7 @@ var Account = function Account() {
                 break;
               }
 
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              urlStr = undefined + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -37327,7 +37327,7 @@ var RemoveFromWishList = function RemoveFromWishList(_ref) {
                   action: "remove"
                 }
               };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
+              urlStr = undefined + "wishlist";
               _context.next = 6;
               return (0, _server.default)({
                 url: urlStr,
@@ -37599,7 +37599,7 @@ var Cart = function Cart() {
                 break;
               }
 
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              urlStr = undefined + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -37682,7 +37682,7 @@ var Cart = function Cart() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              urlStr = undefined + "cart";
               data = {
                 query: {
                   username: user,
@@ -37754,7 +37754,7 @@ var Cart = function Cart() {
                   action: "remove"
                 }
               };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              urlStr = undefined + "cart";
               _context3.next = 4;
               return (0, _server.default)({
                 url: urlStr,
@@ -38001,7 +38001,7 @@ var WishListProvider = function WishListProvider(_ref) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
+            urlStr = undefined + "wishlist";
             data = {
               params: {
                 username: user
@@ -38156,7 +38156,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
                   action: "add"
                 }
               };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              urlStr = undefined + "cart";
               _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
@@ -38327,7 +38327,7 @@ var WishListButton = function WishListButton(_ref) {
                   action: "add"
                 }
               };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
+              urlStr = undefined + "wishlist";
               _context.next = 9;
               return (0, _server.default)({
                 url: urlStr,
@@ -38776,7 +38776,7 @@ var CartProvider = function CartProvider(_ref) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+            urlStr = undefined + "cart";
             data = {
               params: {
                 username: user
@@ -38905,7 +38905,7 @@ var Login = function Login() {
                 break;
               }
 
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              urlStr = undefined + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -39057,7 +39057,7 @@ var Signup = function Signup() {
                 break;
               }
 
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              urlStr = undefined + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -39173,7 +39173,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function loginService(uname, pswd) {
-  var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/login";
+  var urlStr = undefined + "auth/login";
   var data = {
     uname: uname,
     pswd: pswd
@@ -39186,7 +39186,7 @@ function loginService(uname, pswd) {
 }
 
 function signupService(uname, pswd) {
-  var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/signup";
+  var urlStr = undefined + "auth/signup";
   console.log(uname, pswd);
   var data = {
     user: {
@@ -39236,7 +39236,7 @@ var AuthProvider = function AuthProvider(_ref) {
                 break;
               }
 
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
+              urlStr = undefined + "auth/user";
               data = {
                 headers: {
                   authorization: token
@@ -39434,6 +39434,7 @@ var App = function App() {
   return /*#__PURE__*/_react.default.createElement(_AuthProvider.AuthProvider, null, /*#__PURE__*/_react.default.createElement(_ProductProvider.ProductProvider, null, /*#__PURE__*/_react.default.createElement(_WishlistProvider.WishListProvider, null, /*#__PURE__*/_react.default.createElement(_CartProvider.CartProvider, null, /*#__PURE__*/_react.default.createElement(_router.Router, null, /*#__PURE__*/_react.default.createElement(NavbarRouter, {
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_Home.Home, {
+    default: true,
     path: "/"
   }), /*#__PURE__*/_react.default.createElement(_Products.ProductsPage, {
     path: "/products"
@@ -39502,7 +39503,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4185" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1874" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
