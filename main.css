@@ -402,6 +402,10 @@ body {
   margin-top: 0.5em;
 }
 
+.form__submit__btn:hover {
+  cursor: pointer;
+}
+
 .form__message {
   display: flex;
   justify-content: center;
@@ -409,6 +413,29 @@ body {
 
 .form__message__element {
   margin-left: 0.5em;
+}
+
+.product__card__tags {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8em;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.card__tag {
+  padding: 0.25em 0.5em;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+.tag__new__release {
+  background-color: var(--blue);
+}
+
+.tag__trending {
+  background-color: var(--orange);
 }
 
 @media (min-width: 650px) {

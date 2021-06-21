@@ -37200,7 +37200,13 @@ var ProductsPage = function ProductsPage() {
       className: "product__card_platform"
     }, item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
       className: "product__card__rating"
-    }, item.rating, "\u2605")))));
+    }, item.rating, "\u2605"), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__tags"
+    }, item.newRelease ? /*#__PURE__*/_react.default.createElement("div", {
+      className: "card__tag tag__new__release"
+    }, "New") : null, item.trending ? /*#__PURE__*/_react.default.createElement("div", {
+      className: "card__tag tag__trending"
+    }, "Trending") : null)))));
   }) : loading ? /*#__PURE__*/_react.default.createElement("div", {
     className: "loader"
   }, /*#__PURE__*/_react.default.createElement(_reactLoaderSpinner.default, {
@@ -39506,7 +39512,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3506" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2032" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

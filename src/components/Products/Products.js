@@ -44,6 +44,14 @@ const ProductsPage = () => {
                         : null}
                     </div>
                     <div className="product__card__rating">{item.rating}★</div>
+                    <div className="product__card__tags">
+                      {item.newRelease ? (
+                        <div className="card__tag tag__new__release">New</div>
+                      ) : null}
+                      {item.trending ? (
+                        <div className="card__tag tag__trending">Trending</div>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </Link>
