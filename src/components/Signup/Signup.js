@@ -3,15 +3,19 @@ import { useAuth } from "../../context/AuthContext/AuthContext";
 import { navigate } from "@reach/router";
 import axios from "axios";
 import makeApiCall from "../../server/server.request";
+import { validateEmail } from "../../Utilities/validation-utils";
 
 const Signup = () => {
   const { user, signup, token, setUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    signup(username, password);
+    let isEmailValid = validateEmail(username);
+    if (isEmailValid) signup(username, password, setError);
+    else setError("please enter valid email.");
   };
 
   useEffect(() => {
@@ -42,6 +46,7 @@ const Signup = () => {
       <div className="login-form__container">
         <h2>Signup Form</h2>
         <form onSubmit={handleSubmit} className="login__form">
+          {error ? <span className="form__error">{error}</span> : null}
           <label className="form__label form__element">Email:</label>
           <input
             type="text"
@@ -61,7 +66,7 @@ const Signup = () => {
           <input
             type="submit"
             value="Submit"
-            className="form__submit__btn form__element"
+            className="btn form__submit__btn form__element"
           />
         </form>
       </div>

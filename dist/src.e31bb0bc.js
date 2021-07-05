@@ -37036,7 +37036,7 @@ var Filters = function Filters() {
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "desc"
   }, "High To Low")), /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn",
+    className: "btn btn__filter",
     onClick: function onClick() {
       return clearFilter();
     }
@@ -38829,7 +38829,19 @@ var CartProvider = function CartProvider(_ref) {
 };
 
 exports.CartProvider = CartProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","../../server/server.request":"server/server.request.js","../AuthContext/AuthContext":"context/AuthContext/AuthContext.js","./CartContext":"context/CartContext/CartContext.js"}],"components/Login/Login.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","../../server/server.request":"server/server.request.js","../AuthContext/AuthContext":"context/AuthContext/AuthContext.js","./CartContext":"context/CartContext/CartContext.js"}],"Utilities/validation-utils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.validateEmail = validateEmail;
+
+function validateEmail(input) {
+  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (input.match(validRegex)) return true;else return false;
+}
+},{}],"components/Login/Login.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38844,6 +38856,8 @@ var _AuthContext = require("../../context/AuthContext/AuthContext");
 var _router = require("@reach/router");
 
 var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _validationUtils = require("../../Utilities/validation-utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38885,13 +38899,19 @@ var Login = function Login() {
       password = _useState4[0],
       setPassword = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      error = _useState6[0],
+      setError = _useState6[1];
+
   function loginHandler() {
-    user ? logout() : loginWithCredentials(username, password);
+    user ? logout() : loginWithCredentials(username, password, setError);
   }
 
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
-    loginHandler();
+    var isEmailValid = (0, _validationUtils.validateEmail)(username);
+    if (isEmailValid) loginHandler();else setError("please enter valid email.");
   };
 
   (0, _react.useEffect)(function () {
@@ -38956,7 +38976,9 @@ var Login = function Login() {
   }, /*#__PURE__*/_react.default.createElement("h2", null, "Login Form"), /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: handleSubmit,
     className: "login__form"
-  }, /*#__PURE__*/_react.default.createElement("label", {
+  }, error ? /*#__PURE__*/_react.default.createElement("span", {
+    className: "form__error"
+  }, error) : null, /*#__PURE__*/_react.default.createElement("label", {
     className: "form__label form__element"
   }, "Email:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
@@ -38979,11 +39001,11 @@ var Login = function Login() {
   }), /*#__PURE__*/_react.default.createElement("input", {
     type: "submit",
     value: "Submit",
-    className: "form__submit__btn form__element"
+    className: "btn form__submit__btn form__element"
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "form__message"
   }, /*#__PURE__*/_react.default.createElement("div", {
-    classname: "form__message__text form__message__element"
+    className: "form__message__text form__message__element"
   }, "Don't have account?"), /*#__PURE__*/_react.default.createElement(_router.Link, {
     to: "/signup",
     className: "form__messsage__link form__message__element"
@@ -38991,7 +39013,7 @@ var Login = function Login() {
 };
 
 exports.Login = Login;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../server/server.request":"server/server.request.js"}],"components/Signup/Signup.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../server/server.request":"server/server.request.js","../../Utilities/validation-utils":"Utilities/validation-utils.js"}],"components/Signup/Signup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39008,6 +39030,8 @@ var _router = require("@reach/router");
 var _axios = _interopRequireDefault(require("axios"));
 
 var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _validationUtils = require("../../Utilities/validation-utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39048,9 +39072,15 @@ var Signup = function Signup() {
       password = _useState4[0],
       setPassword = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      error = _useState6[0],
+      setError = _useState6[1];
+
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
-    signup(username, password);
+    var isEmailValid = (0, _validationUtils.validateEmail)(username);
+    if (isEmailValid) signup(username, password, setError);else setError("please enter valid email.");
   };
 
   (0, _react.useEffect)(function () {
@@ -39115,7 +39145,9 @@ var Signup = function Signup() {
   }, /*#__PURE__*/_react.default.createElement("h2", null, "Signup Form"), /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: handleSubmit,
     className: "login__form"
-  }, /*#__PURE__*/_react.default.createElement("label", {
+  }, error ? /*#__PURE__*/_react.default.createElement("span", {
+    className: "form__error"
+  }, error) : null, /*#__PURE__*/_react.default.createElement("label", {
     className: "form__label form__element"
   }, "Email:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
@@ -39138,12 +39170,12 @@ var Signup = function Signup() {
   }), /*#__PURE__*/_react.default.createElement("input", {
     type: "submit",
     value: "Submit",
-    className: "form__submit__btn form__element"
+    className: "btn form__submit__btn form__element"
   }))));
 };
 
 exports.Signup = Signup;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js","../../Utilities/validation-utils":"Utilities/validation-utils.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39287,7 +39319,7 @@ var AuthProvider = function AuthProvider(_ref) {
   }, [token, user]);
 
   var loginWithCredentials = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(username, password) {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(username, password, setError) {
       var _yield$loginService, success, response;
 
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -39310,6 +39342,8 @@ var AuthProvider = function AuthProvider(_ref) {
                   loggedIn: true,
                   token: response.token
                 }));
+              } else {
+                setError("email id or password is wrong.");
               }
 
               _context2.next = 12;
@@ -39318,7 +39352,7 @@ var AuthProvider = function AuthProvider(_ref) {
             case 9:
               _context2.prev = 9;
               _context2.t0 = _context2["catch"](0);
-              console.log("galat hai", _context2.t0);
+              setError("something is wrong.");
 
             case 12:
             case "end":
@@ -39328,13 +39362,13 @@ var AuthProvider = function AuthProvider(_ref) {
       }, _callee2, null, [[0, 9]]);
     }));
 
-    return function loginWithCredentials(_x, _x2) {
+    return function loginWithCredentials(_x, _x2, _x3) {
       return _ref4.apply(this, arguments);
     };
   }();
 
   var signup = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(username, password) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(username, password, setError) {
       var _yield$signupService, success, response, _token, _user;
 
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -39353,6 +39387,8 @@ var AuthProvider = function AuthProvider(_ref) {
               if (success) {
                 _token = response.token, _user = response.user;
                 (0, _router.navigate)("../login");
+              } else {
+                setError("something is wrong.");
               }
 
               _context3.next = 12;
@@ -39361,7 +39397,7 @@ var AuthProvider = function AuthProvider(_ref) {
             case 9:
               _context3.prev = 9;
               _context3.t0 = _context3["catch"](0);
-              console.log("galat hai", _context3.t0);
+              setError("something is wrong.");
 
             case 12:
             case "end":
@@ -39371,7 +39407,7 @@ var AuthProvider = function AuthProvider(_ref) {
       }, _callee3, null, [[0, 9]]);
     }));
 
-    return function signup(_x3, _x4) {
+    return function signup(_x4, _x5, _x6) {
       return _ref5.apply(this, arguments);
     };
   }();
@@ -39512,7 +39548,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2032" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4100" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

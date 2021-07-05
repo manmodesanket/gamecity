@@ -3,19 +3,23 @@ import { useAuth } from "../../context/AuthContext/AuthContext";
 import { navigate } from "@reach/router";
 import { Link } from "@reach/router";
 import makeApiCall from "../../server/server.request";
+import { validateEmail } from "../../Utilities/validation-utils";
 
 const Login = () => {
   const { user, loginWithCredentials, logout, token, setUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   function loginHandler() {
-    user ? logout() : loginWithCredentials(username, password);
+    user ? logout() : loginWithCredentials(username, password, setError);
   }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    loginHandler();
+    let isEmailValid = validateEmail(username);
+    if (isEmailValid) loginHandler();
+    else setError("please enter valid email.");
   };
 
   useEffect(() => {
@@ -46,6 +50,7 @@ const Login = () => {
       <div className="login-form__container">
         <h2>Login Form</h2>
         <form onSubmit={handleSubmit} className="login__form">
+          {error ? <span className="form__error">{error}</span> : null}
           <label className="form__label form__element">Email:</label>
           <input
             type="text"
@@ -65,10 +70,10 @@ const Login = () => {
           <input
             type="submit"
             value="Submit"
-            className="form__submit__btn form__element"
+            className="btn form__submit__btn form__element"
           />
           <div className="form__message">
-            <div classname="form__message__text form__message__element">
+            <div className="form__message__text form__message__element">
               Don't have account?
             </div>
             <Link

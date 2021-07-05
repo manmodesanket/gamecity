@@ -89,9 +89,15 @@ body {
 
 .btn {
   padding: 0.5em 1em;
-
-  border-radius: 2px;
+  border-radius: 5px;
   border: 1px solid black;
+  font-weight: bold;
+}
+
+.btn__filter {
+  background-color: var(--dark-blue);
+  color: whitesmoke;
+  border-color: var(--dark-blue);
 }
 
 .btn:hover {
@@ -367,6 +373,14 @@ body {
   margin: 0 1em;
 }
 
+.form__error {
+  background-color: orange;
+  width: fit-content;
+  border-radius: 2px;
+  padding: 0.2rem;
+  margin-bottom: 1rem;
+}
+
 .form__label {
   font-weight: bold;
 }
@@ -397,7 +411,6 @@ body {
   outline: transparent solid 2px;
   background-color: var(--blue);
   color: whitesmoke;
-  font-weight: bold;
   padding: 0.5em 1em;
   margin-top: 0.5em;
 }

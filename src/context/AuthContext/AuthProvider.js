@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
     })();
   }, [token, user]);
 
-  const loginWithCredentials = async (username, password) => {
+  const loginWithCredentials = async (username, password, setError) => {
     try {
       const { success, response } = await loginService(username, password);
       if (success) {
@@ -62,21 +62,25 @@ export const AuthProvider = ({ children }) => {
           "auth",
           JSON.stringify({ loggedIn: true, token: response.token })
         );
+      } else {
+        setError("email id or password is wrong.");
       }
     } catch (error) {
-      console.log("galat hai", error);
+      setError("something is wrong.");
     }
   };
 
-  const signup = async (username, password) => {
+  const signup = async (username, password, setError) => {
     try {
       const { success, response } = await signupService(username, password);
       if (success) {
         const { token, user } = response;
         navigate("../login");
+      } else {
+        setError("something is wrong.");
       }
     } catch (error) {
-      console.log("galat hai", error);
+      setError("something is wrong.");
     }
   };
 
