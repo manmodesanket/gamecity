@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../context/AuthContext/AuthContext";
 import { navigate } from "@reach/router";
 import { Link } from "@reach/router";
@@ -10,6 +10,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const inputEl = useRef(null);
 
   function loginHandler() {
     user ? logout() : loginWithCredentials(username, password, setError);
@@ -45,15 +46,20 @@ const Login = () => {
     })();
   }, [token]);
 
+  useEffect(() => {
+    inputEl.current.focus();
+  }, []);
+
   return (
     <div className="main-page">
       <div className="login-form__container">
-        <h2>Login Form</h2>
         <form onSubmit={handleSubmit} className="login__form">
+          <h2>Login Form</h2>
           {error ? <span className="form__error">{error}</span> : null}
           <label className="form__label form__element">Email:</label>
           <input
             type="text"
+            ref={inputEl}
             value={username}
             className="form__input form__element"
             onChange={(e) => setUsername(e.target.value)}

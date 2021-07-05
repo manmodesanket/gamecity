@@ -370,7 +370,10 @@ body {
 .login__form {
   display: flex;
   flex-direction: column;
-  margin: 0 1em;
+  margin: 1rem 1em;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #e1e7ef;
 }
 
 .form__error {
@@ -682,7 +685,7 @@ body {
   .login__form {
     display: flex;
     flex-direction: column;
-    margin: 0 25%;
+    margin: 10% 25%;
   }
 }
 

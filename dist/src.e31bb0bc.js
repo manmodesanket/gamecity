@@ -38904,6 +38904,8 @@ var Login = function Login() {
       error = _useState6[0],
       setError = _useState6[1];
 
+  var inputEl = (0, _react.useRef)(null);
+
   function loginHandler() {
     user ? logout() : loginWithCredentials(username, password, setError);
   }
@@ -38969,19 +38971,23 @@ var Login = function Login() {
       }, _callee, null, [[0, 12]]);
     }))();
   }, [token]);
+  (0, _react.useEffect)(function () {
+    inputEl.current.focus();
+  }, []);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "login-form__container"
-  }, /*#__PURE__*/_react.default.createElement("h2", null, "Login Form"), /*#__PURE__*/_react.default.createElement("form", {
+  }, /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: handleSubmit,
     className: "login__form"
-  }, error ? /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("h2", null, "Login Form"), error ? /*#__PURE__*/_react.default.createElement("span", {
     className: "form__error"
   }, error) : null, /*#__PURE__*/_react.default.createElement("label", {
     className: "form__label form__element"
   }, "Email:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
+    ref: inputEl,
     value: username,
     className: "form__input form__element",
     onChange: function onChange(e) {
@@ -39077,6 +39083,8 @@ var Signup = function Signup() {
       error = _useState6[0],
       setError = _useState6[1];
 
+  var inputEl = (0, _react.useRef)(null);
+
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
     var isEmailValid = (0, _validationUtils.validateEmail)(username);
@@ -39138,19 +39146,23 @@ var Signup = function Signup() {
       }, _callee, null, [[0, 12]]);
     }))();
   }, [token]);
+  (0, _react.useEffect)(function () {
+    inputEl.current.focus();
+  }, []);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main-page"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "login-form__container"
-  }, /*#__PURE__*/_react.default.createElement("h2", null, "Signup Form"), /*#__PURE__*/_react.default.createElement("form", {
+  }, /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: handleSubmit,
     className: "login__form"
-  }, error ? /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("h2", null, "Signup Form"), error ? /*#__PURE__*/_react.default.createElement("span", {
     className: "form__error"
   }, error) : null, /*#__PURE__*/_react.default.createElement("label", {
     className: "form__label form__element"
   }, "Email:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
+    ref: inputEl,
     value: username,
     className: "form__input form__element",
     onChange: function onChange(e) {
@@ -39548,7 +39560,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4100" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2589" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
