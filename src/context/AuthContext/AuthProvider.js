@@ -14,9 +14,9 @@ function loginService(uname, pswd) {
   return makeApiCall({ type: "post", url: urlStr, data });
 }
 
-function signupService(uname, pswd) {
+function signupService(uname, pswd, displayName) {
   let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/signup";
-  let data = { user: { uname, pswd } };
+  let data = { user: { uname, pswd, displayName } };
   return makeApiCall({ type: "post", url: urlStr, data });
 }
 
@@ -70,9 +70,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signup = async (username, password, setError) => {
+  const signup = async (username, password, displayName, setError) => {
     try {
-      const { success, response } = await signupService(username, password);
+      const { success, response } = await signupService(
+        username,
+        password,
+        displayName
+      );
       if (success) {
         const { token, user } = response;
         navigate("../login");

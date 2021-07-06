@@ -67,7 +67,7 @@ const Login = () => {
           />
           <label className="form__label form__element">Password:</label>
           <input
-            type="text"
+            type="password"
             value={password}
             className="form__input form__element"
             onChange={(e) => setPassword(e.target.value)}
@@ -80,7 +80,7 @@ const Login = () => {
           />
           <div className="form__message">
             <div className="form__message__text form__message__element">
-              Don't have account?
+              Don't have a account?
             </div>
             <Link
               to="/signup"

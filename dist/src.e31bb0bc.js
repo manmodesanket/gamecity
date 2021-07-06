@@ -38997,7 +38997,7 @@ var Login = function Login() {
   }), /*#__PURE__*/_react.default.createElement("label", {
     className: "form__label form__element"
   }, "Password:"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
+    type: "password",
     value: password,
     className: "form__input form__element",
     onChange: function onChange(e) {
@@ -39012,7 +39012,7 @@ var Login = function Login() {
     className: "form__message"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "form__message__text form__message__element"
-  }, "Don't have account?"), /*#__PURE__*/_react.default.createElement(_router.Link, {
+  }, "Don't have a account?"), /*#__PURE__*/_react.default.createElement(_router.Link, {
     to: "/signup",
     className: "form__messsage__link form__message__element"
   }, "Signup")))));
@@ -39083,12 +39083,17 @@ var Signup = function Signup() {
       error = _useState6[0],
       setError = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      displayName = _useState8[0],
+      setDisplayName = _useState8[1];
+
   var inputEl = (0, _react.useRef)(null);
 
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
     var isEmailValid = (0, _validationUtils.validateEmail)(username);
-    if (isEmailValid) signup(username, password, setError);else setError("please enter valid email.");
+    if (isEmailValid) signup(username, password, displayName, setError);else setError("please enter valid email.");
   };
 
   (0, _react.useEffect)(function () {
@@ -39160,9 +39165,19 @@ var Signup = function Signup() {
     className: "form__error"
   }, error) : null, /*#__PURE__*/_react.default.createElement("label", {
     className: "form__label form__element"
-  }, "Email:"), /*#__PURE__*/_react.default.createElement("input", {
+  }, "First Name:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     ref: inputEl,
+    value: displayName,
+    className: "form__input form__element",
+    onChange: function onChange(e) {
+      return setDisplayName(e.target.value);
+    },
+    placeholder: "First name"
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    className: "form__label form__element"
+  }, "Email:"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
     value: username,
     className: "form__input form__element",
     onChange: function onChange(e) {
@@ -39172,7 +39187,7 @@ var Signup = function Signup() {
   }), /*#__PURE__*/_react.default.createElement("label", {
     className: "form__label form__element"
   }, "Password:"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
+    type: "password",
     value: password,
     className: "form__input form__element",
     onChange: function onChange(e) {
@@ -39240,12 +39255,13 @@ function loginService(uname, pswd) {
   });
 }
 
-function signupService(uname, pswd) {
+function signupService(uname, pswd, displayName) {
   var urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/signup";
   var data = {
     user: {
       uname: uname,
-      pswd: pswd
+      pswd: pswd,
+      displayName: displayName
     }
   };
   return (0, _server.default)({
@@ -39380,7 +39396,7 @@ var AuthProvider = function AuthProvider(_ref) {
   }();
 
   var signup = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(username, password, setError) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(username, password, displayName, setError) {
       var _yield$signupService, success, response, _token, _user;
 
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -39389,7 +39405,7 @@ var AuthProvider = function AuthProvider(_ref) {
             case 0:
               _context3.prev = 0;
               _context3.next = 3;
-              return signupService(username, password);
+              return signupService(username, password, displayName);
 
             case 3:
               _yield$signupService = _context3.sent;
@@ -39419,7 +39435,7 @@ var AuthProvider = function AuthProvider(_ref) {
       }, _callee3, null, [[0, 9]]);
     }));
 
-    return function signup(_x4, _x5, _x6) {
+    return function signup(_x4, _x5, _x6, _x7) {
       return _ref5.apply(this, arguments);
     };
   }();
@@ -39560,7 +39576,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2589" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4726" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

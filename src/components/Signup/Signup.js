@@ -10,12 +10,13 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [displayName, setDisplayName] = useState("");
   const inputEl = useRef(null);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     let isEmailValid = validateEmail(username);
-    if (isEmailValid) signup(username, password, setError);
+    if (isEmailValid) signup(username, password, displayName, setError);
     else setError("please enter valid email.");
   };
 
@@ -52,10 +53,18 @@ const Signup = () => {
         <form onSubmit={handleSubmit} className="login__form">
           <h2>Signup Form</h2>
           {error ? <span className="form__error">{error}</span> : null}
-          <label className="form__label form__element">Email:</label>
+          <label className="form__label form__element">First Name:</label>
           <input
             type="text"
             ref={inputEl}
+            value={displayName}
+            className="form__input form__element"
+            onChange={(e) => setDisplayName(e.target.value)}
+            placeholder="First name"
+          />
+          <label className="form__label form__element">Email:</label>
+          <input
+            type="text"
             value={username}
             className="form__input form__element"
             onChange={(e) => setUsername(e.target.value)}
@@ -63,7 +72,7 @@ const Signup = () => {
           />
           <label className="form__label form__element">Password:</label>
           <input
-            type="text"
+            type="password"
             value={password}
             className="form__input form__element"
             onChange={(e) => setPassword(e.target.value)}
