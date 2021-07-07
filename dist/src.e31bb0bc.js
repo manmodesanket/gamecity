@@ -35060,10 +35060,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var Account = function Account() {
   var _useAuth = (0, _AuthContext.useAuth)(),
       user = _useAuth.user,
-      loginWithCredentials = _useAuth.loginWithCredentials,
       logout = _useAuth.logout,
       token = _useAuth.token,
-      setUser = _useAuth.setUser;
+      setUser = _useAuth.setUser,
+      displayName = _useAuth.displayName;
 
   function logoutHandler() {
     user ? logout() : null;
@@ -35138,7 +35138,7 @@ var Account = function Account() {
     className: "user_info"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "user_info__username"
-  }, /*#__PURE__*/_react.default.createElement("div", null, "Email: ", user)), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("div", null, "Hello ", displayName)), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn form__submit__btn",
     onClick: logoutHandler
   }, "Logout"))));
@@ -38031,7 +38031,7 @@ var WishListProvider = function WishListProvider(_ref) {
             success = _yield$makeApiCall.success;
             response = _yield$makeApiCall.response;
 
-            if (success === true) {
+            if (success === true && response.wishlistForUser !== null) {
               dispatch({
                 type: "WISH_LIST",
                 payload: response.wishlistForUser.wishlist
@@ -38806,7 +38806,7 @@ var CartProvider = function CartProvider(_ref) {
             success = _yield$makeApiCall.success;
             response = _yield$makeApiCall.response;
 
-            if (success === true) {
+            if (success === true && response.cartForUser !== null) {
               dispatch({
                 type: "CART_LIST",
                 payload: response.cartForUser.cartList
@@ -39291,6 +39291,11 @@ var AuthProvider = function AuthProvider(_ref) {
       user = _useState4[0],
       setUser = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      displayName = _useState6[0],
+      setDisplayName = _useState6[1];
+
   (0, _react.useEffect)(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       var urlStr, data, _yield$makeApiCall, success, response;
@@ -39326,6 +39331,7 @@ var AuthProvider = function AuthProvider(_ref) {
 
               if (success) {
                 setUser(response.userID);
+                setDisplayName(response.displayName);
               }
 
             case 10:
@@ -39366,6 +39372,7 @@ var AuthProvider = function AuthProvider(_ref) {
               if (success) {
                 setToken(response.token);
                 setUser(response.username);
+                setDisplayName(response.displayName);
                 localStorage.setItem("auth", JSON.stringify({
                   loggedIn: true,
                   token: response.token
@@ -39455,7 +39462,8 @@ var AuthProvider = function AuthProvider(_ref) {
       signup: signup,
       logout: logout,
       user: user,
-      setUser: setUser
+      setUser: setUser,
+      displayName: displayName
     }
   }, children);
 };
@@ -39576,7 +39584,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4726" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1965" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

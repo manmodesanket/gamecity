@@ -22,7 +22,7 @@ export const WishListProvider = ({ children }) => {
         url: urlStr,
         data,
       });
-      if (success === true) {
+      if (success === true && response.wishlistForUser !== null) {
         dispatch({
           type: "WISH_LIST",
           payload: response.wishlistForUser.wishlist,

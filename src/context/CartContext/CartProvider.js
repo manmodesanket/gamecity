@@ -21,7 +21,7 @@ export const CartProvider = ({ children }) => {
         url: urlStr,
         data,
       });
-      if (success === true) {
+      if (success === true && response.cartForUser !== null) {
         dispatch({
           type: "CART_LIST",
           payload: response.cartForUser.cartList,

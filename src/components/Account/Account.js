@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext/AuthContext";
 import makeApiCall from "../../server/server.request";
 
 const Account = () => {
-  const { user, loginWithCredentials, logout, token, setUser } = useAuth();
+  const { user, logout, token, setUser, displayName } = useAuth();
   function logoutHandler() {
     user ? logout() : null;
   }
@@ -37,7 +37,7 @@ const Account = () => {
       <div className="main-page">
         <div className="user_info">
           <div className="user_info__username">
-            <div>Email: {user}</div>
+            <div>Hello {displayName}</div>
           </div>
           <button className="btn form__submit__btn" onClick={logoutHandler}>
             Logout

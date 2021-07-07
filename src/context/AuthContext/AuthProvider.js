@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
 
   const [token, setToken] = useState(savedToken);
   const [user, setUser] = useState(null);
+  const [displayName, setDisplayName] = useState(null);
 
   useEffect(() => {
     (async function () {
@@ -44,6 +45,7 @@ export const AuthProvider = ({ children }) => {
           });
           if (success) {
             setUser(response.userID);
+            setDisplayName(response.displayName);
           }
         }
       } catch (err) {
@@ -58,6 +60,7 @@ export const AuthProvider = ({ children }) => {
       if (success) {
         setToken(response.token);
         setUser(response.username);
+        setDisplayName(response.displayName);
         localStorage.setItem(
           "auth",
           JSON.stringify({ loggedIn: true, token: response.token })
@@ -103,6 +106,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         user,
         setUser,
+        displayName,
       }}
     >
       {children}
