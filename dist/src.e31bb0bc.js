@@ -37040,7 +37040,7 @@ var Filters = function Filters() {
     onClick: function onClick() {
       return clearFilter();
     }
-  }, "Clear Filters")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Stock")));
+  }, "Clear Filters")));
 };
 
 exports.Filters = Filters;
