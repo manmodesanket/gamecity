@@ -38912,8 +38912,12 @@ var Login = function Login() {
 
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
-    var isEmailValid = (0, _validationUtils.validateEmail)(username);
-    if (isEmailValid) loginHandler();else setError("please enter valid email.");
+    var inputsValid = username !== "" && password !== "";
+
+    if (inputsValid) {
+      inputsValid = (0, _validationUtils.validateEmail)(username);
+      if (inputsValid) loginHandler();else setError("please enter valid email.");
+    } else setError("please fill all the details.");
   };
 
   (0, _react.useEffect)(function () {
@@ -39092,8 +39096,16 @@ var Signup = function Signup() {
 
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
-    var isEmailValid = (0, _validationUtils.validateEmail)(username);
-    if (isEmailValid) signup(username, password, displayName, setError);else setError("please enter valid email.");
+    var inputsValid = username !== "" && password !== "" && displayName !== "";
+
+    if (inputsValid) {
+      inputsValid = password.length > 5;
+
+      if (inputsValid) {
+        inputsValid = (0, _validationUtils.validateEmail)(username);
+        if (inputsValid) signup(username, password, displayName, setError);else setError("please enter valid email.");
+      } else setError("password length should be greater than 5.");
+    } else setError("please fill all the details.");
   };
 
   (0, _react.useEffect)(function () {

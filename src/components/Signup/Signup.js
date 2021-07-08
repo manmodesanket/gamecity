@@ -15,9 +15,15 @@ const Signup = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    let isEmailValid = validateEmail(username);
-    if (isEmailValid) signup(username, password, displayName, setError);
-    else setError("please enter valid email.");
+    let inputsValid = username !== "" && password !== "" && displayName !== "";
+    if (inputsValid) {
+      inputsValid = password.length > 5;
+      if (inputsValid) {
+        inputsValid = validateEmail(username);
+        if (inputsValid) signup(username, password, displayName, setError);
+        else setError("please enter valid email.");
+      } else setError("password length should be greater than 5.");
+    } else setError("please fill all the details.");
   };
 
   useEffect(() => {

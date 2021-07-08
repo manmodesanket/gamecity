@@ -18,9 +18,12 @@ const Login = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    let isEmailValid = validateEmail(username);
-    if (isEmailValid) loginHandler();
-    else setError("please enter valid email.");
+    let inputsValid = username !== "" && password !== "";
+    if (inputsValid) {
+      inputsValid = validateEmail(username);
+      if (inputsValid) loginHandler();
+      else setError("please enter valid email.");
+    } else setError("please fill all the details.");
   };
 
   useEffect(() => {
