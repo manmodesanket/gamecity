@@ -57,6 +57,9 @@ const Filters = () => {
           Clear Filters
         </button>
       </div>
+      <div>
+        <p>Based on Stock</p>
+      </div>
     </div>
   );
 };

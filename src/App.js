@@ -16,6 +16,7 @@ import { CartProvider } from "./context/CartContext/CartProvider";
 import { Login } from "./components/Login/Login";
 import { Signup } from "./components/Signup/Signup";
 import { AuthProvider } from "./context/AuthContext/AuthProvider";
+import Privateroute from "./components/PrivateRoute/PrivateRoute";
 
 const App = () => {
   return (
@@ -28,11 +29,11 @@ const App = () => {
                 <Home default path="/" />
                 <ProductsPage path="/products" />
                 <ProductDetails path="/product-details/:id" />
-                <Wishlist path="/wishlist" />
-                <Cart path="/cart" />
+                <Privateroute Component={Wishlist} path="/wishlist" />
+                <Privateroute Component={Cart} path="/cart" />
                 <Login path="/login" />
                 <Signup path="/signup" />
-                <Account path="/account" />
+                <Privateroute Component={Account} path="/account" />
               </NavbarRouter>
             </Router>
           </CartProvider>

@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useWishlist } from "../../context/Wishlist/WishlistContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
 import { RemoveFromWishList } from "../WishListComponents/RemoveFromWishList";
-import {
-  createToastMessageList,
-  findProductById,
-} from "../../Utilities/UtilityFunctions";
+import { findProductById } from "../../Utilities/UtilityFunctions";
 import { Link } from "@reach/router";
 import { Toast } from "../Toast/Toast";
 

@@ -37040,7 +37040,7 @@ var Filters = function Filters() {
     onClick: function onClick() {
       return clearFilter();
     }
-  }, "Clear Filters")));
+  }, "Clear Filters")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Stock")));
 };
 
 exports.Filters = Filters;
@@ -39463,13 +39463,52 @@ var AuthProvider = function AuthProvider(_ref) {
       logout: logout,
       user: user,
       setUser: setUser,
-      displayName: displayName
+      displayName: displayName,
+      loggedIn: loggedIn
     }
   }, children);
 };
 
 exports.AuthProvider = AuthProvider;
-},{"react":"../node_modules/react/index.js","./AuthContext":"context/AuthContext/AuthContext.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./AuthContext":"context/AuthContext/AuthContext.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"components/PrivateRoute/PrivateRoute.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _router = require("@reach/router");
+
+var _react = _interopRequireDefault(require("react"));
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Privateroute = function Privateroute(_ref) {
+  var Component = _ref.Component,
+      path = _ref.path;
+
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      loggedIn = _useAuth.loggedIn;
+
+  if (loggedIn) {
+    return /*#__PURE__*/_react.default.createElement(Component, {
+      path: path
+    });
+  } else {
+    return /*#__PURE__*/_react.default.createElement(_router.Redirect, {
+      from: path,
+      to: "../login",
+      noThrow: true
+    });
+  }
+};
+
+var _default = Privateroute;
+exports.default = _default;
+},{"@reach/router":"../node_modules/@reach/router/es/index.js","react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39509,6 +39548,8 @@ var _Signup = require("./components/Signup/Signup");
 
 var _AuthProvider = require("./context/AuthContext/AuthProvider");
 
+var _PrivateRoute = _interopRequireDefault(require("./components/PrivateRoute/PrivateRoute"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -39521,15 +39562,18 @@ var App = function App() {
     path: "/products"
   }), /*#__PURE__*/_react.default.createElement(_ProductDetails.ProductDetails, {
     path: "/product-details/:id"
-  }), /*#__PURE__*/_react.default.createElement(_Wishlist.Wishlist, {
+  }), /*#__PURE__*/_react.default.createElement(_PrivateRoute.default, {
+    Component: _Wishlist.Wishlist,
     path: "/wishlist"
-  }), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+  }), /*#__PURE__*/_react.default.createElement(_PrivateRoute.default, {
+    Component: _Cart.Cart,
     path: "/cart"
   }), /*#__PURE__*/_react.default.createElement(_Login.Login, {
     path: "/login"
   }), /*#__PURE__*/_react.default.createElement(_Signup.Signup, {
     path: "/signup"
-  }), /*#__PURE__*/_react.default.createElement(_Account.default, {
+  }), /*#__PURE__*/_react.default.createElement(_PrivateRoute.default, {
+    Component: _Account.default,
     path: "/account"
   })))))));
 };
@@ -39542,7 +39586,7 @@ var NavbarRouter = function NavbarRouter(props) {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/Account/Account":"components/Account/Account.js","./components/Navbar/Navbar":"components/Navbar/Navbar.js","./components/Home/Home":"components/Home/Home.js","./components/Products/Products":"components/Products/Products.js","./components/Wishlist/Wishlist":"components/Wishlist/Wishlist.js","./components/Cart/Cart":"components/Cart/Cart.js","./context/Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js","./components/ProductDetails/ProductDetails":"components/ProductDetails/ProductDetails.js","../main.css":"../main.css","./context/ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./context/CartContext/CartProvider":"context/CartContext/CartProvider.js","./components/Login/Login":"components/Login/Login.js","./components/Signup/Signup":"components/Signup/Signup.js","./context/AuthContext/AuthProvider":"context/AuthContext/AuthProvider.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/Account/Account":"components/Account/Account.js","./components/Navbar/Navbar":"components/Navbar/Navbar.js","./components/Home/Home":"components/Home/Home.js","./components/Products/Products":"components/Products/Products.js","./components/Wishlist/Wishlist":"components/Wishlist/Wishlist.js","./components/Cart/Cart":"components/Cart/Cart.js","./context/Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js","./components/ProductDetails/ProductDetails":"components/ProductDetails/ProductDetails.js","../main.css":"../main.css","./context/ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./context/CartContext/CartProvider":"context/CartContext/CartProvider.js","./components/Login/Login":"components/Login/Login.js","./components/Signup/Signup":"components/Signup/Signup.js","./context/AuthContext/AuthProvider":"context/AuthContext/AuthProvider.js","./components/PrivateRoute/PrivateRoute":"components/PrivateRoute/PrivateRoute.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -39584,7 +39628,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1965" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1700" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
