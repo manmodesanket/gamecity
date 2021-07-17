@@ -1,22 +1,27 @@
 import React from "react";
 import { Router } from "@reach/router";
 
-import Account from "./components/Account/Account";
-import { Navbar } from "./components/Navbar/Navbar";
-import { Home } from "./components/Home/Home";
-import { ProductsPage } from "./components/Products/Products";
-import { Wishlist } from "./components/Wishlist/Wishlist";
-import { Cart } from "./components/Cart/Cart";
-import { WishListProvider } from "./context/Wishlist/WishlistProvider";
-import { ProductDetails } from "./components/ProductDetails/ProductDetails";
+import {
+  Account,
+  Navbar,
+  Cart,
+  Home,
+  Login,
+  ProductDetails,
+  Privateroute,
+  ProductsPage,
+  Signup,
+  Wishlist,
+} from "./components/";
+
+import {
+  AuthProvider,
+  CartProvider,
+  ProductProvider,
+  WishListProvider,
+} from "./context/";
 
 import "../main.css";
-import { ProductProvider } from "./context/ProductContext/ProductProvider";
-import { CartProvider } from "./context/CartContext/CartProvider";
-import { Login } from "./components/Login/Login";
-import { Signup } from "./components/Signup/Signup";
-import { AuthProvider } from "./context/AuthContext/AuthProvider";
-import Privateroute from "./components/PrivateRoute/PrivateRoute";
 
 const App = () => {
   return (

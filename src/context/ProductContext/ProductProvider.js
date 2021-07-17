@@ -3,7 +3,7 @@ import { reducerFunction } from "../../Reducers/Reducer";
 import { ProductContext } from "./ProductContext";
 import makeApiCall from "../../server/server.request";
 
-export const ProductProvider = ({ children }) => {
+const ProductProvider = ({ children }) => {
   let [productList, dispatch] = useReducer(reducerFunction, []);
   let [initialList, setInitialList] = useState([]);
   let [clearFilter, setClearFilter] = useState(false);
@@ -55,3 +55,5 @@ export const ProductProvider = ({ children }) => {
     </ProductContext.Provider>
   );
 };
+
+export default ProductProvider;

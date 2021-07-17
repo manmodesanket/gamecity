@@ -63,4 +63,4 @@ const Wishlist = () => {
   );
 };
 
-export { Wishlist };
+export default Wishlist;

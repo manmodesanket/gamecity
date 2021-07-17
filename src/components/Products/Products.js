@@ -73,4 +73,4 @@ const ProductsPage = () => {
   );
 };
 
-export { ProductsPage };
+export default ProductsPage;

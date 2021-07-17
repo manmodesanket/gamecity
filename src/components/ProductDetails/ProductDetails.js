@@ -67,4 +67,4 @@ const GameDetails = ({ game, setToastMessageList, toastMessageList }) => {
   );
 };
 
-export { ProductDetails };
+export default ProductDetails;

@@ -76,4 +76,4 @@ const NavbarNav = ({ linkName, path, location }) => {
   );
 };
 
-export { Navbar };
+export default Navbar;

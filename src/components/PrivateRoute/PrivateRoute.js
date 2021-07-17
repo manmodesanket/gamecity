@@ -3,8 +3,8 @@ import React from "react";
 import { useAuth } from "../../context/AuthContext/AuthContext";
 
 const Privateroute = ({ Component, path }) => {
-  const { loggedIn } = useAuth();
-  if (loggedIn) {
+  const { loggedIn, user } = useAuth();
+  if (loggedIn || user) {
     return <Component path={path} />;
   } else {
     return <Redirect from={path} to="../login" noThrow />;

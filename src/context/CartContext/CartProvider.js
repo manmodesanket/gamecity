@@ -4,7 +4,7 @@ import makeApiCall from "../../server/server.request";
 import { useAuth } from "../AuthContext/AuthContext";
 import { CartContext } from "./CartContext";
 
-export const CartProvider = ({ children }) => {
+const CartProvider = ({ children }) => {
   let [cartList, dispatch] = useReducer(reducerFunction, []);
   let { user, token } = useAuth();
 
@@ -36,3 +36,5 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
+
+export default CartProvider;

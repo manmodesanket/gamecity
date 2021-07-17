@@ -20,7 +20,7 @@ function signupService(uname, pswd, displayName) {
   return makeApiCall({ type: "post", url: urlStr, data });
 }
 
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const { loggedIn, token: savedToken } = JSON.parse(
     localStorage.getItem("auth")
   ) || {
@@ -114,3 +114,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+export default AuthProvider;

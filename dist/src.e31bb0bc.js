@@ -33115,6 +33115,206 @@ exports.AuthContext = AuthContext;
 function useAuth() {
   return (0, _react.useContext)(AuthContext);
 }
+},{"react":"../node_modules/react/index.js"}],"components/Account/Account.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Account = function Account() {
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user,
+      logout = _useAuth.logout,
+      displayName = _useAuth.displayName;
+
+  function logoutHandler() {
+    user ? logout() : null;
+  } // useEffect(() => {
+  //   (async function () {
+  //     try {
+  //       if (token != null) {
+  //         let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/user";
+  //         let data = { headers: { authorization: token } };
+  //         const { success, response } = await makeApiCall({
+  //           type: "get",
+  //           url: urlStr,
+  //           data,
+  //         });
+  //         if (!success) {
+  //           setUser(response.userID);
+  //           navigate("../");
+  //         }
+  //       } else if (token == null || user == null) {
+  //         navigate("../login");
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, [token, user]);
+
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "user_info"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "user_info__username"
+  }, /*#__PURE__*/_react.default.createElement("div", null, "Hello ", displayName)), /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn form__submit__btn",
+    onClick: logoutHandler
+  }, "Logout"))));
+};
+
+var _default = Account;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js"}],"context/CartContext/CartContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useCartList = useCartList;
+exports.CartContext = void 0;
+
+var _react = require("react");
+
+var CartContext = (0, _react.createContext)();
+exports.CartContext = CartContext;
+
+function useCartList() {
+  return (0, _react.useContext)(CartContext);
+}
+},{"react":"../node_modules/react/index.js"}],"context/ProductContext/ProductContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useProductList = useProductList;
+exports.ProductContext = void 0;
+
+var _react = require("react");
+
+var ProductContext = (0, _react.createContext)();
+exports.ProductContext = ProductContext;
+
+function useProductList() {
+  return (0, _react.useContext)(ProductContext);
+}
+},{"react":"../node_modules/react/index.js"}],"Utilities/UtilityFunctions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.findProductById = exports.createToastMessageList = void 0;
+
+var createToastMessageList = function createToastMessageList(msg) {
+  var toastId = Math.floor(Math.random() * 100);
+  var obj = {
+    id: toastId,
+    message: msg
+  };
+  return obj;
+};
+
+exports.createToastMessageList = createToastMessageList;
+
+var findProductById = function findProductById(productList, id) {
+  var newGame = productList.find(function (item) {
+    return item._id === id;
+  });
+
+  if (newGame != null) {
+    return newGame;
+  }
+};
+
+exports.findProductById = findProductById;
+},{}],"components/Toast/Toast.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Toast = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Toast = function Toast(_ref) {
+  var toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList;
+  return /*#__PURE__*/_react.default.createElement("div", null, toastMessageList.length > 0 ? toastMessageList.map(function (toast, i) {
+    var _React$createElement;
+
+    return /*#__PURE__*/_react.default.createElement(ToastCard, (_React$createElement = {
+      key: i,
+      toastObj: toast
+    }, _defineProperty(_React$createElement, "key", toast.id), _defineProperty(_React$createElement, "setToastMessageList", setToastMessageList), _defineProperty(_React$createElement, "toastMessageList", toastMessageList), _React$createElement));
+  }) : null);
+};
+
+exports.Toast = Toast;
+
+var ToastCard = function ToastCard(_ref2) {
+  var toastObj = _ref2.toastObj,
+      setToastMessageList = _ref2.setToastMessageList,
+      toastMessageList = _ref2.toastMessageList;
+
+  var deleteToast = function deleteToast(id) {
+    var index = toastMessageList.findIndex(function (e) {
+      return e.id === id;
+    });
+    toastMessageList.splice(index, 1);
+    setToastMessageList(_toConsumableArray(toastMessageList));
+  };
+
+  (0, _react.useEffect)(function () {
+    var interval = setInterval(function () {
+      deleteToast(toastMessageList[0].id);
+    }, 2000);
+    return function () {
+      clearInterval(interval);
+    };
+  }, []);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "toast-wrapper"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "toast-card"
+  }, /*#__PURE__*/_react.default.createElement("div", null, toastObj.message), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return deleteToast(toastObj.id);
+    },
+    className: "btn toast__card__btn"
+  }, "X")));
+};
 },{"react":"../node_modules/react/index.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
@@ -35031,7 +35231,7 @@ function _makeApiCall() {
 
 var _default = makeApiCall;
 exports.default = _default;
-},{"axios":"../node_modules/axios/index.js"}],"components/Account/Account.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35039,11 +35239,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _router = require("@reach/router");
-
 var _react = _interopRequireWildcard(require("react"));
 
 var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+var _CartContext = require("../../context/CartContext/CartContext");
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+var _Toast = require("../Toast/Toast");
+
+var _router = require("@reach/router");
 
 var _server = _interopRequireDefault(require("../../server/server.request"));
 
@@ -35053,21 +35261,67 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var Account = function Account() {
-  var _useAuth = (0, _AuthContext.useAuth)(),
-      user = _useAuth.user,
-      logout = _useAuth.logout,
-      token = _useAuth.token,
-      setUser = _useAuth.setUser,
-      displayName = _useAuth.displayName;
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-  function logoutHandler() {
-    user ? logout() : null;
-  }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var Cart = function Cart() {
+  var _useCartList = (0, _CartContext.useCartList)(),
+      cartList = _useCartList.cartList,
+      cartDispatch = _useCartList.cartDispatch;
+
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      token = _useAuth.token,
+      user = _useAuth.user,
+      setUser = _useAuth.setUser;
+
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productList = _useProductList.productList;
+
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      itemList = _useState2[0],
+      setItemList = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      total = _useState4[0],
+      setTotal = _useState4[1];
+
+  var _useState5 = (0, _react.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      toastMessageList = _useState6[0],
+      setToastMessageList = _useState6[1];
+
+  var compare = function compare(a, b) {
+    if (a.added > b.added) return 1;else return -1;
+  };
 
   (0, _react.useEffect)(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -35102,18 +35356,15 @@ var Account = function Account() {
               success = _yield$makeApiCall.success;
               response = _yield$makeApiCall.response;
 
-              if (!success) {
+              if (success) {
                 setUser(response.userID);
-                (0, _router.navigate)("../");
               }
 
               _context.next = 13;
               break;
 
             case 12:
-              if (token == null || user == null) {
-                (0, _router.navigate)("../login");
-              }
+              (0, _router.navigate)("../login");
 
             case 13:
               _context.next = 18;
@@ -35131,145 +35382,221 @@ var Account = function Account() {
         }
       }, _callee, null, [[0, 15]]);
     }))();
-  }, [token, user]);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "user_info"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "user_info__username"
-  }, /*#__PURE__*/_react.default.createElement("div", null, "Hello ", displayName)), /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn form__submit__btn",
-    onClick: logoutHandler
-  }, "Logout"))));
-};
+  }, [user, token]);
+  (0, _react.useEffect)(function () {
+    var list = [];
 
-var _default = Account;
-exports.default = _default;
-},{"@reach/router":"../node_modules/@reach/router/es/index.js","react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../server/server.request":"server/server.request.js"}],"components/Navbar/Navbar.js":[function(require,module,exports) {
-"use strict";
+    for (var i = 0; i < cartList.length; i++) {
+      var obj = (0, _UtilityFunctions.findProductById)(productList, cartList[i].id);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Navbar = void 0;
+      if (obj !== null) {
+        obj = _objectSpread({
+          quantity: cartList[i].quantity
+        }, obj);
+        list.push(obj);
+      }
+    }
 
-var _react = _interopRequireWildcard(require("react"));
+    setItemList(list);
+  }, [cartList]);
+  (0, _react.useEffect)(function () {
+    if (itemList.length > 0) {
+      var _total = 0;
 
-var _router = require("@reach/router");
+      for (var i = 0; i < itemList.length; i++) {
+        _total += itemList[i].quantity * itemList[i].price;
+      }
 
-var _AuthContext = require("../../context/AuthContext/AuthContext");
+      setTotal(_total);
+    } else if (itemList.length === 0) {
+      setTotal(0);
+    }
+  }, [itemList]);
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+  var handleQuantity = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id, str) {
+      var urlStr, data, item, _yield$makeApiCall2, success, response, obj;
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              data = {
+                query: {
+                  username: user,
+                  cartItem: id,
+                  action: "update",
+                  actiontype: str
+                }
+              };
+              item = itemList.find(function (item) {
+                return item._id === id;
+              });
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+              if (!(item.quantity > 1 && str === "DESC" || item.quantity < 6 && str === "INC")) {
+                _context2.next = 12;
+                break;
+              }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+              _context2.next = 6;
+              return (0, _server.default)({
+                type: "post",
+                url: urlStr,
+                data: data
+              });
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+            case 6:
+              _yield$makeApiCall2 = _context2.sent;
+              success = _yield$makeApiCall2.success;
+              response = _yield$makeApiCall2.response;
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+              if (success === true) {
+                cartDispatch({
+                  type: "CART_LIST",
+                  payload: response.savedCart.cartList
+                });
+              }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+              _context2.next = 14;
+              break;
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+            case 12:
+              obj = (0, _UtilityFunctions.createToastMessageList)("Cannot perform action.");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+            case 14:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
 
-var Navbar = function Navbar(props) {
-  var _useAuth = (0, _AuthContext.useAuth)(),
-      user = _useAuth.user;
+    return function handleQuantity(_x, _x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var handleCartRemove = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id) {
+      var data, urlStr, _yield$makeApiCall3, success, newItemList, obj, _obj;
+
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              data = {
+                query: {
+                  username: user,
+                  cartItem: id,
+                  action: "remove"
+                }
+              };
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              _context3.next = 4;
+              return (0, _server.default)({
+                url: urlStr,
+                type: "post",
+                data: data
+              });
+
+            case 4:
+              _yield$makeApiCall3 = _context3.sent;
+              success = _yield$makeApiCall3.success;
+
+              if (success) {
+                cartDispatch({
+                  type: "REMOVE_FROM_CART",
+                  payload: id
+                });
+                newItemList = itemList.filter(function (item) {
+                  return item._id != id;
+                });
+                setItemList(newItemList);
+                obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from cart");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+              } else {
+                _obj = (0, _UtilityFunctions.createToastMessageList)("Failed to remove from Cart");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+              }
+
+            case 7:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function handleCartRemove(_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }(); //console.log(itemList);
+
 
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "navbar"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "navbar__wrapper"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "navbar__title"
-  }, /*#__PURE__*/_react.default.createElement(_router.Link, {
-    to: "/",
-    className: "navabar__heading"
-  }, "GameCity")), /*#__PURE__*/_react.default.createElement("div", {
-    className: "navbar__nav"
-  }, /*#__PURE__*/_react.default.createElement(NavbarNav, {
-    linkName: "Home",
-    path: "/",
-    location: props.location
-  }), /*#__PURE__*/_react.default.createElement(NavbarNav, {
-    linkName: "Products",
-    path: "/products",
-    location: props.location
-  }), user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
-    linkName: "Wishlist",
-    path: "/wishlist",
-    location: props.location
-  }), user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
-    linkName: "Cart",
-    path: "/cart",
-    location: props.location
-  }), user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
-    linkName: "Account",
-    path: "/account",
-    location: props.location
-  }), !user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
-    linkName: "Login",
-    path: "/login",
-    location: props.location
-  }))));
-};
-
-exports.Navbar = Navbar;
-
-var NavLink = function NavLink(props) {
-  return /*#__PURE__*/_react.default.createElement(_router.Link, _extends({}, props, {
-    className: "link navbar__nav__links"
+    className: "main-page main-page__cart"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Cart"), /*#__PURE__*/_react.default.createElement("h2", null, "Total: Rs.", total ? total : 0), /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__products"
+  }, itemList ? itemList.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: item._id,
+      className: "cart_card__wrapper"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      key: i,
+      className: "cart__card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card__img"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__image-container"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: item.image,
+      alt: item.name,
+      className: "cart__card__image"
+    }))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card__details"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart_card_details_wrapper"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card__name"
+    }, item.name), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card_platform"
+    }, "Platform:", " ", item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card_publisher"
+    }, "Publisher: ", item.publisher), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart_card__price"
+    }, "Rs.", item.price * item.quantity)))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__product__actions"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "product_quantity"
+    }, /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        return handleQuantity(item._id, "DESC");
+      },
+      className: "btn cart__card__quantity__btn product_quantity__element"
+    }, "-"), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product_quantity__element"
+    }, item.quantity), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        return handleQuantity(item._id, "INC");
+      },
+      className: "btn cart__card__quantity__btn product_quantity__element"
+    }, "+")), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        return handleCartRemove(item._id);
+      },
+      className: "btn cart__product__actions__remove__btn"
+    }, "Remove")));
+  }) : null), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
+    toastMessageList: toastMessageList,
+    setToastMessageList: setToastMessageList
   }));
 };
 
-var NavbarNav = function NavbarNav(_ref) {
-  var linkName = _ref.linkName,
-      path = _ref.path,
-      location = _ref.location;
-
-  var _useState = (0, _react.useState)(),
-      _useState2 = _slicedToArray(_useState, 2),
-      styleObj = _useState2[0],
-      setStyleObj = _useState2[1];
-
-  (0, _react.useEffect)(function () {
-    if (location.pathname === path) {
-      setStyleObj(true);
-    } else {
-      setStyleObj(false);
-    }
-  }, [location]);
-  return /*#__PURE__*/_react.default.createElement(NavLink, {
-    to: "".concat(path),
-    style: {
-      borderBottom: styleObj ? "3px solid whitesmoke" : null
-    }
-  }, linkName);
-};
-},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js"}],"context/ProductContext/ProductContext.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.useProductList = useProductList;
-exports.ProductContext = void 0;
-
-var _react = require("react");
-
-var ProductContext = (0, _react.createContext)();
-exports.ProductContext = ProductContext;
-
-function useProductList() {
-  return (0, _react.useContext)(ProductContext);
-}
-},{"react":"../node_modules/react/index.js"}],"../node_modules/react-loader-spinner/dist/loader/Circles.js":[function(require,module,exports) {
+var _default = Cart;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../server/server.request":"server/server.request.js"}],"../node_modules/react-loader-spinner/dist/loader/Circles.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36933,7 +37260,7 @@ exports.NewRelease = NewRelease;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Home = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -36947,1889 +37274,9 @@ var Home = function Home() {
   }, /*#__PURE__*/_react.default.createElement(_NewRelease.NewRelease, null));
 };
 
-exports.Home = Home;
-},{"react":"../node_modules/react/index.js","./NewRelease":"components/Home/NewRelease.js"}],"components/Filters/Filters.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Filters = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _ProductContext = require("../../context/ProductContext/ProductContext");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var Filters = function Filters() {
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      ascending = _useState2[0],
-      setAscending = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      descending = _useState4[0],
-      setDescending = _useState4[1];
-
-  var _useProductList = (0, _ProductContext.useProductList)(),
-      productListDispatch = _useProductList.productListDispatch,
-      setClearFilter = _useProductList.setClearFilter;
-
-  var handlePriceChange = function handlePriceChange(event) {
-    if (event.target.value === "Ascending") {
-      setAscending(true);
-      setDescending(false);
-      productListDispatch({
-        type: "PRODUCT_LIST_ASCENDING"
-      });
-    } else if (event.target.value === "Descending") {
-      setDescending(true);
-      setAscending(false);
-      productListDispatch({
-        type: "PRODUCT_LIST_DESCENDING"
-      });
-    }
-  };
-
-  var clearFilter = function clearFilter() {
-    setClearFilter(true);
-    setAscending(false);
-    setDescending(false);
-  };
-
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Filters"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Price"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "radio",
-    id: "asc",
-    value: "Ascending",
-    name: "price",
-    checked: ascending,
-    onChange: function onChange(e) {
-      return handlePriceChange(e);
-    }
-  }), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "asc"
-  }, "Low To High"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "radio",
-    id: "desc",
-    value: "Descending",
-    name: "price",
-    checked: descending,
-    onChange: function onChange(e) {
-      return handlePriceChange(e);
-    }
-  }), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "desc"
-  }, "High To Low")), /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn btn__filter",
-    onClick: function onClick() {
-      return clearFilter();
-    }
-  }, "Clear Filters")));
-};
-
-exports.Filters = Filters;
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"components/Toast/Toast.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Toast = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var Toast = function Toast(_ref) {
-  var toastMessageList = _ref.toastMessageList,
-      setToastMessageList = _ref.setToastMessageList;
-  return /*#__PURE__*/_react.default.createElement("div", null, toastMessageList.length > 0 ? toastMessageList.map(function (toast, i) {
-    var _React$createElement;
-
-    return /*#__PURE__*/_react.default.createElement(ToastCard, (_React$createElement = {
-      key: i,
-      toastObj: toast
-    }, _defineProperty(_React$createElement, "key", toast.id), _defineProperty(_React$createElement, "setToastMessageList", setToastMessageList), _defineProperty(_React$createElement, "toastMessageList", toastMessageList), _React$createElement));
-  }) : null);
-};
-
-exports.Toast = Toast;
-
-var ToastCard = function ToastCard(_ref2) {
-  var toastObj = _ref2.toastObj,
-      setToastMessageList = _ref2.setToastMessageList,
-      toastMessageList = _ref2.toastMessageList;
-
-  var deleteToast = function deleteToast(id) {
-    var index = toastMessageList.findIndex(function (e) {
-      return e.id === id;
-    });
-    toastMessageList.splice(index, 1);
-    setToastMessageList(_toConsumableArray(toastMessageList));
-  };
-
-  (0, _react.useEffect)(function () {
-    var interval = setInterval(function () {
-      deleteToast(toastMessageList[0].id);
-    }, 2000);
-    return function () {
-      clearInterval(interval);
-    };
-  }, []);
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "toast-wrapper"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "toast-card"
-  }, /*#__PURE__*/_react.default.createElement("div", null, toastObj.message), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: function onClick() {
-      return deleteToast(toastObj.id);
-    },
-    className: "btn toast__card__btn"
-  }, "X")));
-};
-},{"react":"../node_modules/react/index.js"}],"components/Products/Products.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ProductsPage = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _ProductContext = require("../../context/ProductContext/ProductContext");
-
-var _Filters = require("../Filters/Filters");
-
-var _Toast = require("../Toast/Toast");
-
-var _router = require("@reach/router");
-
-var _reactLoaderSpinner = _interopRequireDefault(require("react-loader-spinner"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var ProductsPage = function ProductsPage() {
-  var _useProductList = (0, _ProductContext.useProductList)(),
-      productList = _useProductList.productList,
-      loading = _useProductList.loading;
-
-  var _useState = (0, _react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      toastMessageList = _useState2[0],
-      setToastMessageList = _useState2[1];
-
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page"
-  }, productList.length > 0 ? /*#__PURE__*/_react.default.createElement(_Filters.Filters, null) : null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "products"
-  }, productList.length > 0 ? productList.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: i,
-      className: "product__wrapper"
-    }, /*#__PURE__*/_react.default.createElement(_router.Link, {
-      className: "product-link",
-      to: "/product-details/".concat(item._id)
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "product__card"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "product__card__img"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "image-container"
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: item.image,
-      alt: item.name,
-      className: "card__image"
-    }))), /*#__PURE__*/_react.default.createElement("div", {
-      className: "product__card__details"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "product__card__name"
-    }, item.name), /*#__PURE__*/_react.default.createElement("div", {
-      className: "product-card__publisher"
-    }, item.publisher), /*#__PURE__*/_react.default.createElement("div", {
-      className: "product__card__price"
-    }, "Rs.", item.price), /*#__PURE__*/_react.default.createElement("div", {
-      className: "product__card_platform"
-    }, item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
-      className: "product__card__rating"
-    }, item.rating, "\u2605"), /*#__PURE__*/_react.default.createElement("div", {
-      className: "product__card__tags"
-    }, item.newRelease ? /*#__PURE__*/_react.default.createElement("div", {
-      className: "card__tag tag__new__release"
-    }, "New") : null, item.trending ? /*#__PURE__*/_react.default.createElement("div", {
-      className: "card__tag tag__trending"
-    }, "Trending") : null)))));
-  }) : loading ? /*#__PURE__*/_react.default.createElement("div", {
-    className: "loader"
-  }, /*#__PURE__*/_react.default.createElement(_reactLoaderSpinner.default, {
-    type: "TailSpin",
-    color: "#543de0",
-    height: 50,
-    width: 50
-  })) : "No Products available"), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
-    toastMessageList: toastMessageList ? toastMessageList : null,
-    setToastMessageList: setToastMessageList
-  }));
-};
-
-exports.ProductsPage = ProductsPage;
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js","@reach/router":"../node_modules/@reach/router/es/index.js","react-loader-spinner":"../node_modules/react-loader-spinner/dist/index.js"}],"context/Wishlist/WishlistContext.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.useWishlist = useWishlist;
-exports.WishListContext = void 0;
-
-var _react = require("react");
-
-var WishListContext = (0, _react.createContext)();
-exports.WishListContext = WishListContext;
-
-function useWishlist() {
-  return (0, _react.useContext)(WishListContext);
-}
-},{"react":"../node_modules/react/index.js"}],"Utilities/UtilityFunctions.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.findProductById = exports.createToastMessageList = void 0;
-
-var createToastMessageList = function createToastMessageList(msg) {
-  var toastId = Math.floor(Math.random() * 100);
-  var obj = {
-    id: toastId,
-    message: msg
-  };
-  return obj;
-};
-
-exports.createToastMessageList = createToastMessageList;
-
-var findProductById = function findProductById(productList, id) {
-  var newGame = productList.find(function (item) {
-    return item._id === id;
-  });
-
-  if (newGame != null) {
-    return newGame;
-  }
-};
-
-exports.findProductById = findProductById;
-},{}],"components/WishListComponents/RemoveFromWishList.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.RemoveFromWishList = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _AuthContext = require("../../context/AuthContext/AuthContext");
-
-var _WishlistContext = require("../../context/Wishlist/WishlistContext");
-
-var _server = _interopRequireDefault(require("../../server/server.request"));
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var RemoveFromWishList = function RemoveFromWishList(_ref) {
-  var id = _ref.id,
-      classes = _ref.classes,
-      toastMessageList = _ref.toastMessageList,
-      setToastMessageList = _ref.setToastMessageList;
-
-  var _useWishlist = (0, _WishlistContext.useWishlist)(),
-      wishListDispatch = _useWishlist.wishListDispatch;
-
-  var _useAuth = (0, _AuthContext.useAuth)(),
-      user = _useAuth.user;
-
-  var removeFromWishList = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id) {
-      var obj, data, urlStr, _yield$makeApiCall, success, _obj, _obj2;
-
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              obj = (0, _UtilityFunctions.createToastMessageList)("Loading...");
-              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
-              data = {
-                query: {
-                  username: user,
-                  wishItem: id,
-                  action: "remove"
-                }
-              };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
-              _context.next = 6;
-              return (0, _server.default)({
-                url: urlStr,
-                type: "post",
-                data: data
-              });
-
-            case 6:
-              _yield$makeApiCall = _context.sent;
-              success = _yield$makeApiCall.success;
-
-              if (success) {
-                wishListDispatch({
-                  type: "REMOVE_FROM_WISHLIST",
-                  payload: id
-                });
-                _obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from wishlist");
-                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
-              } else {
-                _obj2 = (0, _UtilityFunctions.createToastMessageList)("Item removed from wishlist");
-                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
-              }
-
-            case 9:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function removeFromWishList(_x) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  return /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn ".concat(classes),
-    onClick: function onClick() {
-      return removeFromWishList(id);
-    }
-  }, "Remove");
-};
-
-exports.RemoveFromWishList = RemoveFromWishList;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../server/server.request":"server/server.request.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/Wishlist/Wishlist.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Wishlist = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _WishlistContext = require("../../context/Wishlist/WishlistContext");
-
-var _ProductContext = require("../../context/ProductContext/ProductContext");
-
-var _RemoveFromWishList = require("../WishListComponents/RemoveFromWishList");
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-var _router = require("@reach/router");
-
-var _Toast = require("../Toast/Toast");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var Wishlist = function Wishlist() {
-  var _useWishlist = (0, _WishlistContext.useWishlist)(),
-      wishList = _useWishlist.wishList;
-
-  var _useProductList = (0, _ProductContext.useProductList)(),
-      productList = _useProductList.productList;
-
-  var _useState = (0, _react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      itemList = _useState2[0],
-      setItemList = _useState2[1];
-
-  var _useState3 = (0, _react.useState)([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      toastMessageList = _useState4[0],
-      setToastMessageList = _useState4[1];
-
-  (0, _react.useEffect)(function () {
-    var list = [];
-
-    for (var i = 0; i < wishList.length; i++) {
-      var obj = (0, _UtilityFunctions.findProductById)(productList, wishList[i]);
-      list.push(obj);
-    }
-
-    setItemList(list);
-  }, [wishList]);
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "Wishlist"), /*#__PURE__*/_react.default.createElement("div", {
-    className: "cart__products"
-  }, itemList.length > 0 ? itemList.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: item._id,
-      className: "cart_card__wrapper"
-    }, /*#__PURE__*/_react.default.createElement(_router.Link, {
-      className: "wishlist-link",
-      to: "/product-details/".concat(item._id)
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      key: i,
-      className: "cart__card"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__img"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__image-container"
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: item.image,
-      alt: item.name,
-      className: "cart__card__image"
-    }))), /*#__PURE__*/_react.default.createElement("div", {
-      className: "card-name"
-    }, item.name))), /*#__PURE__*/_react.default.createElement(_RemoveFromWishList.RemoveFromWishList, {
-      id: item._id,
-      classes: ["cart__product__actions__remove__btn"],
-      toastMessageList: toastMessageList,
-      setToastMessageList: setToastMessageList
-    }));
-  }) : "Empty"), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
-    toastMessageList: toastMessageList,
-    setToastMessageList: setToastMessageList
-  }));
-};
-
-exports.Wishlist = Wishlist;
-},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListComponents/RemoveFromWishList":"components/WishListComponents/RemoveFromWishList.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","@reach/router":"../node_modules/@reach/router/es/index.js","../Toast/Toast":"components/Toast/Toast.js"}],"context/CartContext/CartContext.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.useCartList = useCartList;
-exports.CartContext = void 0;
-
-var _react = require("react");
-
-var CartContext = (0, _react.createContext)();
-exports.CartContext = CartContext;
-
-function useCartList() {
-  return (0, _react.useContext)(CartContext);
-}
-},{"react":"../node_modules/react/index.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Cart = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _AuthContext = require("../../context/AuthContext/AuthContext");
-
-var _CartContext = require("../../context/CartContext/CartContext");
-
-var _ProductContext = require("../../context/ProductContext/ProductContext");
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-var _Toast = require("../Toast/Toast");
-
-var _router = require("@reach/router");
-
-var _server = _interopRequireDefault(require("../../server/server.request"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var Cart = function Cart() {
-  var _useCartList = (0, _CartContext.useCartList)(),
-      cartList = _useCartList.cartList,
-      cartDispatch = _useCartList.cartDispatch;
-
-  var _useAuth = (0, _AuthContext.useAuth)(),
-      token = _useAuth.token,
-      user = _useAuth.user,
-      setUser = _useAuth.setUser;
-
-  var _useProductList = (0, _ProductContext.useProductList)(),
-      productList = _useProductList.productList;
-
-  var _useState = (0, _react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      itemList = _useState2[0],
-      setItemList = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      total = _useState4[0],
-      setTotal = _useState4[1];
-
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      toastMessageList = _useState6[0],
-      setToastMessageList = _useState6[1];
-
-  var compare = function compare(a, b) {
-    if (a.added > b.added) return 1;else return -1;
-  };
-
-  (0, _react.useEffect)(function () {
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var urlStr, data, _yield$makeApiCall, success, response;
-
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-
-              if (!(token != null)) {
-                _context.next = 12;
-                break;
-              }
-
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
-              data = {
-                headers: {
-                  authorization: token
-                }
-              };
-              _context.next = 6;
-              return (0, _server.default)({
-                type: "get",
-                url: urlStr,
-                data: data
-              });
-
-            case 6:
-              _yield$makeApiCall = _context.sent;
-              success = _yield$makeApiCall.success;
-              response = _yield$makeApiCall.response;
-
-              if (success) {
-                setUser(response.userID);
-              }
-
-              _context.next = 13;
-              break;
-
-            case 12:
-              (0, _router.navigate)("../login");
-
-            case 13:
-              _context.next = 18;
-              break;
-
-            case 15:
-              _context.prev = 15;
-              _context.t0 = _context["catch"](0);
-              console.log(_context.t0);
-
-            case 18:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[0, 15]]);
-    }))();
-  }, [user, token]);
-  (0, _react.useEffect)(function () {
-    var list = [];
-
-    for (var i = 0; i < cartList.length; i++) {
-      var obj = (0, _UtilityFunctions.findProductById)(productList, cartList[i].id);
-
-      if (obj !== null) {
-        obj = _objectSpread({
-          quantity: cartList[i].quantity
-        }, obj);
-        list.push(obj);
-      }
-    }
-
-    setItemList(list);
-  }, [cartList]);
-  (0, _react.useEffect)(function () {
-    if (itemList.length > 0) {
-      var _total = 0;
-
-      for (var i = 0; i < itemList.length; i++) {
-        _total += itemList[i].quantity * itemList[i].price;
-      }
-
-      setTotal(_total);
-    } else if (itemList.length === 0) {
-      setTotal(0);
-    }
-  }, [itemList]);
-
-  var handleQuantity = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id, str) {
-      var urlStr, data, item, _yield$makeApiCall2, success, response, obj;
-
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
-              data = {
-                query: {
-                  username: user,
-                  cartItem: id,
-                  action: "update",
-                  actiontype: str
-                }
-              };
-              item = itemList.find(function (item) {
-                return item._id === id;
-              });
-
-              if (!(item.quantity > 1 && str === "DESC" || item.quantity < 6 && str === "INC")) {
-                _context2.next = 12;
-                break;
-              }
-
-              _context2.next = 6;
-              return (0, _server.default)({
-                type: "post",
-                url: urlStr,
-                data: data
-              });
-
-            case 6:
-              _yield$makeApiCall2 = _context2.sent;
-              success = _yield$makeApiCall2.success;
-              response = _yield$makeApiCall2.response;
-
-              if (success === true) {
-                cartDispatch({
-                  type: "CART_LIST",
-                  payload: response.savedCart.cartList
-                });
-              }
-
-              _context2.next = 14;
-              break;
-
-            case 12:
-              obj = (0, _UtilityFunctions.createToastMessageList)("Cannot perform action.");
-              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
-
-            case 14:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function handleQuantity(_x, _x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  var handleCartRemove = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id) {
-      var data, urlStr, _yield$makeApiCall3, success, newItemList, obj, _obj;
-
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              data = {
-                query: {
-                  username: user,
-                  cartItem: id,
-                  action: "remove"
-                }
-              };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
-              _context3.next = 4;
-              return (0, _server.default)({
-                url: urlStr,
-                type: "post",
-                data: data
-              });
-
-            case 4:
-              _yield$makeApiCall3 = _context3.sent;
-              success = _yield$makeApiCall3.success;
-
-              if (success) {
-                cartDispatch({
-                  type: "REMOVE_FROM_CART",
-                  payload: id
-                });
-                newItemList = itemList.filter(function (item) {
-                  return item._id != id;
-                });
-                setItemList(newItemList);
-                obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from cart");
-                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
-              } else {
-                _obj = (0, _UtilityFunctions.createToastMessageList)("Failed to remove from Cart");
-                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
-              }
-
-            case 7:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }));
-
-    return function handleCartRemove(_x3) {
-      return _ref3.apply(this, arguments);
-    };
-  }(); //console.log(itemList);
-
-
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page main-page__cart"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "Cart"), /*#__PURE__*/_react.default.createElement("h2", null, "Total: Rs.", total ? total : 0), /*#__PURE__*/_react.default.createElement("div", {
-    className: "cart__products"
-  }, itemList ? itemList.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: item._id,
-      className: "cart_card__wrapper"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      key: i,
-      className: "cart__card"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__img"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__image-container"
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: item.image,
-      alt: item.name,
-      className: "cart__card__image"
-    }))), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__details"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart_card_details_wrapper"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__name"
-    }, item.name), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card_platform"
-    }, "Platform:", " ", item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card_publisher"
-    }, "Publisher: ", item.publisher), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart_card__price"
-    }, "Rs.", item.price * item.quantity)))), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__product__actions"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "product_quantity"
-    }, /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleQuantity(item._id, "DESC");
-      },
-      className: "btn cart__card__quantity__btn product_quantity__element"
-    }, "-"), /*#__PURE__*/_react.default.createElement("div", {
-      className: "product_quantity__element"
-    }, item.quantity), /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleQuantity(item._id, "INC");
-      },
-      className: "btn cart__card__quantity__btn product_quantity__element"
-    }, "+")), /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleCartRemove(item._id);
-      },
-      className: "btn cart__product__actions__remove__btn"
-    }, "Remove")));
-  }) : null), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
-    toastMessageList: toastMessageList,
-    setToastMessageList: setToastMessageList
-  }));
-};
-
-exports.Cart = Cart;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../server/server.request":"server/server.request.js"}],"Reducers/Reducer.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.reducerFunction = void 0;
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var reducerFunction = function reducerFunction(state, action) {
-  switch (action.type) {
-    case "PRODUCT_LIST":
-      var initialState = _toConsumableArray(action.payload);
-
-      return initialState;
-
-    case "CART_LIST":
-      var initialCartList = _toConsumableArray(action.payload);
-
-      return initialCartList;
-
-    case "WISH_LIST":
-      var initialWishList = _toConsumableArray(action.payload);
-
-      return initialWishList;
-
-    case "PRODUCT_LIST_ASCENDING":
-      state.sort(function (a, b) {
-        return a.price > b.price ? 1 : -1;
-      });
-
-      var ascPriceState = _toConsumableArray(state);
-
-      return ascPriceState;
-
-    case "PRODUCT_LIST_DESCENDING":
-      state.sort(function (a, b) {
-        return a.price < b.price ? 1 : -1;
-      });
-
-      var descPriceState = _toConsumableArray(state);
-
-      return descPriceState;
-
-    case "ADD_TO_WISHLIST":
-      for (var i = 0; i < state.length; i++) {
-        if (state[i] === action.payload) return state;
-      }
-
-      return [].concat(_toConsumableArray(state), [action.payload]);
-
-    case "REMOVE_FROM_WISHLIST":
-      var newWishListState = state.filter(function (item) {
-        return item !== action.payload;
-      });
-      return newWishListState;
-
-    case "ADD_TO_CART":
-      for (var _i = 0; _i < state.length; _i++) {
-        if (state[_i].id === action.payload.id) return state;
-      }
-
-      return [].concat(_toConsumableArray(state), [action.payload]);
-
-    case "REMOVE_FROM_CART":
-      var newCartState = state.filter(function (item) {
-        return item.id !== action.payload;
-      });
-      return _toConsumableArray(newCartState);
-
-    default:
-      return state;
-  }
-};
-
-exports.reducerFunction = reducerFunction;
-},{}],"context/Wishlist/WishlistProvider.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.WishListProvider = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _Reducer = require("../../Reducers/Reducer");
-
-var _server = _interopRequireDefault(require("../../server/server.request"));
-
-var _AuthContext = require("../AuthContext/AuthContext");
-
-var _WishlistContext = require("./WishlistContext");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var WishListProvider = function WishListProvider(_ref) {
-  var children = _ref.children;
-
-  var _useReducer = (0, _react.useReducer)(_Reducer.reducerFunction, []),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      wishList = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  var _useAuth = (0, _AuthContext.useAuth)(),
-      user = _useAuth.user;
-
-  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var urlStr, data, _yield$makeApiCall, success, response;
-
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
-            data = {
-              params: {
-                username: user
-              }
-            };
-
-            if (!(user != null)) {
-              _context.next = 9;
-              break;
-            }
-
-            _context.next = 5;
-            return (0, _server.default)({
-              type: "get",
-              url: urlStr,
-              data: data
-            });
-
-          case 5:
-            _yield$makeApiCall = _context.sent;
-            success = _yield$makeApiCall.success;
-            response = _yield$makeApiCall.response;
-
-            if (success === true && response.wishlistForUser !== null) {
-              dispatch({
-                type: "WISH_LIST",
-                payload: response.wishlistForUser.wishlist
-              });
-            }
-
-          case 9:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  })), [user]);
-  return /*#__PURE__*/_react.default.createElement(_WishlistContext.WishListContext.Provider, {
-    value: {
-      wishList: wishList,
-      wishListDispatch: dispatch
-    }
-  }, children);
-};
-
-exports.WishListProvider = WishListProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","../../server/server.request":"server/server.request.js","../AuthContext/AuthContext":"context/AuthContext/AuthContext.js","./WishlistContext":"context/Wishlist/WishlistContext.js"}],"components/CartComponents/AddToCartButton.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.AddToCartButton = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _AuthContext = require("../../context/AuthContext/AuthContext");
-
-var _CartContext = require("../../context/CartContext/CartContext");
-
-var _server = _interopRequireDefault(require("../../server/server.request"));
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var AddToCartButton = function AddToCartButton(_ref) {
-  var id = _ref.id,
-      toastMessageList = _ref.toastMessageList,
-      setToastMessageList = _ref.setToastMessageList,
-      classes = _ref.classes;
-
-  var _useCartList = (0, _CartContext.useCartList)(),
-      cartList = _useCartList.cartList,
-      cartDispatch = _useCartList.cartDispatch;
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      added = _useState2[0],
-      setAdded = _useState2[1];
-
-  var _useAuth = (0, _AuthContext.useAuth)(),
-      user = _useAuth.user;
-
-  (0, _react.useEffect)(function () {
-    var addedInCart = cartList.find(function (item) {
-      return item.id === id;
-    });
-
-    if (addedInCart) {
-      setAdded(true);
-    }
-  }, [cartList]);
-
-  var handleAddToCart = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
-      var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, newItem, _obj, _obj2, _obj3, _obj4;
-
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              isPresentInCart = cartList.find(function (itemInCart) {
-                return itemInCart.id === item;
-              });
-
-              if (!(isPresentInCart === undefined || isPresentInCart === null)) {
-                _context.next = 18;
-                break;
-              }
-
-              if (!(user != null)) {
-                _context.next = 14;
-                break;
-              }
-
-              obj = (0, _UtilityFunctions.createToastMessageList)("Loading...");
-              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj])); //make api call if success add to cart
-
-              data = {
-                query: {
-                  username: user,
-                  cartItem: id,
-                  action: "add"
-                }
-              };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
-              _context.next = 9;
-              return (0, _server.default)({
-                url: urlStr,
-                type: "post",
-                data: data
-              });
-
-            case 9:
-              _yield$makeApiCall = _context.sent;
-              success = _yield$makeApiCall.success;
-
-              if (success) {
-                newItem = {
-                  id: item,
-                  quantity: 1,
-                  added: Date.now()
-                };
-                cartDispatch({
-                  type: "ADD_TO_CART",
-                  payload: newItem
-                });
-                _obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
-                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
-                setAdded(true);
-              } else {
-                _obj2 = (0, _UtilityFunctions.createToastMessageList)("Failed to Add to Cart");
-                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
-              }
-
-              _context.next = 16;
-              break;
-
-            case 14:
-              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Please login.");
-              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj3]));
-
-            case 16:
-              _context.next = 20;
-              break;
-
-            case 18:
-              _obj4 = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
-              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj4]));
-
-            case 20:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function handleAddToCart(_x, _x2, _x3, _x4, _x5) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  return /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn ".concat(_toConsumableArray(classes)),
-    onClick: function onClick() {
-      return handleAddToCart(id, cartList, cartDispatch, toastMessageList, setToastMessageList);
-    }
-  }, added ? "Added To Cart" : "Add To Cart");
-};
-
-exports.AddToCartButton = AddToCartButton;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../server/server.request":"server/server.request.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/WishListComponents/WishListButton.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.WishListButton = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _AuthContext = require("../../context/AuthContext/AuthContext");
-
-var _WishlistContext = require("../../context/Wishlist/WishlistContext");
-
-var _server = _interopRequireDefault(require("../../server/server.request"));
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var WishListButton = function WishListButton(_ref) {
-  var id = _ref.id,
-      toastMessageList = _ref.toastMessageList,
-      setToastMessageList = _ref.setToastMessageList,
-      classes = _ref.classes;
-
-  var _useWishlist = (0, _WishlistContext.useWishlist)(),
-      wishList = _useWishlist.wishList,
-      wishListDispatch = _useWishlist.wishListDispatch;
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      added = _useState2[0],
-      setAdded = _useState2[1];
-
-  var _useAuth = (0, _AuthContext.useAuth)(),
-      user = _useAuth.user;
-
-  (0, _react.useEffect)(function () {
-    if (wishList.includes(id)) {
-      setAdded(true);
-    }
-  }, [wishList]);
-
-  var addToWishList = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item, wishList, wishListDispatch, toastMessageList, setToastMessageList) {
-      var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, _obj, _obj2, _obj3, _obj4;
-
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              isPresentInCart = wishList.find(function (itemInCart) {
-                return itemInCart === item;
-              });
-
-              if (!(isPresentInCart === undefined || isPresentInCart === null)) {
-                _context.next = 18;
-                break;
-              }
-
-              if (!(user != null)) {
-                _context.next = 14;
-                break;
-              }
-
-              obj = (0, _UtilityFunctions.createToastMessageList)("Loading...");
-              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj])); //make api call if success add to cart
-
-              data = {
-                query: {
-                  username: user,
-                  wishItem: id,
-                  action: "add"
-                }
-              };
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
-              _context.next = 9;
-              return (0, _server.default)({
-                url: urlStr,
-                type: "post",
-                data: data
-              });
-
-            case 9:
-              _yield$makeApiCall = _context.sent;
-              success = _yield$makeApiCall.success;
-
-              if (success) {
-                wishListDispatch({
-                  type: "ADD_TO_WISHLIST",
-                  payload: item
-                });
-                _obj = (0, _UtilityFunctions.createToastMessageList)("Item added to wishlist");
-                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
-              } else {
-                _obj2 = (0, _UtilityFunctions.createToastMessageList)("Failed to add in Wishlist.");
-                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
-              }
-
-              _context.next = 16;
-              break;
-
-            case 14:
-              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Please login.");
-              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj3]));
-
-            case 16:
-              _context.next = 20;
-              break;
-
-            case 18:
-              _obj4 = (0, _UtilityFunctions.createToastMessageList)("Item already in Wishlist");
-              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj4]));
-
-            case 20:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function addToWishList(_x, _x2, _x3, _x4, _x5) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  return /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn ".concat(_toConsumableArray(classes)),
-    onClick: function onClick() {
-      return addToWishList(id, wishList, wishListDispatch, toastMessageList, setToastMessageList);
-    }
-  }, added ? "Added To Wishlist" : "Add To Wishlist");
-};
-
-exports.WishListButton = WishListButton;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../server/server.request":"server/server.request.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/ProductDetails/ProductDetails.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ProductDetails = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _ProductContext = require("../../context/ProductContext/ProductContext");
-
-var _AddToCartButton = require("../CartComponents/AddToCartButton");
-
-var _Toast = require("../Toast/Toast");
-
-var _WishListButton = require("../WishListComponents/WishListButton");
-
-var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var ProductDetails = function ProductDetails(props) {
-  var id = props.id;
-
-  var _useState = (0, _react.useState)(),
-      _useState2 = _slicedToArray(_useState, 2),
-      game = _useState2[0],
-      setGame = _useState2[1];
-
-  var _useProductList = (0, _ProductContext.useProductList)(),
-      productList = _useProductList.productList;
-
-  var _useState3 = (0, _react.useState)([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      toastMessageList = _useState4[0],
-      setToastMessageList = _useState4[1];
-
-  (0, _react.useEffect)(function () {
-    var newGame = (0, _UtilityFunctions.findProductById)(productList, id);
-    setGame(newGame);
-  }, [productList]);
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page"
-  }, game ? /*#__PURE__*/_react.default.createElement(GameDetails, {
-    game: game,
-    setToastMessageList: setToastMessageList,
-    toastMessageList: toastMessageList
-  }) : "Product Details not available", /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
-    toastMessageList: toastMessageList,
-    setToastMessageList: setToastMessageList
-  }));
-};
-
-exports.ProductDetails = ProductDetails;
-
-var GameDetails = function GameDetails(_ref) {
-  var game = _ref.game,
-      setToastMessageList = _ref.setToastMessageList,
-      toastMessageList = _ref.toastMessageList;
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "game-details_card"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "image-wrapper__outer"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "image-wrapper_inner"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: game.image,
-    alt: game.name,
-    className: "image-holder"
-  }))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "game_details"
-  }, /*#__PURE__*/_react.default.createElement("h1", {
-    className: "product-name"
-  }, game.name), /*#__PURE__*/_react.default.createElement("div", {
-    className: "product__publisher"
-  }, game.publisher), /*#__PURE__*/_react.default.createElement("div", {
-    className: "product__rating"
-  }, game.rating, "\u2605"), /*#__PURE__*/_react.default.createElement("h1", {
-    className: "product-price"
-  }, "Rs.", game.price), /*#__PURE__*/_react.default.createElement(_WishListButton.WishListButton, {
-    id: game._id,
-    classes: ["btn-cart"],
-    setToastMessageList: setToastMessageList,
-    toastMessageList: toastMessageList
-  }), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
-    id: game._id,
-    classes: ["btn-cart"],
-    setToastMessageList: setToastMessageList,
-    toastMessageList: toastMessageList
-  }))));
-};
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../CartComponents/AddToCartButton":"components/CartComponents/AddToCartButton.js","../Toast/Toast":"components/Toast/Toast.js","../WishListComponents/WishListButton":"components/WishListComponents/WishListButton.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../main.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"context/ProductContext/ProductProvider.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ProductProvider = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _Reducer = require("../../Reducers/Reducer");
-
-var _ProductContext = require("./ProductContext");
-
-var _server = _interopRequireDefault(require("../../server/server.request"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var ProductProvider = function ProductProvider(_ref) {
-  var children = _ref.children;
-
-  var _useReducer = (0, _react.useReducer)(_Reducer.reducerFunction, []),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      productList = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  var _useState = (0, _react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      initialList = _useState2[0],
-      setInitialList = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      clearFilter = _useState4[0],
-      setClearFilter = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(true),
-      _useState6 = _slicedToArray(_useState5, 2),
-      loading = _useState6[0],
-      setLoading = _useState6[1];
-
-  var fetchProducts = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var urlStr, _yield$makeApiCall, response;
-
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "products";
-              _context.next = 3;
-              return (0, _server.default)({
-                type: "get",
-                url: urlStr,
-                data: null
-              });
-
-            case 3:
-              _yield$makeApiCall = _context.sent;
-              response = _yield$makeApiCall.response;
-
-              if (!response.success) {
-                _context.next = 8;
-                break;
-              }
-
-              setInitialList(response.products);
-              return _context.abrupt("return", response.products);
-
-            case 8:
-              return _context.abrupt("return", null);
-
-            case 9:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function fetchProducts() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    var products;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.next = 2;
-            return fetchProducts();
-
-          case 2:
-            products = _context2.sent;
-            dispatch({
-              type: "PRODUCT_LIST",
-              payload: products
-            });
-            setLoading(false);
-
-          case 5:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  })), []);
-  (0, _react.useEffect)(function () {
-    if (clearFilter) {
-      dispatch({
-        type: "PRODUCT_LIST",
-        payload: initialList
-      });
-      setClearFilter(false);
-    }
-  }, [clearFilter]);
-  return /*#__PURE__*/_react.default.createElement(_ProductContext.ProductContext.Provider, {
-    value: {
-      productList: productList,
-      productListDispatch: dispatch,
-      setClearFilter: setClearFilter,
-      loading: loading
-    }
-  }, children);
-};
-
-exports.ProductProvider = ProductProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./ProductContext":"context/ProductContext/ProductContext.js","../../server/server.request":"server/server.request.js"}],"context/CartContext/CartProvider.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.CartProvider = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _Reducer = require("../../Reducers/Reducer");
-
-var _server = _interopRequireDefault(require("../../server/server.request"));
-
-var _AuthContext = require("../AuthContext/AuthContext");
-
-var _CartContext = require("./CartContext");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var CartProvider = function CartProvider(_ref) {
-  var children = _ref.children;
-
-  var _useReducer = (0, _react.useReducer)(_Reducer.reducerFunction, []),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      cartList = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  var _useAuth = (0, _AuthContext.useAuth)(),
-      user = _useAuth.user,
-      token = _useAuth.token;
-
-  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var urlStr, data, _yield$makeApiCall, success, response;
-
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
-            data = {
-              params: {
-                username: user
-              }
-            };
-
-            if (!(user != null)) {
-              _context.next = 9;
-              break;
-            }
-
-            _context.next = 5;
-            return (0, _server.default)({
-              type: "get",
-              url: urlStr,
-              data: data
-            });
-
-          case 5:
-            _yield$makeApiCall = _context.sent;
-            success = _yield$makeApiCall.success;
-            response = _yield$makeApiCall.response;
-
-            if (success === true && response.cartForUser !== null) {
-              dispatch({
-                type: "CART_LIST",
-                payload: response.cartForUser.cartList
-              });
-            }
-
-          case 9:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  })), [user]);
-  return /*#__PURE__*/_react.default.createElement(_CartContext.CartContext.Provider, {
-    value: {
-      cartList: cartList,
-      cartDispatch: dispatch
-    }
-  }, children);
-};
-
-exports.CartProvider = CartProvider;
-},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","../../server/server.request":"server/server.request.js","../AuthContext/AuthContext":"context/AuthContext/AuthContext.js","./CartContext":"context/CartContext/CartContext.js"}],"Utilities/validation-utils.js":[function(require,module,exports) {
+var _default = Home;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./NewRelease":"components/Home/NewRelease.js"}],"Utilities/validation-utils.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38847,7 +37294,7 @@ function validateEmail(input) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Login = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -39022,14 +37469,826 @@ var Login = function Login() {
   }, "Signup")))));
 };
 
-exports.Login = Login;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../server/server.request":"server/server.request.js","../../Utilities/validation-utils":"Utilities/validation-utils.js"}],"components/Signup/Signup.js":[function(require,module,exports) {
+var _default = Login;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../server/server.request":"server/server.request.js","../../Utilities/validation-utils":"Utilities/validation-utils.js"}],"components/Navbar/Navbar.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Signup = void 0;
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _router = require("@reach/router");
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var Navbar = function Navbar(props) {
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user;
+
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "navbar"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "navbar__wrapper"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "navbar__title"
+  }, /*#__PURE__*/_react.default.createElement(_router.Link, {
+    to: "/",
+    className: "navabar__heading"
+  }, "GameCity")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "navbar__nav"
+  }, /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Home",
+    path: "/",
+    location: props.location
+  }), /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Products",
+    path: "/products",
+    location: props.location
+  }), user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Wishlist",
+    path: "/wishlist",
+    location: props.location
+  }), user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Cart",
+    path: "/cart",
+    location: props.location
+  }), user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Account",
+    path: "/account",
+    location: props.location
+  }), !user && /*#__PURE__*/_react.default.createElement(NavbarNav, {
+    linkName: "Login",
+    path: "/login",
+    location: props.location
+  }))));
+};
+
+var NavLink = function NavLink(props) {
+  return /*#__PURE__*/_react.default.createElement(_router.Link, _extends({}, props, {
+    className: "link navbar__nav__links"
+  }));
+};
+
+var NavbarNav = function NavbarNav(_ref) {
+  var linkName = _ref.linkName,
+      path = _ref.path,
+      location = _ref.location;
+
+  var _useState = (0, _react.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      styleObj = _useState2[0],
+      setStyleObj = _useState2[1];
+
+  (0, _react.useEffect)(function () {
+    if (location.pathname === path) {
+      setStyleObj(true);
+    } else {
+      setStyleObj(false);
+    }
+  }, [location]);
+  return /*#__PURE__*/_react.default.createElement(NavLink, {
+    to: "".concat(path),
+    style: {
+      borderBottom: styleObj ? "3px solid whitesmoke" : null
+    }
+  }, linkName);
+};
+
+var _default = Navbar;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js"}],"components/PrivateRoute/PrivateRoute.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _router = require("@reach/router");
+
+var _react = _interopRequireDefault(require("react"));
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Privateroute = function Privateroute(_ref) {
+  var Component = _ref.Component,
+      path = _ref.path;
+
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      loggedIn = _useAuth.loggedIn,
+      user = _useAuth.user;
+
+  if (loggedIn || user) {
+    return /*#__PURE__*/_react.default.createElement(Component, {
+      path: path
+    });
+  } else {
+    return /*#__PURE__*/_react.default.createElement(_router.Redirect, {
+      from: path,
+      to: "../login",
+      noThrow: true
+    });
+  }
+};
+
+var _default = Privateroute;
+exports.default = _default;
+},{"@reach/router":"../node_modules/@reach/router/es/index.js","react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js"}],"components/CartComponents/AddToCartButton.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AddToCartButton = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+var _CartContext = require("../../context/CartContext/CartContext");
+
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var AddToCartButton = function AddToCartButton(_ref) {
+  var id = _ref.id,
+      toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList,
+      classes = _ref.classes;
+
+  var _useCartList = (0, _CartContext.useCartList)(),
+      cartList = _useCartList.cartList,
+      cartDispatch = _useCartList.cartDispatch;
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      added = _useState2[0],
+      setAdded = _useState2[1];
+
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user;
+
+  (0, _react.useEffect)(function () {
+    var addedInCart = cartList.find(function (item) {
+      return item.id === id;
+    });
+
+    if (addedInCart) {
+      setAdded(true);
+    }
+  }, [cartList]);
+
+  var handleAddToCart = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
+      var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, newItem, _obj, _obj2, _obj3, _obj4;
+
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              isPresentInCart = cartList.find(function (itemInCart) {
+                return itemInCart.id === item;
+              });
+
+              if (!(isPresentInCart === undefined || isPresentInCart === null)) {
+                _context.next = 18;
+                break;
+              }
+
+              if (!(user != null)) {
+                _context.next = 14;
+                break;
+              }
+
+              obj = (0, _UtilityFunctions.createToastMessageList)("Loading...");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj])); //make api call if success add to cart
+
+              data = {
+                query: {
+                  username: user,
+                  cartItem: id,
+                  action: "add"
+                }
+              };
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+              _context.next = 9;
+              return (0, _server.default)({
+                url: urlStr,
+                type: "post",
+                data: data
+              });
+
+            case 9:
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+
+              if (success) {
+                newItem = {
+                  id: item,
+                  quantity: 1,
+                  added: Date.now()
+                };
+                cartDispatch({
+                  type: "ADD_TO_CART",
+                  payload: newItem
+                });
+                _obj = (0, _UtilityFunctions.createToastMessageList)("Item added to cart");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+                setAdded(true);
+              } else {
+                _obj2 = (0, _UtilityFunctions.createToastMessageList)("Failed to Add to Cart");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
+              }
+
+              _context.next = 16;
+              break;
+
+            case 14:
+              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Please login.");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj3]));
+
+            case 16:
+              _context.next = 20;
+              break;
+
+            case 18:
+              _obj4 = (0, _UtilityFunctions.createToastMessageList)("Item already in cart");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj4]));
+
+            case 20:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleAddToCart(_x, _x2, _x3, _x4, _x5) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn ".concat(_toConsumableArray(classes)),
+    onClick: function onClick() {
+      return handleAddToCart(id, cartList, cartDispatch, toastMessageList, setToastMessageList);
+    }
+  }, added ? "Added To Cart" : "Add To Cart");
+};
+
+exports.AddToCartButton = AddToCartButton;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../server/server.request":"server/server.request.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"context/Wishlist/WishlistContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useWishlist = useWishlist;
+exports.WishListContext = void 0;
+
+var _react = require("react");
+
+var WishListContext = (0, _react.createContext)();
+exports.WishListContext = WishListContext;
+
+function useWishlist() {
+  return (0, _react.useContext)(WishListContext);
+}
+},{"react":"../node_modules/react/index.js"}],"components/WishListComponents/WishListButton.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.WishListButton = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+var _WishlistContext = require("../../context/Wishlist/WishlistContext");
+
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var WishListButton = function WishListButton(_ref) {
+  var id = _ref.id,
+      toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList,
+      classes = _ref.classes;
+
+  var _useWishlist = (0, _WishlistContext.useWishlist)(),
+      wishList = _useWishlist.wishList,
+      wishListDispatch = _useWishlist.wishListDispatch;
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      added = _useState2[0],
+      setAdded = _useState2[1];
+
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user;
+
+  (0, _react.useEffect)(function () {
+    if (wishList.includes(id)) {
+      setAdded(true);
+    }
+  }, [wishList]);
+
+  var addToWishList = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item, wishList, wishListDispatch, toastMessageList, setToastMessageList) {
+      var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, _obj, _obj2, _obj3, _obj4;
+
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              isPresentInCart = wishList.find(function (itemInCart) {
+                return itemInCart === item;
+              });
+
+              if (!(isPresentInCart === undefined || isPresentInCart === null)) {
+                _context.next = 18;
+                break;
+              }
+
+              if (!(user != null)) {
+                _context.next = 14;
+                break;
+              }
+
+              obj = (0, _UtilityFunctions.createToastMessageList)("Loading...");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj])); //make api call if success add to cart
+
+              data = {
+                query: {
+                  username: user,
+                  wishItem: id,
+                  action: "add"
+                }
+              };
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
+              _context.next = 9;
+              return (0, _server.default)({
+                url: urlStr,
+                type: "post",
+                data: data
+              });
+
+            case 9:
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+
+              if (success) {
+                wishListDispatch({
+                  type: "ADD_TO_WISHLIST",
+                  payload: item
+                });
+                _obj = (0, _UtilityFunctions.createToastMessageList)("Item added to wishlist");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+              } else {
+                _obj2 = (0, _UtilityFunctions.createToastMessageList)("Failed to add in Wishlist.");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
+              }
+
+              _context.next = 16;
+              break;
+
+            case 14:
+              _obj3 = (0, _UtilityFunctions.createToastMessageList)("Please login.");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj3]));
+
+            case 16:
+              _context.next = 20;
+              break;
+
+            case 18:
+              _obj4 = (0, _UtilityFunctions.createToastMessageList)("Item already in Wishlist");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj4]));
+
+            case 20:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function addToWishList(_x, _x2, _x3, _x4, _x5) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn ".concat(_toConsumableArray(classes)),
+    onClick: function onClick() {
+      return addToWishList(id, wishList, wishListDispatch, toastMessageList, setToastMessageList);
+    }
+  }, added ? "Added To Wishlist" : "Add To Wishlist");
+};
+
+exports.WishListButton = WishListButton;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../server/server.request":"server/server.request.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/ProductDetails/ProductDetails.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _AddToCartButton = require("../CartComponents/AddToCartButton");
+
+var _Toast = require("../Toast/Toast");
+
+var _WishListButton = require("../WishListComponents/WishListButton");
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var ProductDetails = function ProductDetails(props) {
+  var id = props.id;
+
+  var _useState = (0, _react.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      game = _useState2[0],
+      setGame = _useState2[1];
+
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productList = _useProductList.productList;
+
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      toastMessageList = _useState4[0],
+      setToastMessageList = _useState4[1];
+
+  (0, _react.useEffect)(function () {
+    var newGame = (0, _UtilityFunctions.findProductById)(productList, id);
+    setGame(newGame);
+  }, [productList]);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, game ? /*#__PURE__*/_react.default.createElement(GameDetails, {
+    game: game,
+    setToastMessageList: setToastMessageList,
+    toastMessageList: toastMessageList
+  }) : "Product Details not available", /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
+    toastMessageList: toastMessageList,
+    setToastMessageList: setToastMessageList
+  }));
+};
+
+var GameDetails = function GameDetails(_ref) {
+  var game = _ref.game,
+      setToastMessageList = _ref.setToastMessageList,
+      toastMessageList = _ref.toastMessageList;
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "game-details_card"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "image-wrapper__outer"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "image-wrapper_inner"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: game.image,
+    alt: game.name,
+    className: "image-holder"
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "game_details"
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    className: "product-name"
+  }, game.name), /*#__PURE__*/_react.default.createElement("div", {
+    className: "product__publisher"
+  }, game.publisher), /*#__PURE__*/_react.default.createElement("div", {
+    className: "product__rating"
+  }, game.rating, "\u2605"), /*#__PURE__*/_react.default.createElement("h1", {
+    className: "product-price"
+  }, "Rs.", game.price), /*#__PURE__*/_react.default.createElement(_WishListButton.WishListButton, {
+    id: game._id,
+    classes: ["btn-cart"],
+    setToastMessageList: setToastMessageList,
+    toastMessageList: toastMessageList
+  }), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
+    id: game._id,
+    classes: ["btn-cart"],
+    setToastMessageList: setToastMessageList,
+    toastMessageList: toastMessageList
+  }))));
+};
+
+var _default = ProductDetails;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../CartComponents/AddToCartButton":"components/CartComponents/AddToCartButton.js","../Toast/Toast":"components/Toast/Toast.js","../WishListComponents/WishListButton":"components/WishListComponents/WishListButton.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/Filters/Filters.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Filters = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var Filters = function Filters() {
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      ascending = _useState2[0],
+      setAscending = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      descending = _useState4[0],
+      setDescending = _useState4[1];
+
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productListDispatch = _useProductList.productListDispatch,
+      setClearFilter = _useProductList.setClearFilter;
+
+  var handlePriceChange = function handlePriceChange(event) {
+    if (event.target.value === "Ascending") {
+      setAscending(true);
+      setDescending(false);
+      productListDispatch({
+        type: "PRODUCT_LIST_ASCENDING"
+      });
+    } else if (event.target.value === "Descending") {
+      setDescending(true);
+      setAscending(false);
+      productListDispatch({
+        type: "PRODUCT_LIST_DESCENDING"
+      });
+    }
+  };
+
+  var clearFilter = function clearFilter() {
+    setClearFilter(true);
+    setAscending(false);
+    setDescending(false);
+  };
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Filters"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Price"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "radio",
+    id: "asc",
+    value: "Ascending",
+    name: "price",
+    checked: ascending,
+    onChange: function onChange(e) {
+      return handlePriceChange(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "asc"
+  }, "Low To High"), /*#__PURE__*/_react.default.createElement("input", {
+    type: "radio",
+    id: "desc",
+    value: "Descending",
+    name: "price",
+    checked: descending,
+    onChange: function onChange(e) {
+      return handlePriceChange(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "desc"
+  }, "High To Low")), /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn btn__filter",
+    onClick: function onClick() {
+      return clearFilter();
+    }
+  }, "Clear Filters")));
+};
+
+exports.Filters = Filters;
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js"}],"components/Products/Products.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _Filters = require("../Filters/Filters");
+
+var _Toast = require("../Toast/Toast");
+
+var _router = require("@reach/router");
+
+var _reactLoaderSpinner = _interopRequireDefault(require("react-loader-spinner"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var ProductsPage = function ProductsPage() {
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productList = _useProductList.productList,
+      loading = _useProductList.loading;
+
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      toastMessageList = _useState2[0],
+      setToastMessageList = _useState2[1];
+
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, productList.length > 0 ? /*#__PURE__*/_react.default.createElement(_Filters.Filters, null) : null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "products"
+  }, productList.length > 0 ? productList.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: i,
+      className: "product__wrapper"
+    }, /*#__PURE__*/_react.default.createElement(_router.Link, {
+      className: "product-link",
+      to: "/product-details/".concat(item._id)
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__img"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "image-container"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: item.image,
+      alt: item.name,
+      className: "card__image"
+    }))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__details"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__name"
+    }, item.name), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product-card__publisher"
+    }, item.publisher), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__price"
+    }, "Rs.", item.price), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card_platform"
+    }, item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__rating"
+    }, item.rating, "\u2605"), /*#__PURE__*/_react.default.createElement("div", {
+      className: "product__card__tags"
+    }, item.newRelease ? /*#__PURE__*/_react.default.createElement("div", {
+      className: "card__tag tag__new__release"
+    }, "New") : null, item.trending ? /*#__PURE__*/_react.default.createElement("div", {
+      className: "card__tag tag__trending"
+    }, "Trending") : null)))));
+  }) : loading ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "loader"
+  }, /*#__PURE__*/_react.default.createElement(_reactLoaderSpinner.default, {
+    type: "TailSpin",
+    color: "#543de0",
+    height: 50,
+    width: 50
+  })) : "No Products available"), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
+    toastMessageList: toastMessageList ? toastMessageList : null,
+    setToastMessageList: setToastMessageList
+  }));
+};
+
+var _default = ProductsPage;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Filters/Filters":"components/Filters/Filters.js","../Toast/Toast":"components/Toast/Toast.js","@reach/router":"../node_modules/@reach/router/es/index.js","react-loader-spinner":"../node_modules/react-loader-spinner/dist/index.js"}],"components/Signup/Signup.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -39213,14 +38472,317 @@ var Signup = function Signup() {
   }))));
 };
 
-exports.Signup = Signup;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js","../../Utilities/validation-utils":"Utilities/validation-utils.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
+var _default = Signup;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","@reach/router":"../node_modules/@reach/router/es/index.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js","../../Utilities/validation-utils":"Utilities/validation-utils.js"}],"components/WishListComponents/RemoveFromWishList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AuthProvider = void 0;
+exports.RemoveFromWishList = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _AuthContext = require("../../context/AuthContext/AuthContext");
+
+var _WishlistContext = require("../../context/Wishlist/WishlistContext");
+
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var RemoveFromWishList = function RemoveFromWishList(_ref) {
+  var id = _ref.id,
+      classes = _ref.classes,
+      toastMessageList = _ref.toastMessageList,
+      setToastMessageList = _ref.setToastMessageList;
+
+  var _useWishlist = (0, _WishlistContext.useWishlist)(),
+      wishListDispatch = _useWishlist.wishListDispatch;
+
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user;
+
+  var removeFromWishList = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id) {
+      var obj, data, urlStr, _yield$makeApiCall, success, _obj, _obj2;
+
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              obj = (0, _UtilityFunctions.createToastMessageList)("Loading...");
+              setToastMessageList([].concat(_toConsumableArray(toastMessageList), [obj]));
+              data = {
+                query: {
+                  username: user,
+                  wishItem: id,
+                  action: "remove"
+                }
+              };
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
+              _context.next = 6;
+              return (0, _server.default)({
+                url: urlStr,
+                type: "post",
+                data: data
+              });
+
+            case 6:
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+
+              if (success) {
+                wishListDispatch({
+                  type: "REMOVE_FROM_WISHLIST",
+                  payload: id
+                });
+                _obj = (0, _UtilityFunctions.createToastMessageList)("Item removed from wishlist");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj]));
+              } else {
+                _obj2 = (0, _UtilityFunctions.createToastMessageList)("Item removed from wishlist");
+                setToastMessageList([].concat(_toConsumableArray(toastMessageList), [_obj2]));
+              }
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function removeFromWishList(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn ".concat(classes),
+    onClick: function onClick() {
+      return removeFromWishList(id);
+    }
+  }, "Remove");
+};
+
+exports.RemoveFromWishList = RemoveFromWishList;
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../server/server.request":"server/server.request.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js"}],"components/Wishlist/Wishlist.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _WishlistContext = require("../../context/Wishlist/WishlistContext");
+
+var _ProductContext = require("../../context/ProductContext/ProductContext");
+
+var _RemoveFromWishList = require("../WishListComponents/RemoveFromWishList");
+
+var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
+
+var _router = require("@reach/router");
+
+var _Toast = require("../Toast/Toast");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var Wishlist = function Wishlist() {
+  var _useWishlist = (0, _WishlistContext.useWishlist)(),
+      wishList = _useWishlist.wishList;
+
+  var _useProductList = (0, _ProductContext.useProductList)(),
+      productList = _useProductList.productList;
+
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      itemList = _useState2[0],
+      setItemList = _useState2[1];
+
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      toastMessageList = _useState4[0],
+      setToastMessageList = _useState4[1];
+
+  (0, _react.useEffect)(function () {
+    var list = [];
+
+    for (var i = 0; i < wishList.length; i++) {
+      var obj = (0, _UtilityFunctions.findProductById)(productList, wishList[i]);
+      list.push(obj);
+    }
+
+    setItemList(list);
+  }, [wishList]);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main-page"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Wishlist"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__products"
+  }, itemList.length > 0 ? itemList.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: item._id,
+      className: "cart_card__wrapper"
+    }, /*#__PURE__*/_react.default.createElement(_router.Link, {
+      className: "wishlist-link",
+      to: "/product-details/".concat(item._id)
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      key: i,
+      className: "cart__card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__card__img"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "cart__image-container"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: item.image,
+      alt: item.name,
+      className: "cart__card__image"
+    }))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "card-name"
+    }, item.name))), /*#__PURE__*/_react.default.createElement(_RemoveFromWishList.RemoveFromWishList, {
+      id: item._id,
+      classes: ["cart__product__actions__remove__btn"],
+      toastMessageList: toastMessageList,
+      setToastMessageList: setToastMessageList
+    }));
+  }) : "Empty"), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
+    toastMessageList: toastMessageList,
+    setToastMessageList: setToastMessageList
+  }));
+};
+
+var _default = Wishlist;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../context/Wishlist/WishlistContext":"context/Wishlist/WishlistContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../WishListComponents/RemoveFromWishList":"components/WishListComponents/RemoveFromWishList.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","@reach/router":"../node_modules/@reach/router/es/index.js","../Toast/Toast":"components/Toast/Toast.js"}],"components/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "Account", {
+  enumerable: true,
+  get: function () {
+    return _Account.default;
+  }
+});
+Object.defineProperty(exports, "Cart", {
+  enumerable: true,
+  get: function () {
+    return _Cart.default;
+  }
+});
+Object.defineProperty(exports, "Home", {
+  enumerable: true,
+  get: function () {
+    return _Home.default;
+  }
+});
+Object.defineProperty(exports, "Login", {
+  enumerable: true,
+  get: function () {
+    return _Login.default;
+  }
+});
+Object.defineProperty(exports, "Navbar", {
+  enumerable: true,
+  get: function () {
+    return _Navbar.default;
+  }
+});
+Object.defineProperty(exports, "Privateroute", {
+  enumerable: true,
+  get: function () {
+    return _PrivateRoute.default;
+  }
+});
+Object.defineProperty(exports, "ProductDetails", {
+  enumerable: true,
+  get: function () {
+    return _ProductDetails.default;
+  }
+});
+Object.defineProperty(exports, "ProductsPage", {
+  enumerable: true,
+  get: function () {
+    return _Products.default;
+  }
+});
+Object.defineProperty(exports, "Signup", {
+  enumerable: true,
+  get: function () {
+    return _Signup.default;
+  }
+});
+Object.defineProperty(exports, "Wishlist", {
+  enumerable: true,
+  get: function () {
+    return _Wishlist.default;
+  }
+});
+
+var _Account = _interopRequireDefault(require("./Account/Account"));
+
+var _Cart = _interopRequireDefault(require("./Cart/Cart"));
+
+var _Home = _interopRequireDefault(require("./Home/Home"));
+
+var _Login = _interopRequireDefault(require("./Login/Login"));
+
+var _Navbar = _interopRequireDefault(require("./Navbar/Navbar"));
+
+var _PrivateRoute = _interopRequireDefault(require("./PrivateRoute/PrivateRoute"));
+
+var _ProductDetails = _interopRequireDefault(require("./ProductDetails/ProductDetails"));
+
+var _Products = _interopRequireDefault(require("./Products/Products"));
+
+var _Signup = _interopRequireDefault(require("./Signup/Signup"));
+
+var _Wishlist = _interopRequireDefault(require("./Wishlist/Wishlist"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Account/Account":"components/Account/Account.js","./Cart/Cart":"components/Cart/Cart.js","./Home/Home":"components/Home/Home.js","./Login/Login":"components/Login/Login.js","./Navbar/Navbar":"components/Navbar/Navbar.js","./PrivateRoute/PrivateRoute":"components/PrivateRoute/PrivateRoute.js","./ProductDetails/ProductDetails":"components/ProductDetails/ProductDetails.js","./Products/Products":"components/Products/Products.js","./Signup/Signup":"components/Signup/Signup.js","./Wishlist/Wishlist":"components/Wishlist/Wishlist.js"}],"context/AuthContext/AuthProvider.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -39481,46 +39043,571 @@ var AuthProvider = function AuthProvider(_ref) {
   }, children);
 };
 
-exports.AuthProvider = AuthProvider;
-},{"react":"../node_modules/react/index.js","./AuthContext":"context/AuthContext/AuthContext.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"components/PrivateRoute/PrivateRoute.js":[function(require,module,exports) {
+var _default = AuthProvider;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./AuthContext":"context/AuthContext/AuthContext.js","axios":"../node_modules/axios/index.js","../../server/server.request":"server/server.request.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"Reducers/Reducer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.reducerFunction = void 0;
 
-var _router = require("@reach/router");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-var _react = _interopRequireDefault(require("react"));
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-var _AuthContext = require("../../context/AuthContext/AuthContext");
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
-var Privateroute = function Privateroute(_ref) {
-  var Component = _ref.Component,
-      path = _ref.path;
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-  var _useAuth = (0, _AuthContext.useAuth)(),
-      loggedIn = _useAuth.loggedIn;
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-  if (loggedIn) {
-    return /*#__PURE__*/_react.default.createElement(Component, {
-      path: path
-    });
-  } else {
-    return /*#__PURE__*/_react.default.createElement(_router.Redirect, {
-      from: path,
-      to: "../login",
-      noThrow: true
-    });
+var reducerFunction = function reducerFunction(state, action) {
+  switch (action.type) {
+    case "PRODUCT_LIST":
+      var initialState = _toConsumableArray(action.payload);
+
+      return initialState;
+
+    case "CART_LIST":
+      var initialCartList = _toConsumableArray(action.payload);
+
+      return initialCartList;
+
+    case "WISH_LIST":
+      var initialWishList = _toConsumableArray(action.payload);
+
+      return initialWishList;
+
+    case "PRODUCT_LIST_ASCENDING":
+      state.sort(function (a, b) {
+        return a.price > b.price ? 1 : -1;
+      });
+
+      var ascPriceState = _toConsumableArray(state);
+
+      return ascPriceState;
+
+    case "PRODUCT_LIST_DESCENDING":
+      state.sort(function (a, b) {
+        return a.price < b.price ? 1 : -1;
+      });
+
+      var descPriceState = _toConsumableArray(state);
+
+      return descPriceState;
+
+    case "ADD_TO_WISHLIST":
+      for (var i = 0; i < state.length; i++) {
+        if (state[i] === action.payload) return state;
+      }
+
+      return [].concat(_toConsumableArray(state), [action.payload]);
+
+    case "REMOVE_FROM_WISHLIST":
+      var newWishListState = state.filter(function (item) {
+        return item !== action.payload;
+      });
+      return newWishListState;
+
+    case "ADD_TO_CART":
+      for (var _i = 0; _i < state.length; _i++) {
+        if (state[_i].id === action.payload.id) return state;
+      }
+
+      return [].concat(_toConsumableArray(state), [action.payload]);
+
+    case "REMOVE_FROM_CART":
+      var newCartState = state.filter(function (item) {
+        return item.id !== action.payload;
+      });
+      return _toConsumableArray(newCartState);
+
+    default:
+      return state;
   }
 };
 
-var _default = Privateroute;
+exports.reducerFunction = reducerFunction;
+},{}],"context/CartContext/CartProvider.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Reducer = require("../../Reducers/Reducer");
+
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _AuthContext = require("../AuthContext/AuthContext");
+
+var _CartContext = require("./CartContext");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var CartProvider = function CartProvider(_ref) {
+  var children = _ref.children;
+
+  var _useReducer = (0, _react.useReducer)(_Reducer.reducerFunction, []),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      cartList = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user,
+      token = _useAuth.token;
+
+  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var urlStr, data, _yield$makeApiCall, success, response;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
+            data = {
+              params: {
+                username: user
+              }
+            };
+
+            if (!(user != null)) {
+              _context.next = 9;
+              break;
+            }
+
+            _context.next = 5;
+            return (0, _server.default)({
+              type: "get",
+              url: urlStr,
+              data: data
+            });
+
+          case 5:
+            _yield$makeApiCall = _context.sent;
+            success = _yield$makeApiCall.success;
+            response = _yield$makeApiCall.response;
+
+            if (success === true && response.cartForUser !== null) {
+              dispatch({
+                type: "CART_LIST",
+                payload: response.cartForUser.cartList
+              });
+            }
+
+          case 9:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  })), [user]);
+  return /*#__PURE__*/_react.default.createElement(_CartContext.CartContext.Provider, {
+    value: {
+      cartList: cartList,
+      cartDispatch: dispatch
+    }
+  }, children);
+};
+
+var _default = CartProvider;
 exports.default = _default;
-},{"@reach/router":"../node_modules/@reach/router/es/index.js","react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","../../server/server.request":"server/server.request.js","../AuthContext/AuthContext":"context/AuthContext/AuthContext.js","./CartContext":"context/CartContext/CartContext.js"}],"context/ProductContext/ProductProvider.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Reducer = require("../../Reducers/Reducer");
+
+var _ProductContext = require("./ProductContext");
+
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var ProductProvider = function ProductProvider(_ref) {
+  var children = _ref.children;
+
+  var _useReducer = (0, _react.useReducer)(_Reducer.reducerFunction, []),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      productList = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      initialList = _useState2[0],
+      setInitialList = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      clearFilter = _useState4[0],
+      setClearFilter = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      loading = _useState6[0],
+      setLoading = _useState6[1];
+
+  var fetchProducts = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var urlStr, _yield$makeApiCall, response;
+
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "products";
+              _context.next = 3;
+              return (0, _server.default)({
+                type: "get",
+                url: urlStr,
+                data: null
+              });
+
+            case 3:
+              _yield$makeApiCall = _context.sent;
+              response = _yield$makeApiCall.response;
+
+              if (!response.success) {
+                _context.next = 8;
+                break;
+              }
+
+              setInitialList(response.products);
+              return _context.abrupt("return", response.products);
+
+            case 8:
+              return _context.abrupt("return", null);
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function fetchProducts() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    var products;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return fetchProducts();
+
+          case 2:
+            products = _context2.sent;
+            dispatch({
+              type: "PRODUCT_LIST",
+              payload: products
+            });
+            setLoading(false);
+
+          case 5:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  })), []);
+  (0, _react.useEffect)(function () {
+    if (clearFilter) {
+      dispatch({
+        type: "PRODUCT_LIST",
+        payload: initialList
+      });
+      setClearFilter(false);
+    }
+  }, [clearFilter]);
+  return /*#__PURE__*/_react.default.createElement(_ProductContext.ProductContext.Provider, {
+    value: {
+      productList: productList,
+      productListDispatch: dispatch,
+      setClearFilter: setClearFilter,
+      loading: loading
+    }
+  }, children);
+};
+
+var _default = ProductProvider;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","./ProductContext":"context/ProductContext/ProductContext.js","../../server/server.request":"server/server.request.js"}],"context/Wishlist/WishlistProvider.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Reducer = require("../../Reducers/Reducer");
+
+var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _AuthContext = require("../AuthContext/AuthContext");
+
+var _WishlistContext = require("./WishlistContext");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var WishListProvider = function WishListProvider(_ref) {
+  var children = _ref.children;
+
+  var _useReducer = (0, _react.useReducer)(_Reducer.reducerFunction, []),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      wishList = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  var _useAuth = (0, _AuthContext.useAuth)(),
+      user = _useAuth.user;
+
+  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var urlStr, data, _yield$makeApiCall, success, response;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "wishlist";
+            data = {
+              params: {
+                username: user
+              }
+            };
+
+            if (!(user != null)) {
+              _context.next = 9;
+              break;
+            }
+
+            _context.next = 5;
+            return (0, _server.default)({
+              type: "get",
+              url: urlStr,
+              data: data
+            });
+
+          case 5:
+            _yield$makeApiCall = _context.sent;
+            success = _yield$makeApiCall.success;
+            response = _yield$makeApiCall.response;
+
+            if (success === true && response.wishlistForUser !== null) {
+              dispatch({
+                type: "WISH_LIST",
+                payload: response.wishlistForUser.wishlist
+              });
+            }
+
+          case 9:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  })), [user]);
+  return /*#__PURE__*/_react.default.createElement(_WishlistContext.WishListContext.Provider, {
+    value: {
+      wishList: wishList,
+      wishListDispatch: dispatch
+    }
+  }, children);
+};
+
+var _default = WishListProvider;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../Reducers/Reducer":"Reducers/Reducer.js","../../server/server.request":"server/server.request.js","../AuthContext/AuthContext":"context/AuthContext/AuthContext.js","./WishlistContext":"context/Wishlist/WishlistContext.js"}],"context/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "AuthProvider", {
+  enumerable: true,
+  get: function () {
+    return _AuthProvider.default;
+  }
+});
+Object.defineProperty(exports, "CartProvider", {
+  enumerable: true,
+  get: function () {
+    return _CartProvider.default;
+  }
+});
+Object.defineProperty(exports, "ProductProvider", {
+  enumerable: true,
+  get: function () {
+    return _ProductProvider.default;
+  }
+});
+Object.defineProperty(exports, "WishListProvider", {
+  enumerable: true,
+  get: function () {
+    return _WishlistProvider.default;
+  }
+});
+
+var _AuthProvider = _interopRequireDefault(require("./AuthContext/AuthProvider"));
+
+var _CartProvider = _interopRequireDefault(require("./CartContext/CartProvider"));
+
+var _ProductProvider = _interopRequireDefault(require("./ProductContext/ProductProvider"));
+
+var _WishlistProvider = _interopRequireDefault(require("./Wishlist/WishlistProvider"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./AuthContext/AuthProvider":"context/AuthContext/AuthProvider.js","./CartContext/CartProvider":"context/CartContext/CartProvider.js","./ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../main.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39532,73 +39619,49 @@ var _react = _interopRequireDefault(require("react"));
 
 var _router = require("@reach/router");
 
-var _Account = _interopRequireDefault(require("./components/Account/Account"));
+var _components = require("./components/");
 
-var _Navbar = require("./components/Navbar/Navbar");
-
-var _Home = require("./components/Home/Home");
-
-var _Products = require("./components/Products/Products");
-
-var _Wishlist = require("./components/Wishlist/Wishlist");
-
-var _Cart = require("./components/Cart/Cart");
-
-var _WishlistProvider = require("./context/Wishlist/WishlistProvider");
-
-var _ProductDetails = require("./components/ProductDetails/ProductDetails");
+var _context = require("./context/");
 
 require("../main.css");
-
-var _ProductProvider = require("./context/ProductContext/ProductProvider");
-
-var _CartProvider = require("./context/CartContext/CartProvider");
-
-var _Login = require("./components/Login/Login");
-
-var _Signup = require("./components/Signup/Signup");
-
-var _AuthProvider = require("./context/AuthContext/AuthProvider");
-
-var _PrivateRoute = _interopRequireDefault(require("./components/PrivateRoute/PrivateRoute"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-  return /*#__PURE__*/_react.default.createElement(_AuthProvider.AuthProvider, null, /*#__PURE__*/_react.default.createElement(_ProductProvider.ProductProvider, null, /*#__PURE__*/_react.default.createElement(_WishlistProvider.WishListProvider, null, /*#__PURE__*/_react.default.createElement(_CartProvider.CartProvider, null, /*#__PURE__*/_react.default.createElement(_router.Router, null, /*#__PURE__*/_react.default.createElement(NavbarRouter, {
+  return /*#__PURE__*/_react.default.createElement(_context.AuthProvider, null, /*#__PURE__*/_react.default.createElement(_context.ProductProvider, null, /*#__PURE__*/_react.default.createElement(_context.WishListProvider, null, /*#__PURE__*/_react.default.createElement(_context.CartProvider, null, /*#__PURE__*/_react.default.createElement(_router.Router, null, /*#__PURE__*/_react.default.createElement(NavbarRouter, {
     path: "/"
-  }, /*#__PURE__*/_react.default.createElement(_Home.Home, {
+  }, /*#__PURE__*/_react.default.createElement(_components.Home, {
     default: true,
     path: "/"
-  }), /*#__PURE__*/_react.default.createElement(_Products.ProductsPage, {
+  }), /*#__PURE__*/_react.default.createElement(_components.ProductsPage, {
     path: "/products"
-  }), /*#__PURE__*/_react.default.createElement(_ProductDetails.ProductDetails, {
+  }), /*#__PURE__*/_react.default.createElement(_components.ProductDetails, {
     path: "/product-details/:id"
-  }), /*#__PURE__*/_react.default.createElement(_PrivateRoute.default, {
-    Component: _Wishlist.Wishlist,
+  }), /*#__PURE__*/_react.default.createElement(_components.Privateroute, {
+    Component: _components.Wishlist,
     path: "/wishlist"
-  }), /*#__PURE__*/_react.default.createElement(_PrivateRoute.default, {
-    Component: _Cart.Cart,
+  }), /*#__PURE__*/_react.default.createElement(_components.Privateroute, {
+    Component: _components.Cart,
     path: "/cart"
-  }), /*#__PURE__*/_react.default.createElement(_Login.Login, {
+  }), /*#__PURE__*/_react.default.createElement(_components.Login, {
     path: "/login"
-  }), /*#__PURE__*/_react.default.createElement(_Signup.Signup, {
+  }), /*#__PURE__*/_react.default.createElement(_components.Signup, {
     path: "/signup"
-  }), /*#__PURE__*/_react.default.createElement(_PrivateRoute.default, {
-    Component: _Account.default,
+  }), /*#__PURE__*/_react.default.createElement(_components.Privateroute, {
+    Component: _components.Account,
     path: "/account"
   })))))));
 };
 
 var NavbarRouter = function NavbarRouter(props) {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Navbar.Navbar, {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_components.Navbar, {
     location: props.location
   }), props.children);
 };
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/Account/Account":"components/Account/Account.js","./components/Navbar/Navbar":"components/Navbar/Navbar.js","./components/Home/Home":"components/Home/Home.js","./components/Products/Products":"components/Products/Products.js","./components/Wishlist/Wishlist":"components/Wishlist/Wishlist.js","./components/Cart/Cart":"components/Cart/Cart.js","./context/Wishlist/WishlistProvider":"context/Wishlist/WishlistProvider.js","./components/ProductDetails/ProductDetails":"components/ProductDetails/ProductDetails.js","../main.css":"../main.css","./context/ProductContext/ProductProvider":"context/ProductContext/ProductProvider.js","./context/CartContext/CartProvider":"context/CartContext/CartProvider.js","./components/Login/Login":"components/Login/Login.js","./components/Signup/Signup":"components/Signup/Signup.js","./context/AuthContext/AuthProvider":"context/AuthContext/AuthProvider.js","./components/PrivateRoute/PrivateRoute":"components/PrivateRoute/PrivateRoute.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js","./components/":"components/index.js","./context/":"context/index.js","../main.css":"../main.css"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -39640,7 +39703,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1700" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1917" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -4,7 +4,7 @@ import makeApiCall from "../../server/server.request";
 import { useAuth } from "../AuthContext/AuthContext";
 import { WishListContext } from "./WishlistContext";
 
-export const WishListProvider = ({ children }) => {
+const WishListProvider = ({ children }) => {
   let [wishList, dispatch] = useReducer(reducerFunction, []);
 
   let { user } = useAuth();
@@ -37,3 +37,5 @@ export const WishListProvider = ({ children }) => {
     </WishListContext.Provider>
   );
 };
+
+export default WishListProvider;
