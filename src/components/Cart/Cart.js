@@ -25,29 +25,6 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    (async function () {
-      try {
-        if (token != null) {
-          let urlStr = process.env.REACT_APP_API_ROOT_URL + "auth/user";
-          let data = { headers: { authorization: token } };
-          const { success, response } = await makeApiCall({
-            type: "get",
-            url: urlStr,
-            data,
-          });
-          if (success) {
-            setUser(response.userID);
-          }
-        } else {
-          navigate("../login");
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [user, token]);
-
-  useEffect(() => {
     let list = [];
     for (let i = 0; i < cartList.length; i++) {
       const obj = findProductById(productList, cartList[i].id);

@@ -35318,66 +35318,6 @@ var Cart = function Cart() {
   };
 
   (0, _react.useEffect)(function () {
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var urlStr, data, _yield$makeApiCall, success, response;
-
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-
-              if (!(token != null)) {
-                _context.next = 12;
-                break;
-              }
-
-              urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "auth/user";
-              data = {
-                headers: {
-                  authorization: token
-                }
-              };
-              _context.next = 6;
-              return (0, _server.default)({
-                type: "get",
-                url: urlStr,
-                data: data
-              });
-
-            case 6:
-              _yield$makeApiCall = _context.sent;
-              success = _yield$makeApiCall.success;
-              response = _yield$makeApiCall.response;
-
-              if (success) {
-                setUser(response.userID);
-              }
-
-              _context.next = 13;
-              break;
-
-            case 12:
-              (0, _router.navigate)("../login");
-
-            case 13:
-              _context.next = 18;
-              break;
-
-            case 15:
-              _context.prev = 15;
-              _context.t0 = _context["catch"](0);
-              console.log(_context.t0);
-
-            case 18:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[0, 15]]);
-    }))();
-  }, [user, token]);
-  (0, _react.useEffect)(function () {
     var list = [];
 
     for (var i = 0; i < cartList.length; i++) {
@@ -35406,12 +35346,12 @@ var Cart = function Cart() {
   }, [itemList]);
 
   var handleQuantity = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id, str) {
-      var urlStr, data, item, _yield$makeApiCall2, success, response, obj;
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id, str) {
+      var urlStr, data, item, _yield$makeApiCall, success, response, obj;
 
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context.prev = _context.next) {
             case 0:
               urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
               data = {
@@ -35427,11 +35367,11 @@ var Cart = function Cart() {
               });
 
               if (!(item.quantity > 1 && str === "DESC" || item.quantity < 6 && str === "INC")) {
-                _context2.next = 12;
+                _context.next = 12;
                 break;
               }
 
-              _context2.next = 6;
+              _context.next = 6;
               return (0, _server.default)({
                 type: "post",
                 url: urlStr,
@@ -35439,9 +35379,9 @@ var Cart = function Cart() {
               });
 
             case 6:
-              _yield$makeApiCall2 = _context2.sent;
-              success = _yield$makeApiCall2.success;
-              response = _yield$makeApiCall2.response;
+              _yield$makeApiCall = _context.sent;
+              success = _yield$makeApiCall.success;
+              response = _yield$makeApiCall.response;
 
               if (success === true) {
                 cartDispatch({
@@ -35450,7 +35390,7 @@ var Cart = function Cart() {
                 });
               }
 
-              _context2.next = 14;
+              _context.next = 14;
               break;
 
             case 12:
@@ -35459,24 +35399,24 @@ var Cart = function Cart() {
 
             case 14:
             case "end":
-              return _context2.stop();
+              return _context.stop();
           }
         }
-      }, _callee2);
+      }, _callee);
     }));
 
     return function handleQuantity(_x, _x2) {
-      return _ref2.apply(this, arguments);
+      return _ref.apply(this, arguments);
     };
   }();
 
   var handleCartRemove = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id) {
-      var data, urlStr, _yield$makeApiCall3, success, newItemList, obj, _obj;
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id) {
+      var data, urlStr, _yield$makeApiCall2, success, newItemList, obj, _obj;
 
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               data = {
                 query: {
@@ -35486,7 +35426,7 @@ var Cart = function Cart() {
                 }
               };
               urlStr = "https://buygames-backend.manmodesanket.repl.co/" + "cart";
-              _context3.next = 4;
+              _context2.next = 4;
               return (0, _server.default)({
                 url: urlStr,
                 type: "post",
@@ -35494,8 +35434,8 @@ var Cart = function Cart() {
               });
 
             case 4:
-              _yield$makeApiCall3 = _context3.sent;
-              success = _yield$makeApiCall3.success;
+              _yield$makeApiCall2 = _context2.sent;
+              success = _yield$makeApiCall2.success;
 
               if (success) {
                 cartDispatch({
@@ -35515,14 +35455,14 @@ var Cart = function Cart() {
 
             case 7:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3);
+      }, _callee2);
     }));
 
     return function handleCartRemove(_x3) {
-      return _ref3.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
