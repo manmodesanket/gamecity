@@ -52,10 +52,7 @@ const Cart = () => {
     for (let i = 0; i < cartList.length; i++) {
       const obj = findProductById(productList, cartList[i].id);
       if (obj !== null) {
-        obj = {
-          quantity: cartList[i].quantity,
-          ...obj,
-        };
+        obj.quantity = cartList[i].quantity;
         list.push(obj);
       }
     }
@@ -130,7 +127,6 @@ const Cart = () => {
     }
   };
 
-  //console.log(itemList);
   return (
     <div className="main-page main-page__cart">
       <h1>Cart</h1>

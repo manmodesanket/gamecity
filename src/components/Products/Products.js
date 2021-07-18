@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useProductList } from "../../context/ProductContext/ProductContext";
 import { Filters } from "../Filters/Filters";
 import { Toast } from "../Toast/Toast";
