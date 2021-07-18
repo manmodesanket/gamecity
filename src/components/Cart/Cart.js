@@ -7,7 +7,6 @@ import {
   findProductById,
 } from "../../Utilities/UtilityFunctions";
 import { Toast } from "../Toast/Toast";
-import { navigate } from "@reach/router";
 import makeApiCall from "../../server/server.request";
 
 const Cart = () => {

@@ -22,19 +22,12 @@ const AddToCartButton = ({
     }
   }, [cartList]);
 
-  const handleAddToCart = async (
-    item,
-    cartList,
-    cartDispatch,
-    toastMessageList,
-    setToastMessageList
-  ) => {
+  const handleAddToCart = async (item) => {
     let isPresentInCart = cartList.find((itemInCart) => itemInCart.id === item);
-    if (isPresentInCart === undefined || isPresentInCart === null) {
+    if (!isPresentInCart) {
       if (user != null) {
         const obj = createToastMessageList("Loading...");
         setToastMessageList([...toastMessageList, obj]);
-
         //make api call if success add to cart
         let data = { query: { username: user, cartItem: id, action: "add" } };
         let urlStr = process.env.REACT_APP_API_ROOT_URL + "cart";
@@ -73,15 +66,7 @@ const AddToCartButton = ({
   return (
     <button
       className={`btn ${[...classes]}`}
-      onClick={() =>
-        handleAddToCart(
-          id,
-          cartList,
-          cartDispatch,
-          toastMessageList,
-          setToastMessageList
-        )
-      }
+      onClick={() => handleAddToCart(id)}
     >
       {added ? "Added To Cart" : "Add To Cart"}
     </button>

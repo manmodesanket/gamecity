@@ -35251,8 +35251,6 @@ var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
 
 var _Toast = require("../Toast/Toast");
 
-var _router = require("@reach/router");
-
 var _server = _interopRequireDefault(require("../../server/server.request"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -35527,7 +35525,7 @@ var Cart = function Cart() {
 
 var _default = Cart;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js","@reach/router":"../node_modules/@reach/router/es/index.js","../../server/server.request":"server/server.request.js"}],"../node_modules/react-loader-spinner/dist/loader/Circles.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js","../../server/server.request":"server/server.request.js"}],"../node_modules/react-loader-spinner/dist/loader/Circles.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37625,7 +37623,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
   }, [cartList]);
 
   var handleAddToCart = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item, cartList, cartDispatch, toastMessageList, setToastMessageList) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item) {
       var isPresentInCart, obj, data, urlStr, _yield$makeApiCall, success, newItem, _obj, _obj2, _obj3, _obj4;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -37636,7 +37634,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
                 return itemInCart.id === item;
               });
 
-              if (!(isPresentInCart === undefined || isPresentInCart === null)) {
+              if (isPresentInCart) {
                 _context.next = 18;
                 break;
               }
@@ -37709,7 +37707,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
       }, _callee);
     }));
 
-    return function handleAddToCart(_x, _x2, _x3, _x4, _x5) {
+    return function handleAddToCart(_x) {
       return _ref2.apply(this, arguments);
     };
   }();
@@ -37717,7 +37715,7 @@ var AddToCartButton = function AddToCartButton(_ref) {
   return /*#__PURE__*/_react.default.createElement("button", {
     className: "btn ".concat(_toConsumableArray(classes)),
     onClick: function onClick() {
-      return handleAddToCart(id, cartList, cartDispatch, toastMessageList, setToastMessageList);
+      return handleAddToCart(id);
     }
   }, added ? "Added To Cart" : "Add To Cart");
 };
