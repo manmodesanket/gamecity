@@ -28,8 +28,9 @@ body {
 
 .navbar {
   background-color: var(--blue);
-
   color: whitesmoke;
+  position: sticky;
+  top: 0;
 }
 
 .navbar__wrapper {
