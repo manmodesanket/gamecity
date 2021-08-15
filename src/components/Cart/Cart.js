@@ -106,7 +106,9 @@ const Cart = () => {
   return (
     <div className="main-page main-page__cart">
       <h1>Cart</h1>
-      <h2>Total: Rs.{total ? total : 0}</h2>
+      <h2>
+        {total ? <span>Total: Rs. {total}</span> : <span>Cart is Empty</span>}
+      </h2>
       <div className="cart__products">
         {itemList
           ? itemList.map((item, i) => (

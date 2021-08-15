@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "@reach/router";
 import { useWishlist } from "../../context/Wishlist/WishlistContext";
 import { useProductList } from "../../context/ProductContext/ProductContext";
 import { RemoveFromWishList } from "../WishListComponents/RemoveFromWishList";
 import { findProductById } from "../../Utilities/UtilityFunctions";
-import { Link } from "@reach/router";
 import { Toast } from "../Toast/Toast";
+import WishListItem from "./WishListItem";
 
 const Wishlist = () => {
   let { wishList } = useWishlist();
@@ -28,23 +29,7 @@ const Wishlist = () => {
         {itemList.length > 0
           ? itemList.map((item, i) => (
               <div key={item._id} className="cart_card__wrapper">
-                <Link
-                  className="wishlist-link"
-                  to={`/product-details/${item._id}`}
-                >
-                  <div key={i} className="cart__card">
-                    <div className="cart__card__img">
-                      <div className="cart__image-container">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="cart__card__image"
-                        />
-                      </div>
-                    </div>
-                    <div className="card-name">{item.name}</div>
-                  </div>
-                </Link>
+                <WishListItem item={item} />
                 <RemoveFromWishList
                   id={item._id}
                   classes={["cart__product__actions__remove__btn"]}

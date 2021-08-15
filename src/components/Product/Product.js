@@ -1,0 +1,29 @@
+import React from "react";
+import { Link } from "@reach/router";
+
+export default function Product({ item }) {
+  return (
+    <Link className="product-link" to={`/product-details/${item._id}`}>
+      <div className="product__card">
+        <div className="product__card__img">
+          <div className="image-container">
+            <img src={item.image} alt={item.name} className="card__image" />
+          </div>
+        </div>
+        <div className="product__card__details">
+          <div className="product__card__name">{item.name}</div>
+          <div className="product-card__publisher">{item.publisher}</div>
+          <div className="product__card__price">Rs.{item.price}</div>
+          <div className="product__card_platform">
+            {item.platform === 1
+              ? "PlayStation 5"
+              : item.platform === 2
+              ? "Xbox Series X"
+              : null}
+          </div>
+          <div className="product__card__rating">{item.rating}★</div>
+        </div>
+      </div>
+    </Link>
+  );
+}
