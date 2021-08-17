@@ -54,8 +54,8 @@ const Signup = () => {
   }, []);
 
   return (
-    <div className="main-page">
-      <div className="login-form__container">
+    <main className="main-page">
+      <section className="login-form__container">
         <form onSubmit={handleSubmit} className="login__form">
           <h2>Signup Form</h2>
           {error ? <span className="form__error">{error}</span> : null}
@@ -90,8 +90,8 @@ const Signup = () => {
             className="btn form__submit__btn form__element"
           />
         </form>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

@@ -5,8 +5,8 @@ import { useAuth } from "../../context/AuthContext/AuthContext";
 const Navbar = (props) => {
   const { user } = useAuth();
   return (
-    <div className="navbar">
-      <div className="navbar__wrapper">
+    <header className="navbar">
+      <nav className="navbar__wrapper">
         <div className="navbar__title">
           <Link to="/" className="navabar__heading">
             GameCity
@@ -48,8 +48,8 @@ const Navbar = (props) => {
             />
           )}
         </div>
-      </div>
-    </div>
+      </nav>
+    </header>
   );
 };
 

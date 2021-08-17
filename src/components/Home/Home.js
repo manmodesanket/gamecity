@@ -3,9 +3,9 @@ import { NewRelease } from "./NewRelease";
 
 const Home = () => {
   return (
-    <div className="main-page">
+    <main className="main-page">
       <NewRelease />
-    </div>
+    </main>
   );
 };
 

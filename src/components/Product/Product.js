@@ -6,9 +6,9 @@ export default function Product({ item }) {
     <Link className="product-link" to={`/product-details/${item._id}`}>
       <div className="product__card">
         <div className="product__card__img">
-          <div className="image-container">
+          <figure className="image-container">
             <img src={item.image} alt={item.name} className="card__image" />
-          </div>
+          </figure>
         </div>
         <div className="product__card__details">
           <div className="product__card__name">{item.name}</div>

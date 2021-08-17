@@ -35208,7 +35208,68 @@ function _makeApiCall() {
 
 var _default = makeApiCall;
 exports.default = _default;
-},{"axios":"../node_modules/axios/index.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js"}],"components/Cart/CartItem.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = CartItem;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function CartItem(_ref) {
+  var item = _ref.item;
+  return /*#__PURE__*/_react.default.createElement("article", {
+    className: "cart_card__wrapper"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__card"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__card__img"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__image-container"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: item.image,
+    alt: item.name,
+    className: "cart__card__image"
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__card__details"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart_card_details_wrapper"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__card__name"
+  }, item.name), /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__card_platform"
+  }, "Platform:", " ", item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__card_publisher"
+  }, "Publisher: ", item.publisher), /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart_card__price"
+  }, "Rs.", item.price * item.quantity)))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "cart__product__actions"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "product_quantity"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return handleQuantity(item._id, "DESC");
+    },
+    className: "btn cart__card__quantity__btn product_quantity__element"
+  }, "-"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "product_quantity__element"
+  }, item.quantity), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return handleQuantity(item._id, "INC");
+    },
+    className: "btn cart__card__quantity__btn product_quantity__element"
+  }, "+")), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return handleCartRemove(item._id);
+    },
+    className: "btn cart__product__actions__remove__btn"
+  }, "Remove")));
+}
+},{"react":"../node_modules/react/index.js"}],"components/Cart/Cart.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35229,6 +35290,8 @@ var _UtilityFunctions = require("../../Utilities/UtilityFunctions");
 var _Toast = require("../Toast/Toast");
 
 var _server = _interopRequireDefault(require("../../server/server.request"));
+
+var _CartItem = _interopRequireDefault(require("./CartItem"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35441,59 +35504,15 @@ var Cart = function Cart() {
     };
   }();
 
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("main", {
     className: "main-page main-page__cart"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "Cart"), /*#__PURE__*/_react.default.createElement("h2", null, total ? /*#__PURE__*/_react.default.createElement("span", null, "Total: Rs. ", total) : /*#__PURE__*/_react.default.createElement("span", null, "Cart is Empty")), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h1", null, "Cart")), /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h2", null, total ? /*#__PURE__*/_react.default.createElement("span", null, "Total: Rs. ", total) : /*#__PURE__*/_react.default.createElement("span", null, "Cart is Empty"))), /*#__PURE__*/_react.default.createElement("section", {
     className: "cart__products"
-  }, itemList ? itemList.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: item._id,
-      className: "cart_card__wrapper"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      key: i,
-      className: "cart__card"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__img"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__image-container"
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: item.image,
-      alt: item.name,
-      className: "cart__card__image"
-    }))), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__details"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart_card_details_wrapper"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card__name"
-    }, item.name), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card_platform"
-    }, "Platform:", " ", item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__card_publisher"
-    }, "Publisher: ", item.publisher), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart_card__price"
-    }, "Rs.", item.price * item.quantity)))), /*#__PURE__*/_react.default.createElement("div", {
-      className: "cart__product__actions"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "product_quantity"
-    }, /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleQuantity(item._id, "DESC");
-      },
-      className: "btn cart__card__quantity__btn product_quantity__element"
-    }, "-"), /*#__PURE__*/_react.default.createElement("div", {
-      className: "product_quantity__element"
-    }, item.quantity), /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleQuantity(item._id, "INC");
-      },
-      className: "btn cart__card__quantity__btn product_quantity__element"
-    }, "+")), /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        return handleCartRemove(item._id);
-      },
-      className: "btn cart__product__actions__remove__btn"
-    }, "Remove")));
+  }, itemList ? itemList.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_CartItem.default, {
+      item: item,
+      key: item._id
+    });
   }) : null), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
     toastMessageList: toastMessageList,
     setToastMessageList: setToastMessageList
@@ -35502,7 +35521,7 @@ var Cart = function Cart() {
 
 var _default = Cart;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js","../../server/server.request":"server/server.request.js"}],"components/Product/Product.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/AuthContext/AuthContext":"context/AuthContext/AuthContext.js","../../context/CartContext/CartContext":"context/CartContext/CartContext.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../../Utilities/UtilityFunctions":"Utilities/UtilityFunctions.js","../Toast/Toast":"components/Toast/Toast.js","../../server/server.request":"server/server.request.js","./CartItem":"components/Cart/CartItem.js"}],"components/Product/Product.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35525,7 +35544,7 @@ function Product(_ref) {
     className: "product__card"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "product__card__img"
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("figure", {
     className: "image-container"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: item.image,
@@ -37154,7 +37173,7 @@ var NewRelease = function NewRelease() {
       productList = _useProductList.productList,
       loading = _useProductList.loading;
 
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("section", {
     className: "newrelease"
   }, /*#__PURE__*/_react.default.createElement("h1", {
     className: "newrelease__heading"
@@ -37195,7 +37214,7 @@ var _NewRelease = require("./NewRelease");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Home = function Home() {
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("main", {
     className: "main-page"
   }, /*#__PURE__*/_react.default.createElement(_NewRelease.NewRelease, null));
 };
@@ -37351,9 +37370,9 @@ var Login = function Login() {
   (0, _react.useEffect)(function () {
     inputEl.current.focus();
   }, []);
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("main", {
     className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("section", {
     className: "login-form__container"
   }, /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: handleSubmit,
@@ -37433,9 +37452,9 @@ var Navbar = function Navbar(props) {
   var _useAuth = (0, _AuthContext.useAuth)(),
       user = _useAuth.user;
 
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("header", {
     className: "navbar"
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("nav", {
     className: "navbar__wrapper"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "navbar__title"
@@ -37956,7 +37975,7 @@ var ProductDetails = function ProductDetails(props) {
     var newGame = (0, _UtilityFunctions.findProductById)(productList, id);
     setGame(newGame);
   }, [productList]);
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("main", {
     className: "main-page"
   }, game ? /*#__PURE__*/_react.default.createElement(GameDetails, {
     game: game,
@@ -37972,9 +37991,7 @@ var GameDetails = function GameDetails(_ref) {
   var game = _ref.game,
       setToastMessageList = _ref.setToastMessageList,
       toastMessageList = _ref.toastMessageList;
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("section", {
     className: "game-details_card"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "image-wrapper__outer"
@@ -38004,7 +38021,7 @@ var GameDetails = function GameDetails(_ref) {
     classes: ["btn-cart"],
     setToastMessageList: setToastMessageList,
     toastMessageList: toastMessageList
-  }))));
+  })));
 };
 
 var _default = ProductDetails;
@@ -38074,7 +38091,7 @@ var Filters = function Filters() {
     setDescending(false);
   };
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Filters"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Price"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
+  return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h2", null, "Filters"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Price"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "radio",
     id: "asc",
     value: "Ascending",
@@ -38153,12 +38170,12 @@ var ProductsPage = function ProductsPage() {
       toastMessageList = _useState2[0],
       setToastMessageList = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("main", {
     className: "main-page"
-  }, productList.length > 0 ? /*#__PURE__*/_react.default.createElement(_Filters.Filters, null) : null, /*#__PURE__*/_react.default.createElement("div", {
+  }, productList.length > 0 ? /*#__PURE__*/_react.default.createElement(_Filters.Filters, null) : null, /*#__PURE__*/_react.default.createElement("section", {
     className: "products"
   }, productList.length > 0 ? productList.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
+    return /*#__PURE__*/_react.default.createElement("article", {
       key: i,
       className: "product__wrapper"
     }, /*#__PURE__*/_react.default.createElement(_Product.default, {
@@ -38322,9 +38339,9 @@ var Signup = function Signup() {
   (0, _react.useEffect)(function () {
     inputEl.current.focus();
   }, []);
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("main", {
     className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("section", {
     className: "login-form__container"
   }, /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: handleSubmit,
@@ -38584,12 +38601,12 @@ var Wishlist = function Wishlist() {
 
     setItemList(list);
   }, [wishList]);
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("main", {
     className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "Wishlist"), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h1", null, "Wishlist")), /*#__PURE__*/_react.default.createElement("section", {
     className: "cart__products"
   }, itemList.length > 0 ? itemList.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("div", {
+    return /*#__PURE__*/_react.default.createElement("article", {
       key: item._id,
       className: "cart_card__wrapper"
     }, /*#__PURE__*/_react.default.createElement(_WishListItem.default, {
@@ -39623,7 +39640,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1611" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3768" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

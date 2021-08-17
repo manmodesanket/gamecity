@@ -10,14 +10,14 @@ const ProductsPage = () => {
   let [toastMessageList, setToastMessageList] = useState([]);
 
   return (
-    <div className="main-page">
+    <main className="main-page">
       {productList.length > 0 ? <Filters /> : null}
-      <div className="products">
+      <section className="products">
         {productList.length > 0 ? (
           productList.map((item, i) => (
-            <div key={i} className="product__wrapper">
+            <article key={i} className="product__wrapper">
               <Product item={item} />
-            </div>
+            </article>
           ))
         ) : loading ? (
           <div className="loader">
@@ -26,12 +26,12 @@ const ProductsPage = () => {
         ) : (
           "No Products available"
         )}
-      </div>
+      </section>
       <Toast
         toastMessageList={toastMessageList ? toastMessageList : null}
         setToastMessageList={setToastMessageList}
       />
-    </div>
+    </main>
   );
 };
 

@@ -54,8 +54,8 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="main-page">
-      <div className="login-form__container">
+    <main className="main-page">
+      <section className="login-form__container">
         <form onSubmit={handleSubmit} className="login__form">
           <h2>Login Form</h2>
           {error ? <span className="form__error">{error}</span> : null}
@@ -93,8 +93,8 @@ const Login = () => {
             </Link>
           </div>
         </form>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

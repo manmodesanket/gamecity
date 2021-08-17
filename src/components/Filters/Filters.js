@@ -29,7 +29,7 @@ const Filters = () => {
   };
 
   return (
-    <div>
+    <section>
       <h2>Filters</h2>
       <div>
         <p>Based on Price</p>
@@ -57,7 +57,7 @@ const Filters = () => {
           Clear Filters
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -23,12 +23,14 @@ const Wishlist = () => {
   }, [wishList]);
 
   return (
-    <div className="main-page">
-      <h1>Wishlist</h1>
-      <div className="cart__products">
+    <main className="main-page">
+      <section>
+        <h1>Wishlist</h1>
+      </section>
+      <section className="cart__products">
         {itemList.length > 0
           ? itemList.map((item, i) => (
-              <div key={item._id} className="cart_card__wrapper">
+              <article key={item._id} className="cart_card__wrapper">
                 <WishListItem item={item} />
                 <RemoveFromWishList
                   id={item._id}
@@ -36,15 +38,15 @@ const Wishlist = () => {
                   toastMessageList={toastMessageList}
                   setToastMessageList={setToastMessageList}
                 />
-              </div>
+              </article>
             ))
           : "Empty"}
-      </div>
+      </section>
       <Toast
         toastMessageList={toastMessageList}
         setToastMessageList={setToastMessageList}
       />
-    </div>
+    </main>
   );
 };
 
