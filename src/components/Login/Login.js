@@ -26,6 +26,17 @@ const Login = () => {
     } else setError("please fill all the details.");
   };
 
+  const handleGuestLogin = (evt) => {
+    evt.preventDefault();
+    let inputsValid = username !== "" && password !== "";
+    if (inputsValid) {
+      inputsValid = validateEmail(username);
+      if (inputsValid)
+        loginWithCredentials("guest@gmail.com", "guest@123", setError);
+      else setError("please enter valid email.");
+    } else setError("please fill all the details.");
+  };
+
   useEffect(() => {
     (async function () {
       try {
@@ -79,6 +90,12 @@ const Login = () => {
           <input
             type="submit"
             value="Submit"
+            className="btn form__submit__btn form__element"
+          />
+          <input
+            type="button"
+            value="Guest Login"
+            onClick={(e) => handleGuestLogin(e)}
             className="btn form__submit__btn form__element"
           />
           <div className="form__message">

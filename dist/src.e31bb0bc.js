@@ -37312,6 +37312,16 @@ var Login = function Login() {
     } else setError("please fill all the details.");
   };
 
+  var handleGuestLogin = function handleGuestLogin(evt) {
+    evt.preventDefault();
+    var inputsValid = username !== "" && password !== "";
+
+    if (inputsValid) {
+      inputsValid = (0, _validationUtils.validateEmail)(username);
+      if (inputsValid) loginWithCredentials("guest@gmail.com", "guest@123", setError);else setError("please enter valid email.");
+    } else setError("please fill all the details.");
+  };
+
   (0, _react.useEffect)(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       var urlStr, data, _yield$makeApiCall, success, response;
@@ -37403,6 +37413,13 @@ var Login = function Login() {
   }), /*#__PURE__*/_react.default.createElement("input", {
     type: "submit",
     value: "Submit",
+    className: "btn form__submit__btn form__element"
+  }), /*#__PURE__*/_react.default.createElement("input", {
+    type: "button",
+    value: "Guest Login",
+    onClick: function onClick(e) {
+      return handleGuestLogin(e);
+    },
     className: "btn form__submit__btn form__element"
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "form__message"
@@ -39640,7 +39657,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3768" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3087" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

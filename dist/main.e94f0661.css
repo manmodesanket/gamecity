@@ -12,7 +12,6 @@
   --fz-heading: 32px;
   --border-radius: 4px;
   --nav-height: 60px;
-
   /*colors*/
   --blue: #543de0;
   --dark-blue: #4b1aec;
@@ -35,7 +34,6 @@ body {
 
 .navbar__wrapper {
   width: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -45,16 +43,13 @@ body {
 .navabar__heading {
   font-size: var(--fz-heading);
   font-weight: bold;
-
   color: whitesmoke;
   text-decoration: none;
 }
 
 .navbar__nav {
   font-size: var(--fz-lg);
-
   width: 100%;
-
   display: flex;
   flex-direction: row;
 }
@@ -64,7 +59,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-
   outline: none;
   padding: 0.5em 0;
 }
@@ -79,7 +73,6 @@ body {
 .link {
   color: whitesmoke;
   text-decoration: none;
-
   display: flex;
   align-items: center;
 }
@@ -115,7 +108,6 @@ body {
   font-weight: bold;
   background-color: var(--blue);
   cursor: pointer;
-
   margin-bottom: 0.5em;
 }
 
@@ -133,14 +125,12 @@ body {
 .product__wrapper {
   width: 100%;
   padding: 0.5em 0.5em;
-
   border-bottom: 1px solid #e1e7ef;
 }
 
 .product-link {
   text-decoration: none;
   color: black;
-
   width: 100%;
   display: flex;
 }
@@ -158,10 +148,8 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-
   padding-bottom: 1em;
   margin: 1rem 1rem 0 1rem;
-
   cursor: pointer;
 }
 
@@ -188,7 +176,6 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-
   padding: 0;
 }
 
@@ -203,41 +190,30 @@ body {
 .toast-wrapper {
   position: absolute;
   bottom: 12px;
-
   width: 90%;
-
   display: flex;
   justify-content: center;
-
   transition: all 2s ease-in-out;
 }
 
 .toast-card {
   border: 1px solid black;
   width: 100%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   padding: 0.5em 1em;
-
   margin: 0 auto;
-
   border-radius: 5px;
-
   color: whitesmoke;
   background-color: var(--blue);
-
   box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
 }
 
 .toast__card__btn {
   outline: none;
   border: none;
-
   cursor: pointer;
-
   color: whitesmoke;
   background-color: inherit;
 }
@@ -279,13 +255,11 @@ body {
 .cart_card__wrapper {
   width: 100%;
   padding: 0.5em 0.5em;
-
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-
   border-bottom: 1px solid #e1e7ef;
 }
 
@@ -296,9 +270,7 @@ body {
 .cart__card {
   display: flex;
   flex-direction: row;
-
   align-items: center;
-
   margin-bottom: 0.5em;
   flex-basis: 100%;
 }
@@ -331,7 +303,6 @@ body {
 
 .cart__product__actions {
   width: 100%;
-
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -343,7 +314,6 @@ body {
   flex-direction: row;
   align-items: center;
   margin-top: 0.5em;
-
   flex-basis: 33.333%;
 }
 
@@ -379,6 +349,8 @@ body {
 
 .form__error {
   background-color: orange;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 2px;
   padding: 0.2rem;
@@ -489,16 +461,13 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex: 0 0 23%;
-
     border: 0;
   }
 
   .product-link {
     text-decoration: none;
     color: black;
-
     display: block;
-
     width: 100%;
     height: 100%;
     padding: 0.5em;
@@ -508,7 +477,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     padding: 0;
     width: 100%;
   }
@@ -540,7 +508,6 @@ body {
 
   .game-details_card {
     margin-top: 1em;
-
     display: flex;
   }
 
@@ -563,7 +530,6 @@ body {
 
   .game_details {
     flex-basis: 30%;
-
     padding: 1em;
     margin: auto 0;
   }
@@ -579,11 +545,9 @@ body {
   .cart_card__wrapper {
     width: 100%;
     padding: 0.5em 0.5em;
-
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-
     border-bottom: 1px solid #e1e7ef;
   }
 
@@ -592,7 +556,6 @@ body {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
     flex-basis: 67.6667%;
   }
 
@@ -614,7 +577,6 @@ body {
 
   .cart__card__details {
     flex-grow: 2;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -631,10 +593,8 @@ body {
 
   .cart__product__actions {
     width: 100%;
-
     flex-basis: 33.333%;
     max-width: 33.333%;
-
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -645,7 +605,6 @@ body {
     flex-direction: row;
     align-items: center;
     margin-top: 0.5em;
-
     flex-basis: 10%;
     max-width: 10%;
   }
@@ -654,32 +613,23 @@ body {
     position: absolute;
     bottom: 12px;
     right: 12px;
-
     width: 30%;
-
     display: flex;
     justify-content: center;
-
     transition: all 2s ease-in-out;
   }
 
   .toast-card {
     border: 1px solid black;
     width: 100%;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 0.5em 1em;
-
     margin: 0 auto;
-
     border-radius: 5px;
-
     color: whitesmoke;
     background-color: var(--blue);
-
     box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
   }
 
