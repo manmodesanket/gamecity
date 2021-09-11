@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@reach/router";
 import { useAuth } from "../../context/AuthContext/AuthContext";
+import { LogOut } from "react-feather";
+import { ToolTip } from "..";
 
 const Navbar = (props) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  const logOutHandler = () => {
+    user ? logout() : null;
+  };
+
   return (
     <header className="navbar">
       <nav className="navbar__wrapper">
@@ -34,11 +41,14 @@ const Navbar = (props) => {
             />
           )}
           {user && (
-            <NavbarNav
-              linkName={"Account"}
-              path="/account"
-              location={props.location}
-            />
+            <>
+              <ToolTip text={"Logout"}>
+                <LogOut
+                  onClick={logOutHandler}
+                  className="link navbar__nav__links"
+                />
+              </ToolTip>
+            </>
           )}
           {!user && (
             <NavbarNav

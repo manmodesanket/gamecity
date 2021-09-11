@@ -8,3 +8,4 @@ export { default as ProductDetails } from "./ProductDetails/ProductDetails";
 export { default as ProductsPage } from "./Products/Products";
 export { default as Signup } from "./Signup/Signup";
 export { default as Wishlist } from "./Wishlist/Wishlist";
+export { default as ToolTip } from "./ToolTip/ToolTip";
