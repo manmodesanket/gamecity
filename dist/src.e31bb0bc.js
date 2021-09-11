@@ -37314,12 +37314,7 @@ var Login = function Login() {
 
   var handleGuestLogin = function handleGuestLogin(evt) {
     evt.preventDefault();
-    var inputsValid = username !== "" && password !== "";
-
-    if (inputsValid) {
-      inputsValid = (0, _validationUtils.validateEmail)(username);
-      if (inputsValid) loginWithCredentials("guest@gmail.com", "guest@123", setError);else setError("please enter valid email.");
-    } else setError("please fill all the details.");
+    loginWithCredentials("guest@gmail.com", "guest@123", setError);
   };
 
   (0, _react.useEffect)(function () {
