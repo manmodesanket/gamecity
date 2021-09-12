@@ -35562,7 +35562,9 @@ function Product(_ref) {
     className: "product__card_platform"
   }, item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
     className: "product__card__rating"
-  }, item.rating, "\u2605"))));
+  }, item.rating, "\u2605"), item.stock === 0 && /*#__PURE__*/_react.default.createElement("span", {
+    className: "product__card__tags card__tag tag__error"
+  }, "Out of Stock"))));
 }
 },{"react":"../node_modules/react/index.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"../node_modules/react-loader-spinner/dist/loader/Circles.js":[function(require,module,exports) {
 "use strict";
@@ -71556,7 +71558,9 @@ var Filters = function Filters() {
 
   var _useProductList = (0, _ProductContext.useProductList)(),
       productListDispatch = _useProductList.productListDispatch,
-      setClearFilter = _useProductList.setClearFilter;
+      setClearFilter = _useProductList.setClearFilter,
+      includeOutOfStock = _useProductList.includeOutOfStock,
+      setIncludeOutOfStock = _useProductList.setIncludeOutOfStock;
 
   var handlePriceChange = function handlePriceChange(event) {
     if (event.target.value === "Ascending") {
@@ -71580,7 +71584,7 @@ var Filters = function Filters() {
     setDescending(false);
   };
 
-  return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("h2", null, "Filters"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Based on Price"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
+  return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "Sort By"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "radio",
     id: "asc",
     value: "Ascending",
@@ -71602,7 +71606,18 @@ var Filters = function Filters() {
     }
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "desc"
-  }, "High To Low")), /*#__PURE__*/_react.default.createElement("button", {
+  }, "High To Low")), /*#__PURE__*/_react.default.createElement("h3", null, "Filter by"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "checkbox",
+    id: "stock",
+    value: "Out of Stock",
+    name: "Out of Stock",
+    checked: includeOutOfStock,
+    onChange: function onChange() {
+      return setIncludeOutOfStock(!includeOutOfStock);
+    }
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "asc"
+  }, "Include Out Of Stock")), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn btn__filter",
     onClick: function onClick() {
       return clearFilter();
@@ -71652,19 +71667,28 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductsPage = function ProductsPage() {
   var _useProductList = (0, _ProductContext.useProductList)(),
       productList = _useProductList.productList,
-      loading = _useProductList.loading;
+      loading = _useProductList.loading,
+      includeOutOfStock = _useProductList.includeOutOfStock;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       toastMessageList = _useState2[0],
       setToastMessageList = _useState2[1];
 
+  var showTheProduct = function showTheProduct(item) {
+    if (item.stock === 0 && !includeOutOfStock) {
+      return false;
+    }
+
+    return true;
+  };
+
   return /*#__PURE__*/_react.default.createElement("main", {
     className: "main-page"
   }, productList.length > 0 ? /*#__PURE__*/_react.default.createElement(_Filters.Filters, null) : null, /*#__PURE__*/_react.default.createElement("section", {
     className: "products"
   }, productList.length > 0 ? productList.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("article", {
+    return showTheProduct(item) && /*#__PURE__*/_react.default.createElement("article", {
       key: i,
       className: "product__wrapper"
     }, /*#__PURE__*/_react.default.createElement(_Product.default, {
@@ -72784,13 +72808,18 @@ var ProductProvider = function ProductProvider(_ref) {
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      clearFilter = _useState4[0],
-      setClearFilter = _useState4[1];
+      includeOutOfStock = _useState4[0],
+      setIncludeOutOfStock = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(true),
+  var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      loading = _useState6[0],
-      setLoading = _useState6[1];
+      clearFilter = _useState6[0],
+      setClearFilter = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(true),
+      _useState8 = _slicedToArray(_useState7, 2),
+      loading = _useState8[0],
+      setLoading = _useState8[1];
 
   var fetchProducts = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -72874,6 +72903,8 @@ var ProductProvider = function ProductProvider(_ref) {
       productList: productList,
       productListDispatch: dispatch,
       setClearFilter: setClearFilter,
+      includeOutOfStock: includeOutOfStock,
+      setIncludeOutOfStock: setIncludeOutOfStock,
       loading: loading
     }
   }, children);
@@ -73195,7 +73226,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3087" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1564" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

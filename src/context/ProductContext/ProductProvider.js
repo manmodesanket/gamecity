@@ -6,6 +6,7 @@ import makeApiCall from "../../server/server.request";
 const ProductProvider = ({ children }) => {
   let [productList, dispatch] = useReducer(reducerFunction, []);
   let [initialList, setInitialList] = useState([]);
+  let [includeOutOfStock, setIncludeOutOfStock] = useState(false);
   let [clearFilter, setClearFilter] = useState(false);
   let [loading, setLoading] = useState(true);
 
@@ -48,6 +49,8 @@ const ProductProvider = ({ children }) => {
         productList,
         productListDispatch: dispatch,
         setClearFilter,
+        includeOutOfStock,
+        setIncludeOutOfStock,
         loading,
       }}
     >

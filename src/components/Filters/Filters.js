@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useProductList } from "../../context/ProductContext/ProductContext";
 
 const Filters = () => {
   let [ascending, setAscending] = useState(false);
   let [descending, setDescending] = useState(false);
-  let { productListDispatch, setClearFilter } = useProductList();
+  let {
+    productListDispatch,
+    setClearFilter,
+    includeOutOfStock,
+    setIncludeOutOfStock,
+  } = useProductList();
 
   const handlePriceChange = (event) => {
     if (event.target.value === "Ascending") {
@@ -30,9 +35,8 @@ const Filters = () => {
 
   return (
     <section>
-      <h2>Filters</h2>
       <div>
-        <p>Based on Price</p>
+        <h3>Sort By</h3>
         <form>
           <input
             type="radio"
@@ -53,6 +57,19 @@ const Filters = () => {
           />
           <label htmlFor="desc">High To Low</label>
         </form>
+        <h3>Filter by</h3>
+        <form>
+          <input
+            type="checkbox"
+            id="stock"
+            value="Out of Stock"
+            name="Out of Stock"
+            checked={includeOutOfStock}
+            onChange={() => setIncludeOutOfStock(!includeOutOfStock)}
+          />
+          <label htmlFor="asc">Include Out Of Stock</label>
+        </form>
+
         <button className="btn btn__filter" onClick={() => clearFilter()}>
           Clear Filters
         </button>

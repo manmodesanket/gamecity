@@ -22,6 +22,11 @@ export default function Product({ item }) {
               : null}
           </div>
           <div className="product__card__rating">{item.rating}★</div>
+          {item.stock === 0 && (
+            <span className="product__card__tags card__tag tag__error">
+              Out of Stock
+            </span>
+          )}
         </div>
       </div>
     </Link>

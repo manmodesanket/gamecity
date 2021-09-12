@@ -18,6 +18,7 @@
   --green: #40be88;
   --orange: #ff9d44;
   --secondary: #f1f4f9;
+  --red: #cf251f;
 }
 
 body {
@@ -184,6 +185,7 @@ body {
 }
 
 .product__card__name {
+  display: flex;
   font-weight: bold;
 }
 
@@ -429,6 +431,10 @@ body {
 
 .tag__trending {
   background-color: var(--orange);
+}
+
+.tag__error {
+  background-color: var(--red);
 }
 
 .tooltip-container {
