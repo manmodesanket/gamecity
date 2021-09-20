@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CartItem({ item }) {
+export default function CartItem({ item, handleQuantity, handleCartRemove }) {
   return (
     <article className="cart_card__wrapper">
       <div className="cart__card">

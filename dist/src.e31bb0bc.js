@@ -35221,7 +35221,9 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function CartItem(_ref) {
-  var item = _ref.item;
+  var item = _ref.item,
+      handleQuantity = _ref.handleQuantity,
+      handleCartRemove = _ref.handleCartRemove;
   return /*#__PURE__*/_react.default.createElement("article", {
     className: "cart_card__wrapper"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -35511,6 +35513,8 @@ var Cart = function Cart() {
   }, itemList ? itemList.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_CartItem.default, {
       item: item,
+      handleQuantity: handleQuantity,
+      handleCartRemove: handleCartRemove,
       key: item._id
     });
   }) : null), /*#__PURE__*/_react.default.createElement(_Toast.Toast, {
@@ -71465,7 +71469,7 @@ var ProductDetails = function ProductDetails(props) {
   (0, _react.useEffect)(function () {
     var newGame = (0, _UtilityFunctions.findProductById)(productList, id);
     setGame(newGame);
-  }, [productList]);
+  }, [productList, id]);
   return /*#__PURE__*/_react.default.createElement("main", {
     className: "main-page"
   }, game ? /*#__PURE__*/_react.default.createElement(GameDetails, {
@@ -73226,7 +73230,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1564" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1592" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -117,7 +117,14 @@ const Cart = () => {
 
       <section className="cart__products">
         {itemList
-          ? itemList.map((item) => <CartItem item={item} key={item._id} />)
+          ? itemList.map((item) => (
+              <CartItem
+                item={item}
+                handleQuantity={handleQuantity}
+                handleCartRemove={handleCartRemove}
+                key={item._id}
+              />
+            ))
           : null}
       </section>
       <Toast

@@ -14,7 +14,7 @@ const ProductDetails = (props) => {
   useEffect(() => {
     let newGame = findProductById(productList, id);
     setGame(newGame);
-  }, [productList]);
+  }, [productList, id]);
 
   return (
     <main className="main-page">
