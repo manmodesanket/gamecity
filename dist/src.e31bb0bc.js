@@ -35331,9 +35331,7 @@ var Cart = function Cart() {
       cartDispatch = _useCartList.cartDispatch;
 
   var _useAuth = (0, _AuthContext.useAuth)(),
-      token = _useAuth.token,
-      user = _useAuth.user,
-      setUser = _useAuth.setUser;
+      user = _useAuth.user;
 
   var _useProductList = (0, _ProductContext.useProductList)(),
       productList = _useProductList.productList;
@@ -35352,10 +35350,6 @@ var Cart = function Cart() {
       _useState6 = _slicedToArray(_useState5, 2),
       toastMessageList = _useState6[0],
       setToastMessageList = _useState6[1];
-
-  var compare = function compare(a, b) {
-    if (a.added > b.added) return 1;else return -1;
-  };
 
   (0, _react.useEffect)(function () {
     var list = [];
@@ -35559,12 +35553,8 @@ function Product(_ref) {
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "product__card__name"
   }, item.name), /*#__PURE__*/_react.default.createElement("div", {
-    className: "product-card__publisher"
-  }, item.publisher), /*#__PURE__*/_react.default.createElement("div", {
     className: "product__card__price"
   }, "Rs.", item.price), /*#__PURE__*/_react.default.createElement("div", {
-    className: "product__card_platform"
-  }, item.platform === 1 ? "PlayStation 5" : item.platform === 2 ? "Xbox Series X" : null), /*#__PURE__*/_react.default.createElement("div", {
     className: "product__card__rating"
   }, item.rating, "\u2605"), item.stock === 0 && /*#__PURE__*/_react.default.createElement("span", {
     className: "product__card__tags card__tag tag__error"
@@ -37205,7 +37195,9 @@ var NewRelease = function NewRelease() {
 };
 
 exports.NewRelease = NewRelease;
-},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Product/Product":"components/Product/Product.js","react-loader-spinner":"../node_modules/react-loader-spinner/dist/index.js"}],"components/Home/Home.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../context/ProductContext/ProductContext":"context/ProductContext/ProductContext.js","../Product/Product":"components/Product/Product.js","react-loader-spinner":"../node_modules/react-loader-spinner/dist/index.js"}],"../public/landing.png":[function(require,module,exports) {
+module.exports = "/landing.01ce407f.png";
+},{}],"components/Home/Home.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37217,17 +37209,41 @@ var _react = _interopRequireDefault(require("react"));
 
 var _NewRelease = require("./NewRelease");
 
+var _landing = _interopRequireDefault(require("../../../public/landing.png"));
+
+var _router = require("@reach/router");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Home = function Home() {
   return /*#__PURE__*/_react.default.createElement("main", {
-    className: "main-page"
-  }, /*#__PURE__*/_react.default.createElement(_NewRelease.NewRelease, null));
+    className: "hero"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "hero__container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "hero__heading"
+  }, "Find your next game to play."), /*#__PURE__*/_react.default.createElement("div", {
+    className: "hero__content"
+  }, "Purchase latest console and PC games"), /*#__PURE__*/_react.default.createElement("div", {
+    className: ""
+  }, /*#__PURE__*/_react.default.createElement(_router.Link, {
+    to: "/products"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "btn hero__btn"
+  }, "Shop Now")))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "hero"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "hero__img__wrapper"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _landing.default,
+    alt: "Landimg Image",
+    className: "hero__img"
+  }))));
 };
 
 var _default = Home;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./NewRelease":"components/Home/NewRelease.js"}],"Utilities/validation-utils.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./NewRelease":"components/Home/NewRelease.js","../../../public/landing.png":"../public/landing.png","@reach/router":"../node_modules/@reach/router/es/index.js"}],"Utilities/validation-utils.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37358,7 +37374,7 @@ var Login = function Login() {
 
               if (success) {
                 setUser(response.userID);
-                (0, _router.navigate)("../");
+                (0, _router.navigate)("../products");
               }
 
             case 10:
@@ -71486,7 +71502,7 @@ var GameDetails = function GameDetails(_ref) {
   var game = _ref.game,
       setToastMessageList = _ref.setToastMessageList,
       toastMessageList = _ref.toastMessageList;
-  return /*#__PURE__*/_react.default.createElement("section", {
+  return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "game-details_card"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "image-wrapper__outer"
@@ -71511,12 +71527,14 @@ var GameDetails = function GameDetails(_ref) {
     classes: ["btn-cart"],
     setToastMessageList: setToastMessageList,
     toastMessageList: toastMessageList
-  }), /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
+  }), game.stock === 0 && /*#__PURE__*/_react.default.createElement("p", {
+    className: "out__of__stock"
+  }, "Product is out of Stock!"), game.stock > 0 && /*#__PURE__*/_react.default.createElement(_AddToCartButton.AddToCartButton, {
     id: game._id,
     classes: ["btn-cart"],
     setToastMessageList: setToastMessageList,
     toastMessageList: toastMessageList
-  })));
+  }))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Product Description"), /*#__PURE__*/_react.default.createElement("p", null, game.description)));
 };
 
 var _default = ProductDetails;
@@ -71586,6 +71604,7 @@ var Filters = function Filters() {
     setClearFilter(true);
     setAscending(false);
     setDescending(false);
+    setIncludeOutOfStock(false);
   };
 
   return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "Sort By"), /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
@@ -73230,7 +73249,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1592" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4531" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

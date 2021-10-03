@@ -31,6 +31,7 @@ body {
   color: whitesmoke;
   position: sticky;
   top: 0;
+  z-index: 3;
 }
 
 .navbar__wrapper {
@@ -84,6 +85,43 @@ body {
 
 .main-page {
   padding: 0 1em;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 1rem;
+}
+
+.hero__img__wrapper {
+  width: 100%;
+}
+
+.hero__img {
+  width: 100%;
+}
+
+.hero__heading {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.hero__content {
+  font-size: 1.25rem;
+  margin: 1rem auto;
+}
+
+.hero__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero__btn {
+  margin: 0 auto;
+  background-color: var(--blue);
+  color: whitesmoke;
 }
 
 .btn {
@@ -233,6 +271,8 @@ body {
 }
 
 .game-details_card {
+  display: flex;
+  flex-direction: column;
   margin-top: 1em;
 }
 
@@ -465,6 +505,31 @@ body {
 }
 
 @media (min-width: 650px) {
+  .hero {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .hero__img {
+  }
+
+  .hero__heading {
+    text-align: left;
+    font-size: 3rem;
+  }
+
+  .hero__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero__content {
+  }
+
+  .button--large {
+  }
+
   .navbar__wrapper {
     flex-direction: row;
     width: 70%;
@@ -547,6 +612,8 @@ body {
   .game-details_card {
     margin-top: 1em;
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
   }
 
   .image-wrapper__outer {
@@ -570,6 +637,12 @@ body {
     flex-basis: 30%;
     padding: 1em;
     margin: auto 0;
+  }
+
+  .out__of__stock {
+    display: flex;
+    justify-content: center;
+    margin: inherit auto;
   }
 
   .cart__products {

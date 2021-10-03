@@ -13,16 +13,11 @@ import CartItem from "./CartItem";
 const Cart = () => {
   let { cartList, cartDispatch } = useCartList();
 
-  let { token, user, setUser } = useAuth();
+  let { user } = useAuth();
   const { productList } = useProductList();
   let [itemList, setItemList] = useState([]);
   let [total, setTotal] = useState(0);
   let [toastMessageList, setToastMessageList] = useState([]);
-
-  const compare = (a, b) => {
-    if (a.added > b.added) return 1;
-    else return -1;
-  };
 
   useEffect(() => {
     let list = [];

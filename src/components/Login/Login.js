@@ -45,7 +45,7 @@ const Login = () => {
 
           if (success) {
             setUser(response.userID);
-            navigate("../");
+            navigate("../products");
           }
         }
       } catch (err) {

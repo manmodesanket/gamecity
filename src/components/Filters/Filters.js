@@ -31,6 +31,7 @@ const Filters = () => {
     setClearFilter(true);
     setAscending(false);
     setDescending(false);
+    setIncludeOutOfStock(false);
   };
 
   return (
