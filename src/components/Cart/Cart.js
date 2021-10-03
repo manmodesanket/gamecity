@@ -9,6 +9,7 @@ import {
 import { Toast } from "../Toast/Toast";
 import makeApiCall from "../../server/server.request";
 import CartItem from "./CartItem";
+import empty from "../../../public/empty_cart.png";
 
 const Cart = () => {
   let { cartList, cartDispatch } = useCartList();
@@ -105,9 +106,14 @@ const Cart = () => {
         <h1>Cart</h1>
       </section>
       <section>
-        <h2>
-          {total ? <span>Total: Rs. {total}</span> : <span>Cart is Empty</span>}
-        </h2>
+        {total ? (
+          <span>Total: Rs. {total}</span>
+        ) : (
+          <div className="empty__cart">
+            <p>Cart is empty.</p>
+            <img src={empty} alt="Cart Empty" className="empty__cart__img" />
+          </div>
+        )}
       </section>
 
       <section className="cart__products">
@@ -117,6 +123,8 @@ const Cart = () => {
                 item={item}
                 handleQuantity={handleQuantity}
                 handleCartRemove={handleCartRemove}
+                toastMessageList={toastMessageList}
+                setToastMessageList={setToastMessageList}
                 key={item._id}
               />
             ))

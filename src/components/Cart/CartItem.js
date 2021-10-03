@@ -1,6 +1,14 @@
 import React from "react";
+import { MoveToWishlist } from "../CartComponents/MoveToWishList";
+import { MoveToCart } from "../WishListComponents/MoveToCart";
 
-export default function CartItem({ item, handleQuantity, handleCartRemove }) {
+export default function CartItem({
+  item,
+  handleQuantity,
+  handleCartRemove,
+  toastMessageList,
+  setToastMessageList,
+}) {
   return (
     <article className="cart_card__wrapper">
       <div className="cart__card">
@@ -50,6 +58,12 @@ export default function CartItem({ item, handleQuantity, handleCartRemove }) {
             +
           </button>
         </div>
+        <MoveToWishlist
+          id={item._id}
+          classes={["move__btn"]}
+          setToastMessageList={setToastMessageList}
+          toastMessageList={toastMessageList}
+        />
         <button
           onClick={() => handleCartRemove(item._id)}
           className="btn cart__product__actions__remove__btn"

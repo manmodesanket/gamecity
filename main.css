@@ -339,6 +339,12 @@ body {
   background-color: var(--secondary);
 }
 
+.move__btn {
+  background-color: var(--orange);
+  margin-right: 0.1rem;
+  color: whitesmoke;
+}
+
 .cart__card {
   display: flex;
   flex-direction: row;
@@ -382,6 +388,12 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
+}
+
+.empty__cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .product_quantity {
@@ -674,6 +686,19 @@ body {
   .out__of__stock {
     display: flex;
     justify-content: center;
+    margin: inherit auto;
+  }
+
+  .empty__cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+  }
+
+  .empty__cart__img {
+    width: 50%;
     margin: inherit auto;
   }
 
