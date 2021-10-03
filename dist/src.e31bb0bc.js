@@ -72458,7 +72458,7 @@ var Wishlist = function Wishlist() {
       item: item
     }), /*#__PURE__*/_react.default.createElement("div", {
       className: "cart__product__actions"
-    }, /*#__PURE__*/_react.default.createElement(_MoveToCart.MoveToCart, {
+    }, item.stock > 0 && /*#__PURE__*/_react.default.createElement(_MoveToCart.MoveToCart, {
       id: item._id,
       classes: ["move__btn"],
       toastMessageList: toastMessageList,

@@ -348,9 +348,8 @@ body {
 .cart__card {
   display: flex;
   flex-direction: row;
-
+  justify-content: space-evenly;
   align-items: center;
-
   margin-bottom: 0.5em;
   flex-basis: 100%;
 }
@@ -383,7 +382,6 @@ body {
 
 .cart__product__actions {
   width: 100%;
-
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -765,13 +763,11 @@ body {
 
   .cart__product__actions {
     width: 100%;
-
-    flex-basis: 33.333%;
-    max-width: 33.333%;
-
+    flex-basis: 50%;
+    max-width: 50%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   .product_quantity {

@@ -35,12 +35,14 @@ const Wishlist = () => {
             <article key={item._id} className="cart_card__wrapper">
               <WishListItem item={item} />
               <div className="cart__product__actions">
-                <MoveToCart
-                  id={item._id}
-                  classes={["move__btn"]}
-                  toastMessageList={toastMessageList}
-                  setToastMessageList={setToastMessageList}
-                />
+                {item.stock > 0 && (
+                  <MoveToCart
+                    id={item._id}
+                    classes={["move__btn"]}
+                    toastMessageList={toastMessageList}
+                    setToastMessageList={setToastMessageList}
+                  />
+                )}
                 <RemoveFromWishList
                   id={item._id}
                   classes={["cart__product__actions__remove__btn"]}
