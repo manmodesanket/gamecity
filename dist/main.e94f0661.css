@@ -1,0 +1,780 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+:root {
+  /*fonts*/
+  --fz-xxs: 12px;
+  --fz-xs: 13px;
+  --fz-sm: 14px;
+  --fz-md: 16px;
+  --fz-lg: 18px;
+  --fz-xl: 20px;
+  --fz-xxl: 22px;
+  --fz-heading: 32px;
+  --border-radius: 4px;
+  --nav-height: 60px;
+  /*colors*/
+  --blue: #543de0;
+  --dark-blue: #4b1aec;
+  --green: #40be88;
+  --orange: #ff9d44;
+  --secondary: #f1f4f9;
+  --red: #cf251f;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.navbar {
+  background-color: var(--blue);
+  color: whitesmoke;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.navbar__wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navabar__heading {
+  font-size: var(--fz-heading);
+  font-weight: bold;
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+.navbar__nav {
+  font-size: var(--fz-lg);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar__nav__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  outline: none;
+  padding: 0.5em 0;
+}
+
+.navbar__nav__links:hover {
+  cursor: pointer;
+}
+
+.loader {
+  color: black;
+  position: fixed;
+  top: 50%;
+  left: 45%;
+}
+
+.link {
+  color: whitesmoke;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.main-page {
+  padding: 0 1em;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 1rem;
+}
+
+.hero__img__wrapper {
+  width: 100%;
+}
+
+.hero__img {
+  width: 100%;
+}
+
+.hero__heading {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.hero__content {
+  font-size: 1.25rem;
+  margin: 1rem auto;
+}
+
+.hero__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero__btn {
+  margin: 0 auto;
+  background-color: var(--blue);
+  color: whitesmoke;
+}
+
+.btn {
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  border: 1px solid black;
+  font-weight: bold;
+}
+
+.btn__filter {
+  background-color: var(--dark-blue);
+  color: whitesmoke;
+  border-color: var(--dark-blue);
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-card {
+  width: 100%;
+}
+
+.btn-cart {
+  width: 100%;
+  color: whitesmoke;
+  font-weight: bold;
+  background-color: var(--blue);
+  cursor: pointer;
+  margin-bottom: 0.5em;
+}
+
+.btn-cart:hover {
+  background-color: var(--dark-blue);
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  transition: all 2s ease-in-out;
+}
+
+.product__wrapper {
+  width: 100%;
+  padding: 0.5em 0.5em;
+  border-bottom: 1px solid #e1e7ef;
+}
+
+.product-link {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  display: flex;
+}
+
+.product-link:hover {
+  box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
+}
+
+.wishlist-link {
+  text-decoration: none;
+  color: black;
+}
+
+.product__card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 1em;
+  margin: 1rem 1rem 0 1rem;
+  cursor: pointer;
+}
+
+.product__card__img {
+  width: auto;
+  flex-basis: 28.7%;
+  max-width: 28.7%;
+  padding: 0;
+  margin: 0 20px 0 0;
+}
+
+.image-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card__image {
+  width: 100%;
+  min-width: 25vw;
+}
+
+.product__card__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+}
+
+.product__card__name {
+  display: flex;
+  font-weight: bold;
+}
+
+.product__card__price {
+  font-weight: bold;
+}
+
+.toast-wrapper {
+  position: absolute;
+  bottom: 12px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  transition: all 2s ease-in-out;
+}
+
+.toast-card {
+  border: 1px solid black;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1em;
+  margin: 0 auto;
+  border-radius: 5px;
+  color: whitesmoke;
+  background-color: var(--blue);
+  box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
+}
+
+.toast__card__btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: whitesmoke;
+  background-color: inherit;
+}
+
+.product-name {
+  font-size: var(--fz-lg);
+}
+
+.product-price {
+  font-size: var(--fz-xxl);
+}
+
+.game-details_card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.image-wrapper__outer {
+  width: 100%;
+}
+
+.image-wrapper__outer .image-wrapper_inner {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.image-holder {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cart__products {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cart_card__wrapper {
+  width: 100%;
+  padding: 0.5em 0.5em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #e1e7ef;
+}
+
+.cart_card__wrapper:hover {
+  background-color: var(--secondary);
+}
+
+.move__btn {
+  background-color: var(--orange);
+  margin-right: 0.1rem;
+  color: whitesmoke;
+}
+
+.cart__card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 0.5em;
+  flex-basis: 100%;
+}
+
+.cart__card__img {
+  width: auto;
+  flex-basis: 41.6667%;
+  max-width: 41.6667%;
+  max-width: 25vw;
+  padding: 0;
+}
+
+.cart__image-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.cart__card__image {
+  width: 100%;
+}
+
+.cart__card__details {
+  flex-grow: 2;
+  padding: 1em;
+}
+
+.cart__card__name {
+  font-weight: bold;
+}
+
+.cart__product__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.empty__cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product_quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.5em;
+  flex-basis: 33.333%;
+}
+
+.cart__card__quantity__btn {
+  color: whitesmoke;
+  background-color: var(--blue);
+  cursor: pointer;
+}
+
+.cart__card__quantity__btn:hover {
+  cursor: pointer;
+}
+
+.cart__product__actions__remove__btn {
+  cursor: pointer;
+  font-weight: bold;
+  color: whitesmoke;
+  background-color: var(--orange);
+}
+
+.product_quantity__element {
+  margin: 0 2px;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 1em;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #e1e7ef;
+}
+
+.form__error {
+  background-color: orange;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 2px;
+  padding: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+.form__label {
+  font-weight: bold;
+}
+
+.form__input {
+  outline: transparent solid 2px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0, 0.1);
+  padding: 0.5em 1em;
+}
+
+.form__input:focus {
+  border-color: var(--dark-blue);
+  border-width: 2px;
+}
+
+.form__element {
+  margin-bottom: 0.5em;
+}
+
+.form__submit__btn {
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0, 0.1);
+  outline: transparent solid 2px;
+  background-color: var(--blue);
+  color: whitesmoke;
+  padding: 0.5em 1em;
+  margin-top: 0.5em;
+}
+
+.form__submit__btn:hover {
+  cursor: pointer;
+}
+
+.form__message {
+  display: flex;
+  justify-content: center;
+}
+
+.form__message__element {
+  margin-left: 0.5em;
+}
+
+.product__card__tags {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8em;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.card__tag {
+  padding: 0.25em 0.5em;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+.tag__new__release {
+  background-color: var(--blue);
+}
+
+.tag__trending {
+  background-color: var(--orange);
+}
+
+.tag__error {
+  background-color: var(--red);
+}
+
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip-box {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  top: calc(100% + 5px);
+  display: none;
+}
+
+.tooltip-box.visible {
+  display: block;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  top: -10px;
+  left: 10%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
+}
+
+@media (min-width: 650px) {
+  .hero {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .hero__img {
+  }
+
+  .hero__heading {
+    text-align: left;
+    font-size: 3rem;
+  }
+
+  .hero__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero__content {
+  }
+
+  .button--large {
+  }
+
+  .navbar__wrapper {
+    flex-direction: row;
+    width: 70%;
+    margin-left: 15%;
+  }
+
+  .navbar__nav {
+    flex-basis: 50%;
+  }
+
+  .main-page {
+    margin: 0 15%;
+    padding: 0;
+  }
+
+  .loader {
+    color: black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+  }
+
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .product__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 23%;
+    border: 0;
+  }
+
+  .product-link {
+    text-decoration: none;
+    color: black;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0 0.5em;
+  }
+
+  .product__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .product__card__img {
+    min-width: 100%;
+    padding: 16px 5px 8px;
+    height: 212px !important;
+  }
+
+  .image-container {
+    width: 30%;
+    margin: 0 auto;
+  }
+
+  .card__image {
+    width: 100%;
+    min-width: 5vw;
+  }
+
+  .image-container {
+    margin: 0 auto;
+    width: 180px;
+  }
+
+  .product__card__details {
+    padding: 0.5em;
+  }
+
+  .game-details_card {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .image-wrapper__outer {
+    width: 100%;
+    flex-basis: 70%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .image-wrapper__outer .image-wrapper_inner {
+    width: 30%;
+    margin: 0 auto;
+  }
+
+  .image-holder {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .game_details {
+    flex-basis: 30%;
+    padding: 1em;
+    margin: auto 0;
+  }
+
+  .out__of__stock {
+    display: flex;
+    justify-content: center;
+    margin: inherit auto;
+  }
+
+  .empty__cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .empty__cart__img {
+    width: 50%;
+    margin: inherit auto;
+  }
+
+  .cart__products {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cart_card__wrapper {
+    width: 100%;
+    padding: 0.5em 0.5em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #e1e7ef;
+  }
+
+  .cart__card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-basis: 67.6667%;
+  }
+
+  .cart__card__img {
+    width: auto;
+    flex-basis: 30%;
+    max-width: 16.6667%;
+    padding: 0;
+  }
+
+  .cart__image-container {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .cart__card__image {
+    width: 100%;
+  }
+
+  .cart__card__details {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cart_card_details_wrapper {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .cart__card__name {
+    font-weight: bold;
+  }
+
+  .cart__product__actions {
+    width: 100%;
+    flex-basis: 50%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .product_quantity {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0.5em;
+    flex-basis: 10%;
+    max-width: 10%;
+  }
+
+  .toast-wrapper {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    transition: all 2s ease-in-out;
+  }
+
+  .toast-card {
+    border: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+    margin: 0 auto;
+    border-radius: 5px;
+    color: whitesmoke;
+    background-color: var(--blue);
+    box-shadow: -5px 5px 10px 10px rgb(0, 0, 0, 0.1);
+  }
+
+  .login__form {
+    display: flex;
+    flex-direction: column;
+    margin: 10% 25%;
+  }
+}
+
+
+/*# sourceMappingURL=/main.e94f0661.css.map */
